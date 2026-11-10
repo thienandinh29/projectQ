@@ -1,0 +1,15 @@
+NodeTrail v2
+Copyright 2026 Sena Empire team and NodeTrail contributors
+
+The source code in this repository (everything outside the `data/` directory) is licensed under the
+Apache License, Version 2.0 (see LICENSE).
+
+The `data/` directory is licensed separately under CC BY-NC-SA 4.0 (see data/LICENSE.md), because it
+contains material derived from CC BY-NC-SA textbooks. It is not covered by the Apache License.
+
+This project started as the NodeTrail contest build of team Sena Empire (hackathon 2026, repository
+thienandinh29/SenaEmpire36); the code inherited from that build is the work of the whole team.
+
+Third-party software keeps its own licences. Notably, psycopg (LGPL-3.0), certifi and pathspec (MPL-2.0)
+are used as unmodified libraries. Textbooks fetched by `app.sources.fetch` are not part of this repository;
+each keeps the licence recorded in its `source.json`.
