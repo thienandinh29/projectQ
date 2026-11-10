@@ -1,0 +1,30 @@
+# v2 source catalogue (M0): books read from structured sources; licence and chapter order come from
+# each book's own metadata. Fetch with: uv run python -m app.sources.fetch ../../data/sources/catalog.yaml --out <dir>
+# Repositories confirmed to exist on 2026-11-10 (`git ls-remote`). `keywords` feed topic matching in M1.
+books:
+  - slug: python-openstax
+    adapter: openstax_git
+    publisher: OpenStax
+    repo: openstax/osbooks-introduction-python-programming
+    collection: introduction-python-programming
+    subject_name_vi: Nhập môn lập trình Python
+    subject_name_en: Introduction to Python Programming
+    keywords: [python, lập trình, programming, vòng lặp, loop, hàm, function, chuỗi, string, list, danh sách]
+
+  - slug: statistics-openstax
+    adapter: openstax_git
+    publisher: OpenStax
+    repo: openstax/osbooks-introductory-statistics-bundle
+    collection: introductory-statistics-2e
+    subject_name_vi: Nhập môn thống kê
+    subject_name_en: Introductory Statistics
+    keywords: [thống kê, statistics, xác suất, probability, kiểm định giả thuyết, hypothesis testing, phân phối, distribution]
+
+  - slug: business-statistics-openstax
+    adapter: openstax_git
+    publisher: OpenStax
+    repo: openstax/osbooks-introductory-statistics-bundle
+    collection: introductory-business-statistics-2e
+    subject_name_vi: Thống kê kinh doanh
+    subject_name_en: Introductory Business Statistics
+    keywords: [thống kê, statistics, kinh doanh, business, hồi quy, regression]

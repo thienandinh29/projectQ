@@ -1,0 +1,40 @@
+{
+  "order": [
+    "think-python-2e",
+    "logic-critical-thinking",
+    "introductory-statistics",
+    "P4 golden"
+  ],
+  "completed": [
+    {
+      "book": "think-python-2e",
+      "chunks": 391,
+      "reused": true
+    },
+    {
+      "book": "logic-critical-thinking",
+      "chunks": 331,
+      "reused": true
+    },
+    {
+      "book": "introductory-statistics",
+      "chunks": 597,
+      "reused": true
+    },
+    {
+      "golden": "cell-basics",
+      "chunks": 5
+    },
+    {
+      "golden": "fractions",
+      "chunks": 5
+    },
+    {
+      "golden": "python-conditions",
+      "chunks": 5
+    }
+  ],
+  "vector_index_built": true,
+  "stage": "complete",
+  "updated_at": "2026-11-07T15:58:25.027820+00:00"
+}

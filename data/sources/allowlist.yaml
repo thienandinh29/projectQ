@@ -1,0 +1,19 @@
+# Proposed initial allowlist; P1 approval is still required.
+publishers:
+  - name: OpenStax
+    domains: [openstax.org]
+  - name: LibreTexts
+    domains: [libretexts.org]
+  - name: BCcampus Open Textbooks
+    domains: [opentextbc.ca]
+  - name: MIT OpenCourseWare
+    domains: [ocw.mit.edu]
+  - name: Saylor Academy
+    domains: [saylor.org]
+  - name: Open Textbook Library
+    domains: [open.umn.edu]
+  - name: Wikibooks
+    domains: [en.wikibooks.org, vi.wikibooks.org]
+  - name: Wikipedia
+    domains: [en.wikipedia.org, vi.wikipedia.org]
+    fallback_only: true

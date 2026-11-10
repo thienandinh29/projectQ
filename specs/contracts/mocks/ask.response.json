@@ -1,0 +1,11 @@
+{
+  "answer_vi": "`elif` dùng khi các điều kiện loại trừ nhau và chỉ một nhánh được chạy; nó gọn hơn `if` lồng nhau.",
+  "citations": [
+    {
+      "title": "Think Python (3rd edition)",
+      "section": "Chương 5 — Chained conditionals",
+      "url": "https://allendowney.github.io/ThinkPython/chap05.html#chained-conditionals",
+      "page": null
+    }
+  ]
+}

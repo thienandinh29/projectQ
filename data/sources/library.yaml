@@ -1,0 +1,75 @@
+# Acquisition candidates from the existing allowlist. Every page is license-checked.
+# P1 reviews final selection/coverage before indexing; never bypass a source restriction.
+books:
+  - slug: openintro-statistics
+    subject_slug: openintro-statistics
+    subject_name_vi: Nhập môn thống kê — OpenIntro
+    subject_name_en: Introduction to Statistics — OpenIntro
+    title: Introduction to Statistics 4e (Diez et al.)
+    publisher: LibreTexts
+    start_url: https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introduction_to_Statistics_4e_(Diez_et_al.)
+    license_url: https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introduction_to_Statistics_4e_(Diez_et_al.)
+    page_prefix: https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introduction_to_Statistics_4e_(Diez_et_al.)
+  - slug: microbiology-kaiser
+    subject_slug: microbiology-kaiser
+    subject_name_vi: Vi sinh vật học
+    subject_name_en: Microbiology
+    title: Microbiology (Kaiser)
+    publisher: LibreTexts
+    start_url: https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_(Kaiser)
+    license_url: https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_(Kaiser)
+    page_prefix: https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_(Kaiser)
+  - slug: calculus-guichard
+    subject_slug: calculus-guichard
+    subject_name_vi: Giải tích
+    subject_name_en: Calculus
+    title: Calculus (Guichard)
+    publisher: LibreTexts
+    start_url: https://math.libretexts.org/Bookshelves/Calculus/Calculus_(Guichard)
+    license_url: https://math.libretexts.org/Bookshelves/Calculus/Calculus_(Guichard)
+    page_prefix: https://math.libretexts.org/Bookshelves/Calculus/Calculus_(Guichard)
+  - slug: think-python-2e
+    subject_slug: think-python-2e
+    subject_name_vi: Lập trình Python cơ bản
+    subject_name_en: Python Programming Fundamentals
+    title: Think Python 2e (Downey)
+    publisher: LibreTexts
+    start_url: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_(Downey)
+    license_url: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_(Downey)
+    page_prefix: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_(Downey)
+  - slug: logic-critical-thinking
+    subject_slug: logic-critical-thinking
+    subject_name_vi: Logic và tư duy phản biện
+    subject_name_en: Logic and Critical Thinking
+    title: Introduction to Logic and Critical Thinking 2e (van Cleave)
+    publisher: LibreTexts
+    start_url: https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_(van_Cleave)
+    license_url: https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_(van_Cleave)
+    page_prefix: https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_(van_Cleave)
+  - slug: microeconomics
+    subject_slug: microeconomics
+    subject_name_vi: Kinh tế học vi mô
+    subject_name_en: Microeconomics
+    title: Principles of Microeconomics (Curtis and Irvine)
+    publisher: LibreTexts
+    start_url: https://socialsci.libretexts.org/Bookshelves/Economics/Microeconomics/Principles_of_Microeconomics_(Curtis_and_Irvine)
+    license_url: https://socialsci.libretexts.org/Bookshelves/Economics/Microeconomics/Principles_of_Microeconomics_(Curtis_and_Irvine)
+    page_prefix: https://socialsci.libretexts.org/Bookshelves/Economics/Microeconomics/Principles_of_Microeconomics_(Curtis_and_Irvine)
+  - slug: general-chemistry
+    subject_slug: general-chemistry
+    subject_name_vi: Hóa học đại cương
+    subject_name_en: General Chemistry
+    title: General Chemistry (Petrucci et al.)
+    publisher: LibreTexts
+    start_url: https://chem.libretexts.org/Bookshelves/General_Chemistry/Map%253A_General_Chemistry_(Petrucci_et_al.)
+    license_url: https://chem.libretexts.org/Bookshelves/General_Chemistry/Map%253A_General_Chemistry_(Petrucci_et_al.)
+    page_prefix: https://chem.libretexts.org/Bookshelves/General_Chemistry/Map%253A_General_Chemistry_(Petrucci_et_al.)
+  - slug: introductory-statistics
+    subject_slug: introductory-statistics
+    subject_name_vi: Thống kê cơ bản — Shafer và Zhang
+    subject_name_en: Introductory Statistics — Shafer and Zhang
+    title: Introductory Statistics (Shafer and Zhang)
+    publisher: LibreTexts
+    start_url: https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_(Shafer_and_Zhang)
+    license_url: https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_(Shafer_and_Zhang)
+    page_prefix: https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_(Shafer_and_Zhang)

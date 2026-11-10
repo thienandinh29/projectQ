@@ -1,0 +1,498 @@
+{
+  "generated_at": "2026-11-07T13:15:22.465346+00:00",
+  "scope": "P1 label presence in audited local text; no vector search, ranking or model tuning",
+  "subject": "think-python-2e",
+  "total_queries": 10,
+  "all_snippets_present": true,
+  "expected_sections": 10,
+  "expected_sections_confirmed": 10,
+  "held_out_policy": "q06-q10 checked for source existence only; not used to tune k/models",
+  "queries": [
+    {
+      "id": "q01",
+      "question_vi": "Làm sao lấy phần dư khi chia hai số nguyên trong Python?",
+      "p1_note": "definition/how. Expected: ch. 5 Conditionals and recursion, floor division and modulus (5.1).",
+      "labels": [
+        {
+          "contains": "modulus operator",
+          "present": true,
+          "matching_chunks": 5,
+          "sources": [
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.01:_Floor_division_and_modulus",
+              "sections": [
+                "5.01:_Floor_division_and_modulus"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.13:_Glossary",
+              "sections": [
+                "5.13:_Glossary"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/14:_Files/14.03:_Format_operator",
+              "sections": [
+                "14.03:_Format_operator"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/21:_Appendix_B_-_Analysis_of_Algorithms/21.04:_Hashtables",
+              "sections": [
+                "21.04:_Hashtables"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_section_present": true,
+      "confirmed_relevant": [
+        {
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.01:_Floor_division_and_modulus",
+          "contains": "modulus operator"
+        }
+      ]
+    },
+    {
+      "id": "q02",
+      "question_vi": "Biểu thức cho kết quả đúng hoặc sai thì gọi là gì?",
+      "p1_note": "definition. Expected: ch. 5, boolean expressions (5.2).",
+      "labels": [
+        {
+          "contains": "boolean expression",
+          "present": true,
+          "matching_chunks": 5,
+          "sources": [
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion",
+              "sections": [
+                "05:_Conditionals_and_recursion"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.02:_Boolean_expressions",
+              "sections": [
+                "5.02:_Boolean_expressions"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.03:_Logical_operators",
+              "sections": [
+                "5.03:_Logical_operators"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.04:_Conditional_execution",
+              "sections": [
+                "5.04:_Conditional_execution"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.13:_Glossary",
+              "sections": [
+                "5.13:_Glossary"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_section_present": true,
+      "confirmed_relevant": [
+        {
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.02:_Boolean_expressions",
+          "contains": "boolean expression"
+        }
+      ]
+    },
+    {
+      "id": "q03",
+      "question_vi": "Khác nhau giữa and, or và not khi ghép các điều kiện là gì?",
+      "p1_note": "difference. Expected: ch. 5, logical operators (5.3).",
+      "labels": [
+        {
+          "contains": "logical operators",
+          "present": true,
+          "matching_chunks": 3,
+          "sources": [
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion",
+              "sections": [
+                "05:_Conditionals_and_recursion"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.03:_Logical_operators",
+              "sections": [
+                "5.03:_Logical_operators"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.07:_Nested_conditionals",
+              "sections": [
+                "5.07:_Nested_conditionals"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_section_present": true,
+      "confirmed_relevant": [
+        {
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.03:_Logical_operators",
+          "contains": "logical operators"
+        }
+      ]
+    },
+    {
+      "id": "q04",
+      "question_vi": "Khi có hơn hai trường hợp thì viết điều kiện thế nào cho gọn thay vì lồng nhiều if?",
+      "p1_note": "how. Expected: ch. 5, chained conditionals (5.6).",
+      "labels": [
+        {
+          "contains": "chained conditional",
+          "present": true,
+          "matching_chunks": 4,
+          "sources": [
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion",
+              "sections": [
+                "05:_Conditionals_and_recursion"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.06:_Chained_conditionals",
+              "sections": [
+                "5.06:_Chained_conditionals"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.13:_Glossary",
+              "sections": [
+                "5.13:_Glossary"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/11:_Dictionaries/11.02:_Dictionary_as_a_collection_of_counters",
+              "sections": [
+                "11.02:_Dictionary_as_a_collection_of_counters"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_section_present": true,
+      "confirmed_relevant": [
+        {
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.06:_Chained_conditionals",
+          "contains": "chained conditional"
+        }
+      ]
+    },
+    {
+      "id": "q05",
+      "question_vi": "Tại sao một hàm tự gọi chính nó có thể chạy mãi không dừng?",
+      "p1_note": "why. Expected: ch. 5, infinite recursion (5.10).",
+      "labels": [
+        {
+          "contains": "infinite recursion",
+          "present": true,
+          "matching_chunks": 7,
+          "sources": [
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion",
+              "sections": [
+                "05:_Conditionals_and_recursion"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.10:_Infinite_recursion",
+              "sections": [
+                "5.10:_Infinite_recursion"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.13:_Glossary",
+              "sections": [
+                "5.13:_Glossary"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/06:_Fruitful_functions/6.08:_Checking_types",
+              "sections": [
+                "6.08:_Checking_types"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/20:_Appendix_A_-_Debugging",
+              "sections": [
+                "20:_Appendix_A_-_Debugging"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/20:_Appendix_A_-_Debugging/20.02:_Runtime_errors",
+              "sections": [
+                "20.02:_Runtime_errors"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_section_present": true,
+      "confirmed_relevant": [
+        {
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.10:_Infinite_recursion",
+          "contains": "infinite recursion"
+        }
+      ]
+    },
+    {
+      "id": "q06",
+      "question_vi": "Làm thế nào để lặp lại một đoạn lệnh cho đến khi điều kiện không còn đúng?",
+      "p1_note": "how, HELD OUT. Expected: ch. 7 Iteration, the while statement (7.3).",
+      "labels": [
+        {
+          "contains": "while statement",
+          "present": true,
+          "matching_chunks": 4,
+          "sources": [
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/07:_Iteration",
+              "sections": [
+                "07:_Iteration"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/07:_Iteration/7.03:_The_while_statement",
+              "sections": [
+                "7.03:_The_while_statement"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/16:_Classes_and_functions/16.03:_Modifiers",
+              "sections": [
+                "16.03:_Modifiers"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_section_present": true,
+      "confirmed_relevant": [
+        {
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/07:_Iteration/7.03:_The_while_statement",
+          "contains": "while statement"
+        }
+      ]
+    },
+    {
+      "id": "q07",
+      "question_vi": "Tại sao tôi không thể đổi một ký tự trong chuỗi bằng cách gán vào vị trí của nó?",
+      "p1_note": "why, HELD OUT. Expected: ch. 8 Strings, strings are immutable (8.5).",
+      "labels": [
+        {
+          "contains": "immutable",
+          "present": true,
+          "matching_chunks": 12,
+          "sources": [
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/08:_Strings",
+              "sections": [
+                "08:_Strings"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/08:_Strings/8.05:_Strings_are_immutable",
+              "sections": [
+                "8.05:_Strings_are_immutable"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/08:_Strings/8.12:_Glossary",
+              "sections": [
+                "8.12:_Glossary"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/10:_Lists/10.11:_Aliasing",
+              "sections": [
+                "10.11:_Aliasing"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/11:_Dictionaries/11.05:_Dictionaries_and_lists",
+              "sections": [
+                "11.05:_Dictionaries_and_lists"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/11:_Dictionaries/11.09:_Glossary",
+              "sections": [
+                "11.09:_Glossary"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/12:_Tuples",
+              "sections": [
+                "12:_Tuples"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/12:_Tuples/12.01:_Tuples_are_immutable",
+              "sections": [
+                "12.01:_Tuples_are_immutable"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/12:_Tuples/12.07:_Sequences_of_sequences",
+              "sections": [
+                "12.07:_Sequences_of_sequences"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/12:_Tuples/12.09:_Glossary",
+              "sections": [
+                "12.09:_Glossary"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/13:_Case_study_-_data_structure_selection/13.03:_Word_histogram",
+              "sections": [
+                "13.03:_Word_histogram"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_section_present": true,
+      "confirmed_relevant": [
+        {
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/08:_Strings/8.05:_Strings_are_immutable",
+          "contains": "immutable"
+        }
+      ]
+    },
+    {
+      "id": "q08",
+      "question_vi": "Cắt lấy một đoạn của chuỗi bằng cách nào?",
+      "p1_note": "how, HELD OUT. Expected: ch. 8, string slices (8.4).",
+      "labels": [
+        {
+          "contains": "segment of a string",
+          "present": true,
+          "matching_chunks": 1,
+          "sources": [
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/08:_Strings/8.04:_String_slices",
+              "sections": [
+                "8.04:_String_slices"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_section_present": true,
+      "confirmed_relevant": [
+        {
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/08:_Strings/8.04:_String_slices",
+          "contains": "segment of a string"
+        }
+      ]
+    },
+    {
+      "id": "q09",
+      "question_vi": "Danh sách khác chuỗi ở điểm nào khi muốn sửa phần tử?",
+      "p1_note": "difference, HELD OUT. Expected: ch. 10 Lists, lists are mutable (10.2).",
+      "labels": [
+        {
+          "contains": "lists are mutable",
+          "present": true,
+          "matching_chunks": 3,
+          "sources": [
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/10:_Lists",
+              "sections": [
+                "10:_Lists"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/10:_Lists/10.02:_Lists_are_mutable",
+              "sections": [
+                "10.02:_Lists_are_mutable"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/10:_Lists/10.05:_List_slices",
+              "sections": [
+                "10.05:_List_slices"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_section_present": true,
+      "confirmed_relevant": [
+        {
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/10:_Lists/10.02:_Lists_are_mutable",
+          "contains": "lists are mutable"
+        }
+      ]
+    },
+    {
+      "id": "q10",
+      "question_vi": "Dùng cấu trúc nào để tra giá trị theo khóa thay vì theo chỉ số số nguyên?",
+      "p1_note": "what, HELD OUT. Expected: ch. 11 Dictionaries, a dictionary is a mapping (11.1).",
+      "labels": [
+        {
+          "contains": "key-value pair",
+          "present": true,
+          "matching_chunks": 9,
+          "sources": [
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/11:_Dictionaries/11.01:_A_dictionary_is_a_mapping",
+              "sections": [
+                "11.01:_A_dictionary_is_a_mapping"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/11:_Dictionaries/11.05:_Dictionaries_and_lists",
+              "sections": [
+                "11.05:_Dictionaries_and_lists"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/11:_Dictionaries/11.09:_Glossary",
+              "sections": [
+                "11.09:_Glossary"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/12:_Tuples/12.06:_Dictionaries_and_tuples",
+              "sections": [
+                "12.06:_Dictionaries_and_tuples"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/21:_Appendix_B_-_Analysis_of_Algorithms/21.04:_Hashtables",
+              "sections": [
+                "21.04:_Hashtables"
+              ]
+            },
+            {
+              "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/21:_Appendix_B_-_Analysis_of_Algorithms/21.05:_Glossary",
+              "sections": [
+                "21.05:_Glossary"
+              ]
+            }
+          ]
+        }
+      ],
+      "expected_section_present": true,
+      "confirmed_relevant": [
+        {
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/11:_Dictionaries/11.01:_A_dictionary_is_a_mapping",
+          "contains": "key-value pair"
+        }
+      ]
+    }
+  ]
+}

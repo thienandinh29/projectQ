@@ -1,0 +1,71 @@
+# Retrieval evaluation, Think Python 2e (the library book), Vietnamese learner questions.
+# STATUS: P1 labelled these from the textbook's structure BEFORE the book was indexed. P3's clean-export audit
+# (`data/sources/p3-python-query-label-audit.json`, 2026-11-07) then confirmed that every `contains` snippet and every
+# intended numbered section exists in the clean export, and supplied the exact page URLs now in `source_uri` (a hit must
+# match BOTH the page and the snippet). The audit checked label presence in the exported text only: no vector search,
+# no ranking, no tuning. q06-q10 were checked for source existence only.
+# SIZE: 10 questions, below the README's minimum of 20. One question moves hit rate by 10 points; the report says so.
+# P4's >= 20 labelled questions are the full set. SPLIT: q01-q05 may be used for tuning; q06-q10 are HELD OUT, never tune on them.
+# subject: the library subject slug is `think-python-2e` (P3 kept the slug; its display name is "Lap trinh Python co ban").
+subject: think-python-2e
+questions:
+  - id: q01
+    question_vi: "Làm sao lấy phần dư khi chia hai số nguyên trong Python?"
+    relevant:
+      - source_uri: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.01:_Floor_division_and_modulus
+        contains: "modulus operator"
+    note: "definition/how. Expected: ch. 5 Conditionals and recursion, floor division and modulus (5.1)."
+  - id: q02
+    question_vi: "Biểu thức cho kết quả đúng hoặc sai thì gọi là gì?"
+    relevant:
+      - source_uri: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.02:_Boolean_expressions
+        contains: "boolean expression"
+    note: "definition. Expected: ch. 5, boolean expressions (5.2)."
+  - id: q03
+    question_vi: "Khác nhau giữa and, or và not khi ghép các điều kiện là gì?"
+    relevant:
+      - source_uri: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.03:_Logical_operators
+        contains: "logical operators"
+    note: "difference. Expected: ch. 5, logical operators (5.3)."
+  - id: q04
+    question_vi: "Khi có hơn hai trường hợp thì viết điều kiện thế nào cho gọn thay vì lồng nhiều if?"
+    relevant:
+      - source_uri: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.06:_Chained_conditionals
+        contains: "chained conditional"
+    note: "how. Expected: ch. 5, chained conditionals (5.6)."
+  - id: q05
+    question_vi: "Tại sao một hàm tự gọi chính nó có thể chạy mãi không dừng?"
+    relevant:
+      - source_uri: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.10:_Infinite_recursion
+        contains: "infinite recursion"
+    note: "why. Expected: ch. 5, infinite recursion (5.10)."
+  - id: q06
+    question_vi: "Làm thế nào để lặp lại một đoạn lệnh cho đến khi điều kiện không còn đúng?"
+    relevant:
+      - source_uri: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/07:_Iteration/7.03:_The_while_statement
+        contains: "while statement"
+    note: "how, HELD OUT. Expected: ch. 7 Iteration, the while statement (7.3)."
+  - id: q07
+    question_vi: "Tại sao tôi không thể đổi một ký tự trong chuỗi bằng cách gán vào vị trí của nó?"
+    relevant:
+      - source_uri: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/08:_Strings/8.05:_Strings_are_immutable
+        contains: "immutable"
+    note: "why, HELD OUT. Expected: ch. 8 Strings, strings are immutable (8.5)."
+  - id: q08
+    question_vi: "Cắt lấy một đoạn của chuỗi bằng cách nào?"
+    relevant:
+      - source_uri: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/08:_Strings/8.04:_String_slices
+        contains: "segment of a string"
+    note: "how, HELD OUT. Expected: ch. 8, string slices (8.4)."
+  - id: q09
+    question_vi: "Danh sách khác chuỗi ở điểm nào khi muốn sửa phần tử?"
+    relevant:
+      - source_uri: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/10:_Lists/10.02:_Lists_are_mutable
+        contains: "lists are mutable"
+    note: "difference, HELD OUT. Expected: ch. 10 Lists, lists are mutable (10.2)."
+  - id: q10
+    question_vi: "Dùng cấu trúc nào để tra giá trị theo khóa thay vì theo chỉ số số nguyên?"
+    relevant:
+      - source_uri: https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/11:_Dictionaries/11.01:_A_dictionary_is_a_mapping
+        contains: "key-value pair"
+    note: "what, HELD OUT. Expected: ch. 11 Dictionaries, a dictionary is a mapping (11.1)."

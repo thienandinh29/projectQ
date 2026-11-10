@@ -1,0 +1,22 @@
+// Run against an already-started local production server. No browser acceptance is implied.
+import assert from "node:assert/strict";
+const base = new URL(process.argv[2] || "http://localhost:3000");
+const mode = process.argv[3] || "mock";
+const page = await fetch(base);
+assert.equal(page.status, 200);
+const html = await page.text();
+assert.ok(html.includes('lang="vi"'));
+assert.ok(html.includes("NodeTrail"));
+assert.ok(html.includes(mode === "mock" ? "Bản trải nghiệm · dữ liệu mẫu" : "Kết nối API · không dùng dữ liệu mẫu"));
+if (mode === "api") assert.ok(!html.includes("Nhập môn Python"));
+const image = await fetch(new URL("/sena.svg", base));
+assert.equal(image.status, 200);
+assert.match(image.headers.get("content-type"), /image\/svg/);
+const assets = [...html.matchAll(/(?:src|href)="([^"<>]+\.(?:js|css)(?:\?[^"<>]*)?)"/g)].map((match) => match[1]).filter((path) => path.startsWith("/_next/"));
+assert.ok(assets.length > 0);
+const statuses = await Promise.all([...new Set(assets)].map(async (path) => (await fetch(new URL(path.replaceAll("&amp;", "&"), base))).status));
+assert.ok(statuses.every((status) => status === 200));
+assert.equal((await fetch(new URL("/api/backend/unknown", base))).status, 404);
+assert.equal((await fetch(new URL("/api/backend/graph", base))).status, 503);
+assert.equal((await fetch(new URL("/api/backend/topics", base), { method: "POST", headers: { Origin: "https://other.example", "Content-Type": "application/json" }, body: "{}" })).status, 403);
+console.log(`PASS: ${mode} SSR, Vietnamese locale, Sena, ${statuses.length} assets, proxy configuration/route/origin guards`);

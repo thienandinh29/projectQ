@@ -1,0 +1,44 @@
+{
+  "at": "2026-11-07T12:44:53.525236+00:00",
+  "kind": "live public synthetic route smoke",
+  "attempts": [
+    {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "family": "deepseek",
+      "task": "items",
+      "status": "success",
+      "latency_ms": 828.0,
+      "input_tokens": 257,
+      "output_tokens": 44,
+      "thoughts_tokens": 0,
+      "error_code": null
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "family": "gemini",
+      "task": "verify",
+      "status": "provider_error",
+      "latency_ms": 969.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "thoughts_tokens": 0,
+      "error_code": "http_503"
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "family": "gemini",
+      "task": "verify",
+      "status": "provider_error",
+      "latency_ms": 1297.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "thoughts_tokens": 0,
+      "error_code": "http_503"
+    }
+  ],
+  "status": "failed",
+  "reason": "Gateway route failed; inspect sanitized attempt codes."
+}

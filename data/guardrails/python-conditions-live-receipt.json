@@ -1,0 +1,285 @@
+{
+  "checked_at": "2026-11-07T13:50:19.493489+00:00",
+  "verified": 0,
+  "needs_review": 15,
+  "concepts": [],
+  "covered_prerequisite_edges": [],
+  "elapsed_seconds": 73.75,
+  "input_tokens": 0,
+  "output_tokens": 0,
+  "cost_usd": null,
+  "cost_note": "No billing amount returned by gateway; not estimated.",
+  "human_review": "pending",
+  "attempts": [
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_503",
+      "latency_ms": 3281,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "transport_or_json_error",
+      "latency_ms": 30640,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_503",
+      "latency_ms": 27641,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 672,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 578,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "transport_or_json_error",
+      "latency_ms": 30438,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "transport_or_json_error",
+      "latency_ms": 30406,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 844,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 719,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 687,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_503",
+      "latency_ms": 4953,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 766,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 875,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 797,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 688,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 750,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 609,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 750,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 656,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 640,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 656,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 719,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 688,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 531,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 641,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 703,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 625,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 531,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 641,
+      "input_tokens": 0,
+      "output_tokens": 0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "provider_error",
+      "error": "http_429",
+      "latency_ms": 672,
+      "input_tokens": 0,
+      "output_tokens": 0
+    }
+  ]
+}

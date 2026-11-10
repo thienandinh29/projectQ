@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-11-07T16:25:09.331099+00:00",
+  "method": "Read-only local artifacts; is_currently_verified against current chunks",
+  "checkpoint": "data/guardrails/python-conditions-checkpoint.json",
+  "resume_after_utc": "2026-11-08T07:59:46.168208+00:00",
+  "live_calls_this_run": 0,
+  "items_in_live_artifact": 15,
+  "currently_verified": 0,
+  "verified_concepts": [],
+  "prerequisite_chain_accepted": false,
+  "token_usage_this_run": 0,
+  "cost_this_run_usd": 0,
+  "prior_failed_calls_cost": "unknown; missing provider usage is not proof of zero cost",
+  "decision": "NO-GO live E2E; preserve cooldown; one successful probe required before batch"
+}

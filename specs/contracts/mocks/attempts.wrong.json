@@ -1,0 +1,67 @@
+{
+  "correct": false,
+  "misconception_vi": "Bạn nghĩ `range(3)` gồm cả số 3; thực ra nó dừng trước 3.",
+  "p_known": 0.12903225806451613,
+  "mastered": false,
+  "remediation": {
+    "concept_slug": "bieu-thuc-boolean",
+    "reason_vi": "Sai ở «Vòng lặp» → quay lại kiến thức nền «Biểu thức boolean», phần yếu nhất (khả năng đã nắm vững 0,31). Lỗi gặp phải: Bạn nghĩ `range(3)` gồm cả số 3; thực ra nó dừng trước 3"
+  },
+  "traces": [
+    {
+      "kind": "bkt_update",
+      "concept_slug": "vong-lap",
+      "at": "2026-11-07T09:30:00Z",
+      "prior": 0.2,
+      "evidence": {
+        "item_id": "loop-003",
+        "correct": false,
+        "misconception": "range-includes-stop",
+        "slip": 0.1,
+        "guess": 0.25
+      },
+      "posterior": 0.12903225806451613,
+      "rule": "bkt.wrong",
+      "rule_vi": "Trả lời sai → khả năng đã nắm vững giảm từ 0,20 xuống 0,13 (xác suất trượt 0,10, đoán đúng 0,25)",
+      "alternatives": []
+    },
+    {
+      "kind": "root_cause",
+      "concept_slug": "bieu-thuc-boolean",
+      "at": "2026-11-07T09:30:00Z",
+      "prior": 0.31,
+      "evidence": {
+        "item_id": "loop-003",
+        "correct": false,
+        "misconception": "range-includes-stop",
+        "slip": null,
+        "guess": null
+      },
+      "posterior": null,
+      "rule": "remediation.review_prerequisite",
+      "rule_vi": "Sai ở «Vòng lặp» → quay lại kiến thức nền «Biểu thức boolean», phần yếu nhất (khả năng đã nắm vững 0,31). Lỗi gặp phải: Bạn nghĩ `range(3)` gồm cả số 3; thực ra nó dừng trước 3",
+      "alternatives": [
+        {
+          "concept_slug": "vong-lap",
+          "p_known": 0.2,
+          "why_not_vi": "Cần củng cố kiến thức nền yếu hơn trước khi luyện lại bài này"
+        },
+        {
+          "concept_slug": "cau-lenh-dieu-kien",
+          "p_known": 0.4,
+          "why_not_vi": "Vững hơn «Biểu thức boolean» (0,40 so với 0,31)"
+        },
+        {
+          "concept_slug": "bieu-thuc",
+          "p_known": 0.9,
+          "why_not_vi": "Tương đối vững (0,90), chưa cần củng cố"
+        },
+        {
+          "concept_slug": "bien",
+          "p_known": 0.96,
+          "why_not_vi": "Đã nắm vững (0,96)"
+        }
+      ]
+    }
+  ]
+}

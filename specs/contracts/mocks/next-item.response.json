@@ -1,0 +1,22 @@
+{
+  "item": {
+    "id": "bool-002",
+    "kind": "mcq",
+    "prompt_vi": "Giá trị của biểu thức `not (3 > 2) or 4 == 4` là gì?",
+    "options": [
+      {
+        "label": "True"
+      },
+      {
+        "label": "False"
+      },
+      {
+        "label": "Gây lỗi cú pháp"
+      },
+      {
+        "label": "None"
+      }
+    ]
+  },
+  "reason_vi": "Học «Biểu thức boolean»: các kiến thức nền của nó đã đủ vững (hiện 0,15)"
+}

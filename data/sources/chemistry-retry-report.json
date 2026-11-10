@@ -1,0 +1,61 @@
+{
+  "generated_at": "2026-11-07T06:46:55.782624+00:00",
+  "manifest": "E:\\Cooking\\SenaEmpire36\\data\\sources\\library.yaml",
+  "complete": false,
+  "books": [
+    {
+      "book": "general-chemistry",
+      "license": "CC BY-NC-SA 4.0",
+      "downloaded": 264,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/13:_Solutions_and_their_Physical_Properties/13.05:_Solubilities_of_Gases",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/13:_Solutions_and_their_Physical_Properties/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/13:_Solutions_and_their_Physical_Properties/zz:_Back_Matter/10:_Index",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/16:_Acids_and_Bases/16.6:_Polyprotic_Acids",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/18:_Solubility_and_Complex-Ion_Equilibria/18.2:_Relationship_Between_Solubility_and_Ksp",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/24:_Complex_Ions_and_Coordination_Compounds/24.02:_Ligands",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/13:_Solutions_and_their_Physical_Properties/00:_Front_Matter/02:_InfoPage",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/13:_Solutions_and_their_Physical_Properties/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    }
+  ]
+}

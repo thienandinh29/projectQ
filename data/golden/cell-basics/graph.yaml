@@ -1,0 +1,106 @@
+{
+  "concepts": [
+    {
+      "slug": "shared-components",
+      "name_vi": "Thành phần chung của tế bào",
+      "name_en": "Shared cell components",
+      "description_vi": "Theo mô hình tế bào cơ bản của giáo trình, các tế bào có màng sinh chất, tế bào chất, DNA và ribosome. Màng ngăn bên trong tế bào với môi trường; ribosome tổng hợp protein. Vi khu?n v? Archaea thu?c nh?m nh?n s?; ??ng v?t, th?c v?t, n?m v? sinh v?t nguy?n sinh thu?c nh?m nh?n th?c.",
+      "sources": [
+        "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000301"
+      ]
+    },
+    {
+      "slug": "prokaryotes",
+      "name_vi": "Tế bào nhân sơ",
+      "name_en": "Prokaryotes",
+      "description_vi": "Vi khuẩn và Archaea thuộc nhóm nhân sơ. Tế bào nhân sơ không có nhân được màng bao bọc và không có bào quan có màng; DNA tập trung ở vùng nhân (nucleoid).",
+      "sources": [
+        "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000302"
+      ]
+    },
+    {
+      "slug": "eukaryotes",
+      "name_vi": "Tế bào nhân thực",
+      "name_en": "Eukaryotes",
+      "description_vi": "T? b?o nh?n th?c c? nh?n ???c m?ng bao b?c v? c? c?c b?o quan c? m?ng.",
+      "sources": [
+        "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000303"
+      ]
+    },
+    {
+      "slug": "ribosomes",
+      "name_vi": "Chức năng ribosome",
+      "name_en": "Ribosome function",
+      "description_vi": "Ribosome thực hiện tổng hợp protein. Cấu trúc này có ở cả tế bào nhân sơ và nhân thực, nên sự có mặt ribosome không đủ để phân biệt hai nhóm.",
+      "sources": [
+        "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000304"
+      ]
+    },
+    {
+      "slug": "organelles",
+      "name_vi": "Bào quan và chức năng",
+      "name_en": "Organelle functions",
+      "description_vi": "Trong tế bào nhân thực điển hình, nhân chứa DNA; ty thể sản xuất ATP qua hô hấp tế bào. Ty thể có ở cả tế bào thực vật và động vật.",
+      "sources": [
+        "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000305"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "shared-components",
+      "to": "prokaryotes",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000301",
+        "40000000-0000-5000-8000-000000000302"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    },
+    {
+      "from": "shared-components",
+      "to": "eukaryotes",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000301",
+        "40000000-0000-5000-8000-000000000303"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    },
+    {
+      "from": "shared-components",
+      "to": "ribosomes",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000301",
+        "40000000-0000-5000-8000-000000000304"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    },
+    {
+      "from": "eukaryotes",
+      "to": "organelles",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000303",
+        "40000000-0000-5000-8000-000000000305"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    }
+  ]
+}

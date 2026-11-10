@@ -1,0 +1,11 @@
+[
+  {
+    "case_id": "synthetic-hint-1",
+    "task": "hint",
+    "attempts": ["{\"hint_vi\":\"Hãy xem lại định nghĩa trong đoạn trích.\",\"citations\":[{\"title\":\"Tài liệu thử nghiệm\",\"url\":\"https://example.org/chapter\"}]}"],
+    "chunk_ids": ["synthetic-chunk-1"],
+    "source_uris": ["https://example.org/chapter"],
+    "hint_level": 1,
+    "correct_option": "Từ nước"
+  }
+]

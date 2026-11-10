@@ -1,0 +1,52 @@
+# Historical candidates: blocked by current explicit LLM-ingestion notices; review only.
+# Licensing is checked from each live preface, not assumed from this manifest.
+# HTML discovery completeness does not prove the full publisher table of contents was obtained.
+books:
+  - slug: biology-2e
+    title: Biology 2e
+    publisher: OpenStax
+    start_url: https://openstax.org/books/biology-2e/pages/preface
+    license_url: https://openstax.org/books/biology-2e/pages/preface
+    page_prefix: https://openstax.org/books/biology-2e/pages/
+  - slug: chemistry-2e
+    title: Chemistry 2e
+    publisher: OpenStax
+    start_url: https://openstax.org/books/chemistry-2e/pages/preface
+    license_url: https://openstax.org/books/chemistry-2e/pages/preface
+    page_prefix: https://openstax.org/books/chemistry-2e/pages/
+  - slug: university-physics-volume-1
+    title: University Physics Volume 1
+    publisher: OpenStax
+    start_url: https://openstax.org/books/university-physics-volume-1/pages/preface
+    license_url: https://openstax.org/books/university-physics-volume-1/pages/preface
+    page_prefix: https://openstax.org/books/university-physics-volume-1/pages/
+  - slug: introductory-statistics-2e
+    title: Introductory Statistics 2e
+    publisher: OpenStax
+    start_url: https://openstax.org/books/introductory-statistics-2e/pages/preface
+    license_url: https://openstax.org/books/introductory-statistics-2e/pages/preface
+    page_prefix: https://openstax.org/books/introductory-statistics-2e/pages/
+  - slug: psychology-2e
+    title: Psychology 2e
+    publisher: OpenStax
+    start_url: https://openstax.org/books/psychology-2e/pages/preface
+    license_url: https://openstax.org/books/psychology-2e/pages/preface
+    page_prefix: https://openstax.org/books/psychology-2e/pages/
+  - slug: principles-economics-3e
+    title: Principles of Economics 3e
+    publisher: OpenStax
+    start_url: https://openstax.org/books/principles-economics-3e/pages/preface
+    license_url: https://openstax.org/books/principles-economics-3e/pages/preface
+    page_prefix: https://openstax.org/books/principles-economics-3e/pages/
+  - slug: college-algebra-2e
+    title: College Algebra 2e
+    publisher: OpenStax
+    start_url: https://openstax.org/books/college-algebra-2e/pages/preface
+    license_url: https://openstax.org/books/college-algebra-2e/pages/preface
+    page_prefix: https://openstax.org/books/college-algebra-2e/pages/
+  - slug: anatomy-and-physiology-2e
+    title: Anatomy and Physiology 2e
+    publisher: OpenStax
+    start_url: https://openstax.org/books/anatomy-and-physiology-2e/pages/preface
+    license_url: https://openstax.org/books/anatomy-and-physiology-2e/pages/preface
+    page_prefix: https://openstax.org/books/anatomy-and-physiology-2e/pages/

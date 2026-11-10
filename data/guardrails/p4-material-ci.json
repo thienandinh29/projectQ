@@ -1,0 +1,16 @@
+{
+  "code_commit": "b2f8190d54ed0ef04b03ced364f3b98683cf5b0a",
+  "run_id": 42386105551,
+  "url": "https://github.com/thienandinh29/SenaEmpire36/actions/runs/42386105551",
+  "workflow_conclusion": "success",
+  "api_job": "success",
+  "postgres_service": "pgvector/pgvector:pg16; workflow configured",
+  "pytest_step": "uv run pytest -q: success",
+  "ruff_check": "success",
+  "ruff_format_check": "success",
+  "web_job": "success",
+  "ci_test_count": null,
+  "local_tests": {"passed": 1303, "failed": 0, "skipped": 116, "flag": "--no-db"},
+  "p2_actual_golden_reimport": "pending",
+  "real_model_verified_items": 0
+}

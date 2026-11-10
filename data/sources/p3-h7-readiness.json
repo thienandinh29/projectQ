@@ -1,0 +1,54 @@
+{
+  "checked_at": "2026-11-07T13:05:33.327257+00:00",
+  "scope": "P3 H7 preflight; not live model or semantic graph acceptance",
+  "models": {
+    "free": "deepseek-flash",
+    "pro": "deepseek-v4-pro",
+    "verifier": "gemini-3.8-flash"
+  },
+  "retrieval": {
+    "subject": "think-python-2e",
+    "k": 12,
+    "construction": "mandatory; shared worker Retriever",
+    "semantic_quality": "10/10 P1 snippets and intended page sections confirmed locally; ranked TEI retrieval and live k=12 graph review pending"
+  },
+  "model_calls": [],
+  "live_token_counts": null,
+  "live_success_latency_ms": null,
+  "live_status": "not_run; user last reported unrotated keys",
+  "keys_logged": false,
+  "deepseek_limits": {
+    "context_tokens_conservative": 1000000,
+    "max_output_tokens_conservative": 384000,
+    "documentation": "https://api-docs.deepseek.com/quick_start/pricing/",
+    "guard": "UTF-8 byte upper bound + framing + reserved output; no silent input truncation"
+  },
+  "library_audit": "data/sources/p3-python-library-audit.json",
+  "database": {
+    "connected": true,
+    "base_schema_present": false,
+    "p4_runtime_schema_present": false
+  },
+  "tei": {
+    "reachable": false,
+    "error_type": "ConnectTimeout"
+  },
+  "query_label_audit": "data/sources/p3-python-query-label-audit.json",
+  "verified_code_revision": "b7b6619c50e60e8b1c21655dc32c78100d7e9eca",
+  "verification": {
+    "api_ruff": "pass",
+    "api_mypy": "pass (159 files)",
+    "api_tests_passed": 1394,
+    "web_lint": "pass",
+    "web_typecheck": "pass",
+    "web_tests_passed": 46,
+    "p1_label_snippets_present": 10,
+    "p1_expected_sections_present": 10
+  },
+  "p2_index_receipt": {
+    "artifact": "data/sources/p2-index-progress.json",
+    "snapshot_at": "2026-11-07T13:09:04.951519+00:00",
+    "python_completed_chunks": 391,
+    "note": "P2 host receipt; not a local P3 embedding/DB measurement"
+  }
+}

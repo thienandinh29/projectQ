@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-07",
+  "branch": "integration/p1-p5",
+  "included_heads": {
+    "P1": "5245e56",
+    "P2": "651bc7b",
+    "P3": "f8239ee",
+    "P5": "d45cc3e",
+    "P4": "local artifacts restored from retained safety stash"
+  },
+  "api_offline": {
+    "command": "python -m pytest --no-db -q",
+    "passed": 1125,
+    "skipped": 56,
+    "skip_reason": "Explicit --no-db; tests requiring database_url were not executed"
+  },
+  "api_lint": "passed",
+  "api_format": "passed: 138 files",
+  "api_mypy": "passed: 132 source files",
+  "frontend": {
+    "tests_passed": 29,
+    "lint": "passed",
+    "typecheck": "passed",
+    "production_build": "passed",
+    "url": "http://127.0.0.1:3000",
+    "mode": "mock",
+    "types_generator": "openapi-typescript 7.13.0, temporary npm exec; no package dependency added"
+  },
+  "database_probe": {
+    "command": "python -m pytest tests/uploads/test_metadata.py -q",
+    "passed": 2,
+    "errors": 2,
+    "reason": "Postgres localhost:54322 connection timeout, also outside sandbox"
+  },
+  "integrated_openapi_paths": 15,
+  "real_model_calls": 0,
+  "live_search_calls": 0,
+  "migrations_executed": false,
+  "remote_pushes": false,
+  "h7_ready": false,
+  "remaining": [
+    "Concrete DB-backed LearningBackend, TopicsBackend and TutorBackend adapters",
+    "PipelinePorts and TopicPipeline binding in the independent worker",
+    "Queue mode/upload persistence and private upload storage",
+    "Reachable Postgres/pgvector and migration integration tests",
+    "Indexed approved sources, actual model/search configuration and live verification"
+  ]
+}

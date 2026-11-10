@@ -1,0 +1,106 @@
+{
+  "concepts": [
+    {
+      "slug": "equal-parts",
+      "name_vi": "Các phần bằng nhau",
+      "name_en": "Equal parts",
+      "description_vi": "Phân số biểu diễn một số phần bằng nhau của một đơn vị. Nếu tô a trong b phần bằng nhau thì phần tô là a/b.",
+      "sources": [
+        "https://openstax.org/books/prealgebra-2e/pages/4-1-visualize-fractions"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000201"
+      ]
+    },
+    {
+      "slug": "numerator-denominator",
+      "name_vi": "Tử số và mẫu số",
+      "name_en": "Numerator and denominator",
+      "description_vi": "Trong a/b, tử số a là số phần được xét; mẫu số b là tổng số phần bằng nhau. Mẫu số không bằng 0 vì phép chia cho 0 không xác định.",
+      "sources": [
+        "https://openstax.org/books/prealgebra-2e/pages/4-1-visualize-fractions"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000202"
+      ]
+    },
+    {
+      "slug": "unit-whole",
+      "name_vi": "Phân số bằng một",
+      "name_en": "Fractions equal to one",
+      "description_vi": "Với a khác 0, a/a = 1. Lấy đủ b trong b phần bằng nhau sẽ được một đơn vị.",
+      "sources": [
+        "https://openstax.org/books/prealgebra-2e/pages/4-1-visualize-fractions"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000203"
+      ]
+    },
+    {
+      "slug": "equivalent-fractions",
+      "name_vi": "Phân số bằng nhau",
+      "name_en": "Equivalent fractions",
+      "description_vi": "Nhân cả tử và mẫu của một phân số với cùng một số khác 0 tạo ra phân số bằng nó. Hai phân số bằng nhau biểu diễn cùng một giá trị.",
+      "sources": [
+        "https://openstax.org/books/prealgebra-2e/pages/4-1-visualize-fractions"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000204"
+      ]
+    },
+    {
+      "slug": "fraction-order",
+      "name_vi": "So sánh phân số",
+      "name_en": "Fraction ordering",
+      "description_vi": "Với phân số dương cùng mẫu, tử lớn hơn cho phân số lớn hơn. Với cùng tử dương, mẫu lớn hơn cho phần nhỏ hơn. Có thể quy về cùng mẫu để so sánh.",
+      "sources": [
+        "https://openstax.org/books/prealgebra-2e/pages/4-1-visualize-fractions"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000205"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "equal-parts",
+      "to": "numerator-denominator",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000201",
+        "40000000-0000-5000-8000-000000000202"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    },
+    {
+      "from": "numerator-denominator",
+      "to": "unit-whole",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000202",
+        "40000000-0000-5000-8000-000000000203"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    },
+    {
+      "from": "unit-whole",
+      "to": "equivalent-fractions",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000203",
+        "40000000-0000-5000-8000-000000000204"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    },
+    {
+      "from": "equivalent-fractions",
+      "to": "fraction-order",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000204",
+        "40000000-0000-5000-8000-000000000205"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    }
+  ]
+}

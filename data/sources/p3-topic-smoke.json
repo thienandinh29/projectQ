@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-11-07T10:46:17.311297+00:00",
+  "scope": "Canonical schema route smoke; not P4 publication or H8 acceptance",
+  "status": "preflight_only",
+  "live": false,
+  "schemas": [
+    "app.schemas.KnowledgeGraph",
+    "app.schemas.ItemSet"
+  ],
+  "chunks": [
+    {
+      "id": "book-60e46d4f7cfad2b52b050435ba34ab27f46706f569381ccb6b9cac03a99834b6",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program",
+      "page": null
+    },
+    {
+      "id": "book-e89b047a12e77b77f338bf5e5046ae516b92787e9d94f2552812bd668fd85092",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program",
+      "page": null
+    },
+    {
+      "id": "book-eb1eba910478b1cbaf9b35de01fa84aae878bc52d39245bf388fa36e5e94781d",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program",
+      "page": null
+    }
+  ],
+  "source_characters": 3930,
+  "published_items": 0,
+  "attempts": [],
+  "input_tokens": null,
+  "output_tokens": null,
+  "thoughts_tokens": null,
+  "elapsed_ms": null,
+  "live_blocker": "Rotate exposed keys, configure process environment, then use --live",
+  "material_mode": "public_book_chapter; no vector retrieval or persistent DB IDs"
+}

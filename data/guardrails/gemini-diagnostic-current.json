@@ -1,0 +1,324 @@
+{
+  "items": {
+    "python-conditions-001": {
+      "fingerprint": "3fc0e8e5f16d14b1788a58b6207165e7394475d10907e7ad48d886966444023d",
+      "source_fingerprint": "d30f7abb835e98fbba89a4808e8726bf41f964101decb341569ec19747948665",
+      "config_hash": "900de80eced4ca2334c5c95b8647872293d1a57e362d50a97a8be0fa1cf7d7ee",
+      "result": {
+        "id": "python-conditions-001",
+        "kind": "mcq",
+        "concept": "remainder",
+        "prompt_vi": "Giá trị của `17 % 5` là gì?",
+        "difficulty": 0.3,
+        "source": "https://allendowney.github.io/ThinkPython/chap05.html",
+        "source_ids": [
+          "thinkpython3-ch05"
+        ],
+        "chunk_ids": [
+          "40000000-0000-5000-8000-000000000101"
+        ],
+        "options": [
+          {
+            "id": "86d9cf97-8b3a-5187-8fb7-a749be586cd5",
+            "label": "2",
+            "correct": true,
+            "misconception": null
+          },
+          {
+            "id": "63a65e4f-49c0-5511-9b08-a8489794539b",
+            "label": "3",
+            "correct": false,
+            "misconception": "python-conditions-01-m1"
+          },
+          {
+            "id": "fb897ebb-fe1c-5914-b32a-4f5772773d70",
+            "label": "5",
+            "correct": false,
+            "misconception": "python-conditions-01-m2"
+          },
+          {
+            "id": "fcf56566-1694-5770-b035-667b85d6c764",
+            "label": "3.4",
+            "correct": false,
+            "misconception": "python-conditions-01-m3"
+          }
+        ],
+        "answer_id": "86d9cf97-8b3a-5187-8fb7-a749be586cd5",
+        "explanation_vi": "17 = 3 × 5 + 2 nên số dư là 2.",
+        "misconceptions": [
+          {
+            "slug": "python-conditions-01-m1",
+            "description_vi": "Lấy thương nguyên thay cho số dư."
+          },
+          {
+            "slug": "python-conditions-01-m2",
+            "description_vi": "Lấy số chia thay cho số dư."
+          },
+          {
+            "slug": "python-conditions-01-m3",
+            "description_vi": "Dùng phép chia thông thường thay cho lấy dư."
+          }
+        ],
+        "status": "needs_review",
+        "generator": {
+          "provider": "codex",
+          "model": "gpt-6",
+          "family": "gpt",
+          "identity_source": "agent_session"
+        },
+        "verification": {
+          "status": "needs_review",
+          "reason": "verification_error:GatewayError",
+          "content_hash": "948801cd318a1b34aa6d4ac552a89ef0550a31f7035db172b61480c031db0618",
+          "generator": {
+            "provider": "codex",
+            "model": "gpt-6",
+            "family": "gpt",
+            "identity_source": "agent_session"
+          },
+          "verifier": null,
+          "prompt_version": "p4-item-blind-v2",
+          "checked_at": "2026-11-07T14:36:10.678974Z",
+          "evidence": []
+        },
+        "verification_history": [],
+        "human_review": {
+          "status": "pending",
+          "reviewer": null,
+          "reviewed_at": null,
+          "notes": null
+        }
+      },
+      "reply": null,
+      "blind_hash": "d609ed192c7e1c0d6da9945696cdf0605a0f31d4d99bf19114575b1eae157650",
+      "checked_at": "2026-11-07T14:36:10.678974+00:00",
+      "attempt": 1,
+      "latency_ms": 30578,
+      "infrastructure_error": true,
+      "provider_errors": [
+        {
+          "kind": "transient",
+          "code": "transport_or_json_error",
+          "retry_after": null,
+          "delay_source": null,
+          "quota_violations": [],
+          "http": null
+        }
+      ]
+    }
+  },
+  "attempts": [
+    {
+      "item_id": "python-conditions-001",
+      "batch_attempt": 1,
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "family": "gemini",
+      "status": "provider_error",
+      "error": "transport_or_json_error",
+      "latency_ms": 30577.99999997951,
+      "input_tokens": null,
+      "output_tokens": null
+    }
+  ],
+  "blocked": {
+    "kind": "api_retry_exhausted"
+  },
+  "summary": {
+    "verified": 0,
+    "concepts": [],
+    "edges": [],
+    "reused_verified": 0,
+    "elapsed_seconds": 30.57799999997951,
+    "cost_usd": null,
+    "requests": 1,
+    "human_review": "pending",
+    "successful_requests": 0,
+    "retry_requests": 0,
+    "errors_by_type": {
+      "transport_or_json_error": 1
+    },
+    "input_tokens": null,
+    "output_tokens": null
+  },
+  "evaluation": [
+    {
+      "original_item": "python-conditions-001",
+      "variant": "unchanged",
+      "expected_error": false,
+      "candidate_answer": "86d9cf97-8b3a-5187-8fb7-a749be586cd5",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-001",
+      "variant": "flipped",
+      "expected_error": true,
+      "candidate_answer": "63a65e4f-49c0-5511-9b08-a8489794539b",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-002",
+      "variant": "unchanged",
+      "expected_error": false,
+      "candidate_answer": "c52812be-ebb0-5742-bbd6-f86afcd98488",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-002",
+      "variant": "flipped",
+      "expected_error": true,
+      "candidate_answer": "df28e7bb-2732-59e5-a5a0-0aafc9d06b05",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-003",
+      "variant": "unchanged",
+      "expected_error": false,
+      "candidate_answer": "aa40b498-3489-5d25-a8ff-5a816ea626de",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-003",
+      "variant": "flipped",
+      "expected_error": true,
+      "candidate_answer": "48137f93-4422-5ffd-afe1-11672f3b1ebb",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-004",
+      "variant": "unchanged",
+      "expected_error": false,
+      "candidate_answer": "7d075f8c-7459-529a-ac4e-a72a715ff608",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-004",
+      "variant": "flipped",
+      "expected_error": true,
+      "candidate_answer": "27b10732-850e-578d-9f54-69786f572403",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-005",
+      "variant": "unchanged",
+      "expected_error": false,
+      "candidate_answer": "ea58cd54-5ccf-5b3f-ad91-b40fc239f06e",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-005",
+      "variant": "flipped",
+      "expected_error": true,
+      "candidate_answer": "dd2efc29-cc4c-5727-9f08-ef757fe590eb",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-006",
+      "variant": "unchanged",
+      "expected_error": false,
+      "candidate_answer": "6c5473f8-57ce-52b4-93d2-082ae335b9a5",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-006",
+      "variant": "flipped",
+      "expected_error": true,
+      "candidate_answer": "3d3c566b-b405-51c5-8904-5a647af689e4",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-007",
+      "variant": "unchanged",
+      "expected_error": false,
+      "candidate_answer": "8f75c924-771d-553e-abcd-79b3685518d5",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-007",
+      "variant": "flipped",
+      "expected_error": true,
+      "candidate_answer": "c86caef9-63a6-5ad8-a3f8-272a937f8adf",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-008",
+      "variant": "unchanged",
+      "expected_error": false,
+      "candidate_answer": "539c02eb-0c33-59fa-ad22-2234ea86ce81",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-008",
+      "variant": "flipped",
+      "expected_error": true,
+      "candidate_answer": "828ff8ab-dcc1-58d7-8bf9-c246c457ba65",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-009",
+      "variant": "unchanged",
+      "expected_error": false,
+      "candidate_answer": "db2f562a-bc3d-5902-80e2-8c97c8467747",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-009",
+      "variant": "flipped",
+      "expected_error": true,
+      "candidate_answer": "75112aa8-2466-5252-8035-98151522ac44",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-010",
+      "variant": "unchanged",
+      "expected_error": false,
+      "candidate_answer": "653395c6-6169-5a92-8f93-36c95f1b68b1",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    },
+    {
+      "original_item": "python-conditions-010",
+      "variant": "flipped",
+      "expected_error": true,
+      "candidate_answer": "a5d5b2e5-d054-5cc7-8525-d64116ffaad3",
+      "outcome": "infrastructure_or_unfinished",
+      "reuse": "identical question/options/chunks; backend candidate differs"
+    }
+  ],
+  "evaluation_summary": {
+    "wrong_blocked": 0,
+    "wrong_allowed": 0,
+    "correct_blocked": 0,
+    "wrong_valid": 0,
+    "correct_valid": 0,
+    "unfinished": 20,
+    "model_result_reuses": 0,
+    "labels": "expected agent labels; human confirmation pending"
+  },
+  "gateway_context": {
+    "provider": "gemini",
+    "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent",
+    "project": "API-key-associated project; not derivable from local key",
+    "vertex_fallback_disabled_for_single_diagnostic": true,
+    "httpx_trust_env": false,
+    "proxy_env_present": false
+  }
+}

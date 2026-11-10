@@ -1,0 +1,23 @@
+{
+  "status": "researching",
+  "step_vi": "Đang đọc Think Python — Chương 5…",
+  "progress": 0.35,
+  "subject_slug": null,
+  "graph_ready": false,
+  "items_ready": false,
+  "sources": [],
+  "trail": [
+    {
+      "at": "2026-11-07T09:29:10Z",
+      "kind": "search",
+      "text_vi": "Đang tìm giáo trình mở về «Python cơ bản»…",
+      "url": null
+    },
+    {
+      "at": "2026-11-07T09:29:22Z",
+      "kind": "read",
+      "text_vi": "Đang đọc Think Python — Chương 5: Điều kiện và đệ quy",
+      "url": "https://allendowney.github.io/ThinkPython/chap05.html"
+    }
+  ]
+}

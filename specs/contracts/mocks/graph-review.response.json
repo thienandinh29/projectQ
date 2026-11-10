@@ -1,0 +1,103 @@
+{
+  "learner_id": "11111111-1111-4111-8111-111111111111",
+  "subject": "python-co-ban",
+  "graph_revision": "cca4deafecd2ed25f41c0c111e69c1cf35f2cd492bb6b61def2b89dbb588acb3",
+  "graph": {
+    "concepts": [
+      {
+        "slug": "bien",
+        "name_vi": "Biến và phép gán",
+        "name_en": "Variables and assignment",
+        "description_vi": "",
+        "sources": [
+          "https://allendowney.github.io/ThinkPython/chap05.html"
+        ]
+      },
+      {
+        "slug": "bieu-thuc",
+        "name_vi": "Biểu thức và toán tử",
+        "name_en": "Expressions and operators",
+        "description_vi": "",
+        "sources": [
+          "https://allendowney.github.io/ThinkPython/chap05.html"
+        ]
+      },
+      {
+        "slug": "bieu-thuc-boolean",
+        "name_vi": "Biểu thức boolean",
+        "name_en": "Boolean expressions",
+        "description_vi": "",
+        "sources": [
+          "https://allendowney.github.io/ThinkPython/chap05.html"
+        ]
+      },
+      {
+        "slug": "cau-lenh-dieu-kien",
+        "name_vi": "Câu lệnh điều kiện",
+        "name_en": "Conditional statements",
+        "description_vi": "",
+        "sources": [
+          "https://allendowney.github.io/ThinkPython/chap05.html"
+        ]
+      },
+      {
+        "slug": "vong-lap",
+        "name_vi": "Vòng lặp",
+        "name_en": "Loops",
+        "description_vi": "",
+        "sources": [
+          "https://allendowney.github.io/ThinkPython/chap05.html"
+        ]
+      },
+      {
+        "slug": "ham",
+        "name_vi": "Hàm",
+        "name_en": "Functions",
+        "description_vi": "",
+        "sources": [
+          "https://allendowney.github.io/ThinkPython/chap05.html"
+        ]
+      },
+      {
+        "slug": "danh-sach",
+        "name_vi": "Danh sách",
+        "name_en": "Lists",
+        "description_vi": "",
+        "sources": [
+          "https://allendowney.github.io/ThinkPython/chap05.html"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "from": "bien",
+        "to": "bieu-thuc"
+      },
+      {
+        "from": "bieu-thuc",
+        "to": "bieu-thuc-boolean"
+      },
+      {
+        "from": "bieu-thuc-boolean",
+        "to": "cau-lenh-dieu-kien"
+      },
+      {
+        "from": "cau-lenh-dieu-kien",
+        "to": "vong-lap"
+      },
+      {
+        "from": "bien",
+        "to": "ham"
+      },
+      {
+        "from": "vong-lap",
+        "to": "danh-sach"
+      },
+      {
+        "from": "ham",
+        "to": "danh-sach"
+      }
+    ]
+  },
+  "confirmed": false
+}

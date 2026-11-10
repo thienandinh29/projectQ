@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-11-07T13:13:54.812113+00:00",
+  "books": [
+    {
+      "book": "think-python-2e",
+      "subject_name_vi": "Lập trình Python cơ bản",
+      "status": "pass",
+      "checks": {
+        "translated_label": true,
+        "subject_slug": true,
+        "natural_page_order": true,
+        "non_whitespace_content_retained": true,
+        "source_uris_retained": true,
+        "source_scope": true,
+        "chunk_size_bound": true,
+        "html_pages_have_no_invented_pdf_number": true,
+        "no_site_chrome": true
+      },
+      "blocks": 244,
+      "source_pages": 244,
+      "chunks": 391,
+      "chunk_characters": {
+        "min": 342,
+        "median": 1404,
+        "p95": 1785,
+        "max": 1800,
+        "limit": 1800,
+        "under_200": 0
+      },
+      "page_metadata": "HTML has section URLs; PDF page numbers are not applicable",
+      "order_sample": [
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Preface",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Preface/1.01:_The_strange_history_of_this_book",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Preface/1.02:_Acknowledgments",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Preface/1.03:_Contributor_List",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.01:_What_is_a_program",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.02:_Running_Python",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.03:_The_first_program",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.04:_Arithmetic_operators",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.05:_Values_and_types",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.06:_Formal_and_natural_languages",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.07:_Debugging",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.08:_Glossary",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.09:_Exercises",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/02:_Variables_expressions_and_statements"
+      ],
+      "samples": [
+        {
+          "index": 0,
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29",
+          "section": "Think_Python_2e_(Downey)",
+          "page": null,
+          "characters": 1272,
+          "excerpt": "Think Python is an introduction to Python programming for beginners. It starts with basic concepts of programming, and is carefully designed to define all terms when they are first used and to develop each new concept in a logical progression. Larger pieces, like recursion and object-oriented programming are divided into a sequence of smaller steps and introduced over the course of several chapters.\nFront Matter\n0: Preface\n1: The way of the program\n2: Variables, expressions and statements\n3: Fun"
+        },
+        {
+          "index": 97,
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.11:_Keyboard_input",
+          "section": "5.11:_Keyboard_input",
+          "page": null,
+          "characters": 351,
+          "excerpt": "This page titled 5.11: Keyboard input was last modified on Tue, 01 Dec 2020 03:31:10 GMT and is shared under a  https://creativecommons.org/licenses/by-nc/3.0 CC BY-NC  3.0  license and was authored, remixed, and/or curated by Allen B. Downey (Green Tea Press)  via source content that was edited to the style and standards of the LibreTexts platform."
+        },
+        {
+          "index": 195,
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/11:_Dictionaries/11.01:_A_dictionary_is_a_mapping",
+          "section": "11.01:_A_dictionary_is_a_mapping",
+          "page": null,
+          "characters": 1794,
+          "excerpt": "A dictionary is like a list, but more general. In a list, the indices have to be integers; in a dictionary they can be (almost) any type.\nA dictionary contains a collection of indices, which are called keys, and a collection of values. Each key is associated with a single value. The association of a key and a value is called a key-value pair or sometimes an item.\nIn mathematical language, a dictionary represents a mapping from keys to values, so you can also say that each key “maps to” a value. "
+        },
+        {
+          "index": 293,
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/16:_Classes_and_functions/16.03:_Modifiers",
+          "section": "16.03:_Modifiers",
+          "page": null,
+          "characters": 1738,
+          "excerpt": "Sometimes it is useful for a function to modify the objects it gets as parameters. In that case, the changes are visible to the caller. Functions that work this way are called modifiers.\nincrement, which adds a given number of seconds to a Time object, can be written naturally as a modifier. Here is a rough draft:\ndef increment(time, seconds):\n    time.second += seconds\n    if time.second >= 60:\n        time.second -= 60\n        time.minute += 1\n    if time.minute >= 60:\n        time.minute -= 6"
+        },
+        {
+          "index": 390,
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/21:_Appendix_B_-_Analysis_of_Algorithms/21.05:_Glossary",
+          "section": "21.05:_Glossary",
+          "page": null,
+          "characters": 1669,
+          "excerpt": "analysis of algorithms:\n    A way to compare algorithms in terms of their run time and/or space requirements.\n    machine model:\n    A simplified representation of a computer used to describe algorithms.\n    worst case:\n    The input that makes a given algorithm run slowest (or require the most space).\n    leading term:\n    In a polynomial, the term with the highest exponent.\n    crossover point:\n    The problem size where two algorithms require the same run time or space.\n    order of growth:\n "
+        }
+      ],
+      "semantic_retrieval": "pending real indexed TEI evaluation of P1's Vietnamese queries"
+    }
+  ]
+}

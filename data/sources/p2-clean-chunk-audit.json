@@ -1,0 +1,272 @@
+{
+  "generated_at": "2026-11-07T13:00:04.945590+00:00",
+  "books": [
+    {
+      "book": "think-python-2e",
+      "subject_name_vi": "Lập trình Python cơ bản",
+      "status": "pass",
+      "checks": {
+        "translated_label": true,
+        "subject_slug": true,
+        "natural_page_order": true,
+        "non_whitespace_content_retained": true,
+        "source_uris_retained": true,
+        "source_scope": true,
+        "chunk_size_bound": true,
+        "html_pages_have_no_invented_pdf_number": true,
+        "no_site_chrome": true
+      },
+      "blocks": 244,
+      "source_pages": 244,
+      "chunks": 391,
+      "chunk_characters": {
+        "min": 342,
+        "median": 1404,
+        "p95": 1785,
+        "max": 1800,
+        "limit": 1800,
+        "under_200": 0
+      },
+      "page_metadata": "HTML has section URLs; PDF page numbers are not applicable",
+      "order_sample": [
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Preface",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Preface/1.01:_The_strange_history_of_this_book",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Preface/1.02:_Acknowledgments",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Preface/1.03:_Contributor_List",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.01:_What_is_a_program",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.02:_Running_Python",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.03:_The_first_program",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.04:_Arithmetic_operators",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.05:_Values_and_types",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.06:_Formal_and_natural_languages",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.07:_Debugging",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.08:_Glossary",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.09:_Exercises",
+        "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/02:_Variables_expressions_and_statements"
+      ],
+      "samples": [
+        {
+          "index": 0,
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29",
+          "section": "Think_Python_2e_(Downey)",
+          "page": null,
+          "characters": 1272,
+          "excerpt": "Think Python is an introduction to Python programming for beginners. It starts with basic concepts of programming, and is carefully designed to define all terms when they are first used and to develop each new concept in a logical progression. Larger pieces, like recursion and object-oriented programming are divided into a sequence of smaller steps and introduced over the course of several chapters.\nFront Matter\n0: Preface\n1: The way of the program\n2: Variables, expressions and statements\n3: Fun"
+        },
+        {
+          "index": 97,
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/05:_Conditionals_and_recursion/5.11:_Keyboard_input",
+          "section": "5.11:_Keyboard_input",
+          "page": null,
+          "characters": 351,
+          "excerpt": "This page titled 5.11: Keyboard input was last modified on Tue, 01 Dec 2020 03:31:10 GMT and is shared under a  https://creativecommons.org/licenses/by-nc/3.0 CC BY-NC  3.0  license and was authored, remixed, and/or curated by Allen B. Downey (Green Tea Press)  via source content that was edited to the style and standards of the LibreTexts platform."
+        },
+        {
+          "index": 195,
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/11:_Dictionaries/11.01:_A_dictionary_is_a_mapping",
+          "section": "11.01:_A_dictionary_is_a_mapping",
+          "page": null,
+          "characters": 1794,
+          "excerpt": "A dictionary is like a list, but more general. In a list, the indices have to be integers; in a dictionary they can be (almost) any type.\nA dictionary contains a collection of indices, which are called keys, and a collection of values. Each key is associated with a single value. The association of a key and a value is called a key-value pair or sometimes an item.\nIn mathematical language, a dictionary represents a mapping from keys to values, so you can also say that each key “maps to” a value. "
+        },
+        {
+          "index": 293,
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/16:_Classes_and_functions/16.03:_Modifiers",
+          "section": "16.03:_Modifiers",
+          "page": null,
+          "characters": 1738,
+          "excerpt": "Sometimes it is useful for a function to modify the objects it gets as parameters. In that case, the changes are visible to the caller. Functions that work this way are called modifiers.\nincrement, which adds a given number of seconds to a Time object, can be written naturally as a modifier. Here is a rough draft:\ndef increment(time, seconds):\n    time.second += seconds\n    if time.second >= 60:\n        time.second -= 60\n        time.minute += 1\n    if time.minute >= 60:\n        time.minute -= 6"
+        },
+        {
+          "index": 390,
+          "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/21:_Appendix_B_-_Analysis_of_Algorithms/21.05:_Glossary",
+          "section": "21.05:_Glossary",
+          "page": null,
+          "characters": 1669,
+          "excerpt": "analysis of algorithms:\n    A way to compare algorithms in terms of their run time and/or space requirements.\n    machine model:\n    A simplified representation of a computer used to describe algorithms.\n    worst case:\n    The input that makes a given algorithm run slowest (or require the most space).\n    leading term:\n    In a polynomial, the term with the highest exponent.\n    crossover point:\n    The problem size where two algorithms require the same run time or space.\n    order of growth:\n "
+        }
+      ],
+      "semantic_retrieval": "pending P1's 10 Vietnamese queries and indexed TEI retrieval"
+    },
+    {
+      "book": "logic-critical-thinking",
+      "subject_name_vi": "Logic và tư duy phản biện",
+      "status": "pass",
+      "checks": {
+        "translated_label": true,
+        "subject_slug": true,
+        "natural_page_order": true,
+        "non_whitespace_content_retained": true,
+        "source_uris_retained": true,
+        "source_scope": true,
+        "chunk_size_bound": true,
+        "html_pages_have_no_invented_pdf_number": true,
+        "no_site_chrome": true
+      },
+      "blocks": 48,
+      "source_pages": 48,
+      "chunks": 331,
+      "chunk_characters": {
+        "min": 167,
+        "median": 1580,
+        "p95": 1792,
+        "max": 1800,
+        "limit": 1800,
+        "under_200": 2
+      },
+      "page_metadata": "HTML has section URLs; PDF page numbers are not applicable",
+      "order_sample": [
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.01:_What_is_an_Argument",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.02:_Identifying_Arguments",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.03:_Arguments_vs._Explanations",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.04:_More_Complex_Argument_Structures",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.05:_Using_Your_Own_Paraphrases_of_Premises_and_Conclusions_to_Reconstruct_Arguments_in_Standard_Form",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.06:_Validity",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.07:_Soundness",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.08:_Deductive_vs._Inductive_Arguments",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.09:_Arguments_with_Missing_Premises",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.10:_Assuring_guarding_and_Discounting",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.11:_Evaluating_Language",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/01:_Reconstructing_and_Analyzing_Arguments/1.12:_Evaluating_a_Real-Life_Argument",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/02:_Formal_Methods_of_Evaluating_Arguments",
+        "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/02:_Formal_Methods_of_Evaluating_Arguments/2.01:_What_is_a_Formal_Method_of_Evaluation_and_Why_Do_We_Need_Them"
+      ],
+      "samples": [
+        {
+          "index": 0,
+          "source_uri": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29",
+          "section": "Introduction_to_Logic_and_Critical_Thinking_2e_(van_Cleave)",
+          "page": null,
+          "characters": 972,
+          "excerpt": "This is an introductory textbook in logic and critical thinking. The goal of the textbook is to provide the reader with a set of tools and skills that will enable them to identify and evaluate arguments. The book is intended for an introductory course that covers both formal and informal logic. As such, it is not a formal logic textbook, but is closer to what one would find marketed as a “critical thinking textbook.”\nFront Matter\n1: Reconstructing and Analyzing Arguments\n2: Formal Methods of Eva"
+        },
+        {
+          "index": 82,
+          "source_uri": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/02:_Formal_Methods_of_Evaluating_Arguments/2.01:_What_is_a_Formal_Method_of_Evaluation_and_Why_Do_We_Need_Them",
+          "section": "2.01:_What_is_a_Formal_Method_of_Evaluation_and_Why_Do_We_Need_Them",
+          "page": null,
+          "characters": 1056,
+          "excerpt": "Regardless of whether you know what the statements in the first premise mean, we can still see that the inference is valid because the inference has the same form that I just pointed out above. Thus, you may not know what “Kant” is (one of the most famous German philosophers of the Enlightenment) or what a “deontologist” or “Pietist” is, but you can still see that since these are statements that form a conjunction, and since the inference made has a particular form that is valid, this particular"
+        },
+        {
+          "index": 165,
+          "source_uri": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/02:_Formal_Methods_of_Evaluating_Arguments/2.13:_Short_Review_of_Propositional_Logic",
+          "section": "2.13:_Short_Review_of_Propositional_Logic",
+          "page": null,
+          "characters": 261,
+          "excerpt": "This page titled 2.13: Short Review of Propositional Logic was last modified on Fri, 21 Apr 2023 04:17:51 GMT and is shared under a  https://creativecommons.org/licenses/by/4.0 CC BY  4.0  license and was authored, remixed, and/or curated by Matthew Van Cleave."
+        },
+        {
+          "index": 248,
+          "source_uri": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/03:_Evaluating_Inductive_Arguments_and_Probabilistic_and_Statistical_Fallacies/3.05:_Probability",
+          "section": "3.05:_Probability",
+          "page": null,
+          "characters": 1044,
+          "excerpt": "I recommended her highly for the scholarship, but I also knew that she would end up at a much better institution (and probably with one of their most competitive scholarships). Some time later, I was wondering where she did end up going to college, so I did a quick search on her name and, sure enough, she was a freshman at Harvard. No surprise to me. The point of the story is that although we could have said that this woman’s chances of not getting into Harvard are about 94%, this would neglect "
+        },
+        {
+          "index": 330,
+          "source_uri": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/04:_Informal_Fallacies/4.04:_Exercise_Answers",
+          "section": "4.04:_Exercise_Answers",
+          "page": null,
+          "characters": 1409,
+          "excerpt": "5. B causes A. Arguably, the average number of fires per year will influence the number of fire engines needed. Fewer fires would require fewer engines (in which case they’d likely retire some); more fires would require more engines (in which case they’d likely acquire some).\n6. Common cause: agrarian societies will have more mules and will also probably pay professors less, since higher education is not as important in an agrarian society. So the common cause is being a (more or less) agrarian "
+        }
+      ],
+      "semantic_retrieval": "pending P1's 10 Vietnamese queries and indexed TEI retrieval"
+    },
+    {
+      "book": "introductory-statistics",
+      "subject_name_vi": "Thống kê cơ bản — Shafer và Zhang",
+      "status": "pass",
+      "checks": {
+        "translated_label": true,
+        "subject_slug": true,
+        "natural_page_order": true,
+        "non_whitespace_content_retained": true,
+        "source_uris_retained": true,
+        "source_scope": true,
+        "chunk_size_bound": true,
+        "html_pages_have_no_invented_pdf_number": true,
+        "no_site_chrome": true
+      },
+      "blocks": 71,
+      "source_pages": 71,
+      "chunks": 597,
+      "chunk_characters": {
+        "min": 326,
+        "median": 1706,
+        "p95": 1796,
+        "max": 1800,
+        "limit": 1800,
+        "under_200": 0
+      },
+      "page_metadata": "HTML has section URLs; PDF page numbers are not applicable",
+      "order_sample": [
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/01:_Introduction_to_Statistics",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/01:_Introduction_to_Statistics/1.01:_Basic_Definitions_and_Concepts",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/01:_Introduction_to_Statistics/1.02:_Overview",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/01:_Introduction_to_Statistics/1.03:_Presentation_of_Data",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/01:_Introduction_to_Statistics/1.E:_Introduction_to_Statistics_%28Exercises%29",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/02:_Descriptive_Statistics",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/02:_Descriptive_Statistics/2.01:_Three_Popular_Data_Displays",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/02:_Descriptive_Statistics/2.02:_Measures_of_Central_Location_-_Three_Kinds_of_Averages",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/02:_Descriptive_Statistics/2.03:_Measures_of_Variability",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/02:_Descriptive_Statistics/2.04:_Relative_Position_of_Data",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/02:_Descriptive_Statistics/2.05:_The_Empirical_Rule_and_Chebyshev%27s_Theorem",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/02:_Descriptive_Statistics/2.E:_Descriptive_Statistics_%28Exercises%29",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/03:_Basic_Concepts_of_Probability",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/03:_Basic_Concepts_of_Probability/3.01:_Sample_Spaces_Events_and_Their_Probabilities",
+        "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/03:_Basic_Concepts_of_Probability/3.02:_Complements_Intersections_and_Unions"
+      ],
+      "samples": [
+        {
+          "index": 0,
+          "source_uri": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29",
+          "section": "Introductory_Statistics_(Shafer_and_Zhang)",
+          "page": null,
+          "characters": 966,
+          "excerpt": "Statistics is the study of the collection, analysis, interpretation, presentation, and organization of data. In applying statistics to, e.g., a scientific, industrial, or societal problem, it is conventional to begin with a statistical population or a statistical model process to be studied.\nFront Matter\n1: Introduction to Statistics\n2: Descriptive Statistics\n3: Basic Concepts of Probability\n4: Discrete Random Variables\n5: Continuous Random Variables\n6: Sampling Distributions\n7: Estimation\n8: Te"
+        },
+        {
+          "index": 149,
+          "source_uri": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/04:_Discrete_Random_Variables/4.02:_Probability_Distributions_for_Discrete_Random_Variables",
+          "section": "4.02:_Probability_Distributions_for_Discrete_Random_Variables",
+          "page": null,
+          "characters": 1763,
+          "excerpt": "A service organization in a large town organizes a raffle each month. One thousand raffle tickets are sold for \\(\\$1\\) each. Each has an equal chance of winning. First prize is \\(\\$300\\), second prize is \\(\\$200\\), and third prize is \\(\\$100\\). Let \\(X\\) denote the net gain from the purchase of one ticket.\nConstruct the probability distribution of \\(X\\).\nFind the probability of winning any money in the purchase of one ticket.\nFind the expected value of \\(X\\), and interpret its meaning.\nSolution\n"
+        },
+        {
+          "index": 298,
+          "source_uri": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/07:_Estimation/7.E:_Estimation_%28Exercises%29",
+          "section": "7.E:_Estimation_(Exercises)",
+          "page": null,
+          "characters": 1574,
+          "excerpt": "A wildlife manager wishes to estimate the mean length of fish in a large lake, to within one inch, with \\(80\\%\\) confidence. Estimate the minimum size sample required. In his experience virtually no fish caught in the lake is over \\(23\\) inches long, so using the Empirical Rule he will estimate \\(\\sigma\\) by one-sixth the range, or \\(23/6=3.8\\).\nYou wish to estimate the current mean birth weight of all newborns in a certain region, to within \\(1\\) ounce (\\(1/16\\) pound) and with \\(95\\%\\) confide"
+        },
+        {
+          "index": 447,
+          "source_uri": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/10:_Correlation_and_Regression/10.01:_Linear_Relationships_Between_Variables",
+          "section": "10.01:_Linear_Relationships_Between_Variables",
+          "page": null,
+          "characters": 1386,
+          "excerpt": "Learning Objectives\nTo learn what it means for two variables to exhibit a relationship that is close to linear, but which contains an element of randomness\nThe following table gives examples of the kinds of pairs of variables which could be of interest from a statistical point of view.\n            \\(x\\)\n            \\(y\\)\n            Predictor or independent variable\n            Response or dependent variable\n            Temperature in degrees Celsius\n            Temperature in degrees Fahrenheit"
+        },
+        {
+          "index": 596,
+          "source_uri": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/11:_Chi-Square_Tests_and_F-Tests/11.E:_Chi-Square_Tests_and_F-Tests_%28Exercises%29",
+          "section": "11.E:_Chi-Square_Tests_and_F-Tests_(Exercises)",
+          "page": null,
+          "characters": 1746,
+          "excerpt": "                Sample Size\n                \\(n_1=18\\)\n                \\(n_1=23\\)\n                \\(n_1=22\\)\n    The mean satisfaction level of the combined sample of all \\(63\\) participants was  \\(\\bar{x}=3.81\\). Test, using the ANOVA \\(F\\)-test at the \\(5\\%\\) level of significance, whether the data provide sufficient evidence to conclude that not all three average satisfaction levels are the same\nLarge Data Set Exercise\nLarge Data Set not available\nLarge \\(\\text{Data Set 9}\\) records the costs"
+        }
+      ],
+      "semantic_retrieval": "pending P1's 10 Vietnamese queries and indexed TEI retrieval"
+    }
+  ]
+}

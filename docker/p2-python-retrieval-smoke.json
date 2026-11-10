@@ -1,0 +1,24 @@
+{
+  "scope": "One live TEI + SQL query on clean Think Python 2e while ordered bulk ingest runs; not retrieval evaluation",
+  "seconds": 25.957,
+  "hits": [
+    {
+      "id": "e65f7a19-b51c-4774-aebe-fe28fb7b9ca4",
+      "section": "17.06:_The___str___method",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/17:_Classes_and_methods/17.06:_The___str___method",
+      "score": 0.6362
+    },
+    {
+      "id": "a3fd23c4-9836-4bdb-931f-8b365a158fc4",
+      "section": "8.12:_Glossary",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/08:_Strings/8.12:_Glossary",
+      "score": 0.6114
+    },
+    {
+      "id": "04edcdf7-acc5-4397-8cc6-2505adfe88d3",
+      "section": "8.05:_Strings_are_immutable",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/08:_Strings/8.05:_Strings_are_immutable",
+      "score": 0.6024
+    }
+  ]
+}

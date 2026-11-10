@@ -1,0 +1,48 @@
+{
+  "status": "ready",
+  "step_vi": "Lộ trình đã sẵn sàng",
+  "progress": 1.0,
+  "subject_slug": "python-co-ban",
+  "graph_ready": true,
+  "items_ready": true,
+  "sources": [
+    {
+      "title": "Think Python (3rd edition)",
+      "publisher": "O'Reilly / Allen Downey",
+      "url": "https://allendowney.github.io/ThinkPython",
+      "license": "CC BY-NC-SA 4.0"
+    },
+    {
+      "title": "Python for Everybody",
+      "publisher": "Charles Severance",
+      "url": "https://www.py4e.com/html3/",
+      "license": "CC BY 4.0"
+    },
+    {
+      "title": "Python Programming",
+      "publisher": "Wikibooks",
+      "url": "https://en.wikibooks.org/wiki/Python_Programming",
+      "license": "CC BY-SA 4.0"
+    }
+  ],
+  "trail": [
+    {
+      "at": "2026-11-07T09:29:10Z",
+      "kind": "search",
+      "text_vi": "Đang tìm giáo trình mở về «Python cơ bản»…",
+      "url": null
+    },
+    {
+      "at": "2026-11-07T09:29:22Z",
+      "kind": "read",
+      "text_vi": "Đang đọc Think Python — Chương 5: Điều kiện và đệ quy",
+      "url": "https://allendowney.github.io/ThinkPython/chap05.html"
+    },
+    {
+      "at": "2026-11-07T09:29:39Z",
+      "kind": "select",
+      "text_vi": "Chọn 3 nguồn từ 2 nhà xuất bản; thứ tự chương làm cơ sở cho kiến thức nền",
+      "url": null
+    }
+  ]
+}

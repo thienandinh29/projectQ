@@ -1,0 +1,21 @@
+# Agreed deployment: DeepSeek generation, independent Gemini verification.
+# Model IDs still require account configuration and P1's quality evaluation.
+tiers:
+  free:
+    graph: &free
+      - {provider: deepseek, model: '${DEEPSEEK_FREE_MODEL}', family: deepseek}
+    items: *free
+    tutor: *free
+    ask: *free
+    verify: &verify
+      - {provider: gemini, model: '${GEMINI_VERIFY_MODEL}', family: gemini}
+      - {provider: vertex, model: '${VERTEX_VERIFY_MODEL}', family: gemini}
+  pro:
+    graph: &graph
+      - {provider: deepseek, model: '${DEEPSEEK_PRO_MODEL}', family: deepseek}
+    research: *graph
+    items: *graph
+    verify: *verify
+    tutor: &pro
+      - {provider: deepseek, model: '${DEEPSEEK_PRO_MODEL}', family: deepseek}
+    ask: *pro

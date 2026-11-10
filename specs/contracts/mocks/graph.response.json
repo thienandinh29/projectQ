@@ -1,0 +1,76 @@
+{
+  "nodes": [
+    {
+      "slug": "bien",
+      "name_vi": "Biến và phép gán",
+      "p_known": 0.96,
+      "mastered": true
+    },
+    {
+      "slug": "bieu-thuc",
+      "name_vi": "Biểu thức và toán tử",
+      "p_known": 0.9,
+      "mastered": false
+    },
+    {
+      "slug": "bieu-thuc-boolean",
+      "name_vi": "Biểu thức boolean",
+      "p_known": 0.31,
+      "mastered": false
+    },
+    {
+      "slug": "cau-lenh-dieu-kien",
+      "name_vi": "Câu lệnh điều kiện",
+      "p_known": 0.4,
+      "mastered": false
+    },
+    {
+      "slug": "vong-lap",
+      "name_vi": "Vòng lặp",
+      "p_known": 0.2,
+      "mastered": false
+    },
+    {
+      "slug": "ham",
+      "name_vi": "Hàm",
+      "p_known": 0.6,
+      "mastered": false
+    },
+    {
+      "slug": "danh-sach",
+      "name_vi": "Danh sách",
+      "p_known": 0.2,
+      "mastered": false
+    }
+  ],
+  "edges": [
+    {
+      "from": "bien",
+      "to": "bieu-thuc"
+    },
+    {
+      "from": "bieu-thuc",
+      "to": "bieu-thuc-boolean"
+    },
+    {
+      "from": "bieu-thuc-boolean",
+      "to": "cau-lenh-dieu-kien"
+    },
+    {
+      "from": "cau-lenh-dieu-kien",
+      "to": "vong-lap"
+    },
+    {
+      "from": "bien",
+      "to": "ham"
+    },
+    {
+      "from": "vong-lap",
+      "to": "danh-sach"
+    },
+    {
+      "from": "ham",
+      "to": "danh-sach"
+    }
+  ]
+}

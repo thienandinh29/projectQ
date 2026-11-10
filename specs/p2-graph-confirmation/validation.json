@@ -1,0 +1,24 @@
+{
+  "applied": [
+    "0012_graph_confirmations.sql"
+  ],
+  "confirmation_records": 0,
+  "private_local_database": "127.0.0.1:54322/nodetrail",
+  "api_tests": {
+    "passed": 1436,
+    "failed": 0,
+    "skipped": 0
+  },
+  "ruff": "passed",
+  "format": "passed",
+  "mypy": "passed",
+  "live_model_calls": 0,
+  "public_contract_changed": false,
+  "running_factory": "app.main:create_content_app",
+  "health_status": 200,
+  "health": {
+    "status": "ok",
+    "db": "ok"
+  },
+  "new_confirmation_routes": []
+}

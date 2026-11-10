@@ -1,0 +1,49 @@
+{
+ "books": [
+  {
+   "book": "python-openstax",
+   "publisher": "OpenStax",
+   "repo": "openstax/osbooks-introduction-python-programming",
+   "outcome": "ok",
+   "commit": "d215dd3b99c33db855c49315152ebd5fbadc8534",
+   "licence": "CC BY-NC-SA 4.0",
+   "non_commercial": true,
+   "chapters": 15,
+   "pages": 114,
+   "blocks": 384,
+   "chunks": 422,
+   "objectives": 200,
+   "skipped_front_matter": 1
+  },
+  {
+   "book": "statistics-openstax",
+   "publisher": "OpenStax",
+   "repo": "openstax/osbooks-introductory-statistics-bundle",
+   "outcome": "ok",
+   "commit": "24e9884724b13baba2b8879d03103cccafc7e25d",
+   "licence": "CC BY-NC-SA 4.0",
+   "non_commercial": true,
+   "chapters": 13,
+   "pages": 93,
+   "blocks": 2338,
+   "chunks": 2555,
+   "objectives": 57,
+   "skipped_front_matter": 9
+  },
+  {
+   "book": "business-statistics-openstax",
+   "publisher": "OpenStax",
+   "repo": "openstax/osbooks-introductory-statistics-bundle",
+   "outcome": "ok",
+   "commit": "24e9884724b13baba2b8879d03103cccafc7e25d",
+   "licence": "CC BY-NC-SA 4.0",
+   "non_commercial": true,
+   "chapters": 13,
+   "pages": 74,
+   "blocks": 1995,
+   "chunks": 2254,
+   "objectives": 0,
+   "skipped_front_matter": 3
+  }
+ ]
+}

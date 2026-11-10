@@ -1,0 +1,93 @@
+{
+  "checked_at": "2026-11-07T13:05:32.166075+00:00",
+  "scope": "Canonical schema route smoke; not P4 publication or H8 acceptance",
+  "status": "preflight_only",
+  "live": false,
+  "schemas": [
+    "app.schemas.KnowledgeGraph",
+    "app.schemas.ItemSet"
+  ],
+  "chunks": [
+    {
+      "id": "book-21aff13b9e0b96103ec398819c7272bac018a4f419f805a7890be5d55c60156d",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-52a0a675c7285d3f95779ebfcfb030f92723f604931eeeb490b92987d1e43771",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.01:_What_is_a_program",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-b38bf2132d72a0ba4df26d2afd80b1cdc1c6f5987c48dc97b5c090d427988b6e",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.02:_Running_Python",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-ce79d461713c4849a0eced699bea1bad9285f8133a2938099efa6e305dd92a7f",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.02:_Running_Python",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-03b8abcf28d51f59a3b3c1da39e3e612bb53cb6592c627f385951f93baa9b648",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.03:_The_first_program",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-b9eb76bbb3fbf56f15b3d3be0716cf6edf761170fe8c040a6b2268953c633298",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.04:_Arithmetic_operators",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-0385b0d64efcac415cadd98f9426f15740e089512e628a07b039febd1e91ee2f",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.05:_Values_and_types",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-c487ea92261822de3338628d0a08bcc5564f00ef07dce87542e37ce41a602899",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.06:_Formal_and_natural_languages",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-00feeeb96a97cea3ea697ac46db4916778151491213553389133e339812851d0",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.06:_Formal_and_natural_languages",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-59789cc5799f6db2f36bbc6dd82b6a8e94ff769b78ec1bd4ee57745294ef846f",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.06:_Formal_and_natural_languages",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-98749eb1dc5d5b979fc310e6251a47af1b7db0d70a2f28ac0c7d2a2d89df52f9",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.07:_Debugging",
+      "page": null,
+      "source_url": null
+    },
+    {
+      "id": "book-bd9926191e0883178e988fe9efb077d3ee68df8660757fc15e76e7a5911c0d9a",
+      "source_uri": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/01:_The_way_of_the_program/1.08:_Glossary",
+      "page": null,
+      "source_url": null
+    }
+  ],
+  "source_characters": 17614,
+  "published_items": 0,
+  "attempts": [],
+  "input_tokens": null,
+  "output_tokens": null,
+  "thoughts_tokens": null,
+  "elapsed_ms": null,
+  "live_blocker": "Rotate exposed keys, configure process environment, then use --live",
+  "material_mode": "public_book_chapter; no vector retrieval or persistent DB IDs"
+}

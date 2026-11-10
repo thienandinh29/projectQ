@@ -1,0 +1,35 @@
+{
+    "topic":  "Cấu trúc tế bào cơ bản",
+    "sources":  [
+                    {
+                        "source_id":  "openstax-biology2-4-2",
+                        "title":  "Biology 2e",
+                        "author":  "Mary Ann Clark, Matthew Douglas, Jung Choi",
+                        "publisher":  "OpenStax",
+                        "version":  "2e, web accessed 2026-11-07",
+                        "url":  "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells",
+                        "section":  "4.2 Prokaryotic Cells",
+                        "license":  "CC BY-NC-SA 4.0",
+                        "accessed_at":  "2026-11-07",
+                        "location_type":  "web_section",
+                        "page":  null,
+                        "attribution":  "Mary Ann Clark, Matthew Douglas, Jung Choi, Biology 2e, 4.2 Prokaryotic Cells; CC BY-NC-SA 4.0. Vietnamese paraphrases by the P4 agent, not verbatim quotations. Current publisher page additionally requires prior written permission for generative-AI ingestion; no permission is recorded.",
+                        "model_ingestion_allowed":  false
+                    },
+                    {
+                        "source_id":  "openstax-biology2-4-3",
+                        "title":  "Biology 2e",
+                        "author":  "Mary Ann Clark, Matthew Douglas, Jung Choi",
+                        "publisher":  "OpenStax",
+                        "version":  "2e, web accessed 2026-11-07",
+                        "url":  "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells",
+                        "section":  "4.3 Eukaryotic Cells",
+                        "license":  "CC BY-NC-SA 4.0",
+                        "accessed_at":  "2026-11-07",
+                        "location_type":  "web_section",
+                        "page":  null,
+                        "attribution":  "Mary Ann Clark, Matthew Douglas, Jung Choi, Biology 2e, 4.3 Eukaryotic Cells; CC BY-NC-SA 4.0. Vietnamese paraphrases by the P4 agent, not verbatim quotations. Current publisher page additionally requires prior written permission for generative-AI ingestion; no permission is recorded.",
+                        "model_ingestion_allowed":  false
+                    }
+                ]
+}

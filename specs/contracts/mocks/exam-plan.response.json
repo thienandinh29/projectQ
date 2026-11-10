@@ -1,0 +1,19 @@
+{
+  "days": [
+    {
+      "date": "2026-11-08",
+      "concept_slugs": [
+        "bieu-thuc-boolean",
+        "cau-lenh-dieu-kien"
+      ],
+      "minutes": 20
+    },
+    {
+      "date": "2026-11-09",
+      "concept_slugs": [
+        "vong-lap"
+      ],
+      "minutes": 20
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "mode": "simulation",
+  "label_vi": "Dữ liệu mẫu kiểm tra nghiệp vụ; không phải luồng AI/database thật.",
+  "subject": "python-conditions",
+  "at": "2026-11-07T08:00:00+00:00",
+  "goal_vi": "Tôi muốn qua môn Nhập môn lập trình, còn 14 ngày nữa thi.",
+  "exam_in_days": 14,
+  "minutes_available": 30,
+  "placement_target_minutes": 10,
+  "entries": [
+    {
+      "kind": "goal",
+      "source_mode": "explicit_sample",
+      "search_performed": false
+    },
+    {
+      "kind": "syllabus",
+      "source_mode": "outline_with_missing_material",
+      "search_performed": false
+    }
+  ],
+  "graph_confirmation": "explicit_in_memory_per_learner_and_revision",
+  "verification_mode": "fake_gateway_only",
+  "real_verified_count": 0,
+  "personal_note_vi": "Tôi nghĩ mọi chuỗi không rỗng đều có giá trị False.",
+  "personal_note_status": "unverified",
+  "pending_policy": [
+    "mastery_80_vs_95",
+    "two_attempt_scope",
+    "skip_lecture_after_two_correct",
+    "review_priority_and_grace"
+  ],
+  "expected_steps": [
+    "goal_and_deadline",
+    "proposed_map",
+    "explicit_confirmation",
+    "placement",
+    "explained_next_step",
+    "wrong_choice",
+    "verified_hint_mock_only",
+    "submit_and_source_feedback",
+    "bkt_update",
+    "remediation",
+    "fsrs_review",
+    "overdue_plan"
+  ]
+}

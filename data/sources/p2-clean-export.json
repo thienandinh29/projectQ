@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-11-07T12:58:44.503407+00:00",
+  "books": [
+    {
+      "book": "think-python-2e",
+      "accepted_pages": 244,
+      "rejected": [],
+      "missing": false
+    },
+    {
+      "book": "logic-critical-thinking",
+      "accepted_pages": 48,
+      "rejected": [],
+      "missing": false
+    },
+    {
+      "book": "introductory-statistics",
+      "accepted_pages": 71,
+      "rejected": [],
+      "missing": false
+    }
+  ]
+}

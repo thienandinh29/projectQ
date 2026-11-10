@@ -1,0 +1,90 @@
+{
+  "recorded_on": "2026-11-07",
+  "branch": "integration/p1-p5",
+  "base_commit": "2128cb2",
+  "changes": "uncommitted working tree; no commit, merge or push in this session",
+  "focused": {
+    "command": "python -m pytest tests/content tests/guardrails tests/tutor tests/api tests/research tests/llm tests/uploads --no-db -q --tb=short",
+    "cwd": "apps/api",
+    "passed": 195,
+    "skipped": 12,
+    "failed": 0,
+    "errors": 0,
+    "skips": "10 new P4 PostgreSQL cases and 2 existing PostgreSQL cases explicitly excluded by --no-db",
+    "warnings": [
+      "Starlette TestClient httpx deprecation"
+    ],
+    "models": "fake only",
+    "database": false
+  },
+  "static": {
+    "ruff": "passed on content/guardrails/tutor/worker/tests-content",
+    "mypy": "passed, 27 source files",
+    "diff_check": "passed"
+  },
+  "database_probe": {
+    "command": "python -m pytest tests/content/test_runtime_database.py::test_repository_preserves_ids_and_retry_does_not_duplicate -q --tb=short",
+    "attempted_inside_and_outside_sandbox": true,
+    "passed": 0,
+    "errors": 1,
+    "result": "fixture setup psycopg.errors.ConnectionTimeout at 127.0.0.1:54322 on both attempts",
+    "database_created": false,
+    "migrations_applied": false,
+    "extra_outside_sandbox_warnings": "pytest cache access denied; not a database success"
+  },
+  "schema": {
+    "existing": "0001..0007 untouched",
+    "candidate": "app/content/sql/0008_p4_runtime.sql",
+    "automatically_discovered": false,
+    "executed": false,
+    "owner_review": "P2 required"
+  },
+  "golden": {
+    "subjects": 3,
+    "items": 45,
+    "chunks": 15,
+    "structurally_valid": true,
+    "servable_on_disk": 0,
+    "human_approved": 0,
+    "real_model_verified": 0,
+    "openstax_model_permission": false,
+    "python_independent": true
+  },
+  "evaluation": {
+    "item_cases": 50,
+    "planted_item_cases": 6,
+    "hint_candidates": 20,
+    "human_label_templates": 70,
+    "confirmed_human_labels": 0,
+    "tutor_acceptance": "not measured"
+  },
+  "environment": {
+    "database_url_present": false,
+    "configured_model_routes": 0,
+    "real_model_calls": 0,
+    "secrets_printed": false,
+    "root_env_read": false,
+    "postgres_local": "timeout",
+    "docker_available": false,
+    "postgres_cli_available": false,
+    "wsl": "not installed"
+  },
+  "frontend": {
+    "changed": false,
+    "tests_rerun": false,
+    "default_mode": "mock"
+  },
+  "test_python": "$env:TEMP/nodetrail-p4-tools/venv/Scripts/python.exe",
+  "live_modes": {
+    "golden_import_then_verify": "not run",
+    "pipeline_generation": "not run",
+    "database_api_wrong_answer_hint": "not run"
+  },
+  "remaining": [
+    "P2 schema/worker review and real PostgreSQL tests",
+    "P3 credentials/model routing and live independent verification",
+    "P2/P3 private Storage and upload model-use permission",
+    "P5 API browser run",
+    "P4/P1 evalkit alignment, 20 held-out verified cases, >=36 planted cases, >=20 retrieval judgments, human labels"
+  ]
+}

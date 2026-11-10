@@ -1,0 +1,20 @@
+{
+    "topic":  "Điều kiện trong Python",
+    "sources":  [
+                    {
+                        "source_id":  "thinkpython3-ch05",
+                        "title":  "Think Python, 3rd edition",
+                        "author":  "Allen B. Downey",
+                        "publisher":  "Green Tea Press",
+                        "version":  "3rd edition, web accessed 2026-11-07",
+                        "url":  "https://allendowney.github.io/ThinkPython/chap05.html",
+                        "section":  "5.1–5.6",
+                        "license":  "CC BY-NC-SA 4.0 (text); MIT (code)",
+                        "accessed_at":  "2026-11-07",
+                        "location_type":  "web_section",
+                        "page":  null,
+                        "attribution":  "Allen B. Downey, Think Python, 3rd edition, 5.1–5.6; CC BY-NC-SA 4.0 (text); MIT (code). Vietnamese paraphrases by the P4 agent, not verbatim quotations.",
+                        "model_ingestion_allowed":  true
+                    }
+                ]
+}

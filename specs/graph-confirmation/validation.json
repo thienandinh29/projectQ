@@ -1,0 +1,25 @@
+{
+  "baseline": "657c09f",
+  "branch": "ptest2",
+  "database": "disposable local PostgreSQL with pgvector; migrations through 0013",
+  "api_tests": {
+    "passed": 1443,
+    "failed": 0,
+    "skipped": 0,
+    "new_graph_confirmation_tests": 7
+  },
+  "api_ruff": "pass",
+  "api_format": "pass",
+  "api_mypy": "pass",
+  "web_tests": {
+    "passed": 50,
+    "failed": 0
+  },
+  "web_lint": "pass",
+  "web_typecheck": "pass",
+  "web_build": "pass",
+  "shared_database_migrated": false,
+  "live_llm_calls": 0,
+  "browser_end_to_end": "not run; P5 UI integration pending",
+  "hosted_supabase_advisors": "not run; no hosted database changed"
+}

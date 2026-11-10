@@ -1,0 +1,11 @@
+{
+  "hint_vi": "Hãy tính từng vế: `3 > 2` cho giá trị gì? Sau đó `not` đảo giá trị đó thành gì, và `or` cần ít nhất một vế đúng để cho kết quả True?",
+  "citations": [
+    {
+      "title": "Think Python (3rd edition)",
+      "section": "Chương 5 — Boolean expressions",
+      "url": "https://allendowney.github.io/ThinkPython/chap05.html#boolean-expressions",
+      "page": null
+    }
+  ]
+}

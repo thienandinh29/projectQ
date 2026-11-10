@@ -1,0 +1,20 @@
+{
+    "topic":  "Phân số cơ bản",
+    "sources":  [
+                    {
+                        "source_id":  "openstax-prealgebra2-4-1",
+                        "title":  "Prealgebra 2e",
+                        "author":  "Lynn Marecek, MaryAnne Anthony-Smith, Andrea Honeycutt Mathis",
+                        "publisher":  "OpenStax",
+                        "version":  "2e, web accessed 2026-11-07",
+                        "url":  "https://openstax.org/books/prealgebra-2e/pages/4-1-visualize-fractions",
+                        "section":  "4.1 Visualize Fractions",
+                        "license":  "CC BY-NC-SA 4.0",
+                        "accessed_at":  "2026-11-07",
+                        "location_type":  "web_section",
+                        "page":  null,
+                        "attribution":  "Lynn Marecek, MaryAnne Anthony-Smith, Andrea Honeycutt Mathis, Prealgebra 2e, 4.1 Visualize Fractions; CC BY-NC-SA 4.0. Vietnamese paraphrases by the P4 agent, not verbatim quotations. Current publisher page additionally requires prior written permission for generative-AI ingestion; no permission is recorded.",
+                        "model_ingestion_allowed":  false
+                    }
+                ]
+}

@@ -1,0 +1,43 @@
+{
+  "correct": true,
+  "misconception_vi": null,
+  "p_known": 0.9815681685196022,
+  "mastered": true,
+  "remediation": null,
+  "traces": [
+    {
+      "kind": "bkt_update",
+      "concept_slug": "bieu-thuc-boolean",
+      "at": "2026-11-07T09:30:00Z",
+      "prior": 0.93,
+      "evidence": {
+        "item_id": "bool-002",
+        "correct": true,
+        "misconception": null,
+        "slip": 0.1,
+        "guess": 0.25
+      },
+      "posterior": 0.9815681685196022,
+      "rule": "bkt.correct.mastered",
+      "rule_vi": "Trả lời đúng → khả năng đã nắm vững tăng từ 0,93 lên 0,98 — đã đạt mức nắm vững (xác suất trượt 0,10, đoán đúng 0,25)",
+      "alternatives": []
+    },
+    {
+      "kind": "review",
+      "concept_slug": "bieu-thuc-boolean",
+      "at": "2026-11-07T09:30:00Z",
+      "prior": null,
+      "evidence": {
+        "item_id": "bool-002",
+        "correct": true,
+        "misconception": null,
+        "slip": null,
+        "guess": null
+      },
+      "posterior": null,
+      "rule": "review.good",
+      "rule_vi": "Ôn lại sau 2 ngày (09/11/2026): trả lời đúng không cần gợi ý; lịch ôn giữ khả năng nhớ khoảng 90%",
+      "alternatives": []
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "generated_at": "2026-11-07T12:43:49.470527+00:00",
+  "books": [
+    {
+      "book": "openintro-statistics",
+      "accepted_pages": 97,
+      "rejected": [],
+      "missing": false
+    },
+    {
+      "book": "microbiology-kaiser",
+      "accepted_pages": 227,
+      "rejected": [],
+      "missing": false
+    },
+    {
+      "book": "calculus-guichard",
+      "accepted_pages": 147,
+      "rejected": [],
+      "missing": false
+    },
+    {
+      "book": "think-python-2e",
+      "accepted_pages": 244,
+      "rejected": [],
+      "missing": false
+    },
+    {
+      "book": "logic-critical-thinking",
+      "accepted_pages": 48,
+      "rejected": [],
+      "missing": false
+    },
+    {
+      "book": "microeconomics",
+      "accepted_pages": 157,
+      "rejected": [],
+      "missing": false
+    },
+    {
+      "book": "general-chemistry",
+      "accepted_pages": 264,
+      "rejected": [],
+      "missing": false
+    },
+    {
+      "book": "introductory-statistics",
+      "accepted_pages": 71,
+      "rejected": [],
+      "missing": false
+    }
+  ]
+}

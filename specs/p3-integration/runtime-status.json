@@ -1,0 +1,11 @@
+{
+  "checked_at": "2026-11-07T07:54:35.277376+00:00",
+  "live": false,
+  "configured_model_slots": 0,
+  "total_model_slots": 31,
+  "search": {
+    "provider": "brave",
+    "api_key_present": false
+  },
+  "scope": "Process environment only; .env and credential files not inspected."
+}

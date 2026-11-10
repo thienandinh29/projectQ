@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-11-07T12:48:32.036897+00:00",
+  "manifest": "C:\\Users\\PC\\orca\\SenaEmpire36\\data\\sources\\library.yaml",
+  "complete": false,
+  "books": [
+    {
+      "book": "think-python-2e",
+      "license": "CC BY-NC 3.0",
+      "downloaded": 244,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    }
+  ]
+}

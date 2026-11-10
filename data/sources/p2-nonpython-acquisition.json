@@ -1,0 +1,51 @@
+{
+  "generated_at": "2026-11-07T12:50:17.722313+00:00",
+  "manifest": "C:\\Users\\PC\\orca\\SenaEmpire36\\data\\sources\\library.yaml",
+  "complete": false,
+  "books": [
+    {
+      "book": "logic-critical-thinking",
+      "license": "CC BY 4.0",
+      "downloaded": 48,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    },
+    {
+      "book": "introductory-statistics",
+      "license": "CC BY-NC-SA 3.0",
+      "downloaded": 71,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    }
+  ]
+}

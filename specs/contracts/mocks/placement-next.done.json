@@ -1,0 +1,38 @@
+{
+  "item": null,
+  "done": true,
+  "gap_slug": "bieu-thuc-boolean",
+  "trace": {
+    "kind": "placement_step",
+    "concept_slug": "bieu-thuc-boolean",
+    "at": "2026-11-07T09:30:00Z",
+    "prior": 0.15,
+    "evidence": {
+      "item_id": null,
+      "correct": true,
+      "misconception": null,
+      "slip": null,
+      "guess": null
+    },
+    "posterior": null,
+    "rule": "placement.done.gap_located",
+    "rule_vi": "Đã định vị lỗ hổng: «Biểu thức boolean» chưa vững trong khi các kiến thức nền của nó đã vững (đã hỏi 4 câu; p_known ước tính 0,15)",
+    "alternatives": [
+      {
+        "concept_slug": "cau-lenh-dieu-kien",
+        "p_known": 0.15,
+        "why_not_vi": "Phụ thuộc vào «Biểu thức boolean» nên xử lý sau"
+      },
+      {
+        "concept_slug": "vong-lap",
+        "p_known": 0.15,
+        "why_not_vi": "Phụ thuộc vào «Biểu thức boolean» nên xử lý sau"
+      },
+      {
+        "concept_slug": "danh-sach",
+        "p_known": 0.15,
+        "why_not_vi": "Phụ thuộc vào «Biểu thức boolean» nên xử lý sau"
+      }
+    ]
+  }
+}

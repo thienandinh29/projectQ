@@ -1,0 +1,36 @@
+{
+  "check": "Pydantic reference/DAG/option validation and current release gate",
+  "date": "2026-11-07",
+  "valid": true,
+  "topics": [
+    {
+      "topic": "cell-basics",
+      "sources": 2,
+      "chunks": 5,
+      "concepts": 5,
+      "items": 15,
+      "servable": 0,
+      "human_approved": 0
+    },
+    {
+      "topic": "fractions",
+      "sources": 1,
+      "chunks": 5,
+      "concepts": 5,
+      "items": 15,
+      "servable": 0,
+      "human_approved": 0
+    },
+    {
+      "topic": "python-conditions",
+      "sources": 1,
+      "chunks": 5,
+      "concepts": 5,
+      "items": 15,
+      "servable": 0,
+      "human_approved": 0
+    }
+  ],
+  "real_model_verified": 0,
+  "human_approved": 0
+}

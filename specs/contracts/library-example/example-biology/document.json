@@ -1,0 +1,28 @@
+{
+  "blocks": [
+    {
+      "chapter_no": 8,
+      "chapter": "Photosynthesis",
+      "section": "Overview of Photosynthesis",
+      "kind": "text",
+      "text": "Photosynthesis is the process by which plants and some other organisms turn light energy into chemical energy.\n\nIt takes place in two stages: the light reactions and the Calvin cycle.",
+      "source_uri": "https://example.org/biology/chapter-8#overview"
+    },
+    {
+      "chapter_no": 8,
+      "chapter": "Photosynthesis",
+      "section": "The Light Reactions",
+      "kind": "text",
+      "text": "In the light reactions, water is split and oxygen is released as a by-product.",
+      "source_uri": "https://example.org/biology/chapter-8#light-reactions"
+    },
+    {
+      "chapter_no": 8,
+      "chapter": "Photosynthesis",
+      "section": "Glossary",
+      "kind": "glossary",
+      "text": "**chloroplast:** the organelle where photosynthesis happens.",
+      "source_uri": "https://example.org/biology/chapter-8#glossary"
+    }
+  ]
+}

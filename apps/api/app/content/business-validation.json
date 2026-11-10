@@ -1,0 +1,61 @@
+{
+  "recorded_on": "2026-11-07",
+  "branch": "p4",
+  "base_commit": "bc7da3e",
+  "mode": "offline_business_alignment",
+  "changes_committed": false,
+  "checks": {
+    "pytest": {
+      "command": "python -m pytest tests/content tests/guardrails tests/tutor tests/api tests/research tests/llm tests/uploads --no-db -q --tb=short",
+      "passed": 201,
+      "skipped": 12,
+      "failed": 0,
+      "errors": 0,
+      "warnings": [
+        "Starlette TestClient httpx deprecation"
+      ],
+      "new_business_tests": 6
+    },
+    "ruff": "passed content/guardrails/tutor and tests/content",
+    "mypy": "passed, 29 source files",
+    "diff_check": "passed"
+  },
+  "scenario": {
+    "command": "python -m tests.content.learning_loop",
+    "result": "passed",
+    "placement_fixture_answers": 4,
+    "real_engine_functions": [
+      "placement",
+      "BKT",
+      "path",
+      "remediation",
+      "FSRS"
+    ],
+    "source_selection": "explicit sample, no search",
+    "graph_confirmation": "trusted-callback simulation, in-memory",
+    "hint_verification": "fake gateway only",
+    "post_submission_feedback": "P4 helper, no HTTP endpoint",
+    "question_answer_review_card": "fixture only",
+    "concept_review_scheduling": "existing P1 FSRS in memory",
+    "today": "existing overdue rule, not full dashboard",
+    "exam_date_capture": "fixture only; no exam prioritization"
+  },
+  "boundaries": {
+    "live_model_calls": 0,
+    "database_connections": 0,
+    "migrations_changed": 0,
+    "migrations_run": 0,
+    "new_dependencies": 0,
+    "real_verified_count": 0,
+    "human_review_claimed": false,
+    "production_graph_confirmation": "default409 until trusted callback wired"
+  },
+  "pending": [
+    "P1 threshold80% versus95%, two-attempt scope, two-correct lecture skip, review priority/grace",
+    "P2/P3/P5 graph-confirmation HTTP/state wiring",
+    "P3/P5 accepted-submission feedback contract/display",
+    "P3 explicit structural/source classification port",
+    "P2/P5 persistent notes/Q&A cards/Today/deadline integration if scoped",
+    "Real gateway/database integration deferred by user"
+  ]
+}

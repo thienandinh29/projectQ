@@ -1,0 +1,63 @@
+{
+  "positive_definition": "faulty_content_to_block",
+  "ground_truth": "confirmed_human_labels_only",
+  "counts": {
+    "cases": 70,
+    "confirmed": 0,
+    "paired": 0,
+    "pending_or_disputed": 70,
+    "missing_predictions": 0,
+    "unlabelled_predictions": 0,
+    "hints_missing_rubric": 0,
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "tn": 0
+  },
+  "content_error_rate": {
+    "value": null,
+    "numerator": 0,
+    "denominator": 0
+  },
+  "item_error_rate": {
+    "value": null,
+    "numerator": 0,
+    "denominator": 0
+  },
+  "error_precision": {
+    "value": null,
+    "numerator": 0,
+    "denominator": 0
+  },
+  "error_recall": {
+    "value": null,
+    "numerator": 0,
+    "denominator": 0
+  },
+  "false_alarm_rate": {
+    "value": null,
+    "numerator": 0,
+    "denominator": 0
+  },
+  "faulty_item_escape_rate": {
+    "value": null,
+    "numerator": 0,
+    "denominator": 0
+  },
+  "served_item_error_rate": {
+    "value": null,
+    "numerator": 0,
+    "denominator": 0
+  },
+  "tutor_rubric_pass_rate": {
+    "value": null,
+    "numerator": 0,
+    "denominator": 0
+  },
+  "tutor_target": {
+    "required": 18,
+    "sample_size": 20,
+    "met": null
+  },
+  "prediction_methods": []
+}

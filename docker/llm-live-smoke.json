@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-11-07T10:17:17.096685+00:00",
+  "scope": "Synthetic Vietnamese MCQ gateway smoke; not P4 acceptance or live topic pipeline",
+  "generation": {
+    "status": "ok",
+    "provider": "deepseek",
+    "model": "deepseek-flash",
+    "family": "deepseek",
+    "latency_ms": 985.0,
+    "input_tokens": 228,
+    "output_tokens": 50
+  },
+  "verification": {
+    "status": "ok",
+    "provider": "gemini",
+    "model": "gemini-3.8-flash",
+    "family": "gemini",
+    "latency_ms": 4562.0,
+    "input_tokens": 236,
+    "output_tokens": 132,
+    "blind_answer_matches_generator": true,
+    "generator_answer_excluded_from_verifier_input": true
+  },
+  "api_keys_logged": false,
+  "attempts": [
+    {
+      "provider": "deepseek",
+      "model": "deepseek-flash",
+      "status": "success",
+      "latency_ms": 985.0
+    },
+    {
+      "provider": "gemini",
+      "model": "gemini-3.8-flash",
+      "status": "success",
+      "latency_ms": 4562.0
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "checked_at": "2026-11-07T09:52:10.893649+00:00",
+  "database": "local nodetrail, port 54322",
+  "migrations_applied": [
+    "0003_halfvec_source_uri.sql",
+    "0004_decision_traces.sql"
+  ],
+  "benchmark_scope": "Think Python 3e chapter 1 only; not full-library acceptance",
+  "acquisition": {
+    "repository": "https://github.com/AllenDowney/ThinkPython",
+    "revision": "1ba8a66cd47ca33dee6c425b1b6b0777c125a586",
+    "notebook_url": "https://raw.githubusercontent.com/AllenDowney/ThinkPython/1ba8a66cd47ca33dee6c425b1b6b0777c125a586/chapters/chap01.ipynb",
+    "sha256": "9bb7bc68fdd148022220c425c4b0310eccbec474aa9db47d27e0229e4ca13ba8",
+    "bytes": 35458
+  },
+  "license": "[Think Python: 3rd Edition](https://allendowney.github.io/ThinkPython/index.html)\n\nCopyright 2024 [Allen B. Downey](https://allendowney.com)\n\nCode license: [MIT License](https://mit-license.org/)\n\nText license: [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/)",
+  "chunks": 16,
+  "max_input_tokens": 550,
+  "embedding_model": "BAAI/bge-m3",
+  "ingest_seconds": 14.71,
+  "chunks_per_second": 1.088,
+  "tei_peak_sampled_memory": "4.016GiB / 8GiB",
+  "memory_sample_count": 8,
+  "memory_measurement": "Docker stats sampled during ingest; may miss transient peaks",
+  "hnsw_build_seconds": 0.017,
+  "vector_dimensions": 1024,
+  "normalization_and_provenance_checks": true,
+  "retrieval": {
+    "query": "Trong Python, toán tử // khác / như thế nào?",
+    "elapsed_seconds": 0.162,
+    "citations": [
+      {
+        "chunk_id": "51ddb090-5233-414b-b6b6-ff8c5761ffe8",
+        "section": "Arithmetic operators",
+        "source_uri": "https://allendowney.github.io/ThinkPython/chap01.html#arithmetic-operators",
+        "page": null,
+        "score": 0.6551203996883849
+      },
+      {
+        "chunk_id": "19c9de76-cec3-4cce-b26b-d7603ce29475",
+        "section": "Glossary",
+        "source_uri": "https://allendowney.github.io/ThinkPython/chap01.html#glossary",
+        "page": null,
+        "score": 0.5882191348759145
+      },
+      {
+        "chunk_id": "c3bbed38-fa3b-4e43-8a37-e1133c4b69d0",
+        "section": "Strings",
+        "source_uri": "https://allendowney.github.io/ThinkPython/chap01.html#strings",
+        "page": null,
+        "score": 0.576797258412314
+      }
+    ],
+    "identical_text_top1": true
+  },
+  "llm_status": "not configured; user considering DeepSeek API"
+}

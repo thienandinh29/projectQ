@@ -1,0 +1,106 @@
+{
+  "concepts": [
+    {
+      "slug": "remainder",
+      "name_vi": "Phép chia lấy dư",
+      "name_en": "Remainder",
+      "description_vi": "% cho số dư của phép chia số nguyên dương. Nếu x % y bằng 0 thì x chia hết cho y (y khác 0).",
+      "sources": [
+        "https://allendowney.github.io/ThinkPython/chap05.html"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000101"
+      ]
+    },
+    {
+      "slug": "comparison",
+      "name_vi": "So sánh",
+      "name_en": "Comparison",
+      "description_vi": "== kiểm tra bằng nhau, != kiểm tra khác nhau; <, >, <=, >= so sánh giá trị. = là phép gán. Kết quả so sánh là True hoặc False thuộc kiểu bool.",
+      "sources": [
+        "https://allendowney.github.io/ThinkPython/chap05.html"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000102"
+      ]
+    },
+    {
+      "slug": "boolean-logic",
+      "name_vi": "Logic Boolean",
+      "name_en": "Boolean logic",
+      "description_vi": "Với toán hạng Boolean, and đúng khi cả hai đúng; or đúng khi ít nhất một đúng; not đảo đúng thành sai và ngược lại.",
+      "sources": [
+        "https://allendowney.github.io/ThinkPython/chap05.html"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000103"
+      ]
+    },
+    {
+      "slug": "if-else",
+      "name_vi": "Rẽ nhánh if/else",
+      "name_en": "If/else",
+      "description_vi": "Khối thụt lề sau if chạy khi điều kiện đúng; nếu điều kiện sai thì chạy khối else nếu có. Trong một if/else chỉ một nhánh được chạy.",
+      "sources": [
+        "https://allendowney.github.io/ThinkPython/chap05.html"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000104"
+      ]
+    },
+    {
+      "slug": "elif-order",
+      "name_vi": "Thứ tự elif",
+      "name_en": "Elif ordering",
+      "description_vi": "Chuỗi if/elif kiểm tra điều kiện theo thứ tự; chỉ nhánh đúng đầu tiên chạy. else chạy khi tất cả điều kiện trước đó sai.",
+      "sources": [
+        "https://allendowney.github.io/ThinkPython/chap05.html"
+      ],
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000105"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "remainder",
+      "to": "boolean-logic",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000101",
+        "40000000-0000-5000-8000-000000000103"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    },
+    {
+      "from": "comparison",
+      "to": "boolean-logic",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000102",
+        "40000000-0000-5000-8000-000000000103"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    },
+    {
+      "from": "boolean-logic",
+      "to": "if-else",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000103",
+        "40000000-0000-5000-8000-000000000104"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    },
+    {
+      "from": "if-else",
+      "to": "elif-order",
+      "chunk_ids": [
+        "40000000-0000-5000-8000-000000000104",
+        "40000000-0000-5000-8000-000000000105"
+      ],
+      "rationale_vi": "Quan hệ do agent đề xuất để học từ thành phần cơ bản đến cách vận dụng; cần người duyệt.",
+      "evidence_kind": "pedagogical_inference"
+    }
+  ]
+}

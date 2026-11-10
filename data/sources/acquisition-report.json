@@ -1,0 +1,252 @@
+{
+  "generated_at": "2026-11-07T06:52:25.156848+00:00",
+  "manifest": "data/sources/library.yaml",
+  "complete": false,
+  "note": "Latest per-book acquisition attempts; rejected/unknown-license pages remain excluded. See library-index-report.json for re-audited usable counts.",
+  "books": [
+    {
+      "book": "openintro-statistics",
+      "license": "CC BY-SA 3.0",
+      "downloaded": 97,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introduction_to_Statistics_4e_%28Diez_et_al.%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introduction_to_Statistics_4e_%28Diez_et_al.%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introduction_to_Statistics_4e_%28Diez_et_al.%29/00:_Front_Matter/05:_Acknowledgements",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    },
+    {
+      "book": "microbiology-kaiser",
+      "license": "CC BY 4.0",
+      "downloaded": 227,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/Bacteria/Clostridium_tetani",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/Bacteria/Escherichia_coli",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/Bacteria/Haemophilus_influenzae",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/Bacteria/Neisseria_gonorrhoeae",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/Bacteria/Neisseria_meningitidis",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/Bacteria/Streptococcus_pneumoniae",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/Bacteria/Streptococcus_pyogenes",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/Bacteria/Vibrio_cholerae",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://bio.libretexts.org/Bookshelves/Microbiology/Microbiology_%28Kaiser%29/Unit_7:_Microbial_Genetics_and_Microbial_Metabolism/17:_Bacterial_Growth_and_Energy_Production/17.3:_Energy",
+          "error_vi": "Trang chuyển hướng ra ngoài giáo trình."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    },
+    {
+      "book": "calculus-guichard",
+      "license": "CC BY-NC-SA 4.0",
+      "downloaded": 147,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://math.libretexts.org/Bookshelves/Calculus/Calculus_%28Guichard%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://math.libretexts.org/Bookshelves/Calculus/Calculus_%28Guichard%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://math.libretexts.org/Bookshelves/Calculus/Calculus_%28Guichard%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    },
+    {
+      "book": "think-python-2e",
+      "license": "CC BY-NC 3.0",
+      "downloaded": 244,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Think_Python_2e_%28Downey%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    },
+    {
+      "book": "logic-critical-thinking",
+      "license": "CC BY 4.0",
+      "downloaded": 48,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://human.libretexts.org/Bookshelves/Philosophy/Logic_and_Reasoning/Introduction_to_Logic_and_Critical_Thinking_2e_%28van_Cleave%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    },
+    {
+      "book": "microeconomics",
+      "license": "CC BY-NC-SA 4.0",
+      "downloaded": 157,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://socialsci.libretexts.org/Bookshelves/Economics/Microeconomics/Principles_of_Microeconomics_%28Curtis_and_Irvine%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://socialsci.libretexts.org/Bookshelves/Economics/Microeconomics/Principles_of_Microeconomics_%28Curtis_and_Irvine%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://socialsci.libretexts.org/Bookshelves/Economics/Microeconomics/Principles_of_Microeconomics_%28Curtis_and_Irvine%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    },
+    {
+      "book": "general-chemistry",
+      "license": "CC BY-NC-SA 4.0",
+      "downloaded": 264,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/13:_Solutions_and_their_Physical_Properties/13.05:_Solubilities_of_Gases",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/13:_Solutions_and_their_Physical_Properties/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/13:_Solutions_and_their_Physical_Properties/zz:_Back_Matter/10:_Index",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/16:_Acids_and_Bases/16.6:_Polyprotic_Acids",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/18:_Solubility_and_Complex-Ion_Equilibria/18.2:_Relationship_Between_Solubility_and_Ksp",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/24:_Complex_Ions_and_Coordination_Compounds/24.02:_Ligands",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/13:_Solutions_and_their_Physical_Properties/00:_Front_Matter/02:_InfoPage",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://chem.libretexts.org/Bookshelves/General_Chemistry/Map:_General_Chemistry_%28Petrucci_et_al.%29/13:_Solutions_and_their_Physical_Properties/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    },
+    {
+      "book": "introductory-statistics",
+      "license": "CC BY-NC-SA 3.0",
+      "downloaded": 71,
+      "cached": 0,
+      "failures": [
+        {
+          "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/00:_Front_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/zz:_Back_Matter",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        },
+        {
+          "url": "https://stats.libretexts.org/Bookshelves/Introductory_Statistics/Introductory_Statistics_%28Shafer_and_Zhang%29/00:_Front_Matter/04:_Licensing",
+          "error_vi": "Chưa xác định được giấy phép mở của tài liệu."
+        }
+      ],
+      "discovery_exhausted": true,
+      "complete": false
+    }
+  ]
+}
