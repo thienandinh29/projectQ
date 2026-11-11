@@ -38,9 +38,12 @@ deterministic rules over the Knowledge Graph and BKT mastery, never from the LLM
 ## Out of scope (demo)
 Elo difficulty calibration, fitted BKT parameters (defaults from the literature), exam-plan scheduling (H8–H11).
 
-## Measured status (H3–H7, placement.py)
-The success criterion above is **not yet met under noise**. Seeded simulation, slip 0.10 / guess 0.25, one planted gap
-per concept: exact gap located in 43–55% of runs without verification and 56–64% with it (`verify`, now the default); noiseless runs are exact on all shapes.
-Cause: one lucky MCQ guess (25%) settles whole branches by inference. Decided: `verify` is on by default. Remaining options: (1) accept
-"within one concept" as the criterion, (2) probabilistic placement (per-concept BKT
-posteriors, ask the highest-entropy concept; more work than the demo window allows).
+## Measured status (updated 2026-11-11)
+The success criterion above (≥ 90% within 6 questions under slip 0.10 / guess 0.25) is **still not met**. The graph walk
+(`placement.py`) reached 43–55% plain and 56–64% with `verify`. A Bayesian placer (`placement_bayes.py`: posterior
+over prerequisite-closed knowledge states, questions by information gain) reaches 53–82% at a 6-question budget and
+≥ 90% at 10–30 questions depending on the graph, with a 95% interval of about ±3 points per cell. With one question
+per concept (one verified item each) it is close to the walk's `verify` result, so the gain depends on holding
+several verified items per concept. Full tables, the learner models and the limits of the evidence:
+`docs/v2/placement-eval.md` (reproduce with `app.evalkit.placement_sim`). `PLACEMENT_STRATEGY` selects `bayes`
+(default) or `walk`; `app/engine/placer.py` is the shared interface.

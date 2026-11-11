@@ -28,14 +28,26 @@ def test_walk_placer_is_the_graph_walk() -> None:
     assert p.seed_mastery(CHAIN, ANSWERS) == placement.seed_mastery(CHAIN, ANSWERS)
 
 
-def test_bayes_placer_never_asks_a_concept_twice() -> None:
+def test_bayes_placer_respects_the_items_available_per_concept() -> None:
     p = BayesPlacer()
-    assert p.next_question(CHAIN, ANSWERS, now=NOW) == placement_bayes.next_question(
-        CHAIN, ANSWERS, now=NOW, max_asks_per_concept=1
-    )
+    available = {"a": 1, "b": 2, "c": 2, "d": 1}
     answers: list[Answer] = []
-    while (slug := p.next_question(CHAIN, answers, now=NOW)[0]) is not None:
-        assert slug not in {a.slug for a in answers}
-        answers.append(Answer(slug, slug == "a"))
-    assert p.gap(CHAIN, answers) == "b"
+    while (slug := p.next_question(CHAIN, answers, now=NOW, available=available)[0]) is not None:
+        answers.append(Answer(slug, slug in "ab"))
+        assert sum(a.slug == slug for a in answers) <= available[slug]
+    assert len(answers) <= p.max_questions
+    assert p.gap(CHAIN, answers) == "c"
     assert set(p.seed_mastery(CHAIN, answers)) == set("abcd")
+
+
+def test_bayes_placer_never_asks_a_concept_without_items() -> None:
+    slug, _ = BayesPlacer().next_question(CHAIN, [], now=NOW, available={"a": 1})
+    assert slug == "a"
+    slug, trace = BayesPlacer().next_question(CHAIN, [], now=NOW, available={})
+    assert slug is None and trace.rule == "placement.done.exhausted"
+
+
+def test_bayes_placer_matches_the_engine_function() -> None:
+    assert BayesPlacer().next_question(CHAIN, ANSWERS, now=NOW) == placement_bayes.next_question(
+        CHAIN, ANSWERS, now=NOW, max_questions=10
+    )

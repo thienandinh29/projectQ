@@ -128,7 +128,10 @@ def test_placement_records_answers_and_finishes_without_reset(
     with TestClient(
         create_app(
             Settings(
-                database_url=database_url, allow_unauthenticated_local_dev=True, _env_file=None
+                database_url=database_url,
+                allow_unauthenticated_local_dev=True,
+                _env_file=None,
+                placement_strategy="walk",
             )
         )
     ) as client:
@@ -148,7 +151,7 @@ def test_placement_records_answers_and_finishes_without_reset(
         assert done.status_code == 200, done.text
         assert done.json()["done"] and done.json()["item"] is None
         before = client.get("/graph", params=body).json()
-        assert before["nodes"][0]["p_known"] == pytest.approx(0.85)
+        assert before["nodes"][0]["p_known"] == pytest.approx(0.85)  # the walk's KNOWN_P
         assert client.post("/placement/next", json=body).json()["done"]
         assert client.get("/graph", params=body).json() == before
         assert (

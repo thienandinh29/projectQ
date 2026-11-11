@@ -147,6 +147,11 @@ def test_stops_at_the_budget_and_says_it_is_unsure() -> None:
     assert "chưa chắc" in trace.rule_vi
 
 
+def test_cap_as_a_mapping_blocks_unlisted_concepts() -> None:
+    slug, _ = next_question(CHAIN, [], now=NOW, max_asks_per_concept={"d": 3})
+    assert slug == "d"
+
+
 def test_max_asks_per_concept_never_repeats_and_ends_when_exhausted() -> None:
     answers: list[Answer] = []
     while True:

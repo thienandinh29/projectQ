@@ -189,13 +189,15 @@ def next_question(
     confidence: float = CONFIDENCE,
     params: BKTParams | None = None,
     prior: Mapping[str, float] | None = None,
-    max_asks_per_concept: int | None = None,
+    max_asks_per_concept: int | Mapping[str, int] | None = None,
 ) -> tuple[str | None, DecisionTrace]:
     """The concept to ask about next, or None when placement is finished; always with a trace.
 
-    `max_asks_per_concept`: cap on questions per concept (None = no cap). A caller that can serve
-    only one unseen item per concept passes 1; repeats are what make the posterior robust to a
-    lucky guess, so the cap costs some accuracy (see docs/v2/placement-eval.md).
+    `max_asks_per_concept`: cap on questions per concept: one number for every concept, or a
+    mapping (a concept missing from it cannot be asked), or None for no cap. Services pass the
+    number of verified items they hold per concept, so a repeat question is always a new item.
+    Repeats are what make the posterior robust to a lucky guess: capping at one question per
+    concept costs much of the gain (docs/v2/placement-eval.md).
     """
     if len(graph) == 0:
         raise ValueError("cannot place a learner on an empty graph")
@@ -211,11 +213,15 @@ def next_question(
     asked: dict[str, int] = {}
     for a in answers:
         asked[a.slug] = asked.get(a.slug, 0) + 1
-    askable = [
-        n
-        for n in graph.order
-        if max_asks_per_concept is None or asked.get(n, 0) < max_asks_per_concept
-    ]
+
+    def cap(n: str) -> float:
+        if max_asks_per_concept is None:
+            return math.inf
+        if isinstance(max_asks_per_concept, int):
+            return max_asks_per_concept
+        return max_asks_per_concept.get(n, 0)
+
+    askable = [n for n in graph.order if asked.get(n, 0) < cap(n)]
 
     if p_state >= confidence or len(answers) >= max_questions or not askable:
         reason = "confident" if p_state >= confidence else "budget" if askable else "exhausted"

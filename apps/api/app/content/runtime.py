@@ -11,6 +11,7 @@ from app.content.backends import LearningBackend, TopicsBackend, TutorBackend
 from app.content.gateway import Gateway, P3Gateway
 from app.content.learning import GraphConfirmation
 from app.content.repository import Repository
+from app.engine.placer import make_placer
 from app.main import create_app as platform_app
 
 
@@ -28,7 +29,9 @@ def create_app(
     models = gateway or P3Gateway()
     app = platform_app(
         settings,
-        learning_backend=LearningBackend(store, confirmation),
+        learning_backend=LearningBackend(
+            store, confirmation, placer=make_placer(settings.placement_strategy)
+        ),
         topics_backend=TopicsBackend(store),
         tutor_backend=TutorBackend(
             store, models, confirmation, demo_uploads_enabled=settings.demo_uploads_enabled

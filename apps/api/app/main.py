@@ -17,6 +17,7 @@ from starlette.responses import Response
 from app.api import graph_confirmation, learn, topics, tutor
 from app.config import Settings, get_settings
 from app.db import create_pool, ping
+from app.engine.placer import make_placer
 from app.jobs.queue import snapshot
 from app.observability import configure_logging
 from app.schemas import CachedTopics, TopicState
@@ -70,7 +71,12 @@ def create_app(
 
     app = FastAPI(title="NodeTrail API", lifespan=lifespan)
     app.include_router(
-        learn.create_router(learning_backend or LearningService(lambda: app.state.pool))
+        learn.create_router(
+            learning_backend
+            or LearningService(
+                lambda: app.state.pool, placer=make_placer(settings.placement_strategy)
+            )
+        )
     )
     storage = (
         SupabaseStorage(
@@ -246,7 +252,9 @@ def create_content_app(
     approved = confirmation if confirmation is not None else confirmations
     current = create_app(
         settings,
-        learning_backend=LearningBackend(store, approved),
+        learning_backend=LearningBackend(
+            store, approved, placer=make_placer(settings.placement_strategy)
+        ),
         tutor_backend=TutorBackend(
             store, models, approved, demo_uploads_enabled=settings.demo_uploads_enabled
         ),

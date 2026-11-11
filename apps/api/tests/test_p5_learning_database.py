@@ -106,7 +106,7 @@ def test_session_to_practice_persists_engine_state(database_url: str) -> None:
                 return result
 
             placement_answers = 0
-            for _ in range(7):
+            for _ in range(11):  # the Bayesian placer asks at most 10 questions
                 step = client.post("/placement/next", json=scope)
                 assert step.status_code == 200, step.text
                 selection = step.json()
@@ -115,7 +115,7 @@ def test_session_to_practice_persists_engine_state(database_url: str) -> None:
                 answer(selection["item"], correct=placement_answers > 0)
                 placement_answers += 1
             else:
-                pytest.fail("placement did not finish within its six-question budget")
+                pytest.fail("placement did not finish within its question budget")
 
             practice = client.get("/next-item", params=scope)
             assert practice.status_code == 200, practice.text
