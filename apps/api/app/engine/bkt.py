@@ -79,6 +79,47 @@ def is_mastered(p_known: float, threshold: float = MASTERY_THRESHOLD) -> bool:
     return p_known >= threshold
 
 
+# --- confirmed mastery ---------------------------------------------------------------------------
+# p_known >= MASTERY_THRESHOLD alone can be reached by a lucky streak. "Mastered" (what Sena
+# praises and the map shows) also needs independent evidence, and once reached it is kept until
+# p_known falls clearly below the threshold, so one slip does not flip it (hysteresis).
+MIN_UNAIDED_CORRECT = 2  # correct answers on the concept given without any hint
+LEAVE_THRESHOLD = 0.85  # a confirmed mastery is lost only below this
+
+
+def is_confirmed_mastery(
+    p_known: float, unaided_correct: int, *, was_confirmed: bool = False
+) -> bool:
+    """Mastery that may be praised: high p_known, enough unaided evidence, with hysteresis."""
+    _check_probability(p_known)
+    if unaided_correct < 0:
+        raise ValueError("unaided_correct cannot be negative")
+    if was_confirmed:
+        return p_known >= LEAVE_THRESHOLD
+    return p_known >= MASTERY_THRESHOLD and unaided_correct >= MIN_UNAIDED_CORRECT
+
+
+# --- help weakens the evidence --------------------------------------------------------------------
+# A correct answer after hints is more likely even when the concept is not known: each hint level
+# moves p_guess part of the way towards certainty. The third level (the worked step) leaves little
+# evidence. p_slip is unchanged, and the result stays identifiable (p_slip + p_guess < 1).
+HINT_GUESS_SHARE = (0.0, 0.3, 0.6, 0.85)  # by hints used: none, 1, 2, 3 or more
+
+
+def params_with_help(params: BKTParams, hints_used: int) -> BKTParams:
+    """BKT parameters for an attempt made after `hints_used` hint levels."""
+    if hints_used < 0:
+        raise ValueError("hints_used cannot be negative")
+    share = HINT_GUESS_SHARE[min(hints_used, len(HINT_GUESS_SHARE) - 1)]
+    if share == 0.0:
+        return params
+    guess = params.p_guess + (1 - params.p_guess) * share
+    guess = min(guess, 1 - params.p_slip - 1e-6)
+    return BKTParams(
+        p_init=params.p_init, p_transit=params.p_transit, p_slip=params.p_slip, p_guess=guess
+    )
+
+
 def update_traced(
     p_known: float,
     correct: bool,
@@ -88,8 +129,13 @@ def update_traced(
     now: datetime,
     item_id: str | None = None,
     misconception: str | None = None,
+    unaided_correct: int | None = None,
 ) -> tuple[float, DecisionTrace]:
-    """`update` plus the trace the "Vì sao?" panel shows. Same number as `update`, always."""
+    """`update` plus the trace the "Vì sao?" panel shows. Same number as `update`, always.
+
+    `unaided_correct`: correct unaided answers on the concept, this one included. When given,
+    crossing the threshold is reported as mastery only if `is_confirmed_mastery` also holds.
+    """
     new_p = update(p_known, correct, params)
     if correct:
         rule = "bkt.correct"
@@ -104,8 +150,16 @@ def update_traced(
                 f" {fmt_p(p_known)} → {fmt_p(new_p)}"
             )
     if is_mastered(new_p) and not is_mastered(p_known):
-        rule += ".mastered"
-        why += " — đã đạt mức nắm vững"
+        if unaided_correct is None or is_confirmed_mastery(new_p, unaided_correct):
+            rule += ".mastered"
+            why += " — đã đạt mức nắm vững"
+        else:
+            missing = MIN_UNAIDED_CORRECT - unaided_correct
+            rule += ".pending_confirmation"
+            why += (
+                f" — đã chạm ngưỡng, cần thêm {missing} câu đúng không dùng gợi ý"
+                " để xác nhận đã nắm vững"
+            )
     why += f" (xác suất trượt {fmt_p(params.p_slip)}, đoán đúng {fmt_p(params.p_guess)})"
     trace = DecisionTrace(
         kind="bkt_update",

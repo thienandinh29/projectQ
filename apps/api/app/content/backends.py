@@ -24,7 +24,12 @@ from app.graders.mcq import Item as GraderItem
 from app.jobs.queue import enqueue
 from app.schemas import KnowledgeGraph
 from app.services.attempts import remember, replay
-from app.services.learning import save_attempt, save_mastery, save_review
+from app.services.learning import (
+    save_attempt,
+    save_mastery,
+    save_review,
+    unaided_correct_counts,
+)
 from app.services.topic_readiness import require_published_topic
 from app.tutor.hints import HintAttempt, generate_hint_attempt, release_hint
 from app.uploads.metadata import prepare_metadata
@@ -146,16 +151,19 @@ class LearningBackend:
     async def graph(self, learner_id: str, subject: str) -> learn.GraphResponse:
         def run() -> learn.GraphResponse:
             with self.repo.transaction() as conn:
-                _, _, graph, mastery = self._state(
+                lid, sid, graph, mastery = self._state(
                     conn, learner_id, subject, require_confirmation=False
                 )
+                unaided = unaided_correct_counts(conn, lid, sid)
                 return learn.GraphResponse(
                     nodes=[
                         learn.GraphNode(
                             slug=s,
                             name_vi=graph.name_vi(s),
                             p_known=mastery.get(s, 0.2),
-                            mastered=bkt.is_mastered(mastery.get(s, 0.2)),
+                            mastered=bkt.is_confirmed_mastery(
+                                mastery.get(s, 0.2), unaided.get(s, 0)
+                            ),
                         )
                         for s in graph.order
                     ],
@@ -372,15 +380,21 @@ class LearningBackend:
                     else None
                 )
                 now = datetime.now(UTC)
+                item_concept = bundle.item.concept
+                unaided = unaided_correct_counts(conn, lid, sid).get(item_concept, 0)
+                if result.correct and request.hints_used == 0:
+                    unaided += 1  # this attempt is saved below
                 p, trace = bkt.update_traced(
-                    mastery.get(item_concept := bundle.item.concept, 0.2),
+                    mastery.get(item_concept, 0.2),
                     result.correct,
-                    bkt.DEFAULT_PARAMS["mcq"],
+                    bkt.params_with_help(bkt.DEFAULT_PARAMS["mcq"], request.hints_used),
                     concept_slug=item_concept,
                     now=now,
                     item_id=item.id,
                     misconception=result.misconception,
+                    unaided_correct=unaided,
                 )
+                confirmed = bkt.is_confirmed_mastery(p, unaided)
                 aid = save_attempt(
                     conn,
                     learner_id=lid,
@@ -423,7 +437,7 @@ class LearningBackend:
                 scheduled = attempt_review(
                     card[0] if card else None,
                     result.correct,
-                    bkt.is_mastered(p),
+                    confirmed,
                     now,
                     concept=item_concept,
                     item_id=item.id,
@@ -442,7 +456,7 @@ class LearningBackend:
                 )
                 update = learn.AttemptUpdate(
                     p_known=p,
-                    mastered=bkt.is_mastered(p),
+                    mastered=confirmed,
                     misconception_vi=mid[1] if mid else None,
                     remediation=learn.Remediation.model_validate(plan.model_dump())
                     if plan
