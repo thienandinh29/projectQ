@@ -55,6 +55,28 @@ jobs:
       - name: Build the runner image
         run: docker build -t nodetrail-runner:ci .
 
+  code-selftest:
+    runs-on: ubuntu-latest
+    env:
+      RUNNER_TOKEN: ci-only-token
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Build the sandbox image
+        run: docker build -t nodetrail-sandbox:latest runner/sandbox
+      - name: Start the runner
+        working-directory: runner
+        run: |
+          uv sync --locked
+          nohup uv run python -m nodetrail_runner.server > /tmp/runner.log 2>&1 &
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:8090/health && exit 0; sleep 1; done
+          cat /tmp/runner.log; exit 1
+      - name: Every code exercise tells right from wrong (in the real sandbox)
+        working-directory: apps/api
+        run: |
+          uv sync --locked
+          uv run python -m app.graders.selftest ../../data/courses --runner-url http://127.0.0.1:8090
+
   web:
     runs-on: ubuntu-latest
     defaults:
