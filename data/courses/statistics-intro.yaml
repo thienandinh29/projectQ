@@ -1,0 +1,30 @@
+# Introductory statistics: numeric answers checked against a key; charts show the data.
+slug: statistics-intro
+title_vi: Nhập môn thống kê
+title_en: Introductory statistics
+language: vi
+source: statistics-openstax
+modalities: [numeric, mcq, short_answer]
+figures: [chart, function_plot]
+rubrics:
+  - id: explain
+    scale_max: 3
+    criteria:
+      - {id: correct, name_vi: Đúng nội dung, description: "The explanation is correct and uses the cited passage"}
+      - {id: clear, name_vi: Rõ ràng, description: "The reasoning can be followed step by step"}
+objectives:
+  - id: mean-from-chart
+    concept: measures-of-center
+    text_vi: Tính trung bình từ dữ liệu trong biểu đồ cột.
+    modality: numeric
+    figures: [chart]
+  - id: normal-shape
+    concept: normal-distribution
+    text_vi: Nhận ra hình dạng của phân phối chuẩn trên đồ thị.
+    modality: mcq
+    figures: [function_plot]
+  - id: explain-median
+    concept: measures-of-center
+    text_vi: Giải thích vì sao trung vị ít bị ảnh hưởng bởi giá trị ngoại lai hơn trung bình.
+    modality: short_answer
+    rubric: explain

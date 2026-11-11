@@ -1,0 +1,48 @@
+# IELTS Academic Writing: Task 1 describes a chart, a map or a process; Task 2 is an essay.
+# Figures are original (generated from data), never copied from official tests.
+slug: ielts-academic-writing
+title_vi: IELTS Writing (Academic)
+title_en: IELTS Academic Writing
+language: en
+source: authored
+modalities: [figure_description, essay]
+figures: [chart, map, process]
+rubrics:
+  - id: task1
+    scale_max: 9
+    criteria:
+      - {id: task-achievement, name_vi: Hoàn thành yêu cầu, description: "Gives an overview and reports the key features accurately, with the data that supports them"}
+      - {id: coherence, name_vi: Mạch lạc và liên kết, description: "Organises information logically with clear progression and cohesive devices"}
+      - {id: lexical, name_vi: Từ vựng, description: "Uses a range of vocabulary for trends and comparisons accurately"}
+      - {id: grammar, name_vi: Ngữ pháp, description: "Uses a range of structures with control and accuracy"}
+  - id: task2
+    scale_max: 9
+    criteria:
+      - {id: task-response, name_vi: Đáp ứng đề bài, description: "Addresses all parts of the question with a clear, developed position"}
+      - {id: coherence, name_vi: Mạch lạc và liên kết, description: "Organises ideas into paragraphs with clear progression"}
+      - {id: lexical, name_vi: Từ vựng, description: "Uses a wide, precise range of vocabulary"}
+      - {id: grammar, name_vi: Ngữ pháp, description: "Uses a wide range of structures accurately"}
+objectives:
+  - id: task1-trends
+    concept: describing-trends
+    text_vi: Mô tả xu hướng và so sánh số liệu trong biểu đồ đường hoặc cột.
+    modality: figure_description
+    figures: [chart]
+    rubric: task1
+  - id: task1-maps
+    concept: describing-maps
+    text_vi: Mô tả các thay đổi giữa hai bản đồ.
+    modality: figure_description
+    figures: [map]
+    rubric: task1
+  - id: task1-process
+    concept: describing-processes
+    text_vi: Mô tả các bước của một quy trình.
+    modality: figure_description
+    figures: [process]
+    rubric: task1
+  - id: task2-opinion
+    concept: opinion-essay
+    text_vi: Viết bài luận nêu quan điểm và lập luận bảo vệ quan điểm.
+    modality: essay
+    rubric: task2

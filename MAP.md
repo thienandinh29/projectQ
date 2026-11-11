@@ -40,6 +40,7 @@ Planned entries are marked _(planned)_ until they exist.
 | `apps/api/app/graders/` | Deterministic MCQ grading (`mcq.py`) |
 | `apps/api/app/tutor/` | P4 three-level Socratic hints with independent verification and safe release |
 | `apps/api/app/research/` | Deep Research agent, allowlisted search/readers, library acquisition and pipeline |
+| `apps/api/app/curriculum/` | Course specs (modalities and figure kinds per objective, rubrics, code tests), figures as structured data, ground truth computed from figures (`facts.py`); spec in `specs/curriculum-modalities/` |
 | `apps/api/app/sources/` | v2 structured sources: licence from metadata (`licence.py`), OpenStax collection/CNXML parsers (`openstax.py`), catalogue fetch CLI (`fetch.py`); spec in `specs/source-catalog/` |
 | `apps/api/app/uploads/` | PDF/DOCX/link readers and upload metadata validation |
 | `apps/api/app/content/` | P4 schemas, generation, P3 gateway adapter, canonical conversions and runtime repositories/ports |
@@ -52,6 +53,7 @@ Planned entries are marked _(planned)_ until they exist.
 | `apps/api/app/rag/` | `notebook.py` (ipynb → chunks), `store.py` (`build_vector_index` after bulk load), `embed.py` (`TeiEmbedder` sync + async, local bge-m3, `make_embedder`; managed-API fallback planned), `chunker.py` (`ParsedDocument` → size-safe `Chunk`s), `library.py` (index every book folder), `retrieve.py` (`Retriever.search` → `Citation`s), `evaluate.py` (retrieval metrics on a labelled question set), `ingest.py` CLI (`--embedder tei|local`, `--build-index`); optional `rerank.py` planned (P1) |
 | `data/raw/thinkpython/` | Downloaded Think Python 3e notebooks + `SOURCE_SHA` (git-ignored; re-download to rebuild) |
 | `apps/api/app/llm/` | LLM gateway (DeepSeek generation, Gemini verification; legacy Vertex AI, Bedrock and OpenRouter adapters), `routing.yaml`, smoke CLI and setup README |
+| `data/courses/` | Example course specs: Python basics, IELTS Academic Writing, introductory statistics |
 | `data/sources/` | Open-education allowlist, library manifests and acquisition/index reports; `catalog.yaml` + `catalog-report.json` for v2 structured sources |
 | `data/kg/` _(planned)_ | Knowledge Graph YAML fixtures |
 | `data/items/` _(planned)_ | MCQ item fixtures with misconception tags |
