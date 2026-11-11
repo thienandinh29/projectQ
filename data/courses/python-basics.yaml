@@ -1,4 +1,6 @@
 # Python basics: practised by writing code against test cases; diagrams illustrate control flow.
+# Every code objective has visible and hidden tests, a reference solution that must pass them all and
+# known-wrong solutions that must each fail one (checked by the grader self-test, specs/code-sandbox).
 slug: python-basics
 title_vi: Lập trình Python cơ bản
 title_en: Python basics
@@ -12,19 +14,38 @@ objectives:
     text_vi: Viết hàm dùng câu lệnh if để kiểm tra một số là chẵn hay lẻ.
     modality: code
     figures: [diagram]
+    code:
+      function: is_even
+      prompt_vi: Viết hàm is_even(n) trả về True nếu n là số chẵn, False nếu n là số lẻ.
+      starter: "def is_even(n):\n    # Viết mã của bạn ở đây\n    pass\n"
+      reference: "def is_even(n):\n    return n % 2 == 0\n"
+      wrong:
+        - "def is_even(n):\n    return n % 2 == 1\n"
+        - "def is_even(n):\n    return n > 0 and n % 2 == 0\n"
     tests:
       - {call: "is_even(4)", expected: "True"}
       - {call: "is_even(7)", expected: "False"}
       - {call: "is_even(0)", expected: "True"}
-      - {call: "is_even(-3)", expected: "False"}
+      - {call: "is_even(-3)", expected: "False", hidden: true}
+      - {call: "is_even(-8)", expected: "True", hidden: true}
   - id: loops-sum
     concept: loops
     text_vi: Dùng vòng lặp for để tính tổng các số trong một danh sách.
     modality: code
+    code:
+      function: total
+      prompt_vi: Viết hàm total(numbers) dùng vòng lặp for để trả về tổng các số trong danh sách.
+      starter: "def total(numbers):\n    # Viết mã của bạn ở đây\n    pass\n"
+      reference: "def total(numbers):\n    s = 0\n    for x in numbers:\n        s += x\n    return s\n"
+      wrong:
+        - "def total(numbers):\n    s = 0\n    for x in numbers[1:]:\n        s += x\n    return s\n"
+        - "def total(numbers):\n    s = 1\n    for x in numbers:\n        s += x\n    return s\n"
     tests:
       - {call: "total([1, 2, 3])", expected: "6"}
       - {call: "total([])", expected: "0"}
       - {call: "total([-1, 1])", expected: "0"}
+      - {call: "total([10])", expected: "10", hidden: true}
+      - {call: "total([2.5, 2.5])", expected: "5.0", hidden: true}
   - id: loops-concept
     concept: loops
     text_vi: Phân biệt khi nào dùng while và khi nào dùng for.
