@@ -22,7 +22,12 @@ from app.engine.remediation import remediate
 from app.engine.trace import DecisionTrace
 from app.graders.mcq import Grade, Item
 from app.services.attempts import remember, replay
-from app.services.learning import save_attempt, save_mastery, save_review
+from app.services.learning import (
+    save_attempt,
+    save_mastery,
+    save_review,
+    unaided_correct_counts,
+)
 
 
 def learner_uuid(value: str) -> UUID:
@@ -110,14 +115,17 @@ class LearningService:
 
     def _graph(self, learner_id: str, subject: str) -> learn.GraphResponse:
         with self.pool().connection() as conn:
-            _, _, graph, _, mastery = self._context(conn, learner_id, subject)
+            learner, subject_id, graph, _, mastery = self._context(conn, learner_id, subject)
+            unaided = unaided_correct_counts(conn, learner, subject_id)
             return learn.GraphResponse(
                 nodes=[
                     learn.GraphNode(
                         slug=s,
                         name_vi=graph.name_vi(s),
                         p_known=mastery.get(s, UNSEEN_P_KNOWN),
-                        mastered=bkt.is_mastered(mastery.get(s, UNSEEN_P_KNOWN)),
+                        mastered=bkt.is_confirmed_mastery(
+                            mastery.get(s, UNSEEN_P_KNOWN), unaided.get(s, 0)
+                        ),
                     )
                     for s in graph.order
                 ],
@@ -347,15 +355,18 @@ class LearningService:
                 correct=result.correct,
                 misconception_id=misconception[0] if misconception else None,
             )
+            unaided = unaided_correct_counts(conn, learner, subject).get(slug, 0)
             p, trace = bkt.update_traced(
                 mastery.get(slug, UNSEEN_P_KNOWN),
                 result.correct,
-                bkt.DEFAULT_PARAMS["mcq"],
+                bkt.params_with_help(bkt.DEFAULT_PARAMS["mcq"], request.hints_used),
                 concept_slug=slug,
                 now=now,
                 item_id=item.id,
                 misconception=result.misconception,
+                unaided_correct=unaided,
             )
+            confirmed = bkt.is_confirmed_mastery(p, unaided)
             save_mastery(conn, learner, ids[slug], p)
             mastery[slug] = p
             traces = [trace]
@@ -377,7 +388,7 @@ class LearningService:
                 "select fsrs_state from review_cards where learner_id=%s and concept_id=%s",
                 (learner, ids[slug]),
             ).fetchone()
-            if card or bkt.is_mastered(p):
+            if card or confirmed:
                 state = card[0] if card else srs.new_card(now).state
                 review, trace = srs.review_traced(
                     state,
@@ -393,7 +404,7 @@ class LearningService:
                 save_trace(conn, learner, subject, trace, attempt)
             update = learn.AttemptUpdate(
                 p_known=p,
-                mastered=bkt.is_mastered(p),
+                mastered=confirmed,
                 misconception_vi=misconception[1] if misconception else None,
                 remediation=learn.Remediation.model_validate(remediation.model_dump())
                 if remediation

@@ -54,3 +54,17 @@ def save_review(
         "set fsrs_state=excluded.fsrs_state,due_at=excluded.due_at",
         (learner_id, concept_id, Jsonb(state), due_at),
     )
+
+
+def unaided_correct_counts(
+    conn: psycopg.Connection[Any], learner_id: UUID, subject_id: UUID
+) -> dict[str, int]:
+    """Correct answers per concept slug given without any hint (independent evidence of mastery)."""
+    rows = conn.execute(
+        "select c.slug,count(*) from attempts a join items i on i.id=a.item_id "
+        "join concepts c on c.id=i.concept_id "
+        "where a.learner_id=%s and c.subject_id=%s and a.is_correct "
+        "and coalesce((a.answer->>'hints_used')::int,0)=0 group by c.slug",
+        (learner_id, subject_id),
+    ).fetchall()
+    return {slug: int(n) for slug, n in rows}
