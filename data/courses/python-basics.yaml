@@ -1,0 +1,31 @@
+# Python basics: practised by writing code against test cases; diagrams illustrate control flow.
+slug: python-basics
+title_vi: Lập trình Python cơ bản
+title_en: Python basics
+language: vi
+source: python-openstax
+modalities: [mcq, code]
+figures: [diagram]
+objectives:
+  - id: conditions-even
+    concept: conditionals
+    text_vi: Viết hàm dùng câu lệnh if để kiểm tra một số là chẵn hay lẻ.
+    modality: code
+    figures: [diagram]
+    tests:
+      - {call: "is_even(4)", expected: "True"}
+      - {call: "is_even(7)", expected: "False"}
+      - {call: "is_even(0)", expected: "True"}
+      - {call: "is_even(-3)", expected: "False"}
+  - id: loops-sum
+    concept: loops
+    text_vi: Dùng vòng lặp for để tính tổng các số trong một danh sách.
+    modality: code
+    tests:
+      - {call: "total([1, 2, 3])", expected: "6"}
+      - {call: "total([])", expected: "0"}
+      - {call: "total([-1, 1])", expected: "0"}
+  - id: loops-concept
+    concept: loops
+    text_vi: Phân biệt khi nào dùng while và khi nào dùng for.
+    modality: mcq
