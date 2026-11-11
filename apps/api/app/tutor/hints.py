@@ -135,18 +135,59 @@ def _hint_hash(
     )
 
 
-def obvious_leak(item: Item, draft: HintDraft) -> bool:
-    text = unicodedata.normalize("NFC", draft.hint_vi).casefold()
+def _fold(text: str) -> str:
+    """Case- and diacritic-insensitive form, so "Vòng lặp" and "vong lap" compare equal."""
+    decomposed = unicodedata.normalize("NFD", text.casefold())
+    stripped = "".join(c for c in decomposed if unicodedata.category(c) != "Mn")
+    return unicodedata.normalize("NFC", stripped.replace("đ", "d"))
+
+
+def _mentions(text: str, phrase: str) -> bool:
+    return bool(phrase) and re.search(rf"(?<!\w){re.escape(phrase)}(?!\w)", text) is not None
+
+
+def _content_words(text: str) -> set[str]:
+    return {w for w in re.findall(r"\w+", text) if len(w) >= 3}
+
+
+# Share of the correct option's content words that may appear in a hint before it reads as a
+# paraphrase of the answer. Only applied to labels with enough content words to judge.
+PARAPHRASE_SHARE = 0.8
+PARAPHRASE_MIN_WORDS = 3
+
+
+def obvious_leak(item: Item, draft: HintDraft, history: list[str] | None = None) -> bool:
+    """Deterministic answer-disclosure checks that run before release, after model review.
+
+    Conservative by design: a false alarm only withholds one hint, a miss gives the answer away.
+    Checks, all case- and diacritic-insensitive:
+      - an explicit "đáp án là B" style statement, an option id or an opaque choice id;
+      - the correct option's label quoted in the hint;
+      - most of the correct option's content words in the hint (a light paraphrase);
+      - elimination: every wrong option named in this hint and the earlier hints together.
+    """
+    raw = unicodedata.normalize("NFC", draft.hint_vi).casefold()
+    text = _fold(draft.hint_vi)
+    together = _fold("\n".join([*(history or []), draft.hint_vi]))
     correct = next(o for o in item.options if o.correct)
-    label = unicodedata.normalize("NFC", correct.label).casefold().strip()
-    if re.search(r"\b(?:đáp án|chọn|phương án)\s*(?:là|:)\s*[a-d1-4]\b", text):
+    label = _fold(correct.label).strip()
+    if re.search(r"\b(?:đáp án|chọn|phương án)\s*(?:là|:)\s*[a-d1-4]\b", raw):
         return True
-    if any(re.search(rf"\b{re.escape(o.id.casefold())}\b", text) for o in item.options):
+    if re.search(r"\b(?:dap an|chon|phuong an)\s*(?:la|:)\s*[a-d1-4]\b", text):
+        return True
+    if any(_mentions(text, _fold(o.id)) for o in item.options):
         return True
     if re.search(r"\bchoice-\d+\b", text):
         return True
-    # This conservative check may reject harmless literal overlap; never skip model review.
-    return bool(label and re.search(rf"(?<!\w){re.escape(label)}(?!\w)", text))
+    if _mentions(text, label):
+        return True
+    words = _content_words(label)
+    if len(words) >= PARAPHRASE_MIN_WORDS:
+        shared = len(words & _content_words(text)) / len(words)
+        if shared >= PARAPHRASE_SHARE:
+            return True
+    wrong = [_fold(o.label).strip() for o in item.options if not o.correct]
+    return bool(wrong) and all(_mentions(together, w) for w in wrong)
 
 
 async def verify_hint(
@@ -175,7 +216,7 @@ async def verify_hint(
         if not set(draft.chunk_ids) <= set(item.chunk_ids):
             raise ValueError("unknown hint citation")
         fingerprint = _hint_hash(item, chunks, draft, generator, level, last_answer, history)
-        if obvious_leak(item, draft):
+        if obvious_leak(item, draft, history):
             raise ValueError("literal answer disclosure")
         request = blind_request(item, chunks)
         payload = request.model_dump(mode="json")
@@ -295,7 +336,7 @@ def release_hint(
                 item, chunks, attempt.draft, attempt.generator, level, last_answer, history or []
             )
             and evidence_valid(audit.evidence, hint_chunks)
-            and not obvious_leak(item, attempt.draft)
+            and not obvious_leak(item, attempt.draft, history)
         ):
             return None
         lookup = {s.source_id: s for s in sources}
