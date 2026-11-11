@@ -13,9 +13,11 @@ from psycopg_pool import ConnectionPool
 from pydantic import JsonValue
 
 from app.api import learn
+from app.config import get_settings
 from app.engine import bkt, placement, srs
 from app.engine.graph import UNSEEN_P_KNOWN, Graph
 from app.engine.path import next_step
+from app.engine.placer import Placer, make_placer
 from app.engine.remediation import remediate
 from app.engine.trace import DecisionTrace
 from app.graders.mcq import Grade, Item
@@ -59,8 +61,9 @@ def save_trace(
 
 
 class LearningService:
-    def __init__(self, pool: Callable[[], ConnectionPool]) -> None:
+    def __init__(self, pool: Callable[[], ConnectionPool], placer: Placer | None = None) -> None:
         self.pool = pool
+        self.placer = placer or make_placer(get_settings().placement_strategy)
 
     def _context(
         self,
@@ -169,13 +172,27 @@ class LearningService:
                 (learner, subject),
             ).fetchall()
             answers = [placement.Answer(*r) for r in rows]
-            slug, trace = placement.next_question(graph, answers)
+            # A repeated question on a concept must be a new item: cap asks at the items held.
+            available = {
+                slug: n
+                for slug, n in conn.execute(
+                    "select c.slug,count(*) from items i join concepts c on c.id=i.concept_id "
+                    "where c.subject_id=%s and i.kind='mcq' and i.payload->>'status'='verified' "
+                    "group by c.slug",
+                    (subject,),
+                ).fetchall()
+            }
+            if not answers and not any(available.values()):
+                # Nothing verified to ask: do not "finish" placement without evidence.
+                raise HTTPException(503, "Chưa có câu hỏi đã kiểm chứng cho chủ đề này.")
+            slug, trace = self.placer.next_question(graph, answers, available=available)
             selected = None
             if slug is not None:
-                items = self._items(conn, ids[slug])
-                if not items:
+                seen = {a.item_id for a in answers if a.slug == slug}
+                fresh = [i for i in self._items(conn, ids[slug]) if i.id not in seen]
+                if not fresh:
                     raise HTTPException(503, "Chưa có câu hỏi đã kiểm chứng cho khái niệm này.")
-                selected = items[0]
+                selected = fresh[0]
             else:
                 completed = conn.execute(
                     "select 1 from decision_traces where learner_id=%s and subject_id=%s "
@@ -184,13 +201,13 @@ class LearningService:
                 ).fetchone()
                 # Only the first completion seeds placement; reconnects preserve later BKT work.
                 if not completed:
-                    for s, p in placement.seed_mastery(graph, answers).items():
+                    for s, p in self.placer.seed_mastery(graph, answers).items():
                         save_mastery(conn, learner, ids[s], p)
             save_trace(conn, learner, subject, trace)
             return learn.PlacementSelection(
                 item=selected,
                 done=slug is None,
-                gap_slug=placement.gap(graph, answers) if slug is None else None,
+                gap_slug=self.placer.gap(graph, answers) if slug is None else None,
                 trace=learn.DecisionTrace.model_validate(trace.model_dump()),
             )
 

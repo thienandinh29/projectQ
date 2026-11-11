@@ -9,6 +9,7 @@ from psycopg.types.json import Jsonb
 from pydantic import JsonValue
 
 from app.api import learn, topics, tutor
+from app.config import get_settings
 from app.content.gateway import Gateway
 from app.content.integration import contract_item, tutor_text
 from app.content.learning import GraphConfirmation, attempt_review, graph_confirmed
@@ -16,6 +17,7 @@ from app.content.pipeline import require_model_permission
 from app.content.repository import Connection, Repository, StoredItem
 from app.engine import bkt, path, placement, remediation
 from app.engine.graph import Graph as EngineGraph
+from app.engine.placer import Placer, make_placer
 from app.engine.trace import DecisionTrace
 from app.graders.mcq import Grade, grade
 from app.graders.mcq import Item as GraderItem
@@ -42,10 +44,14 @@ def trace_dto(trace: DecisionTrace) -> learn.DecisionTrace:
 
 class LearningBackend:
     def __init__(
-        self, repository: Repository, confirmation: GraphConfirmation | None = None
+        self,
+        repository: Repository,
+        confirmation: GraphConfirmation | None = None,
+        placer: Placer | None = None,
     ) -> None:
         self.repo = repository
         self.confirmation = confirmation
+        self.placer = placer or make_placer(get_settings().placement_strategy)
 
     def _state(
         self, conn: Connection, learner: str, subject: str, *, require_confirmation: bool = True
@@ -174,7 +180,16 @@ class LearningBackend:
                     (lid, sid),
                 ).fetchall()
                 answers = [placement.Answer(slug=r[0], correct=r[1], item_id=r[2]) for r in rows]
-                slug, trace = placement.next_question(graph, answers)
+                # A repeated question on a concept must be a new item: cap asks at the items held.
+                available: dict[str, int] = {}
+                for key in self.repo.item_ids(conn, request.subject):
+                    bundle = self.repo.servable(conn, key)
+                    if bundle:
+                        available[bundle.item.concept] = available.get(bundle.item.concept, 0) + 1
+                if not answers and not any(available.values()):
+                    # Nothing verified to ask: do not "finish" placement without evidence.
+                    raise HTTPException(503, "Chưa có câu hỏi đã kiểm chứng cho chủ đề này.")
+                slug, trace = self.placer.next_question(graph, answers, available=available)
                 if slug is None:
                     complete = conn.execute(
                         "select placement_complete from p4_learning_sessions "
@@ -182,7 +197,7 @@ class LearningBackend:
                         (lid, sid),
                     ).fetchone()
                     if complete and not complete[0]:
-                        for concept, p in placement.seed_mastery(graph, answers).items():
+                        for concept, p in self.placer.seed_mastery(graph, answers).items():
                             cid = conn.execute(
                                 "select id from concepts where subject_id=%s and slug=%s",
                                 (sid, concept),
@@ -198,7 +213,7 @@ class LearningBackend:
                     return learn.PlacementSelection(
                         item=None,
                         done=True,
-                        gap_slug=placement.gap(graph, answers),
+                        gap_slug=self.placer.gap(graph, answers),
                         trace=trace_dto(trace),
                     )
                 bundle = self._pick(conn, request.subject, slug, lid, 0.5)

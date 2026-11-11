@@ -30,6 +30,8 @@ class Settings(BaseSettings):
     supabase_service_role_key: SecretStr = SecretStr("")
     upload_bucket: str = "uploads"
     embedding_backend: Literal["tei", "local"] = "local"
+    # "bayes": posterior over knowledge states (default); "walk": the original graph walk.
+    placement_strategy: Literal["bayes", "walk"] = "bayes"
     tei_url: str = "http://localhost:8080"
     tei_api_key: SecretStr = SecretStr("")
     search_provider: Literal["brave", "tavily"] = "brave"

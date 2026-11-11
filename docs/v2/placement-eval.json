@@ -1,0 +1,4758 @@
+{
+ "seed": 20261111,
+ "runs_per_cell": 1000,
+ "slip": 0.1,
+ "guess": 0.25,
+ "rows": [
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.524,
+   "gap_exact_ci95": [
+    0.4925,
+    0.5553
+   ],
+   "state_exact": 0.524,
+   "state_exact_ci95": [
+    0.4925,
+    0.5553
+   ],
+   "mean_questions": 2.53
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.628,
+   "gap_exact_ci95": [
+    0.5972,
+    0.658
+   ],
+   "state_exact": 0.513,
+   "state_exact_ci95": [
+    0.4815,
+    0.5444
+   ],
+   "mean_questions": 3.17
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.817,
+   "gap_exact_ci95": [
+    0.7916,
+    0.8405
+   ],
+   "state_exact": 0.817,
+   "state_exact_ci95": [
+    0.7916,
+    0.8405
+   ],
+   "mean_questions": 5.35
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.838,
+   "gap_exact_ci95": [
+    0.8137,
+    0.8603
+   ],
+   "state_exact": 0.838,
+   "state_exact_ci95": [
+    0.8137,
+    0.8603
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.648,
+   "gap_exact_ci95": [
+    0.6175,
+    0.6776
+   ],
+   "state_exact": 0.648,
+   "state_exact_ci95": [
+    0.6175,
+    0.6776
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.492,
+   "gap_exact_ci95": [
+    0.4606,
+    0.5235
+   ],
+   "state_exact": 0.492,
+   "state_exact_ci95": [
+    0.4606,
+    0.5235
+   ],
+   "mean_questions": 2.49
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.642,
+   "gap_exact_ci95": [
+    0.6114,
+    0.6718
+   ],
+   "state_exact": 0.506,
+   "state_exact_ci95": [
+    0.4745,
+    0.5374
+   ],
+   "mean_questions": 3.19
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.912,
+   "gap_exact_ci95": [
+    0.8927,
+    0.9288
+   ],
+   "state_exact": 0.912,
+   "state_exact_ci95": [
+    0.8927,
+    0.9288
+   ],
+   "mean_questions": 6.48
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.938,
+   "gap_exact_ci95": [
+    0.9212,
+    0.9521
+   ],
+   "state_exact": 0.938,
+   "state_exact_ci95": [
+    0.9212,
+    0.9521
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.631,
+   "gap_exact_ci95": [
+    0.6002,
+    0.661
+   ],
+   "state_exact": 0.631,
+   "state_exact_ci95": [
+    0.6002,
+    0.661
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.505,
+   "gap_exact_ci95": [
+    0.4735,
+    0.5364
+   ],
+   "state_exact": 0.505,
+   "state_exact_ci95": [
+    0.4735,
+    0.5364
+   ],
+   "mean_questions": 2.5
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.641,
+   "gap_exact_ci95": [
+    0.6104,
+    0.6708
+   ],
+   "state_exact": 0.515,
+   "state_exact_ci95": [
+    0.4835,
+    0.5464
+   ],
+   "mean_questions": 3.19
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.924,
+   "gap_exact_ci95": [
+    0.9058,
+    0.9397
+   ],
+   "state_exact": 0.924,
+   "state_exact_ci95": [
+    0.9058,
+    0.9397
+   ],
+   "mean_questions": 6.82
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.982,
+   "gap_exact_ci95": [
+    0.9717,
+    0.9893
+   ],
+   "state_exact": 0.982,
+   "state_exact_ci95": [
+    0.9717,
+    0.9893
+   ],
+   "mean_questions": 15.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.657,
+   "gap_exact_ci95": [
+    0.6266,
+    0.6864
+   ],
+   "state_exact": 0.657,
+   "state_exact_ci95": [
+    0.6266,
+    0.6864
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.482,
+   "gap_exact_ci95": [
+    0.4506,
+    0.5135
+   ],
+   "state_exact": 0.482,
+   "state_exact_ci95": [
+    0.4506,
+    0.5135
+   ],
+   "mean_questions": 2.46
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.6,
+   "gap_exact_ci95": [
+    0.5689,
+    0.6305
+   ],
+   "state_exact": 0.497,
+   "state_exact_ci95": [
+    0.4656,
+    0.5285
+   ],
+   "mean_questions": 3.18
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.92,
+   "gap_exact_ci95": [
+    0.9014,
+    0.9361
+   ],
+   "state_exact": 0.92,
+   "state_exact_ci95": [
+    0.9014,
+    0.9361
+   ],
+   "mean_questions": 6.96
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.986,
+   "gap_exact_ci95": [
+    0.9766,
+    0.9923
+   ],
+   "state_exact": 0.986,
+   "state_exact_ci95": [
+    0.9766,
+    0.9923
+   ],
+   "mean_questions": 20.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.613,
+   "gap_exact_ci95": [
+    0.582,
+    0.6433
+   ],
+   "state_exact": 0.613,
+   "state_exact_ci95": [
+    0.582,
+    0.6433
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.527,
+   "gap_exact_ci95": [
+    0.4955,
+    0.5583
+   ],
+   "state_exact": 0.527,
+   "state_exact_ci95": [
+    0.4955,
+    0.5583
+   ],
+   "mean_questions": 2.53
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.627,
+   "gap_exact_ci95": [
+    0.5962,
+    0.6571
+   ],
+   "state_exact": 0.514,
+   "state_exact_ci95": [
+    0.4825,
+    0.5454
+   ],
+   "mean_questions": 3.17
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.933,
+   "gap_exact_ci95": [
+    0.9157,
+    0.9477
+   ],
+   "state_exact": 0.933,
+   "state_exact_ci95": [
+    0.9157,
+    0.9477
+   ],
+   "mean_questions": 7.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.999,
+   "gap_exact_ci95": [
+    0.9944,
+    1.0
+   ],
+   "state_exact": 0.999,
+   "state_exact_ci95": [
+    0.9944,
+    1.0
+   ],
+   "mean_questions": 30.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.656,
+   "gap_exact_ci95": [
+    0.6256,
+    0.6854
+   ],
+   "state_exact": 0.656,
+   "state_exact_ci95": [
+    0.6256,
+    0.6854
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.597,
+   "gap_exact_ci95": [
+    0.5659,
+    0.6276
+   ],
+   "state_exact": 0.597,
+   "state_exact_ci95": [
+    0.5659,
+    0.6276
+   ],
+   "mean_questions": 2.18
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.626,
+   "gap_exact_ci95": [
+    0.5952,
+    0.6561
+   ],
+   "state_exact": 0.523,
+   "state_exact_ci95": [
+    0.4915,
+    0.5544
+   ],
+   "mean_questions": 3.33
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.827,
+   "gap_exact_ci95": [
+    0.8021,
+    0.85
+   ],
+   "state_exact": 0.827,
+   "state_exact_ci95": [
+    0.8021,
+    0.85
+   ],
+   "mean_questions": 5.16
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.83,
+   "gap_exact_ci95": [
+    0.8053,
+    0.8528
+   ],
+   "state_exact": 0.83,
+   "state_exact_ci95": [
+    0.8053,
+    0.8528
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.685,
+   "gap_exact_ci95": [
+    0.6552,
+    0.7137
+   ],
+   "state_exact": 0.685,
+   "state_exact_ci95": [
+    0.6552,
+    0.7137
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.57,
+   "gap_exact_ci95": [
+    0.5386,
+    0.6009
+   ],
+   "state_exact": 0.57,
+   "state_exact_ci95": [
+    0.5386,
+    0.6009
+   ],
+   "mean_questions": 2.28
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.613,
+   "gap_exact_ci95": [
+    0.582,
+    0.6433
+   ],
+   "state_exact": 0.525,
+   "state_exact_ci95": [
+    0.4935,
+    0.5563
+   ],
+   "mean_questions": 3.28
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.912,
+   "gap_exact_ci95": [
+    0.8927,
+    0.9288
+   ],
+   "state_exact": 0.912,
+   "state_exact_ci95": [
+    0.8927,
+    0.9288
+   ],
+   "mean_questions": 6.24
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.915,
+   "gap_exact_ci95": [
+    0.896,
+    0.9315
+   ],
+   "state_exact": 0.915,
+   "state_exact_ci95": [
+    0.896,
+    0.9315
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.648,
+   "gap_exact_ci95": [
+    0.6175,
+    0.6776
+   ],
+   "state_exact": 0.648,
+   "state_exact_ci95": [
+    0.6175,
+    0.6776
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.614,
+   "gap_exact_ci95": [
+    0.583,
+    0.6443
+   ],
+   "state_exact": 0.614,
+   "state_exact_ci95": [
+    0.583,
+    0.6443
+   ],
+   "mean_questions": 2.24
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.666,
+   "gap_exact_ci95": [
+    0.6358,
+    0.6952
+   ],
+   "state_exact": 0.558,
+   "state_exact_ci95": [
+    0.5266,
+    0.5891
+   ],
+   "mean_questions": 3.31
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.919,
+   "gap_exact_ci95": [
+    0.9003,
+    0.9352
+   ],
+   "state_exact": 0.919,
+   "state_exact_ci95": [
+    0.9003,
+    0.9352
+   ],
+   "mean_questions": 6.51
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.972,
+   "gap_exact_ci95": [
+    0.9598,
+    0.9813
+   ],
+   "state_exact": 0.972,
+   "state_exact_ci95": [
+    0.9598,
+    0.9813
+   ],
+   "mean_questions": 15.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.686,
+   "gap_exact_ci95": [
+    0.6562,
+    0.7147
+   ],
+   "state_exact": 0.686,
+   "state_exact_ci95": [
+    0.6562,
+    0.7147
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.583,
+   "gap_exact_ci95": [
+    0.5517,
+    0.6138
+   ],
+   "state_exact": 0.583,
+   "state_exact_ci95": [
+    0.5517,
+    0.6138
+   ],
+   "mean_questions": 2.23
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.628,
+   "gap_exact_ci95": [
+    0.5972,
+    0.658
+   ],
+   "state_exact": 0.535,
+   "state_exact_ci95": [
+    0.5035,
+    0.5663
+   ],
+   "mean_questions": 3.33
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.928,
+   "gap_exact_ci95": [
+    0.9102,
+    0.9432
+   ],
+   "state_exact": 0.928,
+   "state_exact_ci95": [
+    0.9102,
+    0.9432
+   ],
+   "mean_questions": 6.75
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.995,
+   "gap_exact_ci95": [
+    0.9884,
+    0.9984
+   ],
+   "state_exact": 0.995,
+   "state_exact_ci95": [
+    0.9884,
+    0.9984
+   ],
+   "mean_questions": 20.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.676,
+   "gap_exact_ci95": [
+    0.646,
+    0.705
+   ],
+   "state_exact": 0.676,
+   "state_exact_ci95": [
+    0.646,
+    0.705
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.576,
+   "gap_exact_ci95": [
+    0.5447,
+    0.6069
+   ],
+   "state_exact": 0.576,
+   "state_exact_ci95": [
+    0.5447,
+    0.6069
+   ],
+   "mean_questions": 2.25
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.635,
+   "gap_exact_ci95": [
+    0.6043,
+    0.6649
+   ],
+   "state_exact": 0.541,
+   "state_exact_ci95": [
+    0.5095,
+    0.5722
+   ],
+   "mean_questions": 3.31
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.936,
+   "gap_exact_ci95": [
+    0.919,
+    0.9504
+   ],
+   "state_exact": 0.936,
+   "state_exact_ci95": [
+    0.919,
+    0.9504
+   ],
+   "mean_questions": 6.66
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.998,
+   "gap_exact_ci95": [
+    0.9928,
+    0.9998
+   ],
+   "state_exact": 0.998,
+   "state_exact_ci95": [
+    0.9928,
+    0.9998
+   ],
+   "mean_questions": 30.0
+  },
+  {
+   "shape": "chain-4",
+   "concepts": 4,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.674,
+   "gap_exact_ci95": [
+    0.644,
+    0.703
+   ],
+   "state_exact": 0.674,
+   "state_exact_ci95": [
+    0.644,
+    0.703
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.471,
+   "gap_exact_ci95": [
+    0.4397,
+    0.5025
+   ],
+   "state_exact": 0.384,
+   "state_exact_ci95": [
+    0.3537,
+    0.4149
+   ],
+   "mean_questions": 4.7
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.613,
+   "gap_exact_ci95": [
+    0.582,
+    0.6433
+   ],
+   "state_exact": 0.38,
+   "state_exact_ci95": [
+    0.3498,
+    0.4109
+   ],
+   "mean_questions": 5.62
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.574,
+   "gap_exact_ci95": [
+    0.5427,
+    0.6049
+   ],
+   "state_exact": 0.431,
+   "state_exact_ci95": [
+    0.4,
+    0.4624
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.574,
+   "gap_exact_ci95": [
+    0.5427,
+    0.6049
+   ],
+   "state_exact": 0.431,
+   "state_exact_ci95": [
+    0.4,
+    0.4624
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.6,
+   "gap_exact_ci95": [
+    0.5689,
+    0.6305
+   ],
+   "state_exact": 0.466,
+   "state_exact_ci95": [
+    0.4347,
+    0.4975
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.435,
+   "gap_exact_ci95": [
+    0.404,
+    0.4664
+   ],
+   "state_exact": 0.366,
+   "state_exact_ci95": [
+    0.3361,
+    0.3967
+   ],
+   "mean_questions": 4.76
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.574,
+   "gap_exact_ci95": [
+    0.5427,
+    0.6049
+   ],
+   "state_exact": 0.368,
+   "state_exact_ci95": [
+    0.338,
+    0.3987
+   ],
+   "mean_questions": 5.61
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.716,
+   "gap_exact_ci95": [
+    0.6869,
+    0.7438
+   ],
+   "state_exact": 0.557,
+   "state_exact_ci95": [
+    0.5256,
+    0.5881
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.716,
+   "gap_exact_ci95": [
+    0.6869,
+    0.7438
+   ],
+   "state_exact": 0.557,
+   "state_exact_ci95": [
+    0.5256,
+    0.5881
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.594,
+   "gap_exact_ci95": [
+    0.5628,
+    0.6246
+   ],
+   "state_exact": 0.471,
+   "state_exact_ci95": [
+    0.4397,
+    0.5025
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.473,
+   "gap_exact_ci95": [
+    0.4417,
+    0.5045
+   ],
+   "state_exact": 0.391,
+   "state_exact_ci95": [
+    0.3606,
+    0.422
+   ],
+   "mean_questions": 4.82
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.612,
+   "gap_exact_ci95": [
+    0.581,
+    0.6423
+   ],
+   "state_exact": 0.396,
+   "state_exact_ci95": [
+    0.3655,
+    0.4271
+   ],
+   "mean_questions": 5.56
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.823,
+   "gap_exact_ci95": [
+    0.7979,
+    0.8462
+   ],
+   "state_exact": 0.751,
+   "state_exact_ci95": [
+    0.723,
+    0.7775
+   ],
+   "mean_questions": 14.97
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.82,
+   "gap_exact_ci95": [
+    0.7948,
+    0.8433
+   ],
+   "state_exact": 0.765,
+   "state_exact_ci95": [
+    0.7375,
+    0.791
+   ],
+   "mean_questions": 15.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.582,
+   "gap_exact_ci95": [
+    0.5507,
+    0.6128
+   ],
+   "state_exact": 0.482,
+   "state_exact_ci95": [
+    0.4506,
+    0.5135
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.453,
+   "gap_exact_ci95": [
+    0.4218,
+    0.4845
+   ],
+   "state_exact": 0.374,
+   "state_exact_ci95": [
+    0.3439,
+    0.4048
+   ],
+   "mean_questions": 4.74
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.608,
+   "gap_exact_ci95": [
+    0.577,
+    0.6384
+   ],
+   "state_exact": 0.379,
+   "state_exact_ci95": [
+    0.3488,
+    0.4099
+   ],
+   "mean_questions": 5.52
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.905,
+   "gap_exact_ci95": [
+    0.8851,
+    0.9225
+   ],
+   "state_exact": 0.851,
+   "state_exact_ci95": [
+    0.8274,
+    0.8725
+   ],
+   "mean_questions": 18.8
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.904,
+   "gap_exact_ci95": [
+    0.884,
+    0.9215
+   ],
+   "state_exact": 0.856,
+   "state_exact_ci95": [
+    0.8327,
+    0.8772
+   ],
+   "mean_questions": 20.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.577,
+   "gap_exact_ci95": [
+    0.5457,
+    0.6079
+   ],
+   "state_exact": 0.469,
+   "state_exact_ci95": [
+    0.4377,
+    0.5005
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.459,
+   "gap_exact_ci95": [
+    0.4278,
+    0.4905
+   ],
+   "state_exact": 0.379,
+   "state_exact_ci95": [
+    0.3488,
+    0.4099
+   ],
+   "mean_questions": 4.83
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.582,
+   "gap_exact_ci95": [
+    0.5507,
+    0.6128
+   ],
+   "state_exact": 0.372,
+   "state_exact_ci95": [
+    0.342,
+    0.4028
+   ],
+   "mean_questions": 5.55
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.938,
+   "gap_exact_ci95": [
+    0.9212,
+    0.9521
+   ],
+   "state_exact": 0.909,
+   "state_exact_ci95": [
+    0.8894,
+    0.9261
+   ],
+   "mean_questions": 21.08
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.971,
+   "gap_exact_ci95": [
+    0.9586,
+    0.9805
+   ],
+   "state_exact": 0.952,
+   "state_exact_ci95": [
+    0.9369,
+    0.9644
+   ],
+   "mean_questions": 30.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.598,
+   "gap_exact_ci95": [
+    0.5669,
+    0.6286
+   ],
+   "state_exact": 0.492,
+   "state_exact_ci95": [
+    0.4606,
+    0.5235
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.516,
+   "gap_exact_ci95": [
+    0.4845,
+    0.5474
+   ],
+   "state_exact": 0.291,
+   "state_exact_ci95": [
+    0.263,
+    0.3202
+   ],
+   "mean_questions": 4.67
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.697,
+   "gap_exact_ci95": [
+    0.6675,
+    0.7254
+   ],
+   "state_exact": 0.301,
+   "state_exact_ci95": [
+    0.2727,
+    0.3305
+   ],
+   "mean_questions": 5.3
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.737,
+   "gap_exact_ci95": [
+    0.7085,
+    0.7641
+   ],
+   "state_exact": 0.415,
+   "state_exact_ci95": [
+    0.3843,
+    0.4463
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.737,
+   "gap_exact_ci95": [
+    0.7085,
+    0.7641
+   ],
+   "state_exact": 0.415,
+   "state_exact_ci95": [
+    0.3843,
+    0.4463
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.704,
+   "gap_exact_ci95": [
+    0.6746,
+    0.7322
+   ],
+   "state_exact": 0.389,
+   "state_exact_ci95": [
+    0.3586,
+    0.42
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.527,
+   "gap_exact_ci95": [
+    0.4955,
+    0.5583
+   ],
+   "state_exact": 0.315,
+   "state_exact_ci95": [
+    0.2863,
+    0.3448
+   ],
+   "mean_questions": 4.71
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.675,
+   "gap_exact_ci95": [
+    0.645,
+    0.704
+   ],
+   "state_exact": 0.314,
+   "state_exact_ci95": [
+    0.2853,
+    0.3438
+   ],
+   "mean_questions": 5.31
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.839,
+   "gap_exact_ci95": [
+    0.8147,
+    0.8613
+   ],
+   "state_exact": 0.591,
+   "state_exact_ci95": [
+    0.5598,
+    0.6217
+   ],
+   "mean_questions": 9.97
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.818,
+   "gap_exact_ci95": [
+    0.7927,
+    0.8415
+   ],
+   "state_exact": 0.589,
+   "state_exact_ci95": [
+    0.5578,
+    0.6197
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.701,
+   "gap_exact_ci95": [
+    0.6716,
+    0.7292
+   ],
+   "state_exact": 0.404,
+   "state_exact_ci95": [
+    0.3734,
+    0.4352
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.555,
+   "gap_exact_ci95": [
+    0.5236,
+    0.5861
+   ],
+   "state_exact": 0.322,
+   "state_exact_ci95": [
+    0.2931,
+    0.352
+   ],
+   "mean_questions": 4.7
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.674,
+   "gap_exact_ci95": [
+    0.644,
+    0.703
+   ],
+   "state_exact": 0.295,
+   "state_exact_ci95": [
+    0.2669,
+    0.3243
+   ],
+   "mean_questions": 5.27
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.908,
+   "gap_exact_ci95": [
+    0.8884,
+    0.9252
+   ],
+   "state_exact": 0.78,
+   "state_exact_ci95": [
+    0.753,
+    0.8053
+   ],
+   "mean_questions": 14.51
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.914,
+   "gap_exact_ci95": [
+    0.8949,
+    0.9306
+   ],
+   "state_exact": 0.774,
+   "state_exact_ci95": [
+    0.7468,
+    0.7996
+   ],
+   "mean_questions": 15.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.707,
+   "gap_exact_ci95": [
+    0.6777,
+    0.7351
+   ],
+   "state_exact": 0.38,
+   "state_exact_ci95": [
+    0.3498,
+    0.4109
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.535,
+   "gap_exact_ci95": [
+    0.5035,
+    0.5663
+   ],
+   "state_exact": 0.319,
+   "state_exact_ci95": [
+    0.2902,
+    0.3489
+   ],
+   "mean_questions": 4.75
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.663,
+   "gap_exact_ci95": [
+    0.6328,
+    0.6923
+   ],
+   "state_exact": 0.296,
+   "state_exact_ci95": [
+    0.2678,
+    0.3254
+   ],
+   "mean_questions": 5.3
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.95,
+   "gap_exact_ci95": [
+    0.9346,
+    0.9627
+   ],
+   "state_exact": 0.861,
+   "state_exact_ci95": [
+    0.838,
+    0.8819
+   ],
+   "mean_questions": 17.26
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.953,
+   "gap_exact_ci95": [
+    0.938,
+    0.9653
+   ],
+   "state_exact": 0.88,
+   "state_exact_ci95": [
+    0.8582,
+    0.8995
+   ],
+   "mean_questions": 20.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.659,
+   "gap_exact_ci95": [
+    0.6287,
+    0.6884
+   ],
+   "state_exact": 0.366,
+   "state_exact_ci95": [
+    0.3361,
+    0.3967
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.484,
+   "gap_exact_ci95": [
+    0.4526,
+    0.5155
+   ],
+   "state_exact": 0.29,
+   "state_exact_ci95": [
+    0.262,
+    0.3192
+   ],
+   "mean_questions": 4.47
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.683,
+   "gap_exact_ci95": [
+    0.6532,
+    0.7118
+   ],
+   "state_exact": 0.285,
+   "state_exact_ci95": [
+    0.2572,
+    0.3141
+   ],
+   "mean_questions": 5.27
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.953,
+   "gap_exact_ci95": [
+    0.938,
+    0.9653
+   ],
+   "state_exact": 0.88,
+   "state_exact_ci95": [
+    0.8582,
+    0.8995
+   ],
+   "mean_questions": 18.57
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.987,
+   "gap_exact_ci95": [
+    0.9779,
+    0.9931
+   ],
+   "state_exact": 0.976,
+   "state_exact_ci95": [
+    0.9645,
+    0.9846
+   ],
+   "mean_questions": 30.0
+  },
+  {
+   "shape": "wide-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.664,
+   "gap_exact_ci95": [
+    0.6338,
+    0.6933
+   ],
+   "state_exact": 0.364,
+   "state_exact_ci95": [
+    0.3341,
+    0.3947
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.461,
+   "gap_exact_ci95": [
+    0.4298,
+    0.4925
+   ],
+   "state_exact": 0.451,
+   "state_exact_ci95": [
+    0.4198,
+    0.4824
+   ],
+   "mean_questions": 2.86
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.617,
+   "gap_exact_ci95": [
+    0.5861,
+    0.6472
+   ],
+   "state_exact": 0.443,
+   "state_exact_ci95": [
+    0.4119,
+    0.4744
+   ],
+   "mean_questions": 4.01
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.761,
+   "gap_exact_ci95": [
+    0.7333,
+    0.7871
+   ],
+   "state_exact": 0.744,
+   "state_exact_ci95": [
+    0.7158,
+    0.7708
+   ],
+   "mean_questions": 5.72
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.791,
+   "gap_exact_ci95": [
+    0.7645,
+    0.8158
+   ],
+   "state_exact": 0.764,
+   "state_exact_ci95": [
+    0.7364,
+    0.79
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.604,
+   "gap_exact_ci95": [
+    0.5729,
+    0.6345
+   ],
+   "state_exact": 0.591,
+   "state_exact_ci95": [
+    0.5598,
+    0.6217
+   ],
+   "mean_questions": 5.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.48,
+   "gap_exact_ci95": [
+    0.4486,
+    0.5115
+   ],
+   "state_exact": 0.471,
+   "state_exact_ci95": [
+    0.4397,
+    0.5025
+   ],
+   "mean_questions": 2.9
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.615,
+   "gap_exact_ci95": [
+    0.584,
+    0.6453
+   ],
+   "state_exact": 0.445,
+   "state_exact_ci95": [
+    0.4139,
+    0.4764
+   ],
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.894,
+   "gap_exact_ci95": [
+    0.8732,
+    0.9124
+   ],
+   "state_exact": 0.882,
+   "state_exact_ci95": [
+    0.8604,
+    0.9013
+   ],
+   "mean_questions": 7.72
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.889,
+   "gap_exact_ci95": [
+    0.8679,
+    0.9078
+   ],
+   "state_exact": 0.875,
+   "state_exact_ci95": [
+    0.8529,
+    0.8949
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.623,
+   "gap_exact_ci95": [
+    0.5921,
+    0.6531
+   ],
+   "state_exact": 0.608,
+   "state_exact_ci95": [
+    0.577,
+    0.6384
+   ],
+   "mean_questions": 5.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.474,
+   "gap_exact_ci95": [
+    0.4427,
+    0.5055
+   ],
+   "state_exact": 0.466,
+   "state_exact_ci95": [
+    0.4347,
+    0.4975
+   ],
+   "mean_questions": 2.91
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.607,
+   "gap_exact_ci95": [
+    0.5759,
+    0.6374
+   ],
+   "state_exact": 0.423,
+   "state_exact_ci95": [
+    0.3921,
+    0.4543
+   ],
+   "mean_questions": 4.01
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.937,
+   "gap_exact_ci95": [
+    0.9201,
+    0.9513
+   ],
+   "state_exact": 0.932,
+   "state_exact_ci95": [
+    0.9146,
+    0.9468
+   ],
+   "mean_questions": 8.41
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.952,
+   "gap_exact_ci95": [
+    0.9369,
+    0.9644
+   ],
+   "state_exact": 0.947,
+   "state_exact_ci95": [
+    0.9312,
+    0.9601
+   ],
+   "mean_questions": 15.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.619,
+   "gap_exact_ci95": [
+    0.5881,
+    0.6492
+   ],
+   "state_exact": 0.608,
+   "state_exact_ci95": [
+    0.577,
+    0.6384
+   ],
+   "mean_questions": 5.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.468,
+   "gap_exact_ci95": [
+    0.4367,
+    0.4995
+   ],
+   "state_exact": 0.457,
+   "state_exact_ci95": [
+    0.4258,
+    0.4885
+   ],
+   "mean_questions": 2.9
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.617,
+   "gap_exact_ci95": [
+    0.5861,
+    0.6472
+   ],
+   "state_exact": 0.458,
+   "state_exact_ci95": [
+    0.4268,
+    0.4895
+   ],
+   "mean_questions": 4.01
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.941,
+   "gap_exact_ci95": [
+    0.9246,
+    0.9548
+   ],
+   "state_exact": 0.934,
+   "state_exact_ci95": [
+    0.9168,
+    0.9486
+   ],
+   "mean_questions": 8.73
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.985,
+   "gap_exact_ci95": [
+    0.9754,
+    0.9916
+   ],
+   "state_exact": 0.983,
+   "state_exact_ci95": [
+    0.9729,
+    0.9901
+   ],
+   "mean_questions": 20.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.616,
+   "gap_exact_ci95": [
+    0.5851,
+    0.6463
+   ],
+   "state_exact": 0.602,
+   "state_exact_ci95": [
+    0.5709,
+    0.6325
+   ],
+   "mean_questions": 5.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.458,
+   "gap_exact_ci95": [
+    0.4268,
+    0.4895
+   ],
+   "state_exact": 0.447,
+   "state_exact_ci95": [
+    0.4159,
+    0.4784
+   ],
+   "mean_questions": 2.87
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.6,
+   "gap_exact_ci95": [
+    0.5689,
+    0.6305
+   ],
+   "state_exact": 0.43,
+   "state_exact_ci95": [
+    0.3991,
+    0.4614
+   ],
+   "mean_questions": 4.04
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.942,
+   "gap_exact_ci95": [
+    0.9257,
+    0.9557
+   ],
+   "state_exact": 0.938,
+   "state_exact_ci95": [
+    0.9212,
+    0.9521
+   ],
+   "mean_questions": 8.76
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.999,
+   "gap_exact_ci95": [
+    0.9944,
+    1.0
+   ],
+   "state_exact": 0.999,
+   "state_exact_ci95": [
+    0.9944,
+    1.0
+   ],
+   "mean_questions": 30.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.596,
+   "gap_exact_ci95": [
+    0.5648,
+    0.6266
+   ],
+   "state_exact": 0.581,
+   "state_exact_ci95": [
+    0.5497,
+    0.6118
+   ],
+   "mean_questions": 5.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.558,
+   "gap_exact_ci95": [
+    0.5266,
+    0.5891
+   ],
+   "state_exact": 0.531,
+   "state_exact_ci95": [
+    0.4995,
+    0.5623
+   ],
+   "mean_questions": 2.75
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.614,
+   "gap_exact_ci95": [
+    0.583,
+    0.6443
+   ],
+   "state_exact": 0.432,
+   "state_exact_ci95": [
+    0.401,
+    0.4634
+   ],
+   "mean_questions": 4.11
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.757,
+   "gap_exact_ci95": [
+    0.7292,
+    0.7833
+   ],
+   "state_exact": 0.738,
+   "state_exact_ci95": [
+    0.7096,
+    0.765
+   ],
+   "mean_questions": 5.68
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.758,
+   "gap_exact_ci95": [
+    0.7302,
+    0.7843
+   ],
+   "state_exact": 0.739,
+   "state_exact_ci95": [
+    0.7106,
+    0.766
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.656,
+   "gap_exact_ci95": [
+    0.6256,
+    0.6854
+   ],
+   "state_exact": 0.62,
+   "state_exact_ci95": [
+    0.5891,
+    0.6502
+   ],
+   "mean_questions": 5.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.541,
+   "gap_exact_ci95": [
+    0.5095,
+    0.5722
+   ],
+   "state_exact": 0.51,
+   "state_exact_ci95": [
+    0.4785,
+    0.5414
+   ],
+   "mean_questions": 2.72
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.619,
+   "gap_exact_ci95": [
+    0.5881,
+    0.6492
+   ],
+   "state_exact": 0.45,
+   "state_exact_ci95": [
+    0.4189,
+    0.4814
+   ],
+   "mean_questions": 4.11
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.891,
+   "gap_exact_ci95": [
+    0.87,
+    0.9096
+   ],
+   "state_exact": 0.879,
+   "state_exact_ci95": [
+    0.8572,
+    0.8986
+   ],
+   "mean_questions": 7.79
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.89,
+   "gap_exact_ci95": [
+    0.8689,
+    0.9087
+   ],
+   "state_exact": 0.871,
+   "state_exact_ci95": [
+    0.8486,
+    0.8912
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.644,
+   "gap_exact_ci95": [
+    0.6134,
+    0.6737
+   ],
+   "state_exact": 0.61,
+   "state_exact_ci95": [
+    0.579,
+    0.6404
+   ],
+   "mean_questions": 5.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.54,
+   "gap_exact_ci95": [
+    0.5085,
+    0.5712
+   ],
+   "state_exact": 0.507,
+   "state_exact_ci95": [
+    0.4755,
+    0.5384
+   ],
+   "mean_questions": 2.63
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.598,
+   "gap_exact_ci95": [
+    0.5669,
+    0.6286
+   ],
+   "state_exact": 0.432,
+   "state_exact_ci95": [
+    0.401,
+    0.4634
+   ],
+   "mean_questions": 4.11
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.925,
+   "gap_exact_ci95": [
+    0.9069,
+    0.9406
+   ],
+   "state_exact": 0.92,
+   "state_exact_ci95": [
+    0.9014,
+    0.9361
+   ],
+   "mean_questions": 8.47
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.96,
+   "gap_exact_ci95": [
+    0.9459,
+    0.9713
+   ],
+   "state_exact": 0.951,
+   "state_exact_ci95": [
+    0.9357,
+    0.9635
+   ],
+   "mean_questions": 15.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.645,
+   "gap_exact_ci95": [
+    0.6144,
+    0.6747
+   ],
+   "state_exact": 0.609,
+   "state_exact_ci95": [
+    0.578,
+    0.6394
+   ],
+   "mean_questions": 5.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.552,
+   "gap_exact_ci95": [
+    0.5206,
+    0.5831
+   ],
+   "state_exact": 0.521,
+   "state_exact_ci95": [
+    0.4895,
+    0.5524
+   ],
+   "mean_questions": 2.71
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.599,
+   "gap_exact_ci95": [
+    0.5679,
+    0.6295
+   ],
+   "state_exact": 0.432,
+   "state_exact_ci95": [
+    0.401,
+    0.4634
+   ],
+   "mean_questions": 4.11
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.952,
+   "gap_exact_ci95": [
+    0.9369,
+    0.9644
+   ],
+   "state_exact": 0.949,
+   "state_exact_ci95": [
+    0.9335,
+    0.9618
+   ],
+   "mean_questions": 8.79
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.992,
+   "gap_exact_ci95": [
+    0.9843,
+    0.9965
+   ],
+   "state_exact": 0.991,
+   "state_exact_ci95": [
+    0.983,
+    0.9959
+   ],
+   "mean_questions": 20.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.657,
+   "gap_exact_ci95": [
+    0.6266,
+    0.6864
+   ],
+   "state_exact": 0.625,
+   "state_exact_ci95": [
+    0.5942,
+    0.6551
+   ],
+   "mean_questions": 5.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.53,
+   "gap_exact_ci95": [
+    0.4985,
+    0.5613
+   ],
+   "state_exact": 0.5,
+   "state_exact_ci95": [
+    0.4685,
+    0.5315
+   ],
+   "mean_questions": 2.69
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.596,
+   "gap_exact_ci95": [
+    0.5648,
+    0.6266
+   ],
+   "state_exact": 0.42,
+   "state_exact_ci95": [
+    0.3892,
+    0.4513
+   ],
+   "mean_questions": 4.16
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.935,
+   "gap_exact_ci95": [
+    0.9179,
+    0.9495
+   ],
+   "state_exact": 0.928,
+   "state_exact_ci95": [
+    0.9102,
+    0.9432
+   ],
+   "mean_questions": 9.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.999,
+   "gap_exact_ci95": [
+    0.9944,
+    1.0
+   ],
+   "state_exact": 0.999,
+   "state_exact_ci95": [
+    0.9944,
+    1.0
+   ],
+   "mean_questions": 30.0
+  },
+  {
+   "shape": "diamond-5",
+   "concepts": 5,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.63,
+   "gap_exact_ci95": [
+    0.5992,
+    0.66
+   ],
+   "state_exact": 0.593,
+   "state_exact_ci95": [
+    0.5618,
+    0.6236
+   ],
+   "mean_questions": 5.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.557,
+   "gap_exact_ci95": [
+    0.5256,
+    0.5881
+   ],
+   "state_exact": 0.29,
+   "state_exact_ci95": [
+    0.262,
+    0.3192
+   ],
+   "mean_questions": 2.79
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.581,
+   "gap_exact_ci95": [
+    0.5497,
+    0.6118
+   ],
+   "state_exact": 0.274,
+   "state_exact_ci95": [
+    0.2466,
+    0.3028
+   ],
+   "mean_questions": 3.12
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.714,
+   "gap_exact_ci95": [
+    0.6849,
+    0.7418
+   ],
+   "state_exact": 0.57,
+   "state_exact_ci95": [
+    0.5386,
+    0.6009
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.714,
+   "gap_exact_ci95": [
+    0.6849,
+    0.7418
+   ],
+   "state_exact": 0.57,
+   "state_exact_ci95": [
+    0.5386,
+    0.6009
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.611,
+   "gap_exact_ci95": [
+    0.58,
+    0.6414
+   ],
+   "state_exact": 0.531,
+   "state_exact_ci95": [
+    0.4995,
+    0.5623
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.547,
+   "gap_exact_ci95": [
+    0.5155,
+    0.5782
+   ],
+   "state_exact": 0.285,
+   "state_exact_ci95": [
+    0.2572,
+    0.3141
+   ],
+   "mean_questions": 2.78
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.598,
+   "gap_exact_ci95": [
+    0.5669,
+    0.6286
+   ],
+   "state_exact": 0.279,
+   "state_exact_ci95": [
+    0.2514,
+    0.3079
+   ],
+   "mean_questions": 3.13
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.819,
+   "gap_exact_ci95": [
+    0.7937,
+    0.8424
+   ],
+   "state_exact": 0.727,
+   "state_exact_ci95": [
+    0.6982,
+    0.7544
+   ],
+   "mean_questions": 9.43
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.819,
+   "gap_exact_ci95": [
+    0.7937,
+    0.8424
+   ],
+   "state_exact": 0.732,
+   "state_exact_ci95": [
+    0.7034,
+    0.7592
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.634,
+   "gap_exact_ci95": [
+    0.6033,
+    0.6639
+   ],
+   "state_exact": 0.564,
+   "state_exact_ci95": [
+    0.5326,
+    0.595
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.514,
+   "gap_exact_ci95": [
+    0.4825,
+    0.5454
+   ],
+   "state_exact": 0.269,
+   "state_exact_ci95": [
+    0.2417,
+    0.2976
+   ],
+   "mean_questions": 2.76
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.598,
+   "gap_exact_ci95": [
+    0.5669,
+    0.6286
+   ],
+   "state_exact": 0.279,
+   "state_exact_ci95": [
+    0.2514,
+    0.3079
+   ],
+   "mean_questions": 3.19
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.911,
+   "gap_exact_ci95": [
+    0.8916,
+    0.9279
+   ],
+   "state_exact": 0.865,
+   "state_exact_ci95": [
+    0.8422,
+    0.8856
+   ],
+   "mean_questions": 11.62
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.917,
+   "gap_exact_ci95": [
+    0.8981,
+    0.9334
+   ],
+   "state_exact": 0.872,
+   "state_exact_ci95": [
+    0.8497,
+    0.8921
+   ],
+   "mean_questions": 15.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.616,
+   "gap_exact_ci95": [
+    0.5851,
+    0.6463
+   ],
+   "state_exact": 0.534,
+   "state_exact_ci95": [
+    0.5025,
+    0.5653
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.55,
+   "gap_exact_ci95": [
+    0.5186,
+    0.5811
+   ],
+   "state_exact": 0.298,
+   "state_exact_ci95": [
+    0.2698,
+    0.3274
+   ],
+   "mean_questions": 2.81
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.608,
+   "gap_exact_ci95": [
+    0.577,
+    0.6384
+   ],
+   "state_exact": 0.294,
+   "state_exact_ci95": [
+    0.2659,
+    0.3233
+   ],
+   "mean_questions": 3.2
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.941,
+   "gap_exact_ci95": [
+    0.9246,
+    0.9548
+   ],
+   "state_exact": 0.913,
+   "state_exact_ci95": [
+    0.8938,
+    0.9297
+   ],
+   "mean_questions": 12.22
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.972,
+   "gap_exact_ci95": [
+    0.9598,
+    0.9813
+   ],
+   "state_exact": 0.955,
+   "state_exact_ci95": [
+    0.9402,
+    0.967
+   ],
+   "mean_questions": 20.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.627,
+   "gap_exact_ci95": [
+    0.5962,
+    0.6571
+   ],
+   "state_exact": 0.546,
+   "state_exact_ci95": [
+    0.5145,
+    0.5772
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.53,
+   "gap_exact_ci95": [
+    0.4985,
+    0.5613
+   ],
+   "state_exact": 0.277,
+   "state_exact_ci95": [
+    0.2495,
+    0.3059
+   ],
+   "mean_questions": 2.78
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.578,
+   "gap_exact_ci95": [
+    0.5467,
+    0.6088
+   ],
+   "state_exact": 0.268,
+   "state_exact_ci95": [
+    0.2408,
+    0.2966
+   ],
+   "mean_questions": 3.16
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.941,
+   "gap_exact_ci95": [
+    0.9246,
+    0.9548
+   ],
+   "state_exact": 0.919,
+   "state_exact_ci95": [
+    0.9003,
+    0.9352
+   ],
+   "mean_questions": 12.41
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.993,
+   "gap_exact_ci95": [
+    0.9856,
+    0.9972
+   ],
+   "state_exact": 0.989,
+   "state_exact_ci95": [
+    0.9804,
+    0.9945
+   ],
+   "mean_questions": 30.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.593,
+   "gap_exact_ci95": [
+    0.5618,
+    0.6236
+   ],
+   "state_exact": 0.523,
+   "state_exact_ci95": [
+    0.4915,
+    0.5544
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.465,
+   "gap_exact_ci95": [
+    0.4337,
+    0.4965
+   ],
+   "state_exact": 0.232,
+   "state_exact_ci95": [
+    0.2062,
+    0.2594
+   ],
+   "mean_questions": 2.7
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.492,
+   "gap_exact_ci95": [
+    0.4606,
+    0.5235
+   ],
+   "state_exact": 0.231,
+   "state_exact_ci95": [
+    0.2052,
+    0.2584
+   ],
+   "mean_questions": 2.98
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.689,
+   "gap_exact_ci95": [
+    0.6593,
+    0.7176
+   ],
+   "state_exact": 0.565,
+   "state_exact_ci95": [
+    0.5336,
+    0.596
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.689,
+   "gap_exact_ci95": [
+    0.6593,
+    0.7176
+   ],
+   "state_exact": 0.565,
+   "state_exact_ci95": [
+    0.5336,
+    0.596
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.626,
+   "gap_exact_ci95": [
+    0.5952,
+    0.6561
+   ],
+   "state_exact": 0.482,
+   "state_exact_ci95": [
+    0.4506,
+    0.5135
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.475,
+   "gap_exact_ci95": [
+    0.4437,
+    0.5065
+   ],
+   "state_exact": 0.227,
+   "state_exact_ci95": [
+    0.2014,
+    0.2542
+   ],
+   "mean_questions": 2.71
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.499,
+   "gap_exact_ci95": [
+    0.4676,
+    0.5305
+   ],
+   "state_exact": 0.222,
+   "state_exact_ci95": [
+    0.1966,
+    0.2491
+   ],
+   "mean_questions": 2.99
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.82,
+   "gap_exact_ci95": [
+    0.7948,
+    0.8433
+   ],
+   "state_exact": 0.732,
+   "state_exact_ci95": [
+    0.7034,
+    0.7592
+   ],
+   "mean_questions": 9.53
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.841,
+   "gap_exact_ci95": [
+    0.8168,
+    0.8631
+   ],
+   "state_exact": 0.745,
+   "state_exact_ci95": [
+    0.7168,
+    0.7718
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.607,
+   "gap_exact_ci95": [
+    0.5759,
+    0.6374
+   ],
+   "state_exact": 0.485,
+   "state_exact_ci95": [
+    0.4536,
+    0.5165
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.461,
+   "gap_exact_ci95": [
+    0.4298,
+    0.4925
+   ],
+   "state_exact": 0.252,
+   "state_exact_ci95": [
+    0.2254,
+    0.2801
+   ],
+   "mean_questions": 2.72
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.469,
+   "gap_exact_ci95": [
+    0.4377,
+    0.5005
+   ],
+   "state_exact": 0.22,
+   "state_exact_ci95": [
+    0.1947,
+    0.247
+   ],
+   "mean_questions": 3.08
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.892,
+   "gap_exact_ci95": [
+    0.8711,
+    0.9106
+   ],
+   "state_exact": 0.853,
+   "state_exact_ci95": [
+    0.8295,
+    0.8744
+   ],
+   "mean_questions": 11.92
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.926,
+   "gap_exact_ci95": [
+    0.908,
+    0.9415
+   ],
+   "state_exact": 0.889,
+   "state_exact_ci95": [
+    0.8679,
+    0.9078
+   ],
+   "mean_questions": 15.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.624,
+   "gap_exact_ci95": [
+    0.5931,
+    0.6541
+   ],
+   "state_exact": 0.511,
+   "state_exact_ci95": [
+    0.4795,
+    0.5424
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.458,
+   "gap_exact_ci95": [
+    0.4268,
+    0.4895
+   ],
+   "state_exact": 0.265,
+   "state_exact_ci95": [
+    0.2379,
+    0.2935
+   ],
+   "mean_questions": 2.71
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.471,
+   "gap_exact_ci95": [
+    0.4397,
+    0.5025
+   ],
+   "state_exact": 0.248,
+   "state_exact_ci95": [
+    0.2215,
+    0.276
+   ],
+   "mean_questions": 2.96
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.945,
+   "gap_exact_ci95": [
+    0.929,
+    0.9583
+   ],
+   "state_exact": 0.912,
+   "state_exact_ci95": [
+    0.8927,
+    0.9288
+   ],
+   "mean_questions": 12.9
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.968,
+   "gap_exact_ci95": [
+    0.9551,
+    0.978
+   ],
+   "state_exact": 0.951,
+   "state_exact_ci95": [
+    0.9357,
+    0.9635
+   ],
+   "mean_questions": 20.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.639,
+   "gap_exact_ci95": [
+    0.6084,
+    0.6688
+   ],
+   "state_exact": 0.496,
+   "state_exact_ci95": [
+    0.4646,
+    0.5275
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.417,
+   "gap_exact_ci95": [
+    0.3862,
+    0.4483
+   ],
+   "state_exact": 0.244,
+   "state_exact_ci95": [
+    0.2177,
+    0.2719
+   ],
+   "mean_questions": 2.7
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.461,
+   "gap_exact_ci95": [
+    0.4298,
+    0.4925
+   ],
+   "state_exact": 0.237,
+   "state_exact_ci95": [
+    0.2109,
+    0.2646
+   ],
+   "mean_questions": 3.01
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.944,
+   "gap_exact_ci95": [
+    0.9279,
+    0.9574
+   ],
+   "state_exact": 0.924,
+   "state_exact_ci95": [
+    0.9058,
+    0.9397
+   ],
+   "mean_questions": 13.3
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.992,
+   "gap_exact_ci95": [
+    0.9843,
+    0.9965
+   ],
+   "state_exact": 0.985,
+   "state_exact_ci95": [
+    0.9754,
+    0.9916
+   ],
+   "mean_questions": 30.0
+  },
+  {
+   "shape": "two-chains-6",
+   "concepts": 6,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.631,
+   "gap_exact_ci95": [
+    0.6002,
+    0.661
+   ],
+   "state_exact": 0.464,
+   "state_exact_ci95": [
+    0.4327,
+    0.4955
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.526,
+   "gap_exact_ci95": [
+    0.4945,
+    0.5573
+   ],
+   "state_exact": 0.093,
+   "state_exact_ci95": [
+    0.0757,
+    0.1127
+   ],
+   "mean_questions": 3.6
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.533,
+   "gap_exact_ci95": [
+    0.5015,
+    0.5643
+   ],
+   "state_exact": 0.085,
+   "state_exact_ci95": [
+    0.0685,
+    0.104
+   ],
+   "mean_questions": 3.96
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.527,
+   "gap_exact_ci95": [
+    0.4955,
+    0.5583
+   ],
+   "state_exact": 0.304,
+   "state_exact_ci95": [
+    0.2756,
+    0.3336
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.527,
+   "gap_exact_ci95": [
+    0.4955,
+    0.5583
+   ],
+   "state_exact": 0.304,
+   "state_exact_ci95": [
+    0.2756,
+    0.3336
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.527,
+   "gap_exact_ci95": [
+    0.4955,
+    0.5583
+   ],
+   "state_exact": 0.304,
+   "state_exact_ci95": [
+    0.2756,
+    0.3336
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.507,
+   "gap_exact_ci95": [
+    0.4755,
+    0.5384
+   ],
+   "state_exact": 0.093,
+   "state_exact_ci95": [
+    0.0757,
+    0.1127
+   ],
+   "mean_questions": 3.62
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.561,
+   "gap_exact_ci95": [
+    0.5296,
+    0.592
+   ],
+   "state_exact": 0.09,
+   "state_exact_ci95": [
+    0.073,
+    0.1095
+   ],
+   "mean_questions": 4.19
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.609,
+   "gap_exact_ci95": [
+    0.578,
+    0.6394
+   ],
+   "state_exact": 0.415,
+   "state_exact_ci95": [
+    0.3843,
+    0.4463
+   ],
+   "mean_questions": 9.92
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.616,
+   "gap_exact_ci95": [
+    0.5851,
+    0.6463
+   ],
+   "state_exact": 0.427,
+   "state_exact_ci95": [
+    0.3961,
+    0.4583
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.589,
+   "gap_exact_ci95": [
+    0.5578,
+    0.6197
+   ],
+   "state_exact": 0.458,
+   "state_exact_ci95": [
+    0.4268,
+    0.4895
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.51,
+   "gap_exact_ci95": [
+    0.4785,
+    0.5414
+   ],
+   "state_exact": 0.087,
+   "state_exact_ci95": [
+    0.0703,
+    0.1062
+   ],
+   "mean_questions": 3.61
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.57,
+   "gap_exact_ci95": [
+    0.5386,
+    0.6009
+   ],
+   "state_exact": 0.09,
+   "state_exact_ci95": [
+    0.073,
+    0.1095
+   ],
+   "mean_questions": 4.19
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.793,
+   "gap_exact_ci95": [
+    0.7665,
+    0.8177
+   ],
+   "state_exact": 0.662,
+   "state_exact_ci95": [
+    0.6317,
+    0.6913
+   ],
+   "mean_questions": 14.37
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.801,
+   "gap_exact_ci95": [
+    0.7749,
+    0.8253
+   ],
+   "state_exact": 0.678,
+   "state_exact_ci95": [
+    0.648,
+    0.7069
+   ],
+   "mean_questions": 15.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 15,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.548,
+   "gap_exact_ci95": [
+    0.5166,
+    0.5792
+   ],
+   "state_exact": 0.431,
+   "state_exact_ci95": [
+    0.4,
+    0.4624
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.512,
+   "gap_exact_ci95": [
+    0.4805,
+    0.5434
+   ],
+   "state_exact": 0.095,
+   "state_exact_ci95": [
+    0.0775,
+    0.1149
+   ],
+   "mean_questions": 3.59
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.532,
+   "gap_exact_ci95": [
+    0.5005,
+    0.5633
+   ],
+   "state_exact": 0.083,
+   "state_exact_ci95": [
+    0.0666,
+    0.1019
+   ],
+   "mean_questions": 4.33
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.853,
+   "gap_exact_ci95": [
+    0.8295,
+    0.8744
+   ],
+   "state_exact": 0.782,
+   "state_exact_ci95": [
+    0.7551,
+    0.8072
+   ],
+   "mean_questions": 17.71
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.884,
+   "gap_exact_ci95": [
+    0.8625,
+    0.9032
+   ],
+   "state_exact": 0.802,
+   "state_exact_ci95": [
+    0.7759,
+    0.8263
+   ],
+   "mean_questions": 20.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 20,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.586,
+   "gap_exact_ci95": [
+    0.5548,
+    0.6167
+   ],
+   "state_exact": 0.449,
+   "state_exact_ci95": [
+    0.4179,
+    0.4804
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.519,
+   "gap_exact_ci95": [
+    0.4875,
+    0.5504
+   ],
+   "state_exact": 0.092,
+   "state_exact_ci95": [
+    0.0748,
+    0.1116
+   ],
+   "mean_questions": 3.63
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.557,
+   "gap_exact_ci95": [
+    0.5256,
+    0.5881
+   ],
+   "state_exact": 0.086,
+   "state_exact_ci95": [
+    0.0694,
+    0.1051
+   ],
+   "mean_questions": 4.34
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.935,
+   "gap_exact_ci95": [
+    0.9179,
+    0.9495
+   ],
+   "state_exact": 0.893,
+   "state_exact_ci95": [
+    0.8722,
+    0.9115
+   ],
+   "mean_questions": 19.69
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.971,
+   "gap_exact_ci95": [
+    0.9586,
+    0.9805
+   ],
+   "state_exact": 0.946,
+   "state_exact_ci95": [
+    0.9301,
+    0.9592
+   ],
+   "mean_questions": 30.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "single_gap",
+   "budget": 30,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.594,
+   "gap_exact_ci95": [
+    0.5628,
+    0.6246
+   ],
+   "state_exact": 0.446,
+   "state_exact_ci95": [
+    0.4149,
+    0.4774
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.359,
+   "gap_exact_ci95": [
+    0.3292,
+    0.3896
+   ],
+   "state_exact": 0.069,
+   "state_exact_ci95": [
+    0.0541,
+    0.0865
+   ],
+   "mean_questions": 3.3
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.366,
+   "gap_exact_ci95": [
+    0.3361,
+    0.3967
+   ],
+   "state_exact": 0.064,
+   "state_exact_ci95": [
+    0.0496,
+    0.081
+   ],
+   "mean_questions": 3.39
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.518,
+   "gap_exact_ci95": [
+    0.4865,
+    0.5494
+   ],
+   "state_exact": 0.252,
+   "state_exact_ci95": [
+    0.2254,
+    0.2801
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.518,
+   "gap_exact_ci95": [
+    0.4865,
+    0.5494
+   ],
+   "state_exact": 0.252,
+   "state_exact_ci95": [
+    0.2254,
+    0.2801
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 6,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.536,
+   "gap_exact_ci95": [
+    0.5045,
+    0.5673
+   ],
+   "state_exact": 0.254,
+   "state_exact_ci95": [
+    0.2273,
+    0.2822
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.357,
+   "gap_exact_ci95": [
+    0.3273,
+    0.3876
+   ],
+   "state_exact": 0.074,
+   "state_exact_ci95": [
+    0.0585,
+    0.092
+   ],
+   "mean_questions": 3.32
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.366,
+   "gap_exact_ci95": [
+    0.3361,
+    0.3967
+   ],
+   "state_exact": 0.07,
+   "state_exact_ci95": [
+    0.055,
+    0.0876
+   ],
+   "mean_questions": 3.56
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.677,
+   "gap_exact_ci95": [
+    0.647,
+    0.7059
+   ],
+   "state_exact": 0.447,
+   "state_exact_ci95": [
+    0.4159,
+    0.4784
+   ],
+   "mean_questions": 9.99
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.681,
+   "gap_exact_ci95": [
+    0.6511,
+    0.7098
+   ],
+   "state_exact": 0.457,
+   "state_exact_ci95": [
+    0.4258,
+    0.4885
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 10,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.61,
+   "gap_exact_ci95": [
+    0.579,
+    0.6404
+   ],
+   "state_exact": 0.343,
+   "state_exact_ci95": [
+    0.3136,
+    0.3734
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.363,
+   "gap_exact_ci95": [
+    0.3331,
+    0.3937
+   ],
+   "state_exact": 0.079,
+   "state_exact_ci95": [
+    0.063,
+    0.0975
+   ],
+   "mean_questions": 3.3
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.354,
+   "gap_exact_ci95": [
+    0.3243,
+    0.3845
+   ],
+   "state_exact": 0.069,
+   "state_exact_ci95": [
+    0.0541,
+    0.0865
+   ],
+   "mean_questions": 3.48
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.798,
+   "gap_exact_ci95": [
+    0.7718,
+    0.8225
+   ],
+   "state_exact": 0.623,
+   "state_exact_ci95": [
+    0.5921,
+    0.6531
+   ],
+   "mean_questions": 14.79
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.845,
+   "gap_exact_ci95": [
+    0.8211,
+    0.8669
+   ],
+   "state_exact": 0.675,
+   "state_exact_ci95": [
+    0.645,
+    0.704
+   ],
+   "mean_questions": 15.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 15,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.613,
+   "gap_exact_ci95": [
+    0.582,
+    0.6433
+   ],
+   "state_exact": 0.307,
+   "state_exact_ci95": [
+    0.2785,
+    0.3366
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.354,
+   "gap_exact_ci95": [
+    0.3243,
+    0.3845
+   ],
+   "state_exact": 0.078,
+   "state_exact_ci95": [
+    0.0621,
+    0.0964
+   ],
+   "mean_questions": 3.28
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.352,
+   "gap_exact_ci95": [
+    0.3224,
+    0.3825
+   ],
+   "state_exact": 0.082,
+   "state_exact_ci95": [
+    0.0657,
+    0.1008
+   ],
+   "mean_questions": 3.54
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.889,
+   "gap_exact_ci95": [
+    0.8679,
+    0.9078
+   ],
+   "state_exact": 0.8,
+   "state_exact_ci95": [
+    0.7738,
+    0.8244
+   ],
+   "mean_questions": 18.57
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.901,
+   "gap_exact_ci95": [
+    0.8808,
+    0.9188
+   ],
+   "state_exact": 0.788,
+   "state_exact_ci95": [
+    0.7613,
+    0.813
+   ],
+   "mean_questions": 20.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 20,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.612,
+   "gap_exact_ci95": [
+    0.581,
+    0.6423
+   ],
+   "state_exact": 0.345,
+   "state_exact_ci95": [
+    0.3155,
+    0.3754
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "walk",
+   "runs": 1000,
+   "gap_exact": 0.367,
+   "gap_exact_ci95": [
+    0.3371,
+    0.3977
+   ],
+   "state_exact": 0.089,
+   "state_exact_ci95": [
+    0.0721,
+    0.1084
+   ],
+   "mean_questions": 3.31
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "walk+verify",
+   "runs": 1000,
+   "gap_exact": 0.357,
+   "gap_exact_ci95": [
+    0.3273,
+    0.3876
+   ],
+   "state_exact": 0.074,
+   "state_exact_ci95": [
+    0.0585,
+    0.092
+   ],
+   "mean_questions": 3.53
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes",
+   "runs": 1000,
+   "gap_exact": 0.949,
+   "gap_exact_ci95": [
+    0.9335,
+    0.9618
+   ],
+   "state_exact": 0.907,
+   "state_exact_ci95": [
+    0.8873,
+    0.9243
+   ],
+   "mean_questions": 21.63
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes-full",
+   "runs": 1000,
+   "gap_exact": 0.974,
+   "gap_exact_ci95": [
+    0.9621,
+    0.9829
+   ],
+   "state_exact": 0.935,
+   "state_exact_ci95": [
+    0.9179,
+    0.9495
+   ],
+   "mean_questions": 30.0
+  },
+  {
+   "shape": "tree-10",
+   "concepts": 10,
+   "learner": "any_state",
+   "budget": 30,
+   "strategy": "bayes-once",
+   "runs": 1000,
+   "gap_exact": 0.597,
+   "gap_exact_ci95": [
+    0.5659,
+    0.6276
+   ],
+   "state_exact": 0.322,
+   "state_exact_ci95": [
+    0.2931,
+    0.352
+   ],
+   "mean_questions": 10.0
+  }
+ ]
+}
