@@ -29,6 +29,7 @@ Planned entries are marked _(planned)_ until they exist.
 | `apps/api/tests/` | pytest; `conftest.py` makes a throwaway migrated DB per run |
 | `apps/api/app/schemas.py` | Contracts (P1): Knowledge Graph + Items YAML models with validators, `Citation`, every API body |
 | `apps/api/app/engine/` | Pure, tested decision logic: `bkt.py` (mastery), `srs.py` (FSRS review scheduling); traced wrappers `update_traced`/`review_traced`; `trace.py` (`DecisionTrace`) |
+| `apps/api/app/engine/bkt_fit.py` | EM (Baum-Welch) fitting of BKT parameters from answer sequences, held-out scoring (log loss, Brier, AUC), simulation; data needs in `docs/v2/bkt-fit-eval.md` |
 | `apps/api/app/engine/graph.py` | `Graph` (prerequisite DAG: topological order, depth, ancestors/descendants) + `root_cause` to the weakest prerequisite, traced |
 | `apps/api/app/evalkit/` | Evaluation helpers (P1): exact intervals and kappa (`stats.py`), the labelled-sample format (`labels.py`), guardrail scoring with notes on what the sample cannot show (`guardrail.py`) |
 | `apps/api/app/evalkit/model_checks.py` | Offline H8 G1–G4 screening against P1 contracts; mandatory review remains explicit (`specs/model-test/offline-checks.md`) |
