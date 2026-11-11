@@ -21,13 +21,13 @@ class; our engine decides).
 |---|---|---|
 | Learning engine | BKT, FSRS, remediation, next-step rules, traces in Vietnamese | Unit tests; `specs/engine/` |
 | Placement | Bayesian placer is the default; graph walk kept | `docs/v2/placement-eval.md`: 53–82% exact gap at 6 questions, ≥ 90% at 10–30; target (90% in 6) **not met** |
-| Mastery | Confirmed mastery needs 2 unaided correct answers; hints weaken evidence | PR #4 |
-| BKT fitting | EM with held-out scoring | `docs/v2/bkt-fit-eval.md`: needs ~100 learners per concept to beat the defaults reliably (PR #7) |
-| Content safety | Citations, cross-family blind verifier, deterministic hint-leak checks | PR #5; verifier catch rate **not measured** |
+| Mastery | Confirmed mastery needs 2 unaided correct answers; hints weaken evidence | `specs/mastery-gate/spec.md` |
+| BKT fitting | EM with held-out scoring | `docs/v2/bkt-fit-eval.md`: needs ~100 learners per concept to beat the defaults reliably |
+| Content safety | Citations, cross-family blind verifier, deterministic hint-leak checks | `tests/content/test_hint_leaks.py`; verifier catch rate **not measured** |
 | Sources | OpenStax books from git with licence and chapter order from metadata; fixed HTML licence inheritance | `specs/source-catalog/`; not yet indexed with the embedding server |
 | Curriculum | Courses declare modalities and figure kinds per objective; figures are data with computed ground truth | `specs/curriculum-modalities/`; no renderer yet |
-| Evaluation in CI | Placement accuracy gate against a committed baseline | PR #6 |
-| Tests | API ~1,630 passing, ruff and mypy clean; web tests in CI | Local runs and CI |
+| Evaluation in CI | Placement accuracy gate against a committed baseline | `evals/` |
+| Tests | API 1,656 passing (20 skipped), ruff and mypy clean; web tests in CI | Local runs and CI |
 | Not proven | Real learners, learning outcomes, retrieval quality, verifier catch rate, LLM-judge agreement, Deep Research on the catalogue, the web flow without sample data | — |
 
 ## 3. Plan
@@ -98,6 +98,8 @@ diagram, screenshots and the measured numbers.
 | Licences (NC textbooks) block commercial use | Data licensed separately; commercial use needs CC BY / BY-SA sources or permission |
 | Running learner code | Sandbox with no network and hard limits; escape tests in CI |
 
-## 7. Open pull requests (2026-11-11)
+## 7. Merged on 2026-11-11
 
-PR #4 mastery gate, PR #5 hint leak checks, PR #6 evaluation gates, PR #7 BKT fitting. All independent of each other.
+PR #2 Bayesian placement, #3 curriculum modalities and figures, #4 mastery gate, #5 hint leak checks, #6 evaluation
+gates, #7 BKT fitting. Combined `main` after #4–#7: API 1,656 tests passed (20 skipped), ruff and mypy clean,
+placement gate passed.
