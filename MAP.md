@@ -23,6 +23,7 @@ Planned entries are marked _(planned)_ until they exist.
 | `docker-compose.yml` | Local Postgres 16 + pgvector on port 54322 (`docker compose up -d`) |
 | `.github/workflows/ci.yml` | CI: ruff, mypy, pytest against a pgvector service, evaluation gates |
 | `evals/` | Evaluation gates and their committed baselines (`app/evalkit/gates.py`); placement accuracy is the first |
+| `runner/` | Code sandbox service: sandbox image and harness, one locked-down container per run, `POST /run`, escape tests (`specs/code-sandbox/`) |
 | `apps/api/` | FastAPI backend (uv, Python 3.12): `app/main.py` app factory + `/health` |
 | `apps/api/app/config.py` | Settings from repo-root `.env` (pydantic-settings) |
 | `apps/api/app/migrate.py` | Applies `supabase/migrations/*.sql` once each (`uv run python -m app.migrate`) |

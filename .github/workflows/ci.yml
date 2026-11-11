@@ -34,6 +34,27 @@ jobs:
       - name: Evaluation gates (placement accuracy vs baseline)
         run: uv run python -m app.evalkit.gates check ../../evals/baselines/placement-gate.json
 
+  runner:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: runner
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - run: uv run ruff check .
+      - run: uv run ruff format --check .
+      - run: uv run mypy nodetrail_runner
+      - name: Build the sandbox image
+        run: docker build -t nodetrail-sandbox:latest sandbox
+      - name: Server tests and escape tests (hostile code in the real sandbox)
+        env:
+          REQUIRE_SANDBOX: "1"
+        run: uv run pytest -q -rs
+      - name: Build the runner image
+        run: docker build -t nodetrail-runner:ci .
+
   web:
     runs-on: ubuntu-latest
     defaults:
