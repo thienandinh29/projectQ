@@ -189,8 +189,14 @@ def next_question(
     confidence: float = CONFIDENCE,
     params: BKTParams | None = None,
     prior: Mapping[str, float] | None = None,
+    max_asks_per_concept: int | None = None,
 ) -> tuple[str | None, DecisionTrace]:
-    """The concept to ask about next, or None when placement is finished; always with a trace."""
+    """The concept to ask about next, or None when placement is finished; always with a trace.
+
+    `max_asks_per_concept`: cap on questions per concept (None = no cap). A caller that can serve
+    only one unseen item per concept passes 1; repeats are what make the posterior robust to a
+    lucky guess, so the cap costs some accuracy (see docs/v2/placement-eval.md).
+    """
     if len(graph) == 0:
         raise ValueError("cannot place a learner on an empty graph")
     params = params or DEFAULT_PARAMS["mcq"]
@@ -202,8 +208,17 @@ def next_question(
         item_id=last.item_id if last else None, correct=last.correct if last else None
     )
 
-    if p_state >= confidence or len(answers) >= max_questions:
-        reason = "confident" if p_state >= confidence else "budget"
+    asked: dict[str, int] = {}
+    for a in answers:
+        asked[a.slug] = asked.get(a.slug, 0) + 1
+    askable = [
+        n
+        for n in graph.order
+        if max_asks_per_concept is None or asked.get(n, 0) < max_asks_per_concept
+    ]
+
+    if p_state >= confidence or len(answers) >= max_questions or not askable:
+        reason = "confident" if p_state >= confidence else "budget" if askable else "exhausted"
         frontier = _frontier(graph, state)
         found = (
             min(frontier, key=lambda n: (graph.depth[n], graph.order.index(n)))
@@ -218,6 +233,8 @@ def next_question(
             why = f"Nhiều khả năng bạn đã nắm mọi khái niệm trong bản đồ ({sure})"
         if reason == "budget":
             why += f"; đã hỏi đủ {len(answers)} câu nên dừng, kết luận này còn chưa chắc"
+        elif reason == "exhausted":
+            why += "; đã hỏi hết các khái niệm có thể hỏi, kết luận này còn chưa chắc"
         others = sorted(
             (n for n in graph.order if n != found),
             key=lambda n: (abs(b.p_known(n) - 0.5), graph.order.index(n)),
@@ -241,8 +258,8 @@ def next_question(
             ],
         )
 
-    gains = {n: information_gain(b, n, params) for n in graph.order}
-    ranked = sorted(graph.order, key=lambda n: (-round(gains[n], 9), -graph.depth[n], n))
+    gains = {n: information_gain(b, n, params) for n in askable}
+    ranked = sorted(askable, key=lambda n: (-round(gains[n], 9), -graph.depth[n], n))
     chosen = ranked[0]
     p = b.p_known(chosen)
     why = (

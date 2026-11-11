@@ -9,7 +9,8 @@ number of questions, each rate with an exact (Clopper-Pearson) interval.
 Learner models
   - `single_gap`: one planted concept and everything that builds on it is unknown (the criterion in
     specs/engine/spec.md). Every concept is planted equally often.
-  - `any_state`: a state drawn uniformly from all prerequisite-closed states (several gaps, or none).
+  - `any_state`: a state drawn uniformly from all prerequisite-closed states (several gaps, or
+    none).
 
 Usage, from apps/api:
     uv run python -m app.evalkit.placement_sim --runs 2000 --out ../../docs/v2/placement-eval.json
@@ -56,7 +57,7 @@ SHAPES: dict[str, Graph] = {
             ("n5", "n8"),
             ("n6", "n9"),
         ],
-    ),  # fmt: skip
+    ),
 }
 
 # A strategy: (graph, answers so far, budget) -> next concept or None; and a final gap estimate.
@@ -85,10 +86,15 @@ def _walk(verify: bool) -> Strategy:
     return Strategy("walk+verify" if verify else "walk", ask, placement.gap, state)
 
 
-def _bayes(confidence: float, name: str) -> Strategy:
+def _bayes(confidence: float, name: str, max_asks: int | None = None) -> Strategy:
     def ask(graph: Graph, answers: Sequence[Answer], budget: int) -> str | None:
         return placement_bayes.next_question(
-            graph, answers, now=NOW, max_questions=budget, confidence=confidence
+            graph,
+            answers,
+            now=NOW,
+            max_questions=budget,
+            confidence=confidence,
+            max_asks_per_concept=max_asks,
         )[0]
 
     def state(graph: Graph, answers: Sequence[Answer]) -> State:
@@ -102,6 +108,7 @@ STRATEGIES = (
     _walk(True),
     _bayes(0.9, "bayes"),  # stops early at 90% posterior
     _bayes(1.01, "bayes-full"),  # always spends the whole budget
+    _bayes(0.9, "bayes-once", max_asks=1),  # at most one question per concept
 )
 
 
