@@ -21,7 +21,8 @@ Planned entries are marked _(planned)_ until they exist.
 | `.claude/skills/verify/` | `/verify` — run all lint, type checks, tests |
 | `.env.example` | Every env var the project uses (copy to `.env`) |
 | `docker-compose.yml` | Local Postgres 16 + pgvector on port 54322 (`docker compose up -d`) |
-| `.github/workflows/ci.yml` | CI: ruff, mypy, pytest against a pgvector service |
+| `.github/workflows/ci.yml` | CI: ruff, mypy, pytest against a pgvector service, evaluation gates |
+| `evals/` | Evaluation gates and their committed baselines (`app/evalkit/gates.py`); placement accuracy is the first |
 | `apps/api/` | FastAPI backend (uv, Python 3.12): `app/main.py` app factory + `/health` |
 | `apps/api/app/config.py` | Settings from repo-root `.env` (pydantic-settings) |
 | `apps/api/app/migrate.py` | Applies `supabase/migrations/*.sql` once each (`uv run python -m app.migrate`) |

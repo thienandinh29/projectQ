@@ -157,13 +157,16 @@ def evaluate(
     seed: int = 20261111,
     params: BKTParams | None = None,
     shapes: dict[str, Graph] | None = None,
+    learner_models: Sequence[str] = ("single_gap", "any_state"),
+    strategies: Sequence[str] | None = None,
 ) -> list[dict[str, object]]:
     params = params or DEFAULT_PARAMS["mcq"]
+    chosen = [s for s in STRATEGIES if strategies is None or s.name in strategies]
     rows: list[dict[str, object]] = []
     for shape, graph in (shapes or SHAPES).items():
-        for model in ("single_gap", "any_state"):
+        for model in learner_models:
             for budget in budgets:
-                for strategy in STRATEGIES:
+                for strategy in chosen:
                     rng = random.Random(f"{seed}-{shape}-{model}-{budget}")  # same learners
                     truths = learners(graph, model, runs, rng)
                     gap_hits = state_hits = asked = 0

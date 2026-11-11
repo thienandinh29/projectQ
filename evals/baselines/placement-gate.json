@@ -1,0 +1,122 @@
+{
+ "gate": {
+  "name": "placement",
+  "shapes": [
+   "chain-4",
+   "diamond-5",
+   "two-chains-6"
+  ],
+  "learner_models": [
+   "single_gap"
+  ],
+  "budgets": [
+   6,
+   10
+  ],
+  "strategies": [
+   "walk+verify",
+   "bayes"
+  ],
+  "runs": 1000,
+  "seed": 20261111,
+  "metric": "gap_exact"
+ },
+ "cells": [
+  {
+   "shape": "chain-4",
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "gap_exact": 0.628,
+   "mean_questions": 3.17
+  },
+  {
+   "shape": "chain-4",
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes",
+   "gap_exact": 0.817,
+   "mean_questions": 5.35
+  },
+  {
+   "shape": "chain-4",
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "gap_exact": 0.642,
+   "mean_questions": 3.19
+  },
+  {
+   "shape": "chain-4",
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes",
+   "gap_exact": 0.912,
+   "mean_questions": 6.48
+  },
+  {
+   "shape": "diamond-5",
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "gap_exact": 0.617,
+   "mean_questions": 4.01
+  },
+  {
+   "shape": "diamond-5",
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes",
+   "gap_exact": 0.761,
+   "mean_questions": 5.72
+  },
+  {
+   "shape": "diamond-5",
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "gap_exact": 0.615,
+   "mean_questions": 4.0
+  },
+  {
+   "shape": "diamond-5",
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes",
+   "gap_exact": 0.894,
+   "mean_questions": 7.72
+  },
+  {
+   "shape": "two-chains-6",
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "walk+verify",
+   "gap_exact": 0.581,
+   "mean_questions": 3.12
+  },
+  {
+   "shape": "two-chains-6",
+   "learner": "single_gap",
+   "budget": 6,
+   "strategy": "bayes",
+   "gap_exact": 0.714,
+   "mean_questions": 6.0
+  },
+  {
+   "shape": "two-chains-6",
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "walk+verify",
+   "gap_exact": 0.598,
+   "mean_questions": 3.13
+  },
+  {
+   "shape": "two-chains-6",
+   "learner": "single_gap",
+   "budget": 10,
+   "strategy": "bayes",
+   "gap_exact": 0.819,
+   "mean_questions": 9.43
+  }
+ ]
+}

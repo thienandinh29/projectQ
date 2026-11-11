@@ -31,6 +31,8 @@ jobs:
         continue-on-error: true
         run: uv run mypy .
       - run: uv run pytest -q
+      - name: Evaluation gates (placement accuracy vs baseline)
+        run: uv run python -m app.evalkit.gates check ../../evals/baselines/placement-gate.json
 
   web:
     runs-on: ubuntu-latest
