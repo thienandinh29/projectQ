@@ -1,0 +1,129 @@
+{
+ "true_params": {
+  "p_init": 0.3,
+  "p_transit": 0.15,
+  "p_slip": 0.08,
+  "p_guess": 0.2
+ },
+ "default_params": {
+  "p_init": 0.2,
+  "p_transit": 0.1,
+  "p_slip": 0.1,
+  "p_guess": 0.25
+ },
+ "answers_per_learner": 10,
+ "seeds_per_size": 10,
+ "held_out_learners": 2000,
+ "held_out_log_loss_true_params": 0.4981,
+ "held_out_log_loss_default_params": 0.5066,
+ "rows": [
+  {
+   "learners": 20,
+   "answers": 200,
+   "mean_abs_error": {
+    "p_init": 0.0958,
+    "p_transit": 0.0461,
+    "p_slip": 0.0147,
+    "p_guess": 0.0586
+   },
+   "max_abs_error": {
+    "p_init": 0.2164,
+    "p_transit": 0.1257,
+    "p_slip": 0.0362,
+    "p_guess": 0.1303
+   },
+   "held_out_log_loss_mean": 0.5085,
+   "held_out_log_loss_worst": 0.5269
+  },
+  {
+   "learners": 50,
+   "answers": 500,
+   "mean_abs_error": {
+    "p_init": 0.0754,
+    "p_transit": 0.0269,
+    "p_slip": 0.0111,
+    "p_guess": 0.0399
+   },
+   "max_abs_error": {
+    "p_init": 0.1653,
+    "p_transit": 0.0535,
+    "p_slip": 0.0255,
+    "p_guess": 0.0965
+   },
+   "held_out_log_loss_mean": 0.5036,
+   "held_out_log_loss_worst": 0.5181
+  },
+  {
+   "learners": 100,
+   "answers": 1000,
+   "mean_abs_error": {
+    "p_init": 0.0593,
+    "p_transit": 0.0168,
+    "p_slip": 0.0071,
+    "p_guess": 0.0312
+   },
+   "max_abs_error": {
+    "p_init": 0.1091,
+    "p_transit": 0.0519,
+    "p_slip": 0.0193,
+    "p_guess": 0.0652
+   },
+   "held_out_log_loss_mean": 0.5007,
+   "held_out_log_loss_worst": 0.5042
+  },
+  {
+   "learners": 200,
+   "answers": 2000,
+   "mean_abs_error": {
+    "p_init": 0.0242,
+    "p_transit": 0.011,
+    "p_slip": 0.0071,
+    "p_guess": 0.0163
+   },
+   "max_abs_error": {
+    "p_init": 0.0534,
+    "p_transit": 0.0272,
+    "p_slip": 0.0123,
+    "p_guess": 0.0374
+   },
+   "held_out_log_loss_mean": 0.4989,
+   "held_out_log_loss_worst": 0.5005
+  },
+  {
+   "learners": 500,
+   "answers": 5000,
+   "mean_abs_error": {
+    "p_init": 0.0182,
+    "p_transit": 0.0083,
+    "p_slip": 0.004,
+    "p_guess": 0.0079
+   },
+   "max_abs_error": {
+    "p_init": 0.0403,
+    "p_transit": 0.0134,
+    "p_slip": 0.0087,
+    "p_guess": 0.0167
+   },
+   "held_out_log_loss_mean": 0.4985,
+   "held_out_log_loss_worst": 0.4988
+  },
+  {
+   "learners": 1000,
+   "answers": 10000,
+   "mean_abs_error": {
+    "p_init": 0.015,
+    "p_transit": 0.0042,
+    "p_slip": 0.0036,
+    "p_guess": 0.0052
+   },
+   "max_abs_error": {
+    "p_init": 0.03,
+    "p_transit": 0.0085,
+    "p_slip": 0.0052,
+    "p_guess": 0.0126
+   },
+   "held_out_log_loss_mean": 0.4983,
+   "held_out_log_loss_worst": 0.4985
+  }
+ ]
+}
