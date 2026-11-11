@@ -6,7 +6,7 @@ objective does not allow.
 """
 
 from pathlib import Path
-from typing import Literal, Self
+from typing import Annotated, Literal, Self
 
 import yaml  # type: ignore[import-untyped]
 from pydantic import BaseModel, ConfigDict, Field, model_validator
@@ -34,8 +34,20 @@ class Rubric(BaseModel):
 
 class TestCase(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
-    call: str = Field(min_length=1)  # e.g. "is_even(4)"; run only inside the sandbox (next spec)
+    call: str = Field(min_length=1, max_length=500)  # e.g. "is_even(4)"; run only in the sandbox
     expected: str = Field(min_length=1)  # the repr of the expected value
+    hidden: bool = False  # never shown to the learner; discourages hard-coding visible answers
+
+
+class CodeTask(BaseModel):
+    """What a code objective needs besides its tests (specs/code-sandbox)."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    function: Annotated[str, Field(pattern=r"^[a-z_][a-z0-9_]*$", max_length=40)]
+    prompt_vi: str = Field(min_length=1)
+    starter: str = Field(min_length=1)  # shown in the editor, e.g. "def is_even(n):\n    ..."
+    reference: str = Field(min_length=1)  # must pass every test (self-test)
+    wrong: tuple[str, ...] = Field(min_length=1)  # each must fail at least one test (self-test)
 
 
 class Objective(BaseModel):
@@ -47,6 +59,7 @@ class Objective(BaseModel):
     figures: tuple[FigureKind, ...] = ()
     rubric: Ident | None = None
     tests: tuple[TestCase, ...] = ()
+    code: CodeTask | None = None
 
 
 class CourseSpec(BaseModel):
@@ -80,8 +93,17 @@ class CourseSpec(BaseModel):
                     raise ValueError(f"objective {o.id}: {o.modality} needs a rubric")
                 if o.rubric not in rubrics:
                     raise ValueError(f"objective {o.id}: unknown rubric {o.rubric!r}")
-            if o.modality == "code" and not o.tests:
-                raise ValueError(f"objective {o.id}: code needs test cases")
+            if o.modality == "code":
+                if not o.tests:
+                    raise ValueError(f"objective {o.id}: code needs test cases")
+                if not any(t.hidden for t in o.tests) or all(t.hidden for t in o.tests):
+                    raise ValueError(f"objective {o.id}: code needs visible and hidden tests")
+                if o.code is None:
+                    raise ValueError(f"objective {o.id}: code needs a CodeTask")
+                if not all(o.code.function + "(" in t.call for t in o.tests):
+                    raise ValueError(f"objective {o.id}: every test must call {o.code.function}")
+            elif o.code is not None:
+                raise ValueError(f"objective {o.id}: only code objectives take a CodeTask")
             if o.modality == "figure_description" and not o.figures:
                 raise ValueError(f"objective {o.id}: figure_description needs a figure kind")
         return self
