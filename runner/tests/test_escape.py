@@ -4,6 +4,7 @@ Needs Docker and the sandbox image (`docker build -t nodetrail-sandbox:latest sa
 otherwise. CI builds the image and runs these.
 """
 
+import os
 import shutil
 import subprocess
 import time
@@ -22,6 +23,9 @@ def _image_ready() -> bool:
     return found.returncode == 0
 
 
+# In CI (REQUIRE_SANDBOX=1) a missing image is a failure, never a silent skip.
+if os.environ.get("REQUIRE_SANDBOX") == "1" and not _image_ready():
+    raise RuntimeError("REQUIRE_SANDBOX=1 but Docker or the sandbox image is missing")
 pytestmark = pytest.mark.skipif(not _image_ready(), reason="Docker or the sandbox image missing")
 
 
