@@ -7,9 +7,9 @@
 - [x] Escape-test suite (network, file system, environment, fork, memory, loop, output, `os.system`) in CI
 - [x] `graders/code.py`: compare reprs outside the sandbox, score, per-test results; unit tests
 - [x] Runner client with timeout
-- [ ] API route for code practice (`practice-api.md`); BKT and mastery gate wired; traces
+- [x] API route for code practice (`practice-api.md`); BKT and mastery gate wired; traces
 - [x] Grader self-test gate over every code objective (CI `code-selftest`)
-- [ ] Tutor: code hint check (no target function definition, at most 3 lines of code)
+- [x] Tutor: code hint check (`tutor/code_hints.py`); the LLM code tutor itself needs model keys
 - [x] Python course: code items with visible and hidden tests, reference and wrong solutions
 - [ ] Latency report (p50, p95)
 - [ ] Next spec: web code editor (dependency decision) and optional in-browser runs
