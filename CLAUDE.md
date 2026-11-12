@@ -13,7 +13,7 @@ read it for history only, its lanes, timeline and freeze rules no longer apply.
 
 ## Owner & working agreement
 - One owner (student, aspiring ML engineer) working with an AI coding agent.
-- **Current goal:** the v2 milestones in `docs/v2/plan-m0-m1.md`: M0 structured source catalogue → M1 Deep Research
+- **Current goal:** `docs/v2/plan-to-tet-2027.md` (weekly plan with status; update its Status column when a week's work lands). Background: the v2 milestones in `docs/v2/plan-m0-m1.md`: M0 structured source catalogue → M1 Deep Research
   on the catalogue → M2 real learning loop through the UI → M3 measurements → M4 AI teacher (slides, whiteboard)
   driven by the engine. Each milestone must run for real before the next starts; no sample data presented as real.
 - **Reply in the owner's language** (Vietnamese in chat is fine); detailed answers with the reasoning behind decisions.
