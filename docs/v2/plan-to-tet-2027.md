@@ -41,6 +41,26 @@ of the slice is cross-grade remediation: an error in grade 10 is traced to the p
 - Explanations generated in Vietnamese from English sources stay cited to those chunks and pass the verification
   gate; Vietnamese maths terms (e.g. *hằng đẳng thức đáng nhớ*, *biệt thức*) need a glossary checked by the owner.
 
+## Yours to do by hand
+The owner is aiming for ML engineer, AI engineer, MLOps and data science roles, so the measurement and analysis work
+is done by the owner, not the agent. The agent prepares the data, tools and plumbing; the owner writes the code
+named below, runs the analysis, and writes the conclusions. Every week ends with an entry in
+`docs/v2/decision-log.md` in the owner's own words.
+
+| Week | By hand | Why it matters for the career goal |
+|---|---|---|
+| 2 | Run the TEI indexing on your machine; explain in the log what each compose service does and why the worker is separate | MLOps: you can describe the deployment you run |
+| 3 | Draft the concept list and prerequisites for the slice from the curriculum text (you know this maths); the agent turns it into YAML and checks | Domain modelling; the graph is yours to defend |
+| 4 | Write the *đúng/sai* partial-scoring function and its unit tests (small, pure Python) | Writing tested Python yourself |
+| 5 | Read `engine/bkt.py` and explain one real decision trace in the log (prior, evidence, posterior) | Understanding the model you will be asked about |
+| 6 | Retrieval evaluation notebook: hit rate and MRR with and without the reranker, with a conclusion | ML engineer: evaluating a retrieval system |
+| 7 | Write the planted errors; compute the verifier's catch rate with a confidence interval | AI engineer: measuring LLM reliability |
+| 8 | Run the pilot: recruit students, talk to parents, collect feedback | Working with real users |
+| 9 | Calibrate the reranker threshold for CRAG from data and justify it | Choosing a threshold from evidence |
+| 11 | The pilot report: calibration of mastery estimates, placement vs later results, BKT fitting, drop-off | Data science: the strongest piece for interviews |
+
+Rule: if the owner cannot explain a piece of code the agent wrote, the agent explains it before the PR is merged.
+
 ## Checkpoints
 End of weeks 5, 7 and 9: if behind, cut scope (week 10 first), never tests or measurement honesty.
 
@@ -75,3 +95,4 @@ wired with stored state.
 | 2026-11-12 | Plan created; week 0 done |
 | 2026-11-12 | Week 1 done ahead of schedule: `/code/exercise`, `/code/attempts`, code hint guard; checked end to end with the real sandbox |
 | 2026-11-12 | **First course changed to secondary/high-school maths** (owner's decision): weeks 3–11 rewritten around the Đại số → Hàm số slice; the code editor week and Tin học mapping move after Tết; Python stays as the second course |
+| 2026-11-12 | Added "Yours to do by hand" per week and `docs/v2/decision-log.md` |

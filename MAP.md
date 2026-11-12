@@ -10,6 +10,7 @@ Planned entries are marked _(planned)_ until they exist.
 | `CLAUDE.md` | Rules and working agreement for Claude, one-owner v2 project (auto-loaded; imports `MAP.md` and `SPEC.md`) |
 | `SPEC.md` | What NodeTrail must do: features, behaviors, non-goals |
 | `docs/v2/plan-to-tet-2027.md` | **Current plan with status per week** (where the project is) |
+| `docs/v2/decision-log.md` | Owner's weekly decision log, in their own words |
 | `docs/v2/plan-m0-m1.md` | v2 plan: M0 source catalogue (built), M1 Deep Research on the catalogue, later milestones |
 | `docs/archive/contest-2026/` | Contest history: `TEAM.md` (lanes, API contract tables, timeline), `PLAN.md`, `team/`, run sheets and reviews, pitch and mock-demo plan. Code comments that cite `TEAM.md` refer to this copy |
 | `specs/` | GitHub Spec Kit: one folder per feature (spec, plan, tasks); `engine/`, `next-item/`, `retrieval/`, `library/`, `remediation/`, `model-test/`, `guardrails/` (P1; includes the labelling protocol), `contracts/review.md` (open contract decisions), `contracts/mocks/` (generated mock JSON for P5, `tests/engine/mocks.py`) |
