@@ -10,8 +10,8 @@ Status values: `done`, `in progress`, `next`, `planned`, `cut`.
 | Week | Dates | Goal | Done when | Status |
 |---|---|---|---|---|
 | 0 | 11–12 Nov | Code sandbox foundations | Runner + sandbox with 15 escape tests in CI; grader with hidden tests; grader self-test in CI (PRs #9–#11) | done |
-| 1 | 12–22 Nov | **Code exercises in the learning flow** | A code answer is graded in the sandbox through the API, BKT updated with the mastery gate, attempt saved and traced; a deterministic check refuses code hints that contain the solution | in progress |
-| 2 | 23–29 Nov | **One-command start** | `docker compose up` runs database, API, worker, runner and web from a `.env`; library indexed with TEI on the owner's machine | next |
+| 1 | 12–22 Nov | **Code exercises in the learning flow** | A code answer is graded in the sandbox through the API, BKT updated with the mastery gate, attempt saved and traced; a deterministic check refuses code hints that contain the solution | done (12 Nov) |
+| 2 | 13–29 Nov | **One-command start** | `docker compose up` runs database, API, worker, runner and web from a `.env`; library indexed with TEI on the owner's machine | next (starts early) |
 | 3 | 30 Nov–6 Dec | **Web flow on real data** | Topic → map → placement → MCQ practice through the real API, no sample data | planned |
 | 4 | 7–13 Dec | **Code editor in the web app** | Write code in the browser, see test results and hints, map updates. **Milestone A done** | planned |
 | 5 | 14–20 Dec | **Retrieval measured + reranker** | Hit rate and MRR on `data/eval/`, with and without a reranker; threshold calibrated (needed by CRAG) | planned |
@@ -49,3 +49,4 @@ more subjects, mastery hysteresis wired with stored state.
 | Date | Change |
 |---|---|
 | 2026-11-12 | Plan created; week 0 done |
+| 2026-11-12 | Week 1 done ahead of schedule: `/code/exercise`, `/code/attempts`, code hint guard; checked end to end with the real sandbox |

@@ -41,7 +41,8 @@ Planned entries are marked _(planned)_ until they exist.
 | `apps/api/app/engine/path.py` | The next step when nothing just went wrong (`next_step`: resume, overdue review, continue, learn, confirm, done) with a target difficulty; traced |
 | `apps/api/app/engine/remediation.py` | Remediation rules after a wrong answer (`remediate`: weakest prerequisite, repeated misconception, practise again) and `resume`; traced |
 | `apps/api/app/engine/placement.py` | Graph-walk placement: `next_question`, `gap`, `seed_mastery`; stateless, traced; `verify` re-check on by default |
-| `apps/api/app/graders/` | Deterministic MCQ grading (`mcq.py`) |
+| `apps/api/app/graders/` | Deterministic grading: MCQ (`mcq.py`), code compared outside the sandbox (`code.py`), runner client, grader self-test |
+| `apps/api/app/services/code_practice.py`, `apps/api/app/api/code.py` | Code practice routes `/code/exercise`, `/code/attempts` (mounted when `RUNNER_URL` is set) |
 | `apps/api/app/tutor/` | P4 three-level Socratic hints with independent verification and safe release |
 | `apps/api/app/research/` | Deep Research agent, allowlisted search/readers, library acquisition and pipeline |
 | `apps/api/app/curriculum/` | Course specs (modalities and figure kinds per objective, rubrics, code tests), figures as structured data, ground truth computed from figures (`facts.py`); spec in `specs/curriculum-modalities/` |

@@ -62,6 +62,16 @@ class Objective(BaseModel):
     code: CodeTask | None = None
 
 
+class Concept(BaseModel):
+    """A knowledge-graph concept the course's objectives practise (authored with the course)."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    slug: Ident
+    name_vi: str = Field(min_length=1)
+    name_en: str = Field(min_length=1)
+    prerequisites: tuple[Ident, ...] = ()
+
+
 class CourseSpec(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
     slug: Ident
@@ -72,7 +82,28 @@ class CourseSpec(BaseModel):
     modalities: tuple[Modality, ...] = Field(min_length=1)
     figures: tuple[FigureKind, ...] = ()
     rubrics: tuple[Rubric, ...] = ()
+    concepts: tuple[Concept, ...] = ()  # required when the course is synced to the database
     objectives: tuple[Objective, ...] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def _concept_graph(self) -> Self:
+        if not self.concepts:
+            return self
+        slugs = [c.slug for c in self.concepts]
+        if len(set(slugs)) != len(slugs):
+            raise ValueError("duplicate concept slug")
+        known = set(slugs)
+        for c in self.concepts:
+            missing = set(c.prerequisites) - known
+            if missing:
+                raise ValueError(f"concept {c.slug}: unknown prerequisites {sorted(missing)}")
+        from app.engine.graph import Graph  # cycle check, same rules as the engine
+
+        Graph.from_edges(slugs, [(p, c.slug) for c in self.concepts for p in c.prerequisites])
+        undeclared = {o.concept for o in self.objectives} - known
+        if undeclared:
+            raise ValueError(f"objectives use undeclared concepts {sorted(undeclared)}")
+        return self
 
     @model_validator(mode="after")
     def _consistent(self) -> Self:

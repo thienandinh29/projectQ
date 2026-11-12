@@ -94,6 +94,14 @@ def create_app(
         )
     )
     app.include_router(tutor.create_router(tutor_backend))
+    if settings.runner_url:
+        from app.api import code as code_routes
+        from app.graders.runner_client import RunnerClient
+        from app.services.code_practice import CodePractice
+
+        runner = RunnerClient(settings.runner_url, settings.runner_token.get_secret_value())
+        practice = CodePractice(lambda: app.state.pool, runner, settings.courses_dir)
+        app.include_router(code_routes.create_router(practice))
     app.include_router(graph_confirmation.create_router())
 
     @app.middleware("http")
