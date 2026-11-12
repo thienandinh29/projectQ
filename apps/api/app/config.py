@@ -32,6 +32,10 @@ class Settings(BaseSettings):
     embedding_backend: Literal["tei", "local"] = "local"
     # "bayes": posterior over knowledge states (default); "walk": the original graph walk.
     placement_strategy: Literal["bayes", "walk"] = "bayes"
+    # Code practice (specs/code-sandbox): the runner service; routes are mounted only when set.
+    runner_url: str = ""
+    runner_token: SecretStr = SecretStr("")
+    courses_dir: Path = REPO_ROOT / "data" / "courses"
     tei_url: str = "http://localhost:8080"
     tei_api_key: SecretStr = SecretStr("")
     search_provider: Literal["brave", "tavily"] = "brave"

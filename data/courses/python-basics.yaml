@@ -8,6 +8,10 @@ language: vi
 source: python-openstax
 modalities: [mcq, code]
 figures: [diagram]
+concepts:
+  - {slug: variables, name_vi: Biến và kiểu dữ liệu, name_en: Variables and types}
+  - {slug: conditionals, name_vi: Câu lệnh điều kiện, name_en: Conditionals, prerequisites: [variables]}
+  - {slug: loops, name_vi: Vòng lặp, name_en: Loops, prerequisites: [conditionals]}
 objectives:
   - id: conditions-even
     concept: conditionals
