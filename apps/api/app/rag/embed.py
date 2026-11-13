@@ -207,19 +207,25 @@ def to_pgvector(vector: Sequence[float]) -> str:
 
 
 def make_embedder(
-    backend: str = "tei", *, tei_url: str | None = None, api_key: str | None = None
+    backend: str = "tei",
+    *,
+    tei_url: str | None = None,
+    api_key: str | None = None,
+    batch_size: int = 32,
+    timeout: float = 60.0,
 ) -> TeiEmbedder | BgeM3Embedder:
     """Build the embedder for `EMBEDDING_BACKEND`.
 
     `tei`: the TEI container (or a Hugging Face Inference Endpoint running TEI), the default.
     `local`: bge-m3 in this process; needs the `embed` extra, for a laptop without TEI.
     A managed multilingual API produces different vectors, so adding one means re-indexing the
-    library; it is not implemented here.
+    library; it is not implemented here. `batch_size` and `timeout` apply to TEI: on a laptop CPU a
+    batch of 32 long chunks can take longer than a minute, so indexing there uses smaller batches.
     """
     if backend == "tei":
         if not tei_url:
             raise ValueError("EMBEDDING_BACKEND=tei needs TEI_URL")
-        return TeiEmbedder(tei_url, api_key=api_key)
+        return TeiEmbedder(tei_url, api_key=api_key, batch_size=batch_size, timeout=timeout)
     if backend == "local":
         return BgeM3Embedder()
     raise ValueError(f"unknown embedding backend {backend!r}; use 'tei' or 'local'")
