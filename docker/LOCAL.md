@@ -6,10 +6,18 @@ Commands run from the repository root and work in bash and PowerShell.
 
 ## Start
 
-1. Create `.env` once, by hand: copy `.env.example` to `.env`. Set two values to long random strings
-   (any 20+ characters; they never leave your machine):
+1. Create `.env` once. It needs two long random strings (they never leave your machine):
    - `API_KEY`: shared by the web app and the API.
    - `RUNNER_TOKEN`: shared by the API and the code runner.
+
+   In PowerShell this creates `.env` from the template with both filled in (it stops if `.env` exists;
+   remove an old one first if it holds nothing you need):
+
+   ```powershell
+   if (Test-Path .env) { 'A .env already exists; remove it first if it holds nothing you need.' } else { $r = { [guid]::NewGuid().ToString('N') + [guid]::NewGuid().ToString('N') }; $lines = (Get-Content .env.example -Encoding UTF8) -replace '^API_KEY=$', "API_KEY=$(& $r)" -replace '^RUNNER_TOKEN=$', "RUNNER_TOKEN=$(& $r)"; [IO.File]::WriteAllLines("$PWD\.env", $lines); 'Created .env' }
+   ```
+
+   Or copy `.env.example` to `.env` and fill the two values by hand.
 
    Model keys are optional. Without them the app runs, but generating a new topic fails with a named
    reason. To generate content, add the DeepSeek and Gemini keys and set `WORKER_ARGS=--pipeline`.
