@@ -15,10 +15,10 @@ Status values: `done`, `in progress`, `next`, `planned`, `cut`.
 |---|---|---|---|---|
 | 0 | 11–12 Nov | Code sandbox foundations | Runner + sandbox with 15 escape tests in CI; grader with hidden tests; grader self-test in CI (PRs #9–#11) | done |
 | 1 | 12–22 Nov | Code exercises in the learning flow | A code answer is graded in the sandbox through the API, BKT updated with the mastery gate, attempt saved and traced; code hint guard (PR #13) | done (12 Nov) |
-| 2 | 13–29 Nov | **One-command start** | `docker compose up` runs database, API, worker, runner and web from a `.env`; library indexed with TEI on the owner's machine | next |
+| 2 | 13–29 Nov | **One-command start** | `docker compose up` runs database, API, worker, runner and web from a `.env`; library indexed with TEI on the owner's machine | in progress: stack built and checked in CI (13 Nov); owner's TEI run pending |
 | 3 | 30 Nov–6 Dec | **English course spec and grammar graph** | Spec in `specs/english-course/`; grammar points from beginner to about band 7 with prerequisites (DAG checked), each with a level; open word lists added with their licences checked; open grammar sources in the catalogue | planned |
 | 4 | 7–13 Dec | **Vocabulary loop** | Word cards scheduled with FSRS; objective item types (meaning, gap-fill, collocation, word form) graded by answer key with accepted variants; routes and tests | planned |
-| 5 | 14–20 Dec | **Grammar practice and placement** | Grammar items with a misconception per wrong option and error correction; placement over the grammar graph; remediation to the weak prerequisite; items generated from cited sources and verified blind, plus an owner-checked seed set | planned |
+| 5 | 14–20 Dec | **Grammar practice and the level test** | Grammar items with a misconception per wrong option and error correction; a level test (adaptive placement over the grammar graph and vocabulary) that reports an overall level (CEFR A1–C1 with an indicative IELTS band range, labelled as an estimate) and the mastery of each grammar point; remediation to the weak prerequisite; items generated from cited sources and verified blind, plus an owner-checked seed set | planned |
 | 6 | 21–27 Dec | **Web flow on real data** | Placement → map → daily vocabulary review + grammar practice in the browser, no sample data. **Milestone A:** the owner studies with it every day from here | planned |
 | 7 | 28 Dec–3 Jan | **Light week: verifier measured** | Catch rate on 50 planted-error grammar items; README, screenshots, recorded demo; pilot invitations prepared | planned |
 | 8 | 4–10 Jan | **Reading** | Passages from openly licensed texts; objective IELTS-style question types (true/false/not given, matching headings, sentence completion); items verified blind | planned |
@@ -104,3 +104,4 @@ Students under 16 need parental consent (Nghị định 13/2023). Decisions then
 | 2026-11-12 | First course changed to secondary/high-school maths (owner's decision) |
 | 2026-11-12 | Added "Yours to do by hand" per week and `docs/v2/decision-log.md` |
 | 2026-11-13 | **First course changed to English for IELTS, vocabulary and grammar first** (owner's decision: own exam in summer 2027, 5.5 → 7.0; the course serves learners from beginner upward). Maths moves after Tết with its plan kept |
+| 2026-11-13 | Week 2 stack built: one command starts db, migrations, API, worker, runner and web; smoke test in CI. Week 5 names the level test (overall level + per-point mastery) |

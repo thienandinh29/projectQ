@@ -77,6 +77,25 @@ jobs:
           uv sync --locked
           uv run python -m app.graders.selftest ../../data/courses --runner-url http://127.0.0.1:8090
 
+  # The whole stack from one command, checked end to end (specs/one-command-start).
+  stack:
+    runs-on: ubuntu-latest
+    env:
+      API_KEY: ci-only-api-key-0123456789
+      RUNNER_TOKEN: ci-only-runner-token-0123456789
+    steps:
+      - uses: actions/checkout@v4
+      - name: Start everything with one command
+        run: docker compose up -d --build --wait --wait-timeout 300
+      - name: End-to-end checks
+        run: scripts/stack-smoke.sh
+      - name: Logs on failure
+        if: failure()
+        run: docker compose ps -a && docker compose logs --tail 80
+      - name: Stop
+        if: always()
+        run: docker compose down --volumes
+
   web:
     runs-on: ubuntu-latest
     defaults:

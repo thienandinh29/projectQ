@@ -15,15 +15,17 @@ Planned entries are marked _(planned)_ until they exist.
 | `docs/archive/contest-2026/` | Contest history: `TEAM.md` (lanes, API contract tables, timeline), `PLAN.md`, `team/`, run sheets and reviews, pitch and mock-demo plan. Code comments that cite `TEAM.md` refer to this copy |
 | `specs/` | GitHub Spec Kit: one folder per feature (spec, plan, tasks); `engine/`, `next-item/`, `retrieval/`, `library/`, `remediation/`, `model-test/`, `guardrails/` (P1; includes the labelling protocol), `contracts/review.md` (open contract decisions), `contracts/mocks/` (generated mock JSON for P5, `tests/engine/mocks.py`) |
 | `.specify/` | Spec Kit project memory: `memory/constitution.md`; templates planned |
-| `docker/` | `LOCAL.md` platform runbook; deployment image/compose and host setup scripts planned |
+| `docker/` | `LOCAL.md` runbook (one-command start, tests, TEI indexing), `TEI.md` |
 | `context/product-brief.vi.md` | Original product brief (Vietnamese) |
 | `context/` | Reference material: research, textbook notes, algorithm papers |
 | `outputs/` | Generated deliverables, not source code |
 | `.claude/settings.json` | Pre-approved commands for Claude Code |
 | `.claude/skills/verify/` | `/verify` — run all lint, type checks, tests |
 | `.env.example` | Every env var the project uses (copy to `.env`) |
-| `docker-compose.yml` | Local Postgres 16 + pgvector on port 54322 (`docker compose up -d`) |
-| `.github/workflows/ci.yml` | CI: ruff, mypy, pytest against a pgvector service, evaluation gates |
+| `docker-compose.yml` | The whole stack in one command: db, migrate, api, worker, sandbox, runner, web; TEI as an opt-in profile (`specs/one-command-start/`) |
+| `apps/api/Dockerfile`, `apps/web/Dockerfile` | Images for the API/worker/migrations and the web app |
+| `scripts/stack-smoke.sh` | End-to-end checks of a running stack (also the CI `stack` job) |
+| `.github/workflows/ci.yml` | CI: ruff, mypy, pytest against a pgvector service, evaluation gates, sandbox escape tests, grader self-test, the full stack |
 | `evals/` | Evaluation gates and their committed baselines (`app/evalkit/gates.py`); placement accuracy is the first |
 | `runner/` | Code sandbox service: sandbox image and harness, one locked-down container per run, `POST /run`, escape tests (`specs/code-sandbox/`) |
 | `apps/api/` | FastAPI backend (uv, Python 3.12): `app/main.py` app factory + `/health` |

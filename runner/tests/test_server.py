@@ -10,7 +10,7 @@ from http.server import ThreadingHTTPServer
 import pytest
 
 from nodetrail_runner.sandbox import RunResult
-from nodetrail_runner.server import MAX_CALLS, MAX_CODE_BYTES, make_handler
+from nodetrail_runner.server import MAX_CALLS, MAX_CODE_BYTES, bind_problem, make_handler
 
 TOKEN = "test-token"
 
@@ -99,3 +99,9 @@ def test_a_busy_runner_answers_503_instead_of_queueing(
         threading.Event().wait(0.05)
     status, _ = post(server[0], {"code": "x", "calls": []})
     assert status == 503
+
+
+def test_a_runner_reachable_beyond_loopback_needs_a_token() -> None:
+    assert bind_problem("0.0.0.0", "") is not None
+    assert bind_problem("0.0.0.0", "secret") is None
+    assert bind_problem("127.0.0.1", "") is None  # local development and tests

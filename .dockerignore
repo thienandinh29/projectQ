@@ -1,0 +1,18 @@
+# Build context for the API image (repo root). Keep it small and free of secrets.
+**/.git
+**/.venv
+**/node_modules
+**/.next
+**/__pycache__
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+.env
+.env.*
+!.env.example
+data/raw
+apps/web
+runner
+outputs
+docs
+context
