@@ -2,10 +2,11 @@
 
 One owner, about 20 hours a week, about 11 working weeks before Tết (around 6 Feb 2027).
 
-**Goal (changed 12 Nov, see Log):** the first real course is **Vietnamese secondary and high-school mathematics**,
-one strand first: **Đại số → Hàm số, grades 6 to 10**. Its knowledge graph follows Chương trình GDPT 2018 môn Toán;
-answers are graded objectively in the 2025 exam formats; it starts with one command, is measured, and has been used
-by real students. Python (weeks 0–1) stays as the second course. Detailed reasoning: `docs/v2/proposal.md`.
+**Goal (changed 13 Nov, see Log):** the first real course is **English for IELTS, starting with vocabulary and
+grammar**, for any learner from beginner upward; placement finds where each learner starts. The owner is the first
+learner (now about band 5.5, aiming for 7.0 in summer 2027) and uses it daily from week 6. Then reading and Writing
+Task 1, a small pilot, and measured results. Maths (GDPT 2018) moves after Tết; its plan is kept below. Python
+(weeks 0–1) stays as a later course. Detailed reasoning: `docs/v2/proposal.md`.
 
 **Where am I?** Look at the *Status* column. Update it in the same PR that finishes the work.
 Status values: `done`, `in progress`, `next`, `planned`, `cut`.
@@ -15,31 +16,33 @@ Status values: `done`, `in progress`, `next`, `planned`, `cut`.
 | 0 | 11–12 Nov | Code sandbox foundations | Runner + sandbox with 15 escape tests in CI; grader with hidden tests; grader self-test in CI (PRs #9–#11) | done |
 | 1 | 12–22 Nov | Code exercises in the learning flow | A code answer is graded in the sandbox through the API, BKT updated with the mastery gate, attempt saved and traced; code hint guard (PR #13) | done (12 Nov) |
 | 2 | 13–29 Nov | **One-command start** | `docker compose up` runs database, API, worker, runner and web from a `.env`; library indexed with TEI on the owner's machine | next |
-| 3 | 30 Nov–6 Dec | **Maths knowledge graph from GDPT 2018** | Spec in `specs/math-course/`; the slice's 25–35 concepts with their *yêu cầu cần đạt* (grade and strand recorded), prerequisites across grades, DAG checked; reviewed by the owner; open maths sources added to the catalogue with each book's own licence checked | planned |
-| 4 | 7–13 Dec | **Maths graders** | Short numeric answers (exact fractions and decimals, stated tolerance); *đúng/sai* questions with 4 statements and the 2025 partial scoring; MCQ with a misconception per wrong option; grader self-test in CI | planned |
-| 5 | 14–20 Dec | **Web flow on real data + formulas** | Topic → map → placement → practice → remediation through the real API, formulas rendered, no sample data. **Milestone A:** a wrong grade-10 answer is traced back to a grade-8 gap in the browser | planned |
-| 6 | 21–27 Dec | **Items and retrieval** | Vietnamese items generated from cited chunks and verified blind, plus owner-written seed items; retrieval hit rate and MRR on a maths question set, with and without a reranker | planned |
-| 7 | 28 Dec–3 Jan | **Light week: verifier measured + pilot preparation** | Catch rate on 50 planted-error maths items; consent text for parents and students, privacy notice, anonymised logging; README, screenshots, recorded demo | planned |
-| 8 | 4–10 Jan | **Pilot starts + CRAG spec** | 10–20 students (grades 9–10) with parental consent; CRAG state machine: retrieve → judge (reranker) → rewrite once → web → honest "no trusted source" | planned |
-| 9 | 11–17 Jan | **CRAG complete** | Web fallback through the allowlist and licence gate; a trace per decision; tier usage, cost and time per topic measured | planned |
-| 10 | 18–24 Jan | **Graphs of functions + exam practice** | Function plots (the existing `function_plot` figure kind) shown in the web app; a practice set in the 2025 exam format built from our own items | planned |
-| 11 | 25–31 Jan | **Pilot report + v1.0** | BKT calibration, placement vs later performance, cross-grade remediation outcomes, BKT fit if data allows, drop-off; tag `v1.0` | planned |
+| 3 | 30 Nov–6 Dec | **English course spec and grammar graph** | Spec in `specs/english-course/`; grammar points from beginner to about band 7 with prerequisites (DAG checked), each with a level; open word lists added with their licences checked; open grammar sources in the catalogue | planned |
+| 4 | 7–13 Dec | **Vocabulary loop** | Word cards scheduled with FSRS; objective item types (meaning, gap-fill, collocation, word form) graded by answer key with accepted variants; routes and tests | planned |
+| 5 | 14–20 Dec | **Grammar practice and placement** | Grammar items with a misconception per wrong option and error correction; placement over the grammar graph; remediation to the weak prerequisite; items generated from cited sources and verified blind, plus an owner-checked seed set | planned |
+| 6 | 21–27 Dec | **Web flow on real data** | Placement → map → daily vocabulary review + grammar practice in the browser, no sample data. **Milestone A:** the owner studies with it every day from here | planned |
+| 7 | 28 Dec–3 Jan | **Light week: verifier measured** | Catch rate on 50 planted-error grammar items; README, screenshots, recorded demo; pilot invitations prepared | planned |
+| 8 | 4–10 Jan | **Reading** | Passages from openly licensed texts; objective IELTS-style question types (true/false/not given, matching headings, sentence completion); items verified blind | planned |
+| 9 | 11–17 Jan | **Writing Task 1 checker** | Charts as data rendered in the web app; facts in the answer checked against the chart's data; coverage of key features; language feedback labelled as feedback, not a band | planned |
+| 10 | 18–24 Jan | **Small pilot** | 5–15 learners at different levels (consent text first; parental consent for anyone under 18) | planned |
+| 11 | 25–31 Jan | **Report + v1.0** | Vocabulary retention vs FSRS predictions, BKT calibration on grammar, placement vs later results, drop-off; owner's own study data included; tag `v1.0` | planned |
 | — | 1–5 Feb | Buffer before Tết | | planned |
 
-## The slice: Đại số → Hàm số, grades 6–10
-Indicative chain, to be fixed against the curriculum text in week 3: fractions and integers (6) → algebraic
-expressions and polynomials (7) → identities and factoring (8) → linear equations, inequalities and systems (8–9) →
-linear functions (8–9) → quadratic equations and Viète (9) → quadratic functions and their graphs (10). The point
-of the slice is cross-grade remediation: an error in grade 10 is traced to the prerequisite that is actually weak.
+## The English course
+- **Levels:** from beginner (about CEFR A1) to about band 7 (C1), so anyone can start; placement decides the start.
+- **Vocabulary:** a general list first, then an academic list. Proposal: NGSL and NAWL (licences to be confirmed
+  from their own pages in week 3); definitions and examples from openly licensed sources (e.g. Wiktionary) or
+  written for the course and labelled as such.
+- **Grammar:** a graph of grammar points with prerequisites (e.g. past simple → present perfect → past perfect;
+  relative clauses → reduced relative clauses). The point of the graph is remediation: a mistake is traced to the
+  prerequisite that is actually weak.
+- **Grading:** answer keys first (vocabulary and grammar are mostly objective). Free writing comes later and is
+  labelled feedback until it is calibrated against human-scored essays.
 
 ## Sources and rights
-- **Curriculum:** Chương trình GDPT 2018 môn Toán (Thông tư 32/2018/TT-BGDĐT), a legal document, used for concepts,
-  objectives and order.
-- **Explanations:** open books only, each licence read from the book itself (OpenStax maths books, Vietnamese
-  Wikipedia). The Vietnamese textbooks (Kết nối tri thức, Chân trời sáng tạo, Cánh diều) are copyrighted and are not
-  ingested. Past exam papers: rights unclear, so used only as a format reference; items are our own.
-- Explanations generated in Vietnamese from English sources stay cited to those chunks and pass the verification
-  gate; Vietnamese maths terms (e.g. *hằng đẳng thức đáng nhớ*, *biệt thức*) need a glossary checked by the owner.
+- Cambridge IELTS books, real past papers and English Profile data are copyrighted and are not ingested. The public
+  band descriptors are used as a reference only.
+- Explanations come from open sources (e.g. Wikibooks, Wikipedia, open word lists), each licence read from the
+  source itself; generated items are cited to chunks and pass the verification gate.
 
 ## Yours to do by hand
 The owner is aiming for ML engineer, AI engineer, MLOps and data science roles, so the measurement and analysis work
@@ -50,49 +53,54 @@ named below, runs the analysis, and writes the conclusions. Every week ends with
 | Week | By hand | Why it matters for the career goal |
 |---|---|---|
 | 2 | Run the TEI indexing on your machine; explain in the log what each compose service does and why the worker is separate | MLOps: you can describe the deployment you run |
-| 3 | Draft the concept list and prerequisites for the slice from the curriculum text (you know this maths); the agent turns it into YAML and checks | Domain modelling; the graph is yours to defend |
-| 4 | Write the *đúng/sai* partial-scoring function and its unit tests (small, pure Python) | Writing tested Python yourself |
-| 5 | Read `engine/bkt.py` and explain one real decision trace in the log (prior, evidence, posterior) | Understanding the model you will be asked about |
-| 6 | Retrieval evaluation notebook: hit rate and MRR with and without the reranker, with a conclusion | ML engineer: evaluating a retrieval system |
+| 3 | Draft the grammar points and their prerequisites from open references; check the word lists' licences on their own pages | Domain modelling; the graph is yours to defend |
+| 4 | Write the answer normaliser for gap-fill (case, spacing, accepted variants) and its unit tests | Writing tested Python yourself |
+| 5 | Read `engine/bkt.py` and explain one real grammar decision trace in the log (prior, evidence, posterior) | Understanding the model you will be asked about |
+| 6 | Study with it daily and keep notes on what feels wrong; you are learner #1 | Product sense from real use |
 | 7 | Write the planted errors; compute the verifier's catch rate with a confidence interval | AI engineer: measuring LLM reliability |
-| 8 | Run the pilot: recruit students, talk to parents, collect feedback | Working with real users |
-| 9 | Calibrate the reranker threshold for CRAG from data and justify it | Choosing a threshold from evidence |
-| 11 | The pilot report: calibration of mastery estimates, placement vs later results, BKT fitting, drop-off | Data science: the strongest piece for interviews |
+| 8 | Label 50 reading items yourself; compare with the verifier (agreement, kappa) | Human labels vs model judgement |
+| 9 | Plant factual errors in 10 Task 1 answers; measure what the checker catches and misses | Precision and recall of a checker |
+| 10 | Run the pilot: recruit learners, collect feedback | Working with real users |
+| 11 | The report: retention vs FSRS predictions, BKT calibration, placement vs later results | Data science: the strongest piece for interviews |
 
 Rule: if the owner cannot explain a piece of code the agent wrote, the agent explains it before the PR is merged.
 
 ## Checkpoints
-End of weeks 5, 7 and 9: if behind, cut scope (week 10 first), never tests or measurement honesty.
+End of weeks 6, 8 and 10: if behind, cut scope (week 9 first, then week 8), never tests or measurement honesty.
 
 ## What the owner provides
 | When | What |
 |---|---|
 | Week 2 | A machine with Docker that can run TEI |
-| Week 3 | About 3 hours: review the graph and the glossary against the curriculum |
-| Week 4 | Decision: add SymPy for equivalent algebraic answers, or numeric answers only at first |
-| Week 5 | Decision: add KaTeX to the web app for formulas |
-| Week 6 | Model API keys (DeepSeek, Gemini); about 5 hours of labelling and writing seed items |
-| Week 7 | Decisions on consent wording (parents) and data retention |
-| Weeks 7–8 | Pilot students (start asking in week 6: siblings, tutoring, former school) |
-| Week 8 | A Tavily or Brave key for the web step |
+| Week 3 | About 3 hours: the grammar graph draft and licence checks |
+| Week 5 | Model API keys (DeepSeek, Gemini); checking the seed items |
+| Week 6 | Daily use (15–20 minutes) |
+| Week 9 | Decision on the consent text and data retention |
+| Week 10 | Pilot learners (start asking in week 8) |
 
 ## Risks
-- **Minors:** students under 16 need parental consent (Nghị định 13/2023); no pilot before the consent text is done.
-- **Sources:** few open maths texts in Vietnamese; quality of Vietnamese generated from English sources is measured,
-  not assumed.
-- **Scope:** grades 6–12 have hundreds of objectives; stay on one strand until it works end to end.
-- **2025 exam format:** confirm against the Ministry's current sample paper before building the scoring.
-- January exams: drop week 10 first.
+- **Few open grammar sources** of good quality: measure item quality, and label owner-written explanations as such.
+- **One learner until week 10:** the owner's data is real but cannot support general claims; the report says so.
+- **Writing scores:** no band score is shown as a measurement until calibrated against human-scored essays.
+- January exams: drop week 9 first.
 
 ## After Tết
-Geometry and statistics strands, grades 11–12 (calculus), proofs with a rubric judge and human calibration,
-the Python course in the web app, classroom layer (slides, whiteboard), Elo item difficulty, mastery hysteresis
-wired with stored state.
+Writing Task 2 feedback calibrated against human-scored essays; Listening (text to speech) and Speaking; the maths
+course below; CRAG (retrieve → judge → rewrite → web → honest "no trusted source"); the Python course in the web app;
+classroom layer (slides, whiteboard); Elo item difficulty; mastery hysteresis wired with stored state.
+
+### Maths course (moved after Tết, plan kept)
+Đại số → Hàm số strand, grades 6–10, from Chương trình GDPT 2018 môn Toán (Thông tư 32/2018): fractions and integers
+→ algebraic expressions → identities and factoring → linear equations and functions → quadratic equations →
+quadratic functions. Graders in the 2025 exam formats (multiple choice, *đúng/sai* with 4 statements, short numeric
+answers). Vietnamese textbooks are copyrighted and not ingested; open maths books with each licence checked.
+Students under 16 need parental consent (Nghị định 13/2023). Decisions then: SymPy and KaTeX.
 
 ## Log
 | Date | Change |
 |---|---|
 | 2026-11-12 | Plan created; week 0 done |
 | 2026-11-12 | Week 1 done ahead of schedule: `/code/exercise`, `/code/attempts`, code hint guard; checked end to end with the real sandbox |
-| 2026-11-12 | **First course changed to secondary/high-school maths** (owner's decision): weeks 3–11 rewritten around the Đại số → Hàm số slice; the code editor week and Tin học mapping move after Tết; Python stays as the second course |
+| 2026-11-12 | First course changed to secondary/high-school maths (owner's decision) |
 | 2026-11-12 | Added "Yours to do by hand" per week and `docs/v2/decision-log.md` |
+| 2026-11-13 | **First course changed to English for IELTS, vocabulary and grammar first** (owner's decision: own exam in summer 2027, 5.5 → 7.0; the course serves learners from beginner upward). Maths moves after Tết with its plan kept |
