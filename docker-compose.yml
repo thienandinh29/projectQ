@@ -1,8 +1,131 @@
-# Local P2 services: Postgres + pgvector and the bge-m3 embedding server.
+# NodeTrail on one machine (specs/one-command-start). Copy .env.example to .env, set API_KEY and
+# RUNNER_TOKEN, then:  docker compose up -d --build --wait
+# Web on http://localhost:3000, API on http://localhost:8000/docs. Nothing listens beyond localhost.
+# The embedding server is opt-in (large download):  docker compose --profile tei up -d tei
+
+x-api-image: &api-image
+  image: nodetrail-api:local
+  build:
+    context: .
+    dockerfile: apps/api/Dockerfile
+
+# Settings shared by the API, the worker and the migration job. Values in .env (model keys and
+# the rest of .env.example) are passed through; the lines below win over .env so the services
+# always reach each other inside the compose network, whatever .env says for a host setup.
+# API_KEY and RUNNER_TOKEN are not checked here (that would break `docker compose up db` for
+# tests); the API refuses to start without API_KEY and the runner without RUNNER_TOKEN.
+x-api-env: &api-env
+  env_file:
+    - path: .env
+      required: false
+  environment: &api-environment
+    DATABASE_URL: postgresql://postgres:postgres@db:5432/nodetrail
+    API_KEY: ${API_KEY:-}
+    RUNNER_URL: http://runner:8090
+    RUNNER_TOKEN: ${RUNNER_TOKEN:-}
+    TEI_URL: http://tei:80
+    CORS_ORIGINS: http://localhost:3000
+
 services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: nodetrail-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: nodetrail
+    ports:
+      - "127.0.0.1:54322:5432"
+    volumes:
+      - nodetrail-db:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d nodetrail"]
+      interval: 2s
+      timeout: 3s
+      retries: 20
+
+  # Applies supabase/migrations once each, then exits; the API and worker wait for it.
+  migrate:
+    <<: [*api-image, *api-env]
+    command: ["python", "-m", "app.migrate"]
+    restart: "no"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  api:
+    <<: [*api-image, *api-env]
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      runner:
+        condition: service_healthy
+
+  # Claims topic jobs from the Postgres queue. Without model keys it fails each job with a named
+  # reason; with keys in .env set WORKER_ARGS=--pipeline to generate and verify content.
+  worker:
+    <<: [*api-image, *api-env]
+    entrypoint: ["sh", "-c", "exec python -m app.jobs.worker $$WORKER_ARGS"]
+    environment:
+      <<: *api-environment
+      WORKER_ARGS: ${WORKER_ARGS:-}
+    restart: unless-stopped
+    healthcheck:
+      disable: true
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  # Builds the image the runner starts for each code run, then exits.
+  sandbox:
+    image: nodetrail-sandbox:latest
+    build: runner/sandbox
+    entrypoint: ["/bin/true"]
+    restart: "no"
+
+  # Starts one locked-down sandbox container per run through the host Docker socket. It is reachable
+  # only inside the compose network and requires RUNNER_TOKEN (runner/README.md).
+  runner:
+    image: nodetrail-runner:local
+    build: runner
+    restart: unless-stopped
+    environment:
+      RUNNER_TOKEN: ${RUNNER_TOKEN:-}
+      RUNNER_HOST: 0.0.0.0
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8090/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    depends_on:
+      sandbox:
+        condition: service_completed_successfully
+
+  web:
+    image: nodetrail-web:local
+    build: apps/web
+    restart: unless-stopped
+    environment:
+      NODETRAIL_DATA_MODE: api
+      NODETRAIL_API_URL: http://api:8000
+      NODETRAIL_API_KEY: ${API_KEY:-}
+      NODETRAIL_API_KEY_HEADER: x-api-key
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      api:
+        condition: service_healthy
+
+  # bge-m3 embeddings for indexing and retrieval (docker/TEI.md). Opt-in: about 2.3 GB of weights.
   tei:
     image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.9
     container_name: nodetrail-tei
+    profiles: [tei]
     restart: unless-stopped
     ports:
       - "127.0.0.1:8080:80"
@@ -24,23 +147,6 @@ services:
       timeout: 10s
       start_period: 10m
       retries: 3
-
-  db:
-    image: pgvector/pgvector:pg16
-    container_name: nodetrail-db
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: nodetrail
-    ports:
-      - "54322:5432"
-    volumes:
-      - nodetrail-db:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d nodetrail"]
-      interval: 2s
-      timeout: 3s
-      retries: 20
 
 volumes:
   tei-data:

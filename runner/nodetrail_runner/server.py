@@ -100,12 +100,25 @@ def make_handler(runner: Runner, token: str, slots: threading.BoundedSemaphore) 
     return Handler
 
 
+LOOPBACK = {"127.0.0.1", "localhost", "::1"}
+
+
+def bind_problem(host: str, token: str) -> str | None:
+    """Why the runner must not start, if it would listen beyond loopback without a token."""
+    if host not in LOOPBACK and not token:
+        return f"RUNNER_TOKEN is required when the runner listens on {host}"
+    return None
+
+
 def serve() -> None:
     runtime = available_runtime()
     token = os.environ.get("RUNNER_TOKEN", "")
+    host = os.environ.get("RUNNER_HOST", "127.0.0.1")
+    problem = bind_problem(host, token)
+    if problem:
+        raise SystemExit(problem)
     slots = threading.BoundedSemaphore(int(os.environ.get("RUNNER_CONCURRENCY", "4")))
     handler = make_handler(lambda code, calls: run(code, calls, runtime=runtime), token, slots)
-    host = os.environ.get("RUNNER_HOST", "127.0.0.1")
     port = int(os.environ.get("RUNNER_PORT", "8090"))
     state = "set" if token else "unset"
     print(f"runner on {host}:{port} runtime={runtime or 'default'} token={state}", flush=True)
