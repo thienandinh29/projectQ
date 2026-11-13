@@ -109,9 +109,20 @@ Record the rate (chunks per second), the time and the TEI container's peak memor
 The whole catalogue (`--out ../../data/library` without `--only`) is about 5,200 chunks: divide by the
 rate to see how long it would take before starting it.
 
-If the machine slows down or the database stops answering, TEI is using too much memory or CPU: stop it
-with `docker compose stop tei`, check `docker stats --no-stream`, and give Docker Desktop more memory
-or use smaller batches.
+**On an 8 GB laptop:** set `TEI_MEMORY_LIMIT=3g` in `.env`, so TEI is stopped with an error instead of
+starving the database, and run only the database and TEI while indexing (close the browser too):
+
+```bash
+docker compose stop web api worker runner
+```
+
+```bash
+docker compose --profile tei up -d --wait db tei
+```
+
+Start the rest again afterwards with `docker compose up -d --wait`. If TEI exits with code 137 (out of
+memory), try `TEI_MEMORY_LIMIT=4g` and `--batch-size 4`. If the machine slows down or the database stops
+answering, stop TEI (`docker compose stop tei`) and check `docker stats --no-stream`.
 
 ## Troubleshooting
 

@@ -140,7 +140,8 @@ services:
       - "32"
       - --max-concurrent-requests
       - "64"
-    mem_limit: 8g
+    # Weights are about 2.3 GB. On an 8 GB laptop set TEI_MEMORY_LIMIT=3g in .env (docker/LOCAL.md).
+    mem_limit: ${TEI_MEMORY_LIMIT:-8g}
     healthcheck:
       test: ["CMD", "curl", "--fail", "--silent", "http://localhost/health"]
       interval: 30s
