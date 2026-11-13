@@ -17,6 +17,7 @@ HARNESS = Path(__file__).resolve().parents[1] / "sandbox" / "harness.py"
 
 
 def _proc(script: str) -> "subprocess.Popen[bytes]":
+    # Pipes are block-buffered without PYTHONUNBUFFERED (as in CI): every script flushes.
     return subprocess.Popen(
         [sys.executable, "-c", script], stdin=subprocess.PIPE, stdout=subprocess.PIPE
     )
@@ -37,7 +38,10 @@ def test_a_slow_start_is_waited_for_and_not_counted() -> None:
     [
         ("import time; time.sleep(5)", "did not start within 0.5 s"),
         ("pass", "exited before it was ready"),
-        ("print('learner output first'); import sys; sys.stdin.read()", "unexpected first line"),
+        (
+            "print('learner output first', flush=True); import sys; sys.stdin.read()",
+            "unexpected first line",
+        ),
     ],
 )
 def test_a_sandbox_that_never_gets_ready_is_reported(script: str, why: str) -> None:
