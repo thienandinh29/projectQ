@@ -85,9 +85,29 @@ End of weeks 6, 8 and 10: if behind, cut scope (week 9 first, then week 8), neve
 - January exams: drop week 9 first.
 
 ## After Tết
-Writing Task 2 feedback calibrated against human-scored essays; Listening (text to speech) and Speaking; the maths
-course below; CRAG (retrieve → judge → rewrite → web → honest "no trusted source"); the Python course in the web app;
+**First:** Pronunciation v0 (below). Then: Writing Task 2 feedback calibrated against human-scored essays; Listening
+(text to speech) and the rest of Speaking; the maths course below; CRAG (retrieve → judge → rewrite → web → honest "no trusted source"); the Python course in the web app;
 classroom layer (slides, whiteboard); Elo item difficulty; mastery hysteresis wired with stored state.
+
+### Pronunciation v0 (first milestone after Tết, added 13 Nov)
+Read-aloud pronunciation checking inside the learning loop. It scores **intelligibility and specific phoneme
+errors, never "how native you sound"** (an accent is not an error; the IELTS criterion rewards intelligibility).
+
+| Step | Done when | By hand (owner) |
+|---|---|---|
+| 1. Offline evaluation | A phoneme recognition model (e.g. a wav2vec2 model fine-tuned on phoneme labels) + alignment to the expected phonemes (Goodness of Pronunciation) scored against expert ratings on speechocean762, and against annotated mispronunciations of the Vietnamese speakers in L2-ARCTIC; correlation with human raters reported with intervals | The evaluation notebook and its conclusion |
+| 2. Pronunciation service | Self-hosted service like TEI (audio never sent to a third party, deleted after scoring); read-aloud exercises recorded in the browser; phoneme-level feedback in Vietnamese | Measure latency on CPU and decide if a GPU is needed |
+| 3. Into the engine | Phonemes and patterns are concepts with BKT mastery; typical Vietnamese errors are named misconceptions (dropped final consonants, /θ ð/, /ʃ/ vs /s/, clusters, -s/-ed endings, word stress); weak words go to FSRS review | Check the error list against your own recordings |
+
+Notes:
+- Whisper is not the judge (it corrects mispronunciations while transcribing); at most it checks whether the words
+  were understood.
+- Licences to confirm on the datasets' own pages before use (believed: speechocean762 CC BY 4.0, L2-ARCTIC
+  CC BY-NC 4.0, non-commercial).
+- Voice is sensitive personal data (Nghị định 13/2023): consent first (parents for minors), no cloud speech API for
+  real learners.
+- New dependencies (PyTorch, a speech model) need the owner's approval at step 1.
+- Not in v0: prosody (stress, intonation, rhythm) beyond word stress, free speaking, band scores.
 
 ### Maths course (moved after Tết, plan kept)
 Đại số → Hàm số strand, grades 6–10, from Chương trình GDPT 2018 môn Toán (Thông tư 32/2018): fractions and integers
@@ -105,3 +125,4 @@ Students under 16 need parental consent (Nghị định 13/2023). Decisions then
 | 2026-11-12 | Added "Yours to do by hand" per week and `docs/v2/decision-log.md` |
 | 2026-11-13 | **First course changed to English for IELTS, vocabulary and grammar first** (owner's decision: own exam in summer 2027, 5.5 → 7.0; the course serves learners from beginner upward). Maths moves after Tết with its plan kept |
 | 2026-11-13 | Week 2 stack built: one command starts db, migrations, API, worker, runner and web; smoke test in CI. Week 5 names the level test (overall level + per-point mastery) |
+| 2026-11-13 | Pronunciation v0 added as the first milestone after Tết |
