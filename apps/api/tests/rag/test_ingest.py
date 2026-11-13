@@ -139,7 +139,14 @@ def _run_cli(
 
     calls: list[tuple[str, str | None]] = []
 
-    def fake_make(backend: str, *, tei_url: str | None = None, api_key: str | None = None) -> Any:
+    def fake_make(
+        backend: str,
+        *,
+        tei_url: str | None = None,
+        api_key: str | None = None,
+        batch_size: int = 32,
+        timeout: float = 60.0,
+    ) -> Any:
         calls.append((backend, tei_url))
         return FakeEmbedder()
 
@@ -194,3 +201,39 @@ def test_cli_builds_the_index_only_when_asked(
     finally:
         with psycopg.connect(database_url, autocommit=True) as conn:
             drop_vector_index(conn)
+
+
+def test_batch_size_and_timeout_reach_the_tei_client() -> None:
+    import argparse
+
+    from app.rag.embed import TeiEmbedder
+    from app.rag.ingest import add_embedder_args, embedder_from_args
+
+    parser = argparse.ArgumentParser()
+    add_embedder_args(parser)
+    args = parser.parse_args(
+        ["--embedder", "tei", "--tei-url", "http://tei.invalid", "--batch-size", "8",
+         "--timeout", "300"]
+    )  # fmt: skip
+    embedder = embedder_from_args(args, parser)
+    assert isinstance(embedder, TeiEmbedder)
+    assert embedder._batch_size == 8 and embedder._timeout == 300.0
+    with pytest.raises(SystemExit):
+        embedder_from_args(
+            parser.parse_args(["--tei-url", "http://x", "--batch-size", "0"]), parser
+        )
+
+
+def test_progress_is_reported_after_each_batch(database_url: str, book_dir: Path) -> None:
+    from app.rag.ingest import THINK_PYTHON, load_chunks
+    from app.rag.store import replace_chunks, upsert_source
+
+    chunks = load_chunks(book_dir)
+    seen: list[tuple[int, int]] = []
+    with psycopg.connect(database_url) as conn:
+        source_id = upsert_source(conn, THINK_PYTHON)
+        n = replace_chunks(
+            conn, source_id, chunks, FakeEmbedder(), batch_size=1,
+            on_progress=lambda done, total: seen.append((done, total)),
+        )  # fmt: skip
+    assert seen == [(i, n) for i in range(1, n + 1)]

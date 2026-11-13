@@ -1,6 +1,6 @@
 """Persist a source and its embedded chunks."""
 
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from uuid import UUID
 
@@ -50,8 +50,11 @@ def replace_chunks(
     embedder: Embedder,
     *,
     batch_size: int = 64,
+    on_progress: Callable[[int, int], None] | None = None,
 ) -> int:
     """Swap a source's chunks for a fresh set in one transaction; returns chunks written.
+
+    `on_progress(done, total)` runs after each batch, so a long CPU run shows how far it got.
 
     Replace rather than diff: chunk boundaries move whenever the text or chunker changes,
     and a half-replaced source would give wrong citations.
@@ -84,6 +87,8 @@ def replace_chunks(
                         for i, (c, v) in enumerate(zip(batch, vectors, strict=True))
                     ],
                 )
+            if on_progress is not None:
+                on_progress(start + len(batch), len(chunks))
     return len(chunks)
 
 

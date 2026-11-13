@@ -15,7 +15,8 @@ each book's chunks. Build the vector index once, after the last book (`--build-i
 import argparse
 import json
 import sys
-from collections.abc import Sequence
+import time
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -87,6 +88,22 @@ def load_library(library: Path, *, max_chars: int = MAX_CHARS) -> list[Book]:
     return [load_book(f, max_chars=max_chars) for f in folders]
 
 
+def _progress(title: str) -> Callable[[int, int], None]:
+    """Prints how far a book's indexing got and an estimate of the time left."""
+    began = time.monotonic()
+
+    def report(done: int, total: int) -> None:
+        rate = done / max(time.monotonic() - began, 1e-9)
+        left_min = (total - done) / rate / 60 if rate else 0.0
+        print(
+            f"  {title}: {done}/{total} chunks, {rate:.1f}/s, about {left_min:.0f} min left",
+            file=sys.stderr,
+            flush=True,
+        )
+
+    return report
+
+
 def ingest_library(
     library: Path, database_url: str, embedder: Embedder, *, max_chars: int = MAX_CHARS
 ) -> dict[str, int]:
@@ -96,7 +113,9 @@ def ingest_library(
     with psycopg.connect(database_url) as conn:
         for book in books:
             source_id = upsert_source(conn, book.info)
-            written[book.info.title] = replace_chunks(conn, source_id, book.chunks, embedder)
+            written[book.info.title] = replace_chunks(
+                conn, source_id, book.chunks, embedder, on_progress=_progress(book.info.title)
+            )
             print(f"{book.info.title}: {written[book.info.title]} chunks", file=sys.stderr)
     return written
 

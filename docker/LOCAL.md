@@ -80,25 +80,38 @@ Each run creates and drops its own `nodetrail_test_*` database. The `/verify` sk
 
 ## Indexing the library with TEI (on your machine)
 
-The embedding model is about 2.3 GB, so it is opt-in. It runs on CPU (8 GB memory limit); see
+The embedding model (bge-m3, about 570M parameters) is about 2.3 GB, so it is opt-in. On a laptop
+CPU it is slow: measure one small book first, then decide whether to index the rest. See
 `docker/TEI.md`.
 
 ```bash
 docker compose --profile tei up -d --wait tei
 ```
 
-Fetch the catalogue books and index them into the running database (from `apps/api`, with `uv`):
+From `apps/api` (uv uses Python 3.12 from `.python-version`), fetch only the smallest book (422 chunks):
 
 ```bash
-uv run python -m app.sources.fetch ../../data/sources/catalog.yaml --out ../../data/library --report ../../data/sources/catalog-report.json
+uv run python -m app.sources.fetch ../../data/sources/catalog.yaml --only python-openstax --out ../../data/library-one --report ../../data/sources/catalog-report.json
+```
+
+Index it with small batches and a long timeout, which a laptop CPU needs. A progress line after each batch
+shows chunks per second and the time left. In PowerShell set `$env:DATABASE_URL` first:
+
+```powershell
+$env:DATABASE_URL = 'postgresql://postgres:postgres@localhost:54322/nodetrail'
 ```
 
 ```bash
-DATABASE_URL=postgresql://postgres:postgres@localhost:54322/nodetrail uv run python -m app.rag.library ../../data/library --embedder tei --tei-url http://localhost:8080 --build-index
+uv run python -m app.rag.library ../../data/library-one --embedder tei --tei-url http://localhost:8080 --batch-size 8 --timeout 300 --build-index
 ```
 
-In PowerShell, set `$env:DATABASE_URL = '...'` first instead of the `VAR=value` prefix. Record the time,
-the chunk count and peak memory in the decision log.
+Record the rate (chunks per second), the time and the TEI container's peak memory in the decision log.
+The whole catalogue (`--out ../../data/library` without `--only`) is about 5,200 chunks: divide by the
+rate to see how long it would take before starting it.
+
+If the machine slows down or the database stops answering, TEI is using too much memory or CPU: stop it
+with `docker compose stop tei`, check `docker stats --no-stream`, and give Docker Desktop more memory
+or use smaller batches.
 
 ## Troubleshooting
 

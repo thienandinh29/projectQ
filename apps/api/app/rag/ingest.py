@@ -71,6 +71,18 @@ def add_embedder_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--tei-url", default=os.environ.get("TEI_URL"))
     parser.add_argument("--api-key", default=os.environ.get("TEI_API_KEY"))
     parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=32,
+        help="texts per TEI request (default 32; use 8 or fewer on a laptop CPU)",
+    )
+    parser.add_argument(
+        "--timeout",
+        type=float,
+        default=60.0,
+        help="seconds to wait for one TEI request (default 60; raise it on a slow CPU)",
+    )
+    parser.add_argument(
         "--build-index",
         action="store_true",
         help="build the HNSW index once loading is done (run it after the last book, not each one)",
@@ -82,7 +94,15 @@ def embedder_from_args(args: argparse.Namespace, parser: argparse.ArgumentParser
         parser.error("--embedder tei needs --tei-url (or the TEI_URL environment variable)")
     from app.rag.embed import make_embedder
 
-    return make_embedder(args.embedder, tei_url=args.tei_url, api_key=args.api_key)
+    if args.batch_size < 1 or args.timeout <= 0:
+        parser.error("--batch-size must be at least 1 and --timeout above 0")
+    return make_embedder(
+        args.embedder,
+        tei_url=args.tei_url,
+        api_key=args.api_key,
+        batch_size=args.batch_size,
+        timeout=args.timeout,
+    )
 
 
 def build_index(database_url: str) -> None:
