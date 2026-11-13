@@ -1,7 +1,9 @@
 """Runs inside the sandbox container. Untrusted learner code is executed here and nowhere else.
 
+stdout, first: one line READY, written before the request is read and before any learner code runs,
+        so the host can start the learner's time limit only once the container is actually up.
 stdin: one JSON object {"nonce": str, "code": str, "calls": [str, ...]}.
-stdout: whatever the learner prints (captured and capped), then one line "<nonce> " + JSON:
+stdout, then: whatever the learner prints (captured and capped), then one line "<nonce> " + JSON:
         {"load_error": {...}} or {"results": [{"repr": ...} or {"error": ..., "message": ...}]}.
 
 The harness never sees expected values: it only reports what each call produced. The comparison
@@ -16,6 +18,7 @@ import sys
 MAX_REPR = 2000
 MAX_MESSAGE = 500
 MAX_CAPTURE = 8000
+READY = "nodetrail-sandbox-ready"
 
 
 class CappedText(io.TextIOBase):
@@ -41,6 +44,8 @@ class CappedText(io.TextIOBase):
 
 
 def main() -> None:
+    sys.stdout.write(READY + "\n")
+    sys.stdout.flush()
     request = json.loads(sys.stdin.read())
     nonce, code, calls = request["nonce"], request["code"], request["calls"]
     real_stdout = sys.stdout

@@ -105,3 +105,20 @@ def test_a_runner_reachable_beyond_loopback_needs_a_token() -> None:
     assert bind_problem("0.0.0.0", "") is not None
     assert bind_problem("0.0.0.0", "secret") is None
     assert bind_problem("127.0.0.1", "") is None  # local development and tests
+
+
+def test_a_sandbox_that_does_not_start_is_a_503_not_a_wrong_answer() -> None:
+    from nodetrail_runner.sandbox import SandboxUnavailable
+
+    def broken(code: str, calls: list[str]) -> RunResult:
+        raise SandboxUnavailable("the sandbox did not start within 30 s")
+
+    handler = make_handler(broken, "", threading.BoundedSemaphore(1))
+    httpd = ThreadingHTTPServer(("127.0.0.1", 0), handler)
+    thread = threading.Thread(target=httpd.serve_forever, daemon=True)
+    thread.start()
+    try:
+        status, body = post(f"http://127.0.0.1:{httpd.server_port}", {"code": "x = 1", "calls": []})
+    finally:
+        httpd.shutdown()
+    assert status == 503 and "sandbox unavailable" in body["error"]

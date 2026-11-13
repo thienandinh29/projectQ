@@ -47,3 +47,6 @@ Languages other than Python; running code in the browser (Pyodide) for instant f
 1. **Isolation:** one Docker container per run, flags as in `plan.md`; gVisor (`runsc`) used when the host has it.
 2. **Hidden tests:** at least one per code objective.
 3. **Limits:** 5 s wall time, 256 MB memory, 32 processes, 64 KB output, 20 KB code, 30 runs per learner per minute.
+   The 5 s are the learner's run time, counted from the harness's ready line; starting the container has its own
+   30 s budget and failing to start is a service error (503, nothing recorded), never a wrong answer (fixed 13 Nov
+   after Docker Desktop on Windows timed out correct code).

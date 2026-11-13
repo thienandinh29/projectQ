@@ -143,3 +143,9 @@ def test_a_forged_result_line_cannot_change_the_reported_values() -> None:
 def test_runs_are_repeatable() -> None:
     code = "def f(n):\n    return sorted(range(n), reverse=True)\n"
     assert run(code, ["f(5)"]).results == run(code, ["f(5)"]).results
+
+
+def test_the_time_limit_is_for_the_learner_code_not_for_starting_the_container() -> None:
+    # 0.5 s of work under a 1 s limit: passes only if container start-up is not counted.
+    r = run("import time\ntime.sleep(0.5)\n", [], limits=Limits(wall_seconds=1))
+    assert r.status == "ok", r

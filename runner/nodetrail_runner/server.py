@@ -17,7 +17,7 @@ from dataclasses import asdict
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from typing import Any
 
-from nodetrail_runner.sandbox import RunResult, available_runtime, run
+from nodetrail_runner.sandbox import RunResult, SandboxUnavailable, available_runtime, run
 
 MAX_CODE_BYTES = 20 * 1024
 MAX_CALLS = 50
@@ -90,6 +90,10 @@ def make_handler(runner: Runner, token: str, slots: threading.BoundedSemaphore) 
                 return
             try:
                 result = runner(code, calls)
+            except SandboxUnavailable as exc:
+                print(f"sandbox unavailable: {exc}", flush=True)  # no learner code in this line
+                self._send(503, {"error": "sandbox unavailable, retry shortly"})
+                return
             finally:
                 slots.release()
             self._send(200, asdict(result))

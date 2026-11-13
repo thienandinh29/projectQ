@@ -6,6 +6,8 @@ it sends `{"code", "calls"}` here and compares the returned values with the expe
 - `sandbox/`: the sandbox image (Python and a fixed harness; no pip, non-root, empty environment).
 - `nodetrail_runner/sandbox.py`: one container per run with no network, a read-only file system, a 16 MB `/tmp`
   that cannot execute files, 256 MB memory, 32 processes, 1 CPU, 5 s wall time, 64 KB output, no capabilities;
+  the 5 s start when the sandbox reports it is ready, so a slow container start (Docker Desktop) never counts
+  against learner code; a sandbox that does not start within 30 s is a 503, never a wrong answer;
   gVisor (`runsc`) when the host offers it.
 - `nodetrail_runner/server.py`: `POST /run`, `GET /health`; size limits, `X-Runner-Token`, a concurrency cap.
 
