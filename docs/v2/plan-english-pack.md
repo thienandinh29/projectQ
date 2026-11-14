@@ -104,6 +104,7 @@ learner is an estimate with a range until measured against examiners.
 ## Log
 | Date | Change |
 |---|---|
+| 2026-11-14 | Step 2.3 specified: scorer as a separate service, candidates chosen by the owner after licence checks, a 30% held-out test set, constant and feature baselines, calibrated range from cross-validated residuals, robustness instead of repeat-scoring stability; the band is never shown as a point |
 | 2026-11-14 | 2.2 built: LanguageTool 6.8 in our own container (jars pinned by SHA-256), minimal correction, ERRANT types, the draft error map, writing evidence into BKT (draft learners only until the 100-error check), grammar section on the result page. Measured: about 0.4 s per 300-word essay, LanguageTool about 670 MB; LanguageTool misses many agreement errors in mid-sentence (recall check added for the owner) |
 | 2026-11-14 | Step 2.2 specified: LanguageTool (own container), minimal correction, ERRANT types, error map (draft, few nodes map yet), gentler writing observation model; waits on the owner's dependency decisions |
 | 2026-11-14 | 2.1: write an essay in the browser (live word count, consent notice), the worker measures it (words, sentences, paragraphs, linking words), result page and deletion; a Playwright test in CI. No model call, no score yet |
