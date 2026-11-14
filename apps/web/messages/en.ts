@@ -17,6 +17,7 @@ export const en = {
       roadmap: "Roadmap",
       levelTest: "Level test",
       explore: "Explore a topic",
+      writing: "Writing",
     },
     draft: "Draft",
     retry: "Try again",

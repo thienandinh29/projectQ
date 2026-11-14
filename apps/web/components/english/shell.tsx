@@ -7,6 +7,7 @@ const LINKS = [
   { href: "/", label: t.nav.today },
   { href: "/lo-trinh", label: t.nav.roadmap },
   { href: "/tu-vung", label: t.homeToday.vocabTitle },
+  { href: "/viet", label: t.nav.writing },
   { href: "/kiem-tra", label: t.nav.levelTest },
   { href: "/gioi-thieu", label: t.about.nav },
   { href: "/kham-pha", label: t.nav.explore },

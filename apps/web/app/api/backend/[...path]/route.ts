@@ -9,8 +9,11 @@ const UUID = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
 const SLUG = "[a-z0-9]+(?:-[a-z0-9]+)*";
 const allowedEnglish = new RegExp(
   `^(level-tests|level-tests/${UUID}/answers|roadmap|milestones/${SLUG}/tests|` +
-    `nodes/${SLUG}/practice|grammar-runs/${UUID}/answers|vocab/session|vocab/answers)$`,
+    `nodes/${SLUG}/practice|grammar-runs/${UUID}/answers|vocab/session|vocab/answers|` +
+    `writing/prompts|essays|essays/${UUID})$`,
 );
+// The only path a learner may DELETE: their own essay (specs/writing/step-2.1.md).
+const deletable = new RegExp(`^essays/${UUID}$`);
 const forwardedParams = [
   "learner_id",
   "subject",
@@ -37,8 +40,10 @@ async function proxy(
   const path = segments.join("/");
   if (!allowed.test(path) && !allowedEnglish.test(path))
     return new Response(null, { status: 404 });
+  if (request.method === "DELETE" && !deletable.test(path))
+    return new Response(null, { status: 405 });
   if (
-    request.method === "POST" &&
+    (request.method === "POST" || request.method === "DELETE") &&
     request.headers.get("origin") !== request.nextUrl.origin
   )
     return new Response(null, { status: 403 });
@@ -146,7 +151,7 @@ async function proxy(
           `${learnerCookie}=${issued}; Path=/; Max-Age=2592000; HttpOnly; SameSite=Lax${request.nextUrl.protocol === "https:" ? "; Secure" : ""}`,
         );
     }
-    return new Response(response.body, {
+    return new Response(response.status === 204 ? null : response.body, {
       status: response.status,
       headers: responseHeaders,
     });
@@ -154,4 +159,4 @@ async function proxy(
     return new Response(null, { status: 502 });
   }
 }
-export { proxy as GET, proxy as POST };
+export { proxy as DELETE, proxy as GET, proxy as POST };

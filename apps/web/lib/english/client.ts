@@ -1,20 +1,27 @@
 // The English pack's calls, through the same-origin proxy (/api/backend): the API key stays on the server.
 import { DataError } from "@/lib/decode";
 import {
+  parseEssay,
+  parseEssaySummaries,
   parseLevelResult,
   parseRoadmap,
   parseStep,
   parseVocabAnswer,
   parseVocabSession,
+  parseWritingPrompts,
 } from "./decode";
 import type {
+  Essay,
+  EssaySummary,
   Level,
   LevelResult,
   Roadmap,
   Step,
   VocabAnswer,
   VocabSession,
+  WritingPrompt,
 } from "./types";
+import { CONSENT } from "./writing";
 
 export const VOCAB_LIST = "core-seed";
 
@@ -42,6 +49,7 @@ export function englishClient(fetcher: Fetch = (...a) => fetch(...a)) {
         response.status === 503 ? "configuration" : "failed",
         response.status,
       );
+    if (response.status === 204) return null;
     try {
       return await response.json();
     } catch {
@@ -140,6 +148,41 @@ export function englishClient(fetcher: Fetch = (...a) => fetch(...a)) {
           answer,
         }),
       );
+    },
+    async writingPrompts(learnerId: string): Promise<WritingPrompt[]> {
+      const q = new URLSearchParams({ learner_id: learnerId });
+      return parseWritingPrompts(await request(`writing/prompts?${q}`));
+    },
+    async essays(learnerId: string): Promise<EssaySummary[]> {
+      const q = new URLSearchParams({ learner_id: learnerId });
+      return parseEssaySummaries(await request(`essays?${q}`));
+    },
+    async essay(learnerId: string, essayId: string): Promise<Essay> {
+      const q = new URLSearchParams({ learner_id: learnerId });
+      return parseEssay(
+        await request(`essays/${encodeURIComponent(essayId)}?${q}`),
+      );
+    },
+    /** Sends the essay with the accepted notice version; the API queues it for the worker. */
+    async submitEssay(
+      learnerId: string,
+      promptId: string,
+      text: string,
+    ): Promise<string> {
+      const d = (await post("essays", {
+        learner_id: learnerId,
+        prompt_id: promptId,
+        text,
+        consent: CONSENT,
+      })) as { essay_id?: unknown };
+      if (typeof d?.essay_id !== "string") throw new DataError("contract");
+      return d.essay_id;
+    },
+    async deleteEssay(learnerId: string, essayId: string): Promise<void> {
+      const q = new URLSearchParams({ learner_id: learnerId });
+      await request(`essays/${encodeURIComponent(essayId)}?${q}`, {
+        method: "DELETE",
+      });
     },
     async roadmap(learnerId: string): Promise<Roadmap> {
       const q = new URLSearchParams({ learner_id: learnerId, course: COURSE });

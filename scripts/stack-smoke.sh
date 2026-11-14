@@ -59,13 +59,16 @@ prompts=$(api "$API/writing/prompts?learner_id=$learner" | json 'len(d)')
 [ "$prompts" = 0 ]; check "draft writing prompts are not listed for a learner without permission" $?
 
 pages=""
-for page in / /kiem-tra /lo-trinh /tu-vung /gioi-thieu /on-tap/cot-moc/passive /kham-pha; do pages="$pages $(curl -sS -o /dev/null -w '%{http_code}' "$WEB$page")"; done
-[ "$pages" = " 200 200 200 200 200 200 200" ]; check "English pack pages and the topic explorer load ($pages)" $?
+for page in / /kiem-tra /lo-trinh /tu-vung /gioi-thieu /on-tap/cot-moc/passive /viet /viet/t2-plastic-ban \
+  /bai-viet/00000000-0000-4000-8000-000000000000 /kham-pha; do pages="$pages $(curl -sS -o /dev/null -w '%{http_code}' "$WEB$page")"; done
+[ "$pages" = " 200 200 200 200 200 200 200 200 200 200" ]; check "English pack pages and the topic explorer load ($pages)" $?
 proxied=$(curl -sS "$WEB/api/backend/roadmap?learner_id=$learner&course=english-ielts" | json 'len(d["milestones"])')
 [ "$proxied" = 10 ]; check "the web proxy serves the roadmap" $?
 code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST -H "Origin: $WEB" -H 'content-type: application/json' \
   -d "{\"learner_id\":\"$learner\"}" "$WEB/api/backend/level-tests")
 [ "$code" = 409 ]; check "the web proxy passes the level test through, drafts still guarded ($code)" $?
+code=$(curl -sS -o /dev/null -w '%{http_code}' -X DELETE -H "Origin: $WEB" "$WEB/api/backend/essays?learner_id=$learner")
+[ "$code" = 405 ]; check "the web proxy deletes nothing but a single essay ($code)" $?
 code=$(curl -sS -o /dev/null -w '%{http_code}' "$WEB/api/backend/level-tests/not-an-id/answers")
 [ "$code" = 404 ]; check "the web proxy refuses paths outside its allowlist ($code)" $?
 

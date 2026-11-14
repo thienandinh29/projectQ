@@ -113,3 +113,34 @@ test("a new word is taught, asked, and scheduled", async ({ page }) => {
   await expect(page.getByText("Đúng rồi.")).toBeVisible();
   await expect(page.getByText("Ôn lại vào")).toBeVisible();
 });
+
+test("an essay is written, measured by the worker, and deleted", async ({
+  page,
+}) => {
+  await asLearner(page, LEARNER); // the starter prompts are drafts
+  await page.goto("/viet");
+  await expect(page.getByRole("heading", { name: "Luyện viết" })).toBeVisible();
+  await page.locator('a[href="/viet/t2-plastic-ban"]').click();
+  const essay =
+    "Plastic bags are cheap. However, they pollute rivers.\n\nIn conclusion, a ban is sensible.";
+  await page.getByRole("textbox").fill(essay);
+  await expect(page.getByTestId("word-count")).toContainText("14 từ");
+  await expect(page.getByTestId("word-count")).toContainText("cần ít nhất 250");
+  const send = page.getByRole("button", { name: "Gửi bài" });
+  await expect(send).toBeDisabled(); // the notice comes first
+  await page.getByLabel("Tôi đã đọc và đồng ý").check();
+  await send.click();
+  await expect(page.getByRole("heading", { name: "Đã phân tích" })).toBeVisible(
+    {
+      timeout: 30_000,
+    },
+  );
+  const result = page.getByTestId("essay-result");
+  await expect(result).toContainText("14 / 250");
+  await expect(result).toContainText("không phải điểm IELTS");
+  await expect(result).toContainText("Đối lập");
+  await expect(result).toContainText("Kết luận");
+  page.once("dialog", (dialog) => dialog.accept());
+  await page.getByRole("button", { name: "Xóa bài viết" }).click();
+  await expect(page.getByRole("heading", { name: "Luyện viết" })).toBeVisible();
+});

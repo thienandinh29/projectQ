@@ -116,3 +116,57 @@ export interface Roadmap {
   learn_next: string | null;
   learn_next_trace: DecisionTrace | null;
 }
+
+// Writing (specs/writing/step-2.1.md).
+export type EssayStatus = "queued" | "analysing" | "done" | "failed";
+export const LINKING_GROUPS = [
+  "addition",
+  "contrast",
+  "cause_effect",
+  "example",
+  "sequence",
+  "opinion",
+  "conclusion",
+] as const;
+export type LinkingGroup = (typeof LINKING_GROUPS)[number];
+
+export interface WritingPrompt {
+  id: string;
+  task: 1 | 2;
+  type: string;
+  level: Level;
+  status: "draft" | "reviewed";
+  prompt: string;
+}
+
+export interface EssaySummary {
+  id: string;
+  prompt_id: string;
+  status: EssayStatus;
+  words: number | null;
+  submitted_at: string;
+}
+
+/** What plain code measured; no score and no model output in step 2.1. */
+export interface EssayResult {
+  words: number;
+  sentences: number;
+  paragraphs: number;
+  min_words: number;
+  long_enough: boolean;
+  avg_sentence_words: number;
+  longest_sentence_words: number;
+  /** group → phrase → times used */
+  linking: Partial<Record<LinkingGroup, Record<string, number>>>;
+  linking_groups_used: number;
+}
+
+export interface Essay {
+  id: string;
+  prompt: WritingPrompt | null;
+  text: string;
+  status: EssayStatus;
+  submitted_at: string;
+  result: EssayResult | null;
+  failure_vi: string | null;
+}
