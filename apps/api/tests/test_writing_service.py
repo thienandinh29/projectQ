@@ -20,6 +20,14 @@ ESSAY = "Cities are crowded. However, buses help.\n\nIn conclusion, plan better.
 Setup = tuple[WritingService, str, str]
 
 
+def drain(db: str, writing_dir: Path) -> int:
+    """Process every queued essay: the test database is shared, so older essays may be waiting."""
+    n = 0
+    while process_next_essay(db, writing_dir):
+        n += 1
+    return n
+
+
 @pytest.fixture
 def setup(database_url: str) -> Iterator[Setup]:
     pool = ConnectionPool(database_url, open=True)
@@ -57,7 +65,7 @@ def test_an_essay_is_queued_then_analysed_by_the_worker(setup: Setup) -> None:
     queued = svc.get(learner, essay_id)
     assert queued["status"] == "queued" and queued["result"] is None
     assert queued["prompt"]["id"] == "t2-plastic-ban"
-    assert process_next_essay(db, WRITING) is True
+    assert drain(db, WRITING) >= 1
     assert process_next_essay(db, WRITING) is False  # nothing left
     done = svc.get(learner, essay_id)
     assert done["status"] == "done"
@@ -109,7 +117,7 @@ def test_essays_are_private_and_deletable(setup: Setup, database_url: str) -> No
 def test_a_failed_analysis_is_reported_not_hidden(setup: Setup, tmp_path: Path) -> None:
     svc, learner, db = setup
     essay_id = svc.submit(learner, "t2-plastic-ban", ESSAY, CONSENT, now=NOW)
-    assert process_next_essay(db, tmp_path)  # no prompts or linking files there
+    assert drain(db, tmp_path) >= 1  # no prompts or linking files there
     failed = svc.get(learner, essay_id)
     assert failed["status"] == "failed" and failed["failure_vi"]
 
@@ -155,7 +163,7 @@ def test_routes(setup: Setup) -> None:
         r = client.post("/essays", json=body)
         assert r.status_code == 202 and r.json()["status"] == "queued"
         essay_id = r.json()["essay_id"]
-        process_next_essay(db, WRITING)
+        drain(db, WRITING)
         got = client.get(f"/essays/{essay_id}", params={"learner_id": learner})
         assert got.status_code == 200 and got.json()["result"]["words"] == 10
         assert client.get("/essays", params={"learner_id": learner}).json()[0]["id"] == essay_id
