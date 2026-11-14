@@ -15,10 +15,10 @@ Status values: `done`, `in progress`, `next`, `planned`, `cut`.
 |---|---|---|---|---|
 | 0 | 11–12 Nov | Code sandbox foundations | Runner + sandbox with 15 escape tests in CI; grader with hidden tests; grader self-test in CI (PRs #9–#11) | done |
 | 1 | 12–22 Nov | Code exercises in the learning flow | A code answer is graded in the sandbox through the API, BKT updated with the mastery gate, attempt saved and traced; code hint guard (PR #13) | done (12 Nov) |
-| 2 | 13–29 Nov | **One-command start** | `docker compose up` runs database, API, worker, runner and web from a `.env`; library indexed with TEI on the owner's machine | in progress: stack built and checked in CI (13 Nov); owner's TEI run pending |
-| 3 | 30 Nov–6 Dec | **English course spec and grammar graph** | Spec in `specs/english-course/`; grammar points from beginner to about band 7 with prerequisites (DAG checked), each with a level; open word lists added with their licences checked; open grammar sources in the catalogue | planned |
+| 2 | 13–29 Nov | **One-command start** | `docker compose up` runs database, API, worker, runner and web from a `.env`; indexing with TEI tried on the owner's machine | done (14 Nov): stack confirmed on the owner's Windows laptop; TEI with bge-m3 does not fit its 4 GB Docker VM (8 GB laptop), so embedding moves to a GPU notebook in week 5 |
+| 3 | 14 Nov–6 Dec | **English course spec and grammar graph** | Spec in `specs/english-course/`; grammar points from beginner to about band 7 with prerequisites (DAG checked), each with a level; open word lists added with their licences checked; open grammar sources in the catalogue | in progress (started 14 Nov) |
 | 4 | 7–13 Dec | **Vocabulary loop** | Word cards scheduled with FSRS; objective item types (meaning, gap-fill, collocation, word form) graded by answer key with accepted variants; routes and tests | planned |
-| 5 | 14–20 Dec | **Grammar practice and the level test** | Grammar items with a misconception per wrong option and error correction; a level test (adaptive placement over the grammar graph and vocabulary) that reports an overall level (CEFR A1–C1 with an indicative IELTS band range, labelled as an estimate) and the mastery of each grammar point; remediation to the weak prerequisite; items generated from cited sources and verified blind, plus an owner-checked seed set | planned |
+| 5 | 14–20 Dec | **Grammar practice and the level test** | Grammar items with a misconception per wrong option and error correction; a level test (adaptive placement over the grammar graph and vocabulary) that reports an overall level (CEFR A1–C1 with an indicative IELTS band range, labelled as an estimate) and the mastery of each grammar point; remediation to the weak prerequisite; items generated from cited sources and verified blind, plus an owner-checked seed set; sources embedded on a free GPU notebook (export chunks → embed bge-m3 → import vectors), since the owner's laptop cannot run it | planned |
 | 6 | 21–27 Dec | **Web flow on real data** | Placement → map → daily vocabulary review + grammar practice in the browser, no sample data. **Milestone A:** the owner studies with it every day from here | planned |
 | 7 | 28 Dec–3 Jan | **Light week: verifier measured** | Catch rate on 50 planted-error grammar items; README, screenshots, recorded demo; pilot invitations prepared | planned |
 | 8 | 4–10 Jan | **Reading** | Passages from openly licensed texts; objective IELTS-style question types (true/false/not given, matching headings, sentence completion); items verified blind | planned |
@@ -55,7 +55,7 @@ named below, runs the analysis, and writes the conclusions. Every week ends with
 | 2 | Run the TEI indexing on your machine; explain in the log what each compose service does and why the worker is separate | MLOps: you can describe the deployment you run |
 | 3 | Draft the grammar points and their prerequisites from open references; check the word lists' licences on their own pages | Domain modelling; the graph is yours to defend |
 | 4 | Write the answer normaliser for gap-fill (case, spacing, accepted variants) and its unit tests | Writing tested Python yourself |
-| 5 | Read `engine/bkt.py` and explain one real grammar decision trace in the log (prior, evidence, posterior) | Understanding the model you will be asked about |
+| 5 | Read `engine/bkt.py` and explain one real grammar decision trace in the log (prior, evidence, posterior); write the GPU embedding notebook and record its throughput against the laptop's | Understanding the model you will be asked about |
 | 6 | Study with it daily and keep notes on what feels wrong; you are learner #1 | Product sense from real use |
 | 7 | Write the planted errors; compute the verifier's catch rate with a confidence interval | AI engineer: measuring LLM reliability |
 | 8 | Label 50 reading items yourself; compare with the verifier (agreement, kappa) | Human labels vs model judgement |
@@ -73,7 +73,7 @@ End of weeks 6, 8 and 10: if behind, cut scope (week 9 first, then week 8), neve
 |---|---|
 | Week 2 | A machine with Docker that can run TEI |
 | Week 3 | About 3 hours: the grammar graph draft and licence checks |
-| Week 5 | Model API keys (DeepSeek, Gemini); checking the seed items |
+| Week 5 | Model API keys (DeepSeek, Gemini); checking the seed items; a Kaggle or Colab account for the embedding notebook |
 | Week 6 | Daily use (15–20 minutes) |
 | Week 9 | Decision on the consent text and data retention |
 | Week 10 | Pilot learners (start asking in week 8) |
@@ -126,3 +126,4 @@ Students under 16 need parental consent (Nghị định 13/2023). Decisions then
 | 2026-11-13 | **First course changed to English for IELTS, vocabulary and grammar first** (owner's decision: own exam in summer 2027, 5.5 → 7.0; the course serves learners from beginner upward). Maths moves after Tết with its plan kept |
 | 2026-11-13 | Week 2 stack built: one command starts db, migrations, API, worker, runner and web; smoke test in CI. Week 5 names the level test (overall level + per-point mastery) |
 | 2026-11-13 | Pronunciation v0 added as the first milestone after Tết |
+| 2026-11-14 | Week 2 done: one-command start confirmed on the owner's laptop (sandbox start-up and indexing fixes, PRs #20–#22). bge-m3 in TEI cannot run in the laptop's 4 GB Docker VM (58 restarts), so embedding moves to a GPU notebook in week 5. Week 3 starts early |
