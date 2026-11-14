@@ -55,6 +55,17 @@ code=$(curl -sS -o /dev/null -w '%{http_code}' -H "x-api-key: $API_KEY" -H 'cont
   -d "{\"learner_id\":\"$learner\"}" "$API/level-tests")
 [ "$code" = 409 ]; check "draft items are not served to a learner without permission ($code)" $?
 
+pages=""
+for page in / /kiem-tra /lo-trinh /kham-pha; do pages="$pages $(curl -sS -o /dev/null -w '%{http_code}' "$WEB$page")"; done
+[ "$pages" = " 200 200 200 200" ]; check "English pack pages and the topic explorer load ($pages)" $?
+proxied=$(curl -sS "$WEB/api/backend/roadmap?learner_id=$learner&course=english-ielts" | json 'len(d["milestones"])')
+[ "$proxied" = 10 ]; check "the web proxy serves the roadmap" $?
+code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST -H "Origin: $WEB" -H 'content-type: application/json' \
+  -d "{\"learner_id\":\"$learner\"}" "$WEB/api/backend/level-tests")
+[ "$code" = 409 ]; check "the web proxy passes the level test through, drafts still guarded ($code)" $?
+code=$(curl -sS -o /dev/null -w '%{http_code}' "$WEB/api/backend/level-tests/not-an-id/answers")
+[ "$code" = 404 ]; check "the web proxy refuses paths outside its allowlist ($code)" $?
+
 topic=$(api -d '{"goal_vi":"Kiểm tra hệ thống","mode":"quick","tier":"free"}' "$API/topics" | json 'd["topic_id"]')
 status=queued
 for _ in $(seq 1 30); do

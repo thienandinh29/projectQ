@@ -1,6 +1,10 @@
-import { Workspace } from "@/components/workspace";
-import { getWebConfig } from "@/lib/config";
-export const dynamic = "force-dynamic";
+import { EnglishHome } from "@/components/english/home";
+import { EnglishShell } from "@/components/english/shell";
+
 export default function Page() {
-  return <Workspace config={getWebConfig()} />;
+  return (
+    <EnglishShell active="/">
+      <EnglishHome />
+    </EnglishShell>
+  );
 }

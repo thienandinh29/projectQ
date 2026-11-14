@@ -72,7 +72,7 @@ Planned entries are marked _(planned)_ until they exist.
 | `apps/api/app/engine/milestones.py` | Milestones and hidden nodes: status, milestone-test outcome (pass, gap, fail), what to learn next, level test on milestones, level estimate; traced (`specs/level-test/`) |
 | `apps/api/app/services/grammar.py`, `apps/api/app/api/grammar.py` | Grammar roadmap API: `/level-tests`, `/roadmap`, `/milestones/{slug}/tests`, `/nodes/{slug}/practice`, `/grammar-runs/{id}/answers`; draft items only for `DRAFT_ITEM_LEARNERS` |
 | `apps/api/app/evalkit/english_gate.py`, `evals/baselines/english-placement.json` | Gate: simulated level-test accuracy on the English roadmap (gap and level), checked in CI |
-| `apps/web/` | Next.js web app: topic input, research trail, map, learning, tutor (some steps still use sample data) |
+| `apps/web/` | Next.js web app. English pack (`specs/web-english/`): `/` today, `/kiem-tra` level test, `/lo-trinh` roadmap (`components/english/`, `lib/english/`); the contest's topic research at `/kham-pha` (some steps still use sample data) |
 | `apps/web/messages/` | i18n strings (`vi` default, `en`) |
 | `supabase/migrations/` | Database schema (Postgres + pgvector); `0001_init.sql` = schema v1, `0002` = chunk provenance (chapter, section, kind, url), `0003` = `halfvec(1024)`, `url` → `source_uri`, HNSW dropped (rebuilt after load), `0004` = `decision_traces` (the "Vì sao?" audit trail), `0014` = `vocab_cards` + `vocab_reviews` (vocabulary state), `0015` = `level_tests`, `grammar_runs`, `grammar_answers` |
 

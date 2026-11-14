@@ -4,6 +4,22 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const allowed =
   /^(learners|topics|topics\/[^/]+|graph|graph\/review|graph\/confirm|placement\/next|attempts|tutor\/hint|uploads|reviews\/due)$/;
+// The English pack (specs/web-english): ids are UUIDs, slugs are lowercase with hyphens.
+const UUID = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
+const SLUG = "[a-z0-9]+(?:-[a-z0-9]+)*";
+const allowedEnglish = new RegExp(
+  `^(level-tests|level-tests/${UUID}/answers|roadmap|milestones/${SLUG}/tests|` +
+    `nodes/${SLUG}/practice|grammar-runs/${UUID}/answers|vocab/session|vocab/answers)$`,
+);
+const forwardedParams = [
+  "learner_id",
+  "subject",
+  "course",
+  "list",
+  "limit",
+  "new_limit",
+  "max_level",
+];
 const learnerCookie = "nodetrail_learner";
 const sessionToken = /^[A-Za-z0-9_-]{43}$/;
 
@@ -19,7 +35,8 @@ async function proxy(
   )
     return new Response(null, { status: 404 });
   const path = segments.join("/");
-  if (!allowed.test(path)) return new Response(null, { status: 404 });
+  if (!allowed.test(path) && !allowedEnglish.test(path))
+    return new Response(null, { status: 404 });
   if (
     request.method === "POST" &&
     request.headers.get("origin") !== request.nextUrl.origin
@@ -53,7 +70,7 @@ async function proxy(
       `${base.pathname.replace(/\/$/, "")}/${path}`,
       base.origin,
     );
-    for (const name of ["learner_id", "subject"]) {
+    for (const name of forwardedParams) {
       const value = request.nextUrl.searchParams.get(name);
       if (value) target.searchParams.set(name, value);
     }

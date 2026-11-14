@@ -11,4 +11,14 @@ export const en = {
   mock: "Preview · sample data",
   close: "Close",
   continue: "Continue learning",
+  english: {
+    nav: {
+      today: "Today",
+      roadmap: "Roadmap",
+      levelTest: "Level test",
+      explore: "Explore a topic",
+    },
+    draft: "Draft",
+    retry: "Try again",
+  },
 };

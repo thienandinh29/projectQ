@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { vi } from "@/messages/vi";
 import "@xyflow/react/dist/style.css";
 import "./globals.css";
+import "./english.css";
 export const metadata: Metadata = {
   title: `${vi.app} — ${vi.tagline}`,
   description: vi.intro,

@@ -188,4 +188,65 @@ describe("graph confirmation session proxy", () => {
       new Headers(fetchMock.mock.calls[0][1].headers).get("cookie"),
     ).toBeNull();
   });
+  it("allows exactly the English pack's routes and parameters", async () => {
+    configure();
+    const fetchMock = vi.fn().mockResolvedValue(new Response("{}"));
+    vi.stubGlobal("fetch", fetchMock);
+    const id = "0b9d2f4e-1c2a-4d3b-8e5f-6a7b8c9d0e1f";
+    const get = (path: string, query = "") =>
+      GET(
+        new NextRequest(`http://localhost:3000/api/backend/${path}${query}`),
+        context(path.split("/")),
+      );
+    const post = (path: string) =>
+      POST(
+        new NextRequest(`http://localhost:3000/api/backend/${path}`, {
+          method: "POST",
+          headers: {
+            origin: "http://localhost:3000",
+            "content-type": "application/json",
+          },
+          body: "{}",
+        }),
+        context(path.split("/")),
+      );
+    for (const path of [
+      "level-tests",
+      `level-tests/${id}/answers`,
+      "milestones/conditionals-1-2/tests",
+      "nodes/past-perfect/practice",
+      `grammar-runs/${id}/answers`,
+      "vocab/answers",
+    ])
+      expect((await post(path)).status).toBe(200);
+    expect(
+      (await get("roadmap", `?learner_id=${id}&course=english-ielts&secret=x`))
+        .status,
+    ).toBe(200);
+    const lastUrl = () =>
+      new URL(
+        String(fetchMock.mock.calls[fetchMock.mock.calls.length - 1]?.[0]),
+      );
+    const target = lastUrl();
+    expect(target.searchParams.get("course")).toBe("english-ielts");
+    expect(target.searchParams.get("secret")).toBeNull();
+    expect(
+      (
+        await get(
+          "vocab/session",
+          `?learner_id=${id}&list=core-seed&max_level=B1`,
+        )
+      ).status,
+    ).toBe(200);
+    expect(lastUrl().searchParams.get("max_level")).toBe("B1");
+    for (const path of [
+      "level-tests/not-a-uuid/answers",
+      "milestones/UPPER/tests",
+      "milestones/a/b/tests",
+      "grammar-runs",
+      "vocab",
+      "level-tests/../learners",
+    ])
+      expect((await post(path)).status).toBe(404);
+  });
 });
