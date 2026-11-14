@@ -9,7 +9,9 @@ Planned entries are marked _(planned)_ until they exist.
 |---|---|
 | `CLAUDE.md` | Rules and working agreement for Claude, one-owner v2 project (auto-loaded; imports `MAP.md` and `SPEC.md`) |
 | `SPEC.md` | What NodeTrail must do: features, behaviors, non-goals |
-| `docs/v2/plan-to-tet-2027.md` | **Current plan with status per week** (where the project is) |
+| `docs/v2/plan-english-pack.md` | **Current plan: the English pack in phases, with gates and status** (where the project is) |
+| `docs/v2/english-pack-proposal.vi.md` | The owner's proposal for the English pack (Vietnamese): why, components, metrics, risks |
+| `docs/v2/plan-to-tet-2027.md` | Superseded weekly plan (weeks 0–2 done); kept for history and the maths outline |
 | `docs/v2/decision-log.md` | Owner's weekly decision log, in their own words |
 | `docs/v2/plan-m0-m1.md` | v2 plan: M0 source catalogue (built), M1 Deep Research on the catalogue, later milestones |
 | `docs/archive/contest-2026/` | Contest history: `TEAM.md` (lanes, API contract tables, timeline), `PLAN.md`, `team/`, run sheets and reviews, pitch and mock-demo plan. Code comments that cite `TEAM.md` refer to this copy |
@@ -48,7 +50,7 @@ Planned entries are marked _(planned)_ until they exist.
 | `apps/api/app/services/code_practice.py`, `apps/api/app/api/code.py` | Code practice routes `/code/exercise`, `/code/attempts` (mounted when `RUNNER_URL` is set) |
 | `apps/api/app/tutor/` | P4 three-level Socratic hints with independent verification and safe release |
 | `apps/api/app/research/` | Deep Research agent, allowlisted search/readers, library acquisition and pipeline |
-| `apps/api/app/curriculum/` | Course specs (modalities and figure kinds per objective, rubrics, code tests, CEFR level per concept), figures as structured data, ground truth computed from figures (`facts.py`), course checker CLI (`check.py`); specs in `specs/curriculum-modalities/`, `specs/english-course/` |
+| `apps/api/app/curriculum/` | Course specs (modalities and figure kinds per objective, rubrics, code tests, CEFR level per concept, hidden nodes under milestones via `part_of`), figures as structured data, ground truth computed from figures (`facts.py`), course checker CLI (`check.py`); specs in `specs/curriculum-modalities/`, `specs/english-course/` |
 | `apps/api/app/sources/` | v2 structured sources: licence from metadata (`licence.py`), OpenStax collection/CNXML parsers (`openstax.py`), catalogue fetch CLI (`fetch.py`); spec in `specs/source-catalog/` |
 | `apps/api/app/uploads/` | PDF/DOCX/link readers and upload metadata validation |
 | `apps/api/app/content/` | P4 schemas, generation, P3 gateway adapter, canonical conversions and runtime repositories/ports |
@@ -61,7 +63,7 @@ Planned entries are marked _(planned)_ until they exist.
 | `apps/api/app/rag/` | `notebook.py` (ipynb → chunks), `store.py` (`build_vector_index` after bulk load), `embed.py` (`TeiEmbedder` sync + async, local bge-m3, `make_embedder`; managed-API fallback planned), `chunker.py` (`ParsedDocument` → size-safe `Chunk`s), `library.py` (index every book folder), `retrieve.py` (`Retriever.search` → `Citation`s), `evaluate.py` (retrieval metrics on a labelled question set), `ingest.py` CLI (`--embedder tei|local`, `--build-index`); optional `rerank.py` planned (P1) |
 | `data/raw/thinkpython/` | Downloaded Think Python 3e notebooks + `SOURCE_SHA` (git-ignored; re-download to rebuild) |
 | `apps/api/app/llm/` | LLM gateway (DeepSeek generation, Gemini verification; legacy Vertex AI, Bedrock and OpenRouter adapters), `routing.yaml`, smoke CLI and setup README |
-| `data/courses/` | Course specs: `english-ielts.yaml` (first real course: grammar graph A1–C1, starter draft), Python basics, IELTS Academic Writing, introductory statistics |
+| `data/courses/` | Course specs: `english-ielts.yaml` (first real course: grammar roadmap of milestones with hidden nodes, A1–C1, starter draft), Python basics, IELTS Academic Writing, introductory statistics |
 | `data/sources/` | Open-education allowlist, library manifests and acquisition/index reports; `catalog.yaml` + `catalog-report.json` for v2 structured sources; `english-candidates.yaml` (English sources awaiting licence checks, rules in `app/sources/candidates.py`) |
 | `data/kg/` _(planned)_ | Knowledge Graph YAML fixtures |
 | `data/items/` _(planned)_ | MCQ item fixtures with misconception tags |

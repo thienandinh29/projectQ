@@ -73,6 +73,39 @@ class Concept(BaseModel):
     name_en: str = Field(min_length=1)
     prerequisites: tuple[Ident, ...] = ()
     level: Level | None = None  # optional; when set, no prerequisite may be at a higher level
+    # A hidden node names the milestone it sits under (specs/english-course). A concept without
+    # `part_of` is a milestone, shown on the learner's roadmap; hidden nodes are opened only when
+    # the milestone is not passed. Every hidden node is a prerequisite of its milestone.
+    part_of: Ident | None = None
+
+
+def concept_edges(concepts: tuple[Concept, ...]) -> list[tuple[str, str]]:
+    """Prerequisite edges: the explicit ones, plus each hidden node before its milestone."""
+    edges = [(p, c.slug) for c in concepts for p in c.prerequisites]
+    edges += [(c.slug, c.part_of) for c in concepts if c.part_of]
+    return list(dict.fromkeys(edges))
+
+
+def part_of_problems(concepts: tuple[Concept, ...]) -> list[str]:
+    """Hidden nodes must sit under an existing milestone at their level or above; no nesting."""
+    by_slug = {c.slug: c for c in concepts}
+    problems = []
+    for c in concepts:
+        if c.part_of is None:
+            continue
+        parent = by_slug.get(c.part_of)
+        if parent is None:
+            problems.append(f"concept {c.slug}: part_of names an unknown concept {c.part_of}")
+        elif parent.part_of is not None:
+            problems.append(
+                f"concept {c.slug}: part_of {c.part_of} is itself a hidden node (no nesting)"
+            )
+        elif c.level and parent.level and LEVELS.index(c.level) > LEVELS.index(parent.level):
+            problems.append(
+                f"hidden node {c.slug} ({c.level}) is above its milestone {c.part_of}"
+                f" ({parent.level})"
+            )
+    return problems
 
 
 def level_inversions(concepts: tuple[Concept, ...]) -> list[str]:
@@ -122,7 +155,10 @@ class CourseSpec(BaseModel):
                 raise ValueError(f"concept {c.slug}: unknown prerequisites {sorted(missing)}")
         from app.engine.graph import Graph  # cycle check, same rules as the engine
 
-        Graph.from_edges(slugs, [(p, c.slug) for c in self.concepts for p in c.prerequisites])
+        structure = part_of_problems(self.concepts)
+        if structure:
+            raise ValueError("; ".join(structure))
+        Graph.from_edges(slugs, concept_edges(self.concepts))
         inverted = level_inversions(self.concepts)
         if inverted:
             raise ValueError("; ".join(inverted))
@@ -164,6 +200,12 @@ class CourseSpec(BaseModel):
             if o.modality == "figure_description" and not o.figures:
                 raise ValueError(f"objective {o.id}: figure_description needs a figure kind")
         return self
+
+    def milestones(self) -> tuple[Concept, ...]:
+        return tuple(c for c in self.concepts if c.part_of is None)
+
+    def hidden_nodes(self, milestone: str) -> tuple[Concept, ...]:
+        return tuple(c for c in self.concepts if c.part_of == milestone)
 
     def objective(self, objective_id: str) -> Objective:
         for o in self.objectives:

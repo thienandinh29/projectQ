@@ -15,7 +15,14 @@ from typing import Any
 import yaml  # type: ignore[import-untyped]
 from pydantic import ValidationError
 
-from app.curriculum.course import LEVELS, Concept, CourseSpec, level_inversions
+from app.curriculum.course import (
+    LEVELS,
+    Concept,
+    CourseSpec,
+    concept_edges,
+    level_inversions,
+    part_of_problems,
+)
 from app.engine.graph import Graph
 
 
@@ -60,14 +67,13 @@ def check_course(path: Path) -> Report:
         if s in seen:
             report.problems.append(f"duplicate concept slug {s}")
         seen.add(s)
-    edges = []
     for c in concepts:
         for p in c.prerequisites:
-            if p in seen:
-                edges.append((p, c.slug))
-            else:
+            if p not in seen:
                 report.problems.append(f"concept {c.slug}: unknown prerequisite {p}")
+    report.problems.extend(part_of_problems(tuple(concepts)))
     report.problems.extend(level_inversions(tuple(concepts)))
+    edges = [(a, b) for a, b in concept_edges(tuple(concepts)) if a in seen and b in seen]
     by_slug = {c.slug: c for c in concepts}
     try:
         graph = Graph.from_edges(sorted(seen), edges)
@@ -91,20 +97,30 @@ def check_course(path: Path) -> Report:
     return report
 
 
+def _line(c: Concept) -> str:
+    level = f" [{c.level}]" if c.level and c.part_of else ""
+    needs = f"  needs: {', '.join(c.prerequisites)}" if c.prerequisites else ""
+    return f"{c.slug}{level}: {c.name_en} / {c.name_vi}{needs}"
+
+
 def render(report: Report) -> str:
     lines = []
     if report.order:
+        # Milestones by level in learning order, each with its hidden nodes underneath.
+        milestones = [c for c in report.order if c.part_of is None]
         by_level: dict[str, list[Concept]] = {}
-        for c in report.order:
+        for c in milestones:
             by_level.setdefault(c.level or "no level", []).append(c)
         for level in [*LEVELS, "no level"]:
             if level not in by_level:
                 continue
-            lines.append(f"{level} ({len(by_level[level])})")
-            for c in by_level[level]:
-                needs = f"  needs: {', '.join(c.prerequisites)}" if c.prerequisites else ""
-                lines.append(f"  {c.slug}: {c.name_en} / {c.name_vi}{needs}")
-        lines.append(f"{len(report.order)} concepts")
+            n = len(by_level[level])
+            lines.append(f"{level} ({n} milestone{'' if n == 1 else 's'})")
+            for m in by_level[level]:
+                lines.append("  " + _line(m))
+                lines += [f"      - {_line(h)}" for h in report.order if h.part_of == m.slug]
+        hidden = len(report.order) - len(milestones)
+        lines.append(f"{len(milestones)} milestones, {hidden} hidden nodes")
     lines += [f"warning: {w}" for w in report.warnings]
     lines += [f"problem: {p}" for p in report.problems]
     lines.append("OK" if report.ok else f"{len(report.problems)} problem(s)")

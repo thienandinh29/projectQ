@@ -1,5 +1,8 @@
 # Plan to Tết 2027 (12 Nov 2026 – 5 Feb 2027)
 
+> **Superseded on 14 Nov 2026 by `plan-english-pack.md`.** Weeks 0–2 below were done; the rest is kept for history
+> and for the maths outline.
+
 One owner, about 20 hours a week, about 11 working weeks before Tết (around 6 Feb 2027).
 
 **Goal (changed 13 Nov, see Log):** the first real course is **English for IELTS, starting with vocabulary and

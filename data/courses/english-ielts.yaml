@@ -1,105 +1,208 @@
-# English for IELTS: grammar first (specs/english-course). STARTER DRAFT for the owner to extend.
+# English pack: the grammar roadmap (specs/english-course). STARTER DRAFT for the owner to extend.
 #
-# Each grammar point has a CEFR level (A1, A2, B1, B2, C1) and the points it needs first. Rules, checked by code:
-#   - every prerequisite exists and there are no cycles;
-#   - a prerequisite is never at a higher level than the point that needs it.
+# Two layers (docs/v2/english-pack-proposal.vi.md):
+#   - a MILESTONE (no `part_of`) is what the learner sees on the roadmap, e.g. "Conditionals: types 1 and 2";
+#   - a HIDDEN NODE (`part_of: <milestone>`) is a smaller step under it, opened only when the milestone is not passed.
+# The graph is shallow: milestones are ordered by CEFR level; add `prerequisites` only for obvious chains.
+# Checked by code: prerequisites exist, no cycles, no prerequisite above the level of what needs it, a hidden node
+# is not above its milestone's level, no hidden node under a hidden node.
 # Check after every edit (from apps/api):
 #   uv run python -m app.curriculum.check ../../data/courses/english-ielts.yaml
 #
-# Authored by the project from open references and the public CEFR descriptors; not copied from any textbook.
-# The 16 points below are an example chain; their levels are approximate (common course-book practice) and
-# are for the owner to check against the CEFR descriptors. Owner's week-3 task: extend to about 30-45 points (articles, countable
-# and uncountable nouns, modals, relative clauses, reported speech, linking words, word formation, ...).
+# Authored by the project (levels are approximate; EVP/EGP and CEFR descriptors are references only, nothing is
+# copied). Owner's task: extend to the milestones A2-C1 need (modals, relative clauses, reported speech, gerunds and
+# infinitives, countable/uncountable, linking words, word formation, subject-verb agreement, ...).
 slug: english-ielts
-title_vi: Tiếng Anh cho IELTS (ngữ pháp và từ vựng)
-title_en: English for IELTS (grammar and vocabulary)
+title_vi: Tiếng Anh (CEFR A2–C1, luyện IELTS)
+title_en: English (CEFR A2–C1, IELTS practice)
 language: en
 source: authored
 modalities: [mcq]
 concepts:
+  # --- milestone (A2) ---
+  - slug: present-tenses
+    level: A2
+    name_en: "Present tenses"
+    name_vi: "Các thì hiện tại"
   - slug: be-present
     level: A1
     name_en: "The verb to be (am, is, are)"
     name_vi: "Động từ to be ở hiện tại (am, is, are)"
-  - slug: plural-nouns
-    level: A1
-    name_en: "Plural nouns"
-    name_vi: "Danh từ số nhiều"
-  - slug: articles-basic
-    level: A1
-    name_en: "Articles a, an, the (basic use)"
-    name_vi: "Mạo từ a, an, the (cách dùng cơ bản)"
-    prerequisites: [plural-nouns]
+    part_of: present-tenses
   - slug: present-simple
     level: A1
     name_en: "Present simple"
     name_vi: "Thì hiện tại đơn"
+    part_of: present-tenses
     prerequisites: [be-present]
-  - slug: there-is-are
-    level: A1
-    name_en: "There is / there are"
-    name_vi: "Cấu trúc there is / there are"
-    prerequisites: [be-present, plural-nouns]
   - slug: present-continuous
     level: A2
     name_en: "Present continuous"
     name_vi: "Thì hiện tại tiếp diễn"
-    prerequisites: [be-present, present-simple]
+    part_of: present-tenses
+    prerequisites: [present-simple]
+  # --- milestone (A2) ---
+  - slug: nouns-articles
+    level: A2
+    name_en: "Nouns and articles"
+    name_vi: "Danh từ và mạo từ"
+  - slug: plural-nouns
+    level: A1
+    name_en: "Plural nouns"
+    name_vi: "Danh từ số nhiều"
+    part_of: nouns-articles
+  - slug: articles-basic
+    level: A1
+    name_en: "Articles a, an, the (basic use)"
+    name_vi: "Mạo từ a, an, the (cách dùng cơ bản)"
+    part_of: nouns-articles
+    prerequisites: [plural-nouns]
+  - slug: there-is-are
+    level: A1
+    name_en: "There is / there are"
+    name_vi: "Cấu trúc there is / there are"
+    part_of: nouns-articles
+    prerequisites: [be-present, plural-nouns]
+  # --- milestone (A2) ---
+  - slug: past-and-future
+    level: A2
+    name_en: "Past simple and the future"
+    name_vi: "Quá khứ đơn và tương lai"
+    prerequisites: [present-tenses]
   - slug: past-simple
     level: A2
     name_en: "Past simple"
     name_vi: "Thì quá khứ đơn"
-    prerequisites: [present-simple]
+    part_of: past-and-future
   - slug: future-will-going-to
     level: A2
     name_en: "Future with will and going to"
     name_vi: "Tương lai với will và going to"
-    prerequisites: [be-present, present-simple]
+    part_of: past-and-future
+  # --- milestone (A2) ---
+  - slug: comparison
+    level: A2
+    name_en: "Comparing things"
+    name_vi: "So sánh"
+    prerequisites: [present-tenses]
   - slug: comparatives
     level: A2
-    name_en: "Comparative and superlative adjectives"
-    name_vi: "So sánh hơn và so sánh nhất"
-    prerequisites: [be-present]
-  - slug: present-perfect
+    name_en: "Comparative adjectives"
+    name_vi: "So sánh hơn"
+    part_of: comparison
+  - slug: superlatives
+    level: A2
+    name_en: "Superlative adjectives"
+    name_vi: "So sánh nhất"
+    part_of: comparison
+    prerequisites: [comparatives]
+  # --- milestone (B1) ---
+  - slug: perfect-tenses
     level: B1
-    name_en: "Present perfect (for, since, ever, already)"
-    name_vi: "Thì hiện tại hoàn thành (for, since, ever, already)"
-    prerequisites: [past-simple]
+    name_en: "Present perfect"
+    name_vi: "Thì hiện tại hoàn thành"
+    prerequisites: [past-and-future]
+  - slug: present-perfect-form
+    level: B1
+    name_en: "Present perfect: form, ever and never"
+    name_vi: "Hiện tại hoàn thành: cấu trúc, ever và never"
+    part_of: perfect-tenses
+  - slug: present-perfect-vs-past
+    level: B1
+    name_en: "Present perfect or past simple (for, since, ago)"
+    name_vi: "Hiện tại hoàn thành hay quá khứ đơn (for, since, ago)"
+    part_of: perfect-tenses
+    prerequisites: [present-perfect-form]
+  # --- milestone (B1) ---
+  - slug: conditionals-1-2
+    level: B1
+    name_en: "Conditionals: types 1 and 2"
+    name_vi: "Câu điều kiện loại 1 và 2"
+    prerequisites: [past-and-future]
   - slug: first-conditional
     level: B1
     name_en: "First conditional"
     name_vi: "Câu điều kiện loại 1"
-    prerequisites: [present-simple, future-will-going-to]
-  - slug: passive-voice
-    level: B1
-    name_en: "Passive voice (present and past)"
-    name_vi: "Câu bị động (hiện tại và quá khứ)"
-    prerequisites: [be-present, past-simple]
-  - slug: past-perfect
-    level: B2
-    name_en: "Past perfect"
-    name_vi: "Thì quá khứ hoàn thành"
-    prerequisites: [past-simple, present-perfect]
+    part_of: conditionals-1-2
   - slug: second-conditional
     level: B1
     name_en: "Second conditional"
     name_vi: "Câu điều kiện loại 2"
-    prerequisites: [past-simple, first-conditional]
+    part_of: conditionals-1-2
+    prerequisites: [first-conditional]
+  # --- milestone (B1) ---
+  - slug: passive
+    level: B1
+    name_en: "Passive voice"
+    name_vi: "Câu bị động"
+    prerequisites: [past-and-future]
+  - slug: passive-present-past
+    level: B1
+    name_en: "Passive: present and past simple"
+    name_vi: "Bị động ở hiện tại đơn và quá khứ đơn"
+    part_of: passive
+  # --- milestone (B2) ---
+  - slug: narrative-tenses
+    level: B2
+    name_en: "Narrative tenses"
+    name_vi: "Các thì kể chuyện"
+    prerequisites: [perfect-tenses]
+  - slug: past-continuous
+    level: B1
+    name_en: "Past continuous"
+    name_vi: "Thì quá khứ tiếp diễn"
+    part_of: narrative-tenses
+  - slug: past-perfect
+    level: B2
+    name_en: "Past perfect"
+    name_vi: "Thì quá khứ hoàn thành"
+    part_of: narrative-tenses
+  # --- milestone (B2) ---
+  - slug: conditional-3
+    level: B2
+    name_en: "Conditionals: type 3"
+    name_vi: "Câu điều kiện loại 3"
+    prerequisites: [conditionals-1-2, narrative-tenses]
   - slug: third-conditional
     level: B2
     name_en: "Third conditional"
     name_vi: "Câu điều kiện loại 3"
-    prerequisites: [past-perfect, second-conditional]
-  - slug: mixed-conditionals
+    part_of: conditional-3
+    prerequisites: [second-conditional, past-perfect]
+  # --- milestone (C1) ---
+  - slug: conditionals-mixed
     level: C1
     name_en: "Mixed conditionals"
     name_vi: "Câu điều kiện hỗn hợp"
-    prerequisites: [second-conditional, third-conditional]
-objectives:  # one multiple-choice objective per point for now; item types come in weeks 4-5
+    prerequisites: [conditional-3]
+  - slug: mixed-conditionals
+    level: C1
+    name_en: "Mixed conditionals (past cause, present result and the reverse)"
+    name_vi: "Điều kiện hỗn hợp (nguyên nhân quá khứ, kết quả hiện tại và ngược lại)"
+    part_of: conditionals-mixed
+    prerequisites: [third-conditional]
+objectives:  # one multiple-choice objective per node for now; milestone tests (3-4 questions on different
+  # sub-skills) and quick hidden-node checks come with the practice spec
+  - id: present-tenses-mcq
+    concept: present-tenses
+    modality: mcq
+    text_vi: "Bài kiểm tra cột mốc: các thì hiện tại."
   - id: be-present-mcq
     concept: be-present
     modality: mcq
     text_vi: "Chọn câu hoặc dạng đúng: động từ to be ở hiện tại (am, is, are)."
+  - id: present-simple-mcq
+    concept: present-simple
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: thì hiện tại đơn."
+  - id: present-continuous-mcq
+    concept: present-continuous
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: thì hiện tại tiếp diễn."
+  - id: nouns-articles-mcq
+    concept: nouns-articles
+    modality: mcq
+    text_vi: "Bài kiểm tra cột mốc: danh từ và mạo từ."
   - id: plural-nouns-mcq
     concept: plural-nouns
     modality: mcq
@@ -108,18 +211,14 @@ objectives:  # one multiple-choice objective per point for now; item types come 
     concept: articles-basic
     modality: mcq
     text_vi: "Chọn câu hoặc dạng đúng: mạo từ a, an, the (cách dùng cơ bản)."
-  - id: present-simple-mcq
-    concept: present-simple
-    modality: mcq
-    text_vi: "Chọn câu hoặc dạng đúng: thì hiện tại đơn."
   - id: there-is-are-mcq
     concept: there-is-are
     modality: mcq
     text_vi: "Chọn câu hoặc dạng đúng: cấu trúc there is / there are."
-  - id: present-continuous-mcq
-    concept: present-continuous
+  - id: past-and-future-mcq
+    concept: past-and-future
     modality: mcq
-    text_vi: "Chọn câu hoặc dạng đúng: thì hiện tại tiếp diễn."
+    text_vi: "Bài kiểm tra cột mốc: quá khứ đơn và tương lai."
   - id: past-simple-mcq
     concept: past-simple
     modality: mcq
@@ -128,35 +227,75 @@ objectives:  # one multiple-choice objective per point for now; item types come 
     concept: future-will-going-to
     modality: mcq
     text_vi: "Chọn câu hoặc dạng đúng: tương lai với will và going to."
+  - id: comparison-mcq
+    concept: comparison
+    modality: mcq
+    text_vi: "Bài kiểm tra cột mốc: so sánh."
   - id: comparatives-mcq
     concept: comparatives
     modality: mcq
-    text_vi: "Chọn câu hoặc dạng đúng: so sánh hơn và so sánh nhất."
-  - id: present-perfect-mcq
-    concept: present-perfect
+    text_vi: "Chọn câu hoặc dạng đúng: so sánh hơn."
+  - id: superlatives-mcq
+    concept: superlatives
     modality: mcq
-    text_vi: "Chọn câu hoặc dạng đúng: thì hiện tại hoàn thành (for, since, ever, already)."
+    text_vi: "Chọn câu hoặc dạng đúng: so sánh nhất."
+  - id: perfect-tenses-mcq
+    concept: perfect-tenses
+    modality: mcq
+    text_vi: "Bài kiểm tra cột mốc: thì hiện tại hoàn thành."
+  - id: present-perfect-form-mcq
+    concept: present-perfect-form
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: hiện tại hoàn thành: cấu trúc, ever và never."
+  - id: present-perfect-vs-past-mcq
+    concept: present-perfect-vs-past
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: hiện tại hoàn thành hay quá khứ đơn (for, since, ago)."
+  - id: conditionals-1-2-mcq
+    concept: conditionals-1-2
+    modality: mcq
+    text_vi: "Bài kiểm tra cột mốc: câu điều kiện loại 1 và 2."
   - id: first-conditional-mcq
     concept: first-conditional
     modality: mcq
     text_vi: "Chọn câu hoặc dạng đúng: câu điều kiện loại 1."
-  - id: passive-voice-mcq
-    concept: passive-voice
-    modality: mcq
-    text_vi: "Chọn câu hoặc dạng đúng: câu bị động (hiện tại và quá khứ)."
-  - id: past-perfect-mcq
-    concept: past-perfect
-    modality: mcq
-    text_vi: "Chọn câu hoặc dạng đúng: thì quá khứ hoàn thành."
   - id: second-conditional-mcq
     concept: second-conditional
     modality: mcq
     text_vi: "Chọn câu hoặc dạng đúng: câu điều kiện loại 2."
+  - id: passive-mcq
+    concept: passive
+    modality: mcq
+    text_vi: "Bài kiểm tra cột mốc: câu bị động."
+  - id: passive-present-past-mcq
+    concept: passive-present-past
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: bị động ở hiện tại đơn và quá khứ đơn."
+  - id: narrative-tenses-mcq
+    concept: narrative-tenses
+    modality: mcq
+    text_vi: "Bài kiểm tra cột mốc: các thì kể chuyện."
+  - id: past-continuous-mcq
+    concept: past-continuous
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: thì quá khứ tiếp diễn."
+  - id: past-perfect-mcq
+    concept: past-perfect
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: thì quá khứ hoàn thành."
+  - id: conditional-3-mcq
+    concept: conditional-3
+    modality: mcq
+    text_vi: "Bài kiểm tra cột mốc: câu điều kiện loại 3."
   - id: third-conditional-mcq
     concept: third-conditional
     modality: mcq
     text_vi: "Chọn câu hoặc dạng đúng: câu điều kiện loại 3."
+  - id: conditionals-mixed-mcq
+    concept: conditionals-mixed
+    modality: mcq
+    text_vi: "Bài kiểm tra cột mốc: câu điều kiện hỗn hợp."
   - id: mixed-conditionals-mcq
     concept: mixed-conditionals
     modality: mcq
-    text_vi: "Chọn câu hoặc dạng đúng: câu điều kiện hỗn hợp."
+    text_vi: "Chọn câu hoặc dạng đúng: điều kiện hỗn hợp (nguyên nhân quá khứ, kết quả hiện tại và ngược lại)."

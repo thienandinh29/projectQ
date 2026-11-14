@@ -94,3 +94,61 @@ def test_verified_needs_the_licence_page_and_date_and_never_nd() -> None:
     assert not Candidate.model_validate({**BASE, **ok, "licence": "CC BY-SA 4.0"}).non_commercial
     with pytest.raises(ValidationError, match="reason"):
         Candidate.model_validate({**BASE, "status": "rejected"})
+
+
+def hidden(slug: str, level: str, part_of: str, *pre: str) -> dict[str, object]:
+    return {**concept(slug, level, *pre), "part_of": part_of}
+
+
+def test_the_starter_course_has_milestones_with_hidden_nodes_under_them() -> None:
+    spec = load_course(ENGLISH)
+    milestones = {m.slug for m in spec.milestones()}
+    assert "conditionals-1-2" in milestones and "first-conditional" not in milestones
+    assert [h.slug for h in spec.hidden_nodes("conditionals-1-2")] == [
+        "first-conditional",
+        "second-conditional",
+    ]
+    assert all(spec.hidden_nodes(m) for m in milestones)  # every milestone has something to open
+
+
+def test_a_hidden_node_is_a_prerequisite_of_its_milestone() -> None:
+    from app.curriculum.course import concept_edges
+    from app.engine.graph import Graph
+
+    spec = load_course(ENGLISH)
+    edges = concept_edges(spec.concepts)
+    assert ("first-conditional", "conditionals-1-2") in edges
+    graph = Graph.from_edges([c.slug for c in spec.concepts], edges)
+    # remediation walks prerequisites, so a failed milestone can be traced to its hidden nodes
+    assert set(graph.parents["conditionals-1-2"]) >= {"first-conditional", "second-conditional"}
+    assert "past-perfect" in graph.ancestors("conditional-3")
+
+
+@pytest.mark.parametrize(
+    ("concepts", "why"),
+    [
+        ([concept("m", "A2"), hidden("h", "A2", "nowhere")], "unknown concept nowhere"),
+        ([concept("m", "A2"), hidden("h", "A2", "m"), hidden("deep", "A2", "h")], "no nesting"),
+        ([concept("m", "A2"), hidden("h", "B1", "m")], "above its milestone"),
+        ([concept("m", "A2", "h2"), hidden("h", "A2", "m", "m"), concept("h2", "A2")], "cycle"),
+    ],
+)
+def test_bad_milestone_structure_is_refused(concepts: list[dict[str, object]], why: str) -> None:
+    with pytest.raises(ValidationError, match=why):
+        CourseSpec.model_validate(course(concepts))
+
+
+def test_hidden_node_edges_are_synced_to_the_database(database_url: str) -> None:
+    import psycopg
+
+    from app.curriculum.store import sync_course
+
+    with psycopg.connect(database_url) as conn:
+        sync_course(conn, load_course(ENGLISH))
+        sync_course(conn, load_course(ENGLISH))  # idempotent
+        row = conn.execute(
+            "select count(*) from concept_edges e"
+            " join concepts p on p.id=e.prerequisite_id join concepts c on c.id=e.concept_id"
+            " where p.slug='first-conditional' and c.slug='conditionals-1-2'"
+        ).fetchone()
+    assert row == (1,)
