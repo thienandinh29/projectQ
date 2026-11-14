@@ -28,6 +28,8 @@ x-api-env: &api-env
     DRAFT_ITEM_LEARNERS: ${DRAFT_ITEM_LEARNERS:-}
     # Set by --profile writing (the languagetool service below); empty: essays get no grammar check.
     LANGUAGETOOL_URL: ${LANGUAGETOOL_URL:-}
+    # Set by --profile scoring (the scorer service); empty: essays get no band.
+    SCORER_URL: ${SCORER_URL:-}
 
 services:
   db:
@@ -133,6 +135,21 @@ services:
     restart: unless-stopped
     mem_limit: ${LANGUAGETOOL_MEMORY_LIMIT:-1500m}
 
+  # The writing band model (scorer/README.md). Opt-in: --profile scoring, and set
+  # SCORER_URL=http://scorer:8020 so the worker uses it. Pinned to one commit and weights hash.
+  scorer:
+    image: nodetrail-scorer:local
+    build: scorer
+    profiles: [scoring]
+    restart: unless-stopped
+    environment:
+      SCORER_MODEL: JacobLinCool/IELTS_essay_scoring_safetensors
+      SCORER_REVISION: 8d8d0193ec4cfcbc9c780fc6e71810dca7ee41f6
+      SCORER_WEIGHTS_SHA256: 3c587f43c84525dcff6d3f59b81566716c7c31be5577be15761210d5a30fdebf
+    volumes:
+      - scorer-models:/models
+    mem_limit: ${SCORER_MEMORY_LIMIT:-1500m}
+
   # bge-m3 embeddings for indexing and retrieval (docker/TEI.md). Opt-in: about 2.3 GB of weights.
   tei:
     image: ghcr.io/huggingface/text-embeddings-inference:cpu-1.9
@@ -162,5 +179,6 @@ services:
       retries: 3
 
 volumes:
+  scorer-models:
   tei-data:
   nodetrail-db:

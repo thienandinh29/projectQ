@@ -1,0 +1,9 @@
+# The band scorer (specs/writing/step-2.3.md, docs/v2/writing-scorer-candidates.md). The model is pinned by commit;
+# a calibration belongs to that model and revision only. `calibration` is written by the owner's evaluation
+# (python -m app.evalkit.writing_score develop --write-calibration); until then no band is shown to anyone.
+# draft: the band is shown only to DRAFT_ITEM_LEARNERS, labelled "chưa kiểm chứng"; validated: the gate is met.
+model: JacobLinCool/IELTS_essay_scoring_safetensors
+revision: 8d8d0193ec4cfcbc9c780fc6e71810dca7ee41f6
+output: 4  # the model's outputs: task achievement, coherence and cohesion, vocabulary, grammar, overall
+status: draft
+calibration: null

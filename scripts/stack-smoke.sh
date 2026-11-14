@@ -71,6 +71,11 @@ if [ -n "${LANGUAGETOOL_URL:-}" ] && [ -n "${E2E_LEARNER_ID:-}" ]; then
   typed=$(api "$API/essays/$essay?learner_id=$E2E_LEARNER_ID" \
     | json '",".join(i["errant_type"] + ">" + str(i["node"]) for i in d["result"]["grammar"]["issues"])')
   [ "$typed" = "R:VERB:SVA>present-simple" ]; check "LanguageTool and ERRANT find, type and map an essay error ($typed)" $?
+  if [ -z "${SCORER_URL:-}" ]; then
+    why=$(api "$API/essays/$essay?learner_id=$E2E_LEARNER_ID" | json 'd["result"]["score_unavailable_vi"]')
+    case "$why" in *SCORER_URL*) true ;; *) false ;; esac
+    check "without the scorer an essay says why it has no band" $?
+  fi
   api -X DELETE -o /dev/null "$API/essays/$essay?learner_id=$E2E_LEARNER_ID"
 fi
 

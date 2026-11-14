@@ -33,6 +33,8 @@ from app.writing.error_map import ErrorMap, load_error_map
 from app.writing.grammar import GrammarResult, Issue, analyse_grammar, choose_evidence, complexity
 from app.writing.languagetool import LanguageToolClient
 from app.writing.prompts import Prompt, PromptBank, load_prompts
+from app.writing.scorer_client import ScorerClient
+from app.writing.scoring import ScorerConfig, band_range, load_scorer_config, no_band_reason
 
 logger = logging.getLogger(__name__)
 CONSENT = (
@@ -40,6 +42,15 @@ CONSENT = (
 )
 MAX_CHARS = 12_000
 NOTE_VI = "Điểm ước lượng và nhận xét chi tiết sẽ có ở các bước sau."
+BAND_OFF_VI = "Chưa ước lượng band: máy chủ chưa bật mô hình chấm (SCORER_URL)."
+BAND_HIDDEN_VI = "Ước lượng band đang được kiểm chứng với điểm giám khảo, chưa mở cho mọi người."
+BAND_DOWN_VI = "Chưa ước lượng được band: mô hình chấm không phản hồi. Bạn thử gửi lại sau nhé."
+BAND_MISMATCH_VI = "Chưa ước lượng band: mô hình đang chạy khác với mô hình đã được hiệu chỉnh."
+BAND_REASONS_VI = {
+    "task1": "Chưa ước lượng band cho Task 1.",
+    "too_short": "Bài dưới 150 từ: chưa đủ dài để ước lượng band.",
+    "not_calibrated": "Chưa ước lượng band: mô hình chưa được hiệu chỉnh với điểm giám khảo.",
+}
 GRAMMAR_OFF_VI = "Chưa kiểm tra ngữ pháp: máy chủ chưa bật LanguageTool (LANGUAGETOOL_URL)."
 GRAMMAR_DOWN_VI = (
     "Chưa kiểm tra được ngữ pháp: LanguageTool không phản hồi. Bạn thử gửi lại sau nhé."
@@ -184,6 +195,8 @@ class GrammarStep:
     course: CourseSpec
     client: LanguageToolClient | None  # None: LANGUAGETOOL_URL not set, grammar is not checked
     draft_learners: frozenset[UUID] = frozenset()
+    scorer: ScorerClient | None = None  # None: SCORER_URL not set, no band (step 2.3)
+    scorer_config: ScorerConfig | None = None
     _ids: tuple[UUID, dict[str, UUID]] | None = None
 
     def evidence_allowed(self, learner: UUID) -> bool:
@@ -201,7 +214,11 @@ class GrammarStep:
 
 
 def load_grammar_step(
-    writing_dir: Path, courses_dir: Path, languagetool_url: str, draft_learners: str = ""
+    writing_dir: Path,
+    courses_dir: Path,
+    languagetool_url: str,
+    draft_learners: str = "",
+    scorer_url: str = "",
 ) -> GrammarStep:
     import errant
     import spacy
@@ -220,7 +237,47 @@ def load_grammar_step(
         draft_learners=frozenset(
             learner_uuid(x.strip()) for x in draft_learners.split(",") if x.strip()
         ),
+        scorer=ScorerClient(scorer_url) if scorer_url else None,
+        scorer_config=load_scorer_config(writing_dir / "scorer.yaml"),
     )
+
+
+def band_for(
+    text: str, task: int, words: int, learner: UUID, step: GrammarStep
+) -> tuple[dict[str, Any] | None, str | None]:
+    """The band range for this essay and learner, or why there is none (Vietnamese).
+
+    Never a point: only the range from the calibration (specs/writing/step-2.3.md). While the
+    scorer is a draft, only DRAFT_ITEM_LEARNERS see it.
+    """
+    config = step.scorer_config
+    if config is None or step.scorer is None:
+        return None, BAND_OFF_VI
+    if config.status == "draft" and learner not in step.draft_learners:
+        return None, BAND_HIDDEN_VI
+    calibration = config.calibration.build() if config.calibration else None
+    reason = no_band_reason(task, words, calibration)
+    if reason is not None or calibration is None:
+        return None, BAND_REASONS_VI[reason or "not_calibrated"]
+    try:
+        raw = step.scorer.score(text)
+    except httpx.HTTPError:
+        logger.exception("the scorer did not answer")
+        return None, BAND_DOWN_VI
+    if (raw.model, raw.revision) != (config.model, config.revision) or config.output >= len(
+        raw.raw
+    ):
+        return None, BAND_MISMATCH_VI
+    r = band_range(calibration.isotonic(raw.raw[config.output]), calibration)
+    return {
+        "band_low": r.low,
+        "band_high": r.high,
+        "uncertain": r.uncertain,
+        "model": config.model,
+        "revision": config.revision,
+        "status": config.status,
+        "truncated": raw.truncated,
+    }, None
 
 
 def _analyse(
@@ -341,7 +398,12 @@ def process_next_essay(
         essay_id, learner, prompt_id, text = row
         try:
             prompt = load_prompts(writing_dir / "prompts.yaml").get(prompt_id)
-            result, grammar = _analyse(text, prompt.task if prompt else 2, writing_dir, step)
+            task = prompt.task if prompt else 2
+            result, grammar = _analyse(text, task, writing_dir, step)
+            if step is not None:
+                result["score"], result["score_unavailable_vi"] = band_for(
+                    text, task, result["words"], learner, step
+                )
             with conn.transaction():
                 if grammar is not None and step is not None:
                     issues, moved = _apply_evidence(

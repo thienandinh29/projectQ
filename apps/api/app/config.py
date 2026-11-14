@@ -42,6 +42,8 @@ class Settings(BaseSettings):
     writing_daily_essays: int = 3  # essays per learner per day
     # LanguageTool for the writing grammar check (specs/writing/step-2.2.md); empty: not checked.
     languagetool_url: str = ""
+    # The band model service (specs/writing/step-2.3.md); empty: no band.
+    scorer_url: str = ""
     llm_daily_cost_cap_usd: float = 1.0  # the whole service, per day (used from writing step 2.4)
     llm_daily_calls_per_learner: int = 30
     # Learners allowed to see draft (unreviewed) items, labelled "Bản nháp": comma-separated ids.

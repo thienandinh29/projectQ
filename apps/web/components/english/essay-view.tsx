@@ -7,6 +7,7 @@ import { englishClient } from "@/lib/english/client";
 import {
   LINKING_GROUPS,
   type Essay,
+  type BandRange,
   type EssayResult,
   type GrammarIssue,
 } from "@/lib/english/types";
@@ -26,6 +27,7 @@ function Result({ result }: { result: EssayResult }) {
   );
   return (
     <section className="en-card" data-testid="essay-result">
+      <Band result={result} />
       <h2>{w.result}</h2>
       <p className="en-muted">{w.measured}</p>
       <dl className="en-measures">
@@ -89,6 +91,36 @@ function Result({ result }: { result: EssayResult }) {
         </>
       )}
     </section>
+  );
+}
+
+/** "Band ước lượng: 5.5–6.5": a range, never a point; or why there is none. */
+export function bandText(score: BandRange): string {
+  if (score.uncertain) return w.bandUncertain;
+  const fmt = (b: number) => b.toFixed(1);
+  return score.band_low === score.band_high
+    ? fmt(score.band_low)
+    : `${fmt(score.band_low)}–${fmt(score.band_high)}`;
+}
+
+function Band({ result }: { result: EssayResult }) {
+  if (result.score === undefined) return null; // analysed before step 2.3
+  if (result.score === null)
+    return result.scoreUnavailableVi ? (
+      <p className="en-muted">{result.scoreUnavailableVi}</p>
+    ) : null;
+  const score = result.score;
+  return (
+    <div className="en-band" data-testid="essay-band">
+      <p>
+        {w.band}: <strong>{bandText(score)}</strong>
+      </p>
+      <p className="en-muted">
+        {w.bandNote}
+        {score.status === "draft" && ` ${w.bandDraft}`}
+        {score.truncated && ` ${w.bandTruncated}`}
+      </p>
+    </div>
   );
 }
 

@@ -81,6 +81,22 @@ jobs:
           uv sync --locked
           uv run python -m app.graders.selftest ../../data/courses --runner-url http://127.0.0.1:8090
 
+  # The band model service with a tiny random model (no real weights in CI; specs/writing/step-2.3.md).
+  scorer:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: scorer
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv sync --locked
+      - run: uv run ruff check . && uv run ruff format --check .
+      - run: uv run mypy .
+      - run: uv run pytest -q
+      - name: The image builds
+        run: docker build -t nodetrail-scorer:ci .
+
   # The whole stack from one command, checked end to end (specs/one-command-start).
   stack:
     runs-on: ubuntu-latest

@@ -591,6 +591,12 @@ export const vi = {
       result: "Kết quả đo",
       measured:
         "Đo bằng quy tắc cố định, không phải điểm IELTS. Điểm ước lượng và nhận xét chi tiết sẽ có ở các bước sau.",
+      band: "Band ước lượng",
+      bandUncertain: "không chắc",
+      bandNote:
+        "Ước lượng từ một mô hình nhỏ, không phải điểm thi. Khoảng này rộng vì mô hình còn sai số.",
+      bandDraft: "Chưa kiểm chứng với điểm giám khảo.",
+      bandTruncated: "Bài dài: mô hình chỉ đọc khoảng 380 từ đầu.",
       complexity: "Độ phức tạp của câu",
       clausesPerSentence: "mệnh đề mỗi câu",
       complexShare: "câu có mệnh đề phụ",

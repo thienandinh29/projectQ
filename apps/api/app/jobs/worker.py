@@ -156,7 +156,11 @@ def loop(
     writing_dir = settings.writing_dir
     # spaCy, ERRANT and the error map load once; a broken error map stops the worker loudly.
     grammar = load_grammar_step(
-        writing_dir, settings.courses_dir, settings.languagetool_url, settings.draft_item_learners
+        writing_dir,
+        settings.courses_dir,
+        settings.languagetool_url,
+        settings.draft_item_learners,
+        settings.scorer_url,
     )
     while True:
         try:
