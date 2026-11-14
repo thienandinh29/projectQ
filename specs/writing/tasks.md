@@ -11,7 +11,9 @@
       (approved 14 Nov)
 - [ ] The consent notice wording (Vietnamese) and how long essays are kept (a draft is in `apps/web/messages/vi.ts`,
       `english.writing.consent`, version `writing-v1`; changing it means a new version in the API and the web app)
-- [ ] Daily limits per learner and the daily cost cap (US$)
+- [ ] Daily limits per learner and the daily cost cap (US$), after the first week's measured cost per essay
+- [ ] Step 2.4 (`specs/writing/step-2.4.md`): the DeepSeek key and model; model features for `DRAFT_ITEM_LEARNERS`
+      only until you have read DeepSeek's data terms and the measurements (proposed); the rewrite's target band
 
 **Owner's hands-on work:**
 - [ ] Collect 50–100 essays with examiner bands for evaluation, kept in `data/private/` (never committed)
@@ -32,6 +34,7 @@
 - [x] 2.2 analysis, minimal correction, ERRANT, mapping, BKT evidence (spec: `specs/writing/step-2.2.md`)
 - [x] 2.3 scorer service, calibration, band range, the owner's evaluation tool (spec: `specs/writing/step-2.3.md`);
       the gate waits on the owner's essays
-- [ ] 2.4 feedback with verified quotes, the correction loop, rewrites, phrases to FSRS
+- [ ] 2.4 feedback with verified quotes, the correction loop, rewrites, phrases to FSRS (spec:
+      `specs/writing/step-2.4.md`)
 - [ ] 2.5 Task 1
 - [ ] Gate report
