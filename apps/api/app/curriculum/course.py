@@ -14,6 +14,8 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 from app.curriculum.figures import Figure, FigureKind, Ident
 
 Modality = Literal["mcq", "numeric", "code", "short_answer", "essay", "figure_description"]
+Level = Literal["A1", "A2", "B1", "B2", "C1"]  # CEFR, for language courses (specs/english-course)
+LEVELS: tuple[Level, ...] = ("A1", "A2", "B1", "B2", "C1")
 NEEDS_RUBRIC: frozenset[str] = frozenset({"short_answer", "essay", "figure_description"})
 
 
@@ -70,6 +72,27 @@ class Concept(BaseModel):
     name_vi: str = Field(min_length=1)
     name_en: str = Field(min_length=1)
     prerequisites: tuple[Ident, ...] = ()
+    level: Level | None = None  # optional; when set, no prerequisite may be at a higher level
+
+
+def level_inversions(concepts: tuple[Concept, ...]) -> list[str]:
+    """Prerequisites at a higher level than the concept that needs them (both levelled)."""
+    by_slug = {c.slug: c for c in concepts}
+    problems = []
+    for c in concepts:
+        for p in c.prerequisites:
+            pre = by_slug.get(p)
+            if (
+                c.level
+                and pre is not None
+                and pre.level
+                and LEVELS.index(pre.level) > LEVELS.index(c.level)
+            ):
+                problems.append(
+                    f"concept {c.slug} ({c.level}) needs {p}, which is at a higher level"
+                    f" ({pre.level})"
+                )
+    return problems
 
 
 class CourseSpec(BaseModel):
@@ -100,6 +123,9 @@ class CourseSpec(BaseModel):
         from app.engine.graph import Graph  # cycle check, same rules as the engine
 
         Graph.from_edges(slugs, [(p, c.slug) for c in self.concepts for p in c.prerequisites])
+        inverted = level_inversions(self.concepts)
+        if inverted:
+            raise ValueError("; ".join(inverted))
         undeclared = {o.concept for o in self.objectives} - known
         if undeclared:
             raise ValueError(f"objectives use undeclared concepts {sorted(undeclared)}")
