@@ -36,6 +36,7 @@ class Settings(BaseSettings):
     runner_url: str = ""
     runner_token: SecretStr = SecretStr("")
     courses_dir: Path = REPO_ROOT / "data" / "courses"
+    vocab_dir: Path = REPO_ROOT / "data" / "vocabulary"
     tei_url: str = "http://localhost:8080"
     tei_api_key: SecretStr = SecretStr("")
     search_provider: Literal["brave", "tavily"] = "brave"

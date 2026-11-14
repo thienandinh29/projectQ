@@ -28,7 +28,7 @@ Status values: `done`, `in progress`, `next`, `planned`, `cut`.
 | Step | Work | Owner by hand | Status |
 |---|---|---|---|
 | 1.1 | Two-layer roadmap: milestones and hidden nodes with CEFR levels (`specs/english-course/`), starter graph, course checker; candidate sources listed | Extend the graph to the milestones A2–C1 need; read each source's licence on its own page | in progress |
-| 1.2 | Vocabulary: word list with CEFR levels, FSRS cards (no prerequisite edges), objective item types (meaning, gap-fill, collocation, word form) | The gap-fill answer normaliser and its unit tests | next |
+| 1.2 | Vocabulary: word list with CEFR levels, FSRS cards (no prerequisite edges), objective item types (meaning, gap-fill, collocation, word form) (`specs/vocabulary/`) | The gap-fill answer normaliser and its unit tests; review the 30-word seed list | built 14 Nov; owner's normaliser and review pending |
 | 1.3 | Milestone tests (3–4 questions on different sub-skills), quick hidden-node checks, pass → hidden nodes count as known, fail → open them and remediate; level test by CEFR tier that stops when sure; items generated from cited sources and verified, plus a reviewed seed set; sources embedded on a GPU notebook | The embedding notebook (throughput vs the laptop); explain one real decision trace | planned |
 | 1.4 | Web flow on real data: level test → roadmap showing milestones → daily review and practice | Use it daily; note what feels wrong | planned |
 | Gate | Placement accuracy curve from the simulation; verifier catch rate on planted errors | Write the planted errors; compute both results with intervals | planned |
@@ -103,4 +103,5 @@ learner is an estimate with a range until measured against examiners.
 ## Log
 | Date | Change |
 |---|---|
+| 2026-11-14 | Step 1.2 built: vocabulary (word lists, items, FSRS cards, `/vocab/*` routes, migration 0014), checked in the stack smoke test. Real word lists wait for their licence checks |
 | 2026-11-14 | Plan created from the owner's proposal; replaces the plan to Tết. Phase 0 done (weeks 0–2 of the old plan). Step 1.1: milestone and hidden-node model, starter roadmap (10 milestones, 19 hidden nodes), candidate sources |
