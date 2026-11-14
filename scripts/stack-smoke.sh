@@ -55,6 +55,9 @@ code=$(curl -sS -o /dev/null -w '%{http_code}' -H "x-api-key: $API_KEY" -H 'cont
   -d "{\"learner_id\":\"$learner\"}" "$API/level-tests")
 [ "$code" = 409 ]; check "draft items are not served to a learner without permission ($code)" $?
 
+prompts=$(api "$API/writing/prompts?learner_id=$learner" | json 'len(d)')
+[ "$prompts" = 0 ]; check "draft writing prompts are not listed for a learner without permission" $?
+
 pages=""
 for page in / /kiem-tra /lo-trinh /tu-vung /gioi-thieu /on-tap/cot-moc/passive /kham-pha; do pages="$pages $(curl -sS -o /dev/null -w '%{http_code}' "$WEB$page")"; done
 [ "$pages" = " 200 200 200 200 200 200 200" ]; check "English pack pages and the topic explorer load ($pages)" $?
