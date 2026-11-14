@@ -568,3 +568,30 @@
 .en-band strong {
   font-size: 22px;
 }
+
+/* Feedback and self-correction (specs/writing/step-2.4.md) */
+.en-criterion ul {
+  display: grid;
+  gap: 8px;
+  padding-left: 0;
+  list-style: none;
+}
+.en-criterion q {
+  display: block;
+  margin-top: 4px;
+  padding-left: 10px;
+  border-left: 3px solid var(--line);
+  color: var(--muted);
+}
+.en-selfcorrect {
+  display: grid;
+  gap: 8px;
+  margin-top: 6px;
+}
+.en-selfcorrect textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font: inherit;
+  border: 2px solid var(--line);
+  border-radius: 10px;
+}

@@ -7,6 +7,9 @@ tiers:
     items: *free
     tutor: *free
     ask: *free
+    # Writing (specs/writing/step-2.4.md): explanations and minimal corrections, checked by code.
+    writing_feedback: *free
+    writing_correct: *free
     verify: &verify
       - {provider: gemini, model: '${GEMINI_VERIFY_MODEL}', family: gemini}
       - {provider: vertex, model: '${VERTEX_VERIFY_MODEL}', family: gemini}

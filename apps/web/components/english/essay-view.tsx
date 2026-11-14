@@ -13,7 +13,9 @@ import {
 } from "@/lib/english/types";
 import { stillWorking } from "@/lib/english/writing";
 import { vi } from "@/messages/vi";
+import { EssayFeedbackView } from "./essay-feedback";
 import { Problem } from "./problem";
+import { SelfCorrect } from "./self-correct";
 import { useLearner } from "./use-learner";
 
 const t = vi.english;
@@ -116,6 +118,7 @@ function Band({ result }: { result: EssayResult }) {
         {w.band}: <strong>{bandText(score)}</strong>
       </p>
       <p className="en-muted">
+        {score.uncertain_reason && `${score.uncertain_reason} `}
         {w.bandNote}
         {score.status === "draft" && ` ${w.bandDraft}`}
         {score.truncated && ` ${w.bandTruncated}`}
@@ -133,11 +136,13 @@ export function notCountedReason(
 ): (issue: GrammarIssue) => string {
   const applied = issues.some((i) => i.evidence);
   return (issue) =>
-    !issue.node
-      ? w.notRecorded
-      : applied
-        ? w.notRecordedCap
-        : w.notRecordedDraft;
+    issue.source === "llm"
+      ? w.notRecordedAi
+      : !issue.node
+        ? w.notRecorded
+        : applied
+          ? w.notRecordedCap
+          : w.notRecordedDraft;
 }
 
 /** The sentence with the error's span marked. */
@@ -153,7 +158,15 @@ function Marked({ issue }: { issue: GrammarIssue }) {
   );
 }
 
-export function Grammar({ result }: { result: EssayResult }) {
+export function Grammar({
+  result,
+  essay,
+  learner,
+}: {
+  result: EssayResult;
+  essay?: Essay;
+  learner?: string;
+}) {
   if (result.grammar === undefined) return null; // analysed before step 2.2
   if (result.grammar === null)
     return (
@@ -179,10 +192,23 @@ export function Grammar({ result }: { result: EssayResult }) {
               </p>
             )}
             {issue.explain_vi && <p>{issue.explain_vi}</p>}
+            {issue.source === "llm" && (
+              <span className="en-badge">{w.fromAi}</span>
+            )}
             {issue.evidence && issue.node ? (
-              <Link className="en-link" href={`/on-tap/phan/${issue.node}`}>
-                {w.recorded}: {issue.node_vi ?? issue.node}
-              </Link>
+              <>
+                <Link className="en-link" href={`/on-tap/phan/${issue.node}`}>
+                  {w.recorded}: {issue.node_vi ?? issue.node}
+                </Link>
+                {essay && learner && issue.suggestion !== null && (
+                  <SelfCorrect
+                    learner={learner}
+                    essayId={essay.id}
+                    issue={issue}
+                    initial={essay.corrections[String(issue.id)]}
+                  />
+                )}
+              </>
             ) : (
               <p className="en-muted">{why(issue)}</p>
             )}
@@ -275,7 +301,10 @@ export function EssayView({ essayId }: { essayId: string }) {
         )}
       </section>
       {essay.result && <Result result={essay.result} />}
-      {essay.result && <Grammar result={essay.result} />}
+      {essay.result && <EssayFeedbackView result={essay.result} />}
+      {essay.result && (
+        <Grammar result={essay.result} essay={essay} learner={learner} />
+      )}
       <section className="en-card">
         <h2>{w.yourText}</h2>
         <div lang="en" className="en-essay-text">

@@ -6,6 +6,7 @@ SKIP LOCKED, analyses them (`writing.analysis`) and stores the result.
 """
 
 import logging
+import re
 import unicodedata
 from collections.abc import Callable
 from dataclasses import asdict, dataclass, replace
@@ -28,10 +29,21 @@ from app.engine.trace import fmt_p
 from app.services.backend import learner_uuid, save_trace
 from app.services.learning import save_mastery
 from app.services.vocabulary import start_of_day
+from app.writing import feedback, llm_corrections
 from app.writing.analysis import analyse, load_linking_words, words
 from app.writing.error_map import ErrorMap, load_error_map
-from app.writing.grammar import GrammarResult, Issue, analyse_grammar, choose_evidence, complexity
-from app.writing.languagetool import LanguageToolClient
+from app.writing.feedback import FeedbackOut
+from app.writing.grammar import (
+    GrammarResult,
+    Issue,
+    analyse_grammar,
+    choose_evidence,
+    complexity,
+    edit_distance,
+)
+from app.writing.languagetool import NEVER_MAPPED_CATEGORIES, LanguageToolClient
+from app.writing.llm_corrections import CorrectionsOut, Sentence, unflagged
+from app.writing.model_calls import BudgetExceeded, WritingModel
 from app.writing.prompts import Prompt, PromptBank, load_prompts
 from app.writing.scorer_client import ScorerClient
 from app.writing.scoring import ScorerConfig, band_range, load_scorer_config, no_band_reason
@@ -42,6 +54,17 @@ CONSENT = (
 )
 MAX_CHARS = 12_000
 NOTE_VI = "Điểm ước lượng và nhận xét chi tiết sẽ có ở các bước sau."
+ACCEPTED_VI = "Đúng rồi! Bạn đã tự sửa được lỗi này."
+STILL_ERROR_VI = "Câu vẫn còn lỗi ngữ pháp hoặc chính tả. Thử lại nhé."
+NOT_CLOSER_VI = "Câu chưa sửa đúng chỗ lỗi. Đọc lại gợi ý rồi thử lại nhé."
+LAST_TRY_VI = "Chưa đúng. Đây là cách sửa, bạn so sánh với câu của mình nhé."
+SHOWN_VI = "Đây là cách sửa, bạn so sánh với câu của mình nhé."
+FEEDBACK_OFF_VI = "Chưa có nhận xét bằng AI: máy chủ chưa cấu hình mô hình (DEEPSEEK_API_KEY)."
+FEEDBACK_HIDDEN_VI = "Nhận xét bằng AI đang được thử nghiệm, chưa mở cho mọi người."
+FEEDBACK_BUDGET_VI = (
+    "Hôm nay đã dùng hết lượt nhận xét bằng AI; các phần đo bằng công cụ vẫn đầy đủ."
+)
+FEEDBACK_FAILED_VI = "Chưa tạo được nhận xét bằng AI lần này. Các phần đo bằng công cụ vẫn đầy đủ."
 BAND_OFF_VI = "Chưa ước lượng band: máy chủ chưa bật mô hình chấm (SCORER_URL)."
 BAND_HIDDEN_VI = "Ước lượng band đang được kiểm chứng với điểm giám khảo, chưa mở cho mọi người."
 BAND_DOWN_VI = "Chưa ước lượng được band: mô hình chấm không phản hồi. Bạn thử gửi lại sau nhé."
@@ -72,14 +95,141 @@ class WritingService:
         *,
         draft_learners: str = "",
         daily_essays: int = 3,
+        languagetool: LanguageToolClient | None = None,
+        courses_dir: Path | None = None,
     ) -> None:
         self.pool = pool
         self.writing_dir = writing_dir
         self.daily_essays = daily_essays
+        self.languagetool = languagetool
+        self.courses_dir = courses_dir
+        self._course: tuple[ErrorMap, CourseSpec, UUID, dict[str, UUID]] | None = None
         self.draft_learners = {
             learner_uuid(x.strip()) for x in draft_learners.split(",") if x.strip()
         }
         self._bank: PromptBank | None = None
+
+    def _map_and_ids(
+        self, conn: psycopg.Connection[Any]
+    ) -> tuple[ErrorMap, CourseSpec, UUID, dict[str, UUID]]:
+        if self._course is None:
+            if self.courses_dir is None:
+                raise HTTPException(503, "Máy chủ chưa cấu hình khóa học cho phần tự sửa.")
+            error_map = load_error_map(self.writing_dir / "error-map.yaml")
+            course = load_course(self.courses_dir / f"{error_map.course}.yaml")
+            ids = sync_course(conn, course)
+            row = conn.execute("select id from subjects where slug=%s", (course.slug,)).fetchone()
+            assert row is not None
+            self._course = (error_map, course, row[0], ids)
+        return self._course
+
+    def correct(
+        self,
+        learner_id: str,
+        essay_id: str,
+        issue_id: int,
+        sentence: str | None,
+        *,
+        show_answer: bool = False,
+        now: datetime | None = None,
+    ) -> dict[str, Any]:
+        """Hint first, then the answer (step 2.4, point 3). No model call.
+
+        Accepted when LanguageTool finds no error in the learner's sentence and it is closer to
+        the minimal correction than the original was; an accepted correction is aided evidence.
+        """
+        now = now or datetime.now(UTC)
+        with self.pool().connection() as conn, conn.transaction():
+            learner = self._learner(conn, learner_id)
+            row = conn.execute(
+                "select result from essays where id=%s and learner_id=%s and status='done' "
+                "for update",
+                (_uuid(essay_id), learner),
+            ).fetchone()
+            if row is None:
+                raise HTTPException(404, "Không tìm thấy bài viết.")
+            issues = ((row[0] or {}).get("grammar") or {}).get("issues", [])
+            issue = next((i for i in issues if i["id"] == issue_id and i["evidence"]), None)
+            if issue is None or not issue.get("suggestion"):
+                raise HTTPException(404, "Lỗi này không có phần tự sửa.")
+            state = conn.execute(
+                "select tries, accepted, answer_shown from essay_corrections "
+                "where essay_id=%s and issue_id=%s",
+                (_uuid(essay_id), issue_id),
+            ).fetchone()
+            tries, accepted, shown = state or (0, False, False)
+            if accepted or shown:
+                raise HTTPException(409, "Bạn đã hoàn thành phần tự sửa cho lỗi này.")
+            original = issue["sentence"]
+            at = issue["start"] - issue["sentence_start"]
+            answer = original[:at] + issue["suggestion"] + original[at + len(issue["text"]) :]
+            feedback_vi = SHOWN_VI
+            if not show_answer:
+                text = unicodedata.normalize("NFC", sentence or "").strip()
+                if not 0 < len(text) <= 1000:
+                    raise HTTPException(422, "Câu cần từ 1 đến 1.000 ký tự.")
+                if self.languagetool is None:
+                    raise HTTPException(503, "Chưa kiểm tra được: máy chủ chưa bật LanguageTool.")
+                try:
+                    flagged = [m for m in self.languagetool.matches(text)
+                               if m.category not in NEVER_MAPPED_CATEGORIES]  # fmt: skip
+                except httpx.HTTPError:
+                    raise HTTPException(503, "LanguageTool không phản hồi, thử lại sau.") from None
+                closer = _distance(text, answer) < _distance(original, answer)
+                accepted = closer and not flagged
+                tries += 1
+                feedback_vi = (
+                    ACCEPTED_VI if accepted else (STILL_ERROR_VI if flagged else NOT_CLOSER_VI)
+                )
+                if accepted:
+                    self._aided_evidence(conn, learner, issue, essay_id, now)
+            shown = show_answer or (not accepted and tries >= 2)
+            conn.execute(
+                "insert into essay_corrections(essay_id,issue_id,learner_id,tries,accepted,"
+                "answer_shown,last_sentence,updated_at) values (%s,%s,%s,%s,%s,%s,%s,%s) "
+                "on conflict (essay_id,issue_id) do update set tries=excluded.tries, "
+                "accepted=excluded.accepted, answer_shown=excluded.answer_shown, "
+                "last_sentence=excluded.last_sentence, updated_at=excluded.updated_at",
+                (_uuid(essay_id), issue_id, learner, tries, accepted, shown, sentence, now),
+            )
+        return {
+            "accepted": accepted,
+            "tries": tries,
+            "answer": answer if shown or accepted else None,
+            "feedback_vi": feedback_vi if not shown or show_answer or accepted else LAST_TRY_VI,
+        }
+
+    def _aided_evidence(
+        self,
+        conn: psycopg.Connection[Any],
+        learner: UUID,
+        issue: dict[str, Any],
+        essay_id: str,
+        now: datetime,
+    ) -> None:
+        error_map, _, subject, ids = self._map_and_ids(conn)
+        node = issue["node"]
+        got = conn.execute(
+            "select p_known from mastery where learner_id=%s and concept_id=%s",
+            (learner, ids[node]),
+        ).fetchone()
+        p = float(got[0]) if got else UNSEEN_P_KNOWN
+        p_new, trace = bkt.update_traced(
+            p, True, bkt.params_with_help(error_map.params(), 1), concept_slug=node, now=now,
+            item_id=f"essay:{essay_id}:{issue['id']}:self",
+        )  # fmt: skip
+        trace = trace.model_copy(
+            update={
+                "rule": "writing.self_correction",
+                "rule_vi": (
+                    f"Bạn tự sửa đúng lỗi sau khi xem gợi ý → khả năng đã nắm vững tăng từ "
+                    f"{fmt_p(p)} lên {fmt_p(p_new)}. Có gợi ý nên được tính nhẹ hơn và không "
+                    f"tính vào số câu đúng tự làm."
+                ),
+            }
+        )
+        save_mastery(conn, learner, ids[node], p_new)
+        save_trace(conn, learner, subject, trace)
 
     def bank(self) -> PromptBank:
         if self._bank is None:
@@ -164,13 +314,25 @@ class WritingService:
         if row is None:
             raise HTTPException(404, "Không tìm thấy bài viết.")
         prompt = self.bank().get(row[1])
+        with self.pool().connection() as conn:
+            states = conn.execute(
+                "select issue_id, tries, accepted, answer_shown from essay_corrections "
+                "where essay_id=%s",
+                (row[0],),
+            ).fetchall()
         return {
+            "corrections": {
+                str(s[0]): {"tries": s[1], "accepted": s[2], "answer_shown": s[3]} for s in states
+            },
             "id": str(row[0]),
             "prompt": prompt.model_dump() if prompt else None,
             "text": row[2],
             "status": row[3],
             "submitted_at": row[4],
-            "result": row[5],
+            # keys starting with "_" are for measurement only (e.g. the model's own bands)
+            "result": {k: v for k, v in row[5].items() if not k.startswith("_")}
+            if row[5]
+            else None,
             "failure_vi": row[6],
         }
 
@@ -197,6 +359,7 @@ class GrammarStep:
     draft_learners: frozenset[UUID] = frozenset()
     scorer: ScorerClient | None = None  # None: SCORER_URL not set, no band (step 2.3)
     scorer_config: ScorerConfig | None = None
+    model: WritingModel | None = None  # None: no model key; no feedback (step 2.4)
     _ids: tuple[UUID, dict[str, UUID]] | None = None
 
     def evidence_allowed(self, learner: UUID) -> bool:
@@ -219,6 +382,7 @@ def load_grammar_step(
     languagetool_url: str,
     draft_learners: str = "",
     scorer_url: str = "",
+    model: WritingModel | None = None,
 ) -> GrammarStep:
     import errant
     import spacy
@@ -239,7 +403,69 @@ def load_grammar_step(
         ),
         scorer=ScorerClient(scorer_url) if scorer_url else None,
         scorer_config=load_scorer_config(writing_dir / "scorer.yaml"),
+        model=model,
     )
+
+
+def model_features(
+    text: str,
+    task_prompt: str,
+    result: dict[str, Any],
+    grammar: GrammarResult | None,
+    learner: UUID,
+    step: GrammarStep,
+) -> list[Issue]:
+    """Feedback and the corrections the tools missed (step 2.4); fills `result`, returns AI issues.
+
+    Only for DRAFT_ITEM_LEARNERS (the owner's decision until the privacy review). Every model call
+    is budgeted and recorded; whatever fails leaves the tool results intact and says why.
+    """
+    result["feedback"] = None
+    if step.model is None:
+        result["feedback_unavailable_vi"] = FEEDBACK_OFF_VI
+        return []
+    if learner not in step.draft_learners:
+        result["feedback_unavailable_vi"] = FEEDBACK_HIDDEN_VI
+        return []
+    model = step.model
+    found: list[Issue] = []
+    try:
+        if grammar is not None:
+            sents = [Sentence(s.start_char, s.text) for s in step.nlp(text).sents if words(s.text)]
+            todo = unflagged(sents, grammar.issues)
+            if todo:
+                out = model.complete(learner, "writing_correct", llm_corrections.SYSTEM,
+                                     llm_corrections.prompt([s.text for s in todo]),
+                                     CorrectionsOut)  # fmt: skip
+                found, discarded = llm_corrections.corrections(
+                    todo, out, step.annotator, step.error_map, first_id=len(grammar.issues)
+                )
+                result["llm_corrections"] = {"kept": len(found), "discarded": discarded}
+        measures = {k: result.get(k) for k in ("words", "sentences", "paragraphs",
+                                               "linking_groups_used", "complexity")}  # fmt: skip
+        if grammar is not None:
+            measures["languagetool_errors"] = [
+                {"text": i.text, "type": i.errant_type} for i in grammar.issues[:30]
+            ]
+        out_fb = model.complete(learner, "writing_feedback", feedback.SYSTEM,
+                                feedback.prompt(task_prompt, text, measures),
+                                FeedbackOut)  # fmt: skip
+        fb = feedback.verify(text, out_fb)
+        result["feedback"] = fb.to_json(model.last_model)
+        result["feedback_unavailable_vi"] = None
+        overall = feedback.overall_band(list(fb.bands.values()))
+        result["_llm_bands"] = fb.bands | {"overall": overall}  # never sent to the browser
+        score = result.get("score")
+        if score and not score["uncertain"]:
+            reason = feedback.disagreement(score["band_low"], score["band_high"], overall)
+            if reason:
+                score["uncertain"], score["uncertain_reason"] = True, reason
+    except BudgetExceeded:
+        result["feedback_unavailable_vi"] = FEEDBACK_BUDGET_VI
+    except Exception:
+        logger.exception("writing model call failed")
+        result["feedback_unavailable_vi"] = FEEDBACK_FAILED_VI
+    return found
 
 
 def band_for(
@@ -400,9 +626,13 @@ def process_next_essay(
             prompt = load_prompts(writing_dir / "prompts.yaml").get(prompt_id)
             task = prompt.task if prompt else 2
             result, grammar = _analyse(text, task, writing_dir, step)
+            ai_issues: list[Issue] = []
             if step is not None:
                 result["score"], result["score_unavailable_vi"] = band_for(
                     text, task, result["words"], learner, step
+                )
+                ai_issues = model_features(
+                    text, prompt.prompt if prompt else "", result, grammar, learner, step
                 )
             with conn.transaction():
                 if grammar is not None and step is not None:
@@ -412,7 +642,7 @@ def process_next_essay(
                     names = {c.slug: c.name_vi for c in step.course.concepts}
                     result["grammar"]["issues"] = [
                         i.to_json() | {"node_vi": names.get(i.node) if i.node else None}
-                        for i in issues
+                        for i in [*issues, *ai_issues]
                     ]
                     result["evidence"] = moved
                 conn.execute(
@@ -428,3 +658,10 @@ def process_next_essay(
                     ("Không phân tích được bài viết. Bạn thử gửi lại sau nhé.", essay_id),
                 )
         return True
+
+
+_TOKENS = re.compile(r"\w+|[^\w\s]")
+
+
+def _distance(a: str, b: str) -> int:
+    return edit_distance(_TOKENS.findall(a), _TOKENS.findall(b))

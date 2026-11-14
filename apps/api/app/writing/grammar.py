@@ -42,6 +42,7 @@ class Issue:
     node: str | None
     explain_vi: str | None
     evidence: bool = False
+    source: str = "languagetool"  # or "llm": shown as "gợi ý từ AI", never evidence (step 2.4)
 
     def to_json(self) -> dict[str, Any]:
         return asdict(self)

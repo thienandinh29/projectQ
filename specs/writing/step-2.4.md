@@ -88,5 +88,13 @@ update and trace); rewrite diff, reasons only on real changes, every acceptance 
 phrase cards through FSRS; the budget stopping calls; a provider error. One live smoke test with the owner's key,
 skipped without it. Web unit tests and one Playwright test (self-correction accepted after a hint) on a fake result.
 
+## Built in two parts
+- **2.4a (14 Nov 2026):** feedback with checked quotes, the disagreement rule, AI corrections for recall, the hint-first
+  loop (`POST /essays/{id}/corrections`), the budget on every call with one `llm_calls` row per attempt (tokens, task,
+  learner, cost from `LLM_PRICE_*`, deliberately high by default), migration `0017` (`llm_calls` tokens and task,
+  `essay_corrections`). The model's own criterion bands are stored under a `_` key the API never returns. Model features
+  only for `DRAFT_ITEM_LEARNERS` (the owner's decision). A live test runs only with `WRITING_LIVE_LLM=1` and a key.
+- **2.4b:** the rewrite and saved phrases, with their own migration (`0018`), replacing the `0017` tables named above.
+
 ## Not in this step
 Task 1 (2.5), speaking, an LLM-written hint (the deterministic hint comes first), showing the LLM's band.

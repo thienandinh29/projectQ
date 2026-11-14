@@ -163,6 +163,37 @@ export interface GrammarIssue {
   explain_vi: string | null;
   /** it moved the learner's mastery of `node` */
   evidence: boolean;
+  /** "llm": proposed by the model (step 2.4), shown as "gợi ý từ AI", never evidence */
+  source: "languagetool" | "llm";
+}
+
+export const CRITERIA = ["tr", "cc", "lr", "gra"] as const;
+export type Criterion = (typeof CRITERIA)[number];
+
+/** A feedback point; every quote was checked to be in the essay (step 2.4). */
+export interface FeedbackPoint {
+  kind: "strength" | "issue";
+  point_vi: string;
+  quotes: string[];
+}
+
+export interface EssayFeedback {
+  criteria: Record<Criterion, FeedbackPoint[]>;
+  /** points removed because none of their quotes was in the essay */
+  dropped: number;
+}
+
+export interface CorrectionState {
+  tries: number;
+  accepted: boolean;
+  answer_shown: boolean;
+}
+
+export interface CorrectionResult {
+  accepted: boolean;
+  tries: number;
+  answer: string | null;
+  feedback_vi: string;
 }
 
 export interface Complexity {
@@ -179,6 +210,8 @@ export interface BandRange {
   uncertain: boolean;
   status: "draft" | "validated";
   truncated: boolean;
+  /** why the range is shown as "không chắc" (step 2.4's disagreement rule) */
+  uncertain_reason: string | null;
 }
 
 /** What tools measured (steps 2.1 to 2.3); the band, when present, is a calibrated range. */
@@ -200,6 +233,9 @@ export interface EssayResult {
   /** step 2.3 on; null when no band is shown (then `scoreUnavailableVi` says why) */
   score?: BandRange | null;
   scoreUnavailableVi?: string | null;
+  /** step 2.4 on; null when there is none (then `feedbackUnavailableVi` says why) */
+  feedback?: EssayFeedback | null;
+  feedbackUnavailableVi?: string | null;
 }
 
 export interface Essay {
@@ -210,4 +246,6 @@ export interface Essay {
   submitted_at: string;
   result: EssayResult | null;
   failure_vi: string | null;
+  /** issue id -> the learner's self-correction (step 2.4) */
+  corrections: Record<string, CorrectionState>;
 }

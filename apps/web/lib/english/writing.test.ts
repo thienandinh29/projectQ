@@ -190,6 +190,7 @@ describe("grammar results (step 2.2)", () => {
     node_vi: "Thì hiện tại đơn",
     explain_vi: "Động từ chưa hợp với chủ ngữ.",
     evidence: true,
+    source: "languagetool" as const,
   };
   const v2 = {
     ...result,
@@ -259,6 +260,7 @@ describe("the band (step 2.3)", () => {
     revision: "r",
     status: "draft",
     truncated: false,
+    uncertain_reason: null,
   };
   it("is a range, never a point, and 'không chắc' when too wide", () => {
     const r = parseEssay({
@@ -294,5 +296,121 @@ describe("the band (step 2.3)", () => {
     expect(() =>
       parseEssay({ ...essay, result: { ...v2, score: bad } }),
     ).toThrow(DataError);
+  });
+});
+
+const issueBase = {
+  id: 0,
+  sentence: "She go to school.",
+  sentence_start: 0,
+  start: 4,
+  end: 6,
+  text: "go",
+  suggestion: "goes",
+  category: "AI",
+  rule_id: "LLM_CORRECTION",
+  message_en: "",
+  errant_type: "R:VERB:SVA",
+  node: "present-simple",
+  node_vi: "Thì hiện tại đơn",
+  explain_vi: "Động từ chưa hợp với chủ ngữ.",
+};
+
+describe("feedback and self-correction (step 2.4)", () => {
+  const v2 = {
+    ...result,
+    version: 2,
+    grammar: null,
+    grammar_unavailable_vi: "x",
+    complexity: null,
+  };
+  const point = {
+    kind: "issue",
+    point_vi: "Câu này cần chia động từ.",
+    quotes: ["She go to school"],
+  };
+  const feedback = {
+    criteria: { tr: [point], cc: [], lr: [], gra: [point] },
+    dropped: 1,
+    quotes_checked: 3,
+    quotes_kept: 2,
+    model: "deepseek-x",
+  };
+  it("reads feedback, and says why there is none", () => {
+    const r = parseEssay({
+      ...essay,
+      result: { ...v2, feedback, feedback_unavailable_vi: null },
+    }).result;
+    expect(r?.feedback?.criteria.tr[0].quotes).toEqual(["She go to school"]);
+    expect(r?.feedback?.dropped).toBe(1);
+    const none = parseEssay({
+      ...essay,
+      result: { ...v2, feedback: null, feedback_unavailable_vi: "Chưa có" },
+    }).result;
+    expect(none?.feedbackUnavailableVi).toBe("Chưa có");
+  });
+  it.each([
+    ["a point without a quote", { ...point, quotes: [] }],
+    ["an unknown kind", { ...point, kind: "praise" }],
+  ])("rejects %s", (_, bad) => {
+    expect(() =>
+      parseEssay({
+        ...essay,
+        result: {
+          ...v2,
+          feedback: {
+            ...feedback,
+            criteria: { ...feedback.criteria, tr: [bad] },
+          },
+        },
+      }),
+    ).toThrow(DataError);
+  });
+  it("never lets an AI suggestion count as evidence", () => {
+    const ai = { ...issueBase, source: "llm", evidence: true };
+    expect(() =>
+      parseEssay({
+        ...essay,
+        result: { ...v2, grammar: { issues: [ai] } },
+      }),
+    ).toThrow(DataError);
+    const fine = { ...issueBase, source: "llm" as const, evidence: false };
+    expect(notCountedReason([fine])(fine)).toContain("AI");
+  });
+  it("reads each error's self-correction state", () => {
+    const e = parseEssay({
+      ...essay,
+      corrections: { "0": { tries: 1, accepted: false, answer_shown: false } },
+    });
+    expect(e.corrections["0"].tries).toBe(1);
+    expect(parseEssay(essay).corrections).toEqual({});
+  });
+  it("posts a try, or asks for the answer", async () => {
+    const fetcher = vi.fn().mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          accepted: true,
+          tries: 1,
+          answer: "She goes.",
+          feedback_vi: "Đúng rồi!",
+        }),
+      ),
+    );
+    const out = await englishClient(fetcher).correctSentence(
+      LEARNER,
+      ID,
+      0,
+      "She goes.",
+    );
+    expect(out.accepted).toBe(true);
+    expect(fetcher.mock.calls[0][0]).toBe(
+      `/api/backend/essays/${ID}/corrections`,
+    );
+    expect(JSON.parse(fetcher.mock.calls[0][1].body)).toEqual({
+      learner_id: LEARNER,
+      issue_id: 0,
+      sentence: "She goes.",
+      show_answer: false,
+    });
   });
 });
