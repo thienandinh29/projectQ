@@ -395,4 +395,83 @@ export const vi = {
       section: "3.1 · Defining new functions",
     },
   ],
+  english: {
+    nav: {
+      today: "Hôm nay",
+      roadmap: "Lộ trình",
+      levelTest: "Kiểm tra trình độ",
+      explore: "Khám phá chủ đề",
+    },
+    brandSub: "Tiếng Anh · CEFR A2–C1 · luyện IELTS",
+    loading: "Đang tải…",
+    offline:
+      "Không kết nối được tới máy chủ. Kiểm tra máy chủ đang chạy rồi thử lại.",
+    contract:
+      "Máy chủ trả về dữ liệu không đúng định dạng. Không hiển thị gì để tránh sai.",
+    noItems:
+      "Chưa có câu hỏi nào được duyệt cho bạn. Nếu bạn là chủ dự án, thêm mã người học của bạn vào DRAFT_ITEM_LEARNERS để thấy bản nháp.",
+    retry: "Thử lại",
+    draft: "Bản nháp",
+    question: "Câu",
+    choose: "Chọn đáp án đúng để hoàn thành câu.",
+    keys: "Mẹo: nhấn phím 1–4 để chọn, Enter để gửi.",
+    submit: "Gửi",
+    home: {
+      hello: "Chào bạn! Hôm nay mình học gì nhé?",
+      noTest:
+        "Bạn chưa làm bài kiểm tra trình độ. Khoảng 10–15 phút, để Sena biết nên bắt đầu từ đâu.",
+      startTest: "Làm bài kiểm tra trình độ",
+      yourLevel: "Trình độ ước lượng của bạn",
+      openRoadmap: "Mở lộ trình",
+      nextMilestone: "Cột mốc tiếp theo",
+      learnNext: "Nên học trước",
+      allKnown: "Bạn đã qua mọi cột mốc hiện có. Sena sẽ thêm cột mốc mới.",
+      senaRule:
+        "Sena chỉ khen khi bạn thật sự hiểu, không khen tốc độ hay chuỗi ngày.",
+    },
+    level: {
+      title: "Kiểm tra trình độ",
+      intro:
+        "Bài kiểm tra tự điều chỉnh: câu sau tùy vào câu trước, dừng khi Sena đủ chắc (tối đa 20 câu ngữ pháp), rồi vài câu từ vựng. Không có điểm, không tính giờ.",
+      target: "Mục tiêu của bạn (không bắt buộc)",
+      noTarget: "Chưa chọn",
+      start: "Bắt đầu",
+      vocabPart: "Phần từ vựng: chọn từ có nghĩa đã cho.",
+      resultTitle: "Kết quả ước lượng",
+      grammar: "Ngữ pháp",
+      vocab: "Từ vựng",
+      known: "Cột mốc bạn có vẻ đã nắm",
+      none: "Chưa có cột mốc nào: mình bắt đầu từ nền tảng nhé.",
+      questions: "Số câu đã làm",
+      estimateNote:
+        "Đây là ước lượng từ một bài kiểm tra ngắn, có thể sai. Sena sẽ điều chỉnh khi bạn học tiếp.",
+      toRoadmap: "Xem lộ trình của bạn",
+    },
+    roadmap: {
+      title: "Lộ trình của bạn",
+      subtitle:
+        "Các cột mốc theo cấp độ CEFR. Mở một cột mốc để xem các phần nhỏ bên trong.",
+      status: {
+        mastered: "Đã nắm vững",
+        known: "Đã biết",
+        partial: "Cần ôn",
+        unknown: "Chưa học",
+      },
+      next: "Tiếp theo",
+      needs: "Cần trước",
+      parts: "Các phần bên trong",
+      show: "Xem các phần",
+      hide: "Ẩn các phần",
+      learnNext: "Nên học trước",
+      why: "Vì sao?",
+      noTest:
+        "Làm bài kiểm tra trình độ để Sena đánh dấu những gì bạn đã biết.",
+      practiceSoon: "Luyện tập cột mốc sẽ có ở bước tiếp theo (1.4b).",
+    },
+    trace: {
+      before: "Trước",
+      after: "Sau",
+      others: "Đã cân nhắc",
+    },
+  },
 };

@@ -11,7 +11,8 @@ step that lets the owner study with NodeTrail every day, which is part of the ph
    "Câu 7" (the test is adaptive, so no fixed total), then the vocabulary part. The result screen shows the
    grammar and vocabulary levels and the IELTS range exactly as the API words it ("ước lượng, không phải điểm IELTS"),
    the milestones found known, and where to start. The learner may pick a target (B2 or C1) before starting.
-3. **Roadmap ("Lộ trình").** Milestones grouped by CEFR level in learning order (the existing map with dagre layout).
+3. **Roadmap ("Lộ trình").** Milestones grouped by CEFR level in learning order, as sections (changed 14 Nov from the
+   React Flow map: a draggable graph is hard to use on a 390 px phone; a graph view can come back later for laptops).
    Colour and a text label show the status (known, mastered, cần ôn, chưa học), never colour alone. Hidden nodes
    appear under a milestone only when it is partial or the learner opens it, each with its p_known as a bar. The next
    milestone and "learn next" are highlighted; every decision opens the existing "Vì sao?" panel.
@@ -47,10 +48,8 @@ step that lets the owner study with NodeTrail every day, which is part of the ph
 15. The owner takes the level test and studies daily from the browser; the phase 1 gate counts 2 weeks of that.
 
 ## Decisions for the owner
-- **Home page:** the English pack replaces the contest's topic research as the home page; topic research moves to
-  its own page. (Proposal: yes.)
-- **Browser tests:** add `@playwright/test` as a dev dependency for a few end-to-end tests on the real stack, or rely
-  on unit tests plus the smoke test through the proxy. (Proposal: add it in 1.4b, a dev dependency only.)
+- **Decided (owner, 14 Nov):** the English pack is the home page; topic research moves to `/kham-pha`.
+- **Decided (owner, 14 Nov):** `@playwright/test` is added as a dev dependency in 1.4b for browser end-to-end tests.
 
 ## Not in scope
 Accounts and login, Writing, audio, offline use, a separate mobile app.

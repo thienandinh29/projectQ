@@ -25,6 +25,7 @@ x-api-env: &api-env
     RUNNER_TOKEN: ${RUNNER_TOKEN:-}
     TEI_URL: http://tei:80
     CORS_ORIGINS: http://localhost:3000
+    DRAFT_ITEM_LEARNERS: ${DRAFT_ITEM_LEARNERS:-}
 
 services:
   db:
