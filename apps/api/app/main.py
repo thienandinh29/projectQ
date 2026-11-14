@@ -119,6 +119,16 @@ def create_app(
         settings.draft_item_learners,
     )
     app.include_router(grammar_routes.create_router(grammar))
+    from app.api import writing as writing_routes
+    from app.services.writing import WritingService
+
+    writing = WritingService(
+        lambda: app.state.pool,
+        settings.writing_dir,
+        draft_learners=settings.draft_item_learners,
+        daily_essays=settings.writing_daily_essays,
+    )
+    app.include_router(writing_routes.create_router(writing))
     app.include_router(graph_confirmation.create_router())
 
     @app.middleware("http")

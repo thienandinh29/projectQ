@@ -38,6 +38,10 @@ class Settings(BaseSettings):
     courses_dir: Path = REPO_ROOT / "data" / "courses"
     vocab_dir: Path = REPO_ROOT / "data" / "vocabulary"
     items_dir: Path = REPO_ROOT / "data" / "items"
+    writing_dir: Path = REPO_ROOT / "data" / "writing"
+    writing_daily_essays: int = 3  # essays per learner per day
+    llm_daily_cost_cap_usd: float = 1.0  # the whole service, per day (used from writing step 2.4)
+    llm_daily_calls_per_learner: int = 30
     # Learners allowed to see draft (unreviewed) items, labelled "Bản nháp": comma-separated ids.
     draft_item_learners: str = ""
     tei_url: str = "http://localhost:8080"

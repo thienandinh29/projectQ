@@ -1,0 +1,42 @@
+# IELTS-style Writing prompts, authored by the project (specs/writing). Never Cambridge or past-paper prompts.
+# DRAFT prompts are written by the agent as starters; the owner reviews them and adds their own (status: reviewed).
+prompts:
+  - id: t2-online-learning
+    task: 2
+    type: discussion
+    level: B2
+    status: draft
+    prompt: >-
+      Some people believe that studying online is as effective as studying in a classroom, while others think that
+      face-to-face learning is still better. Discuss both views and give your own opinion.
+  - id: t2-city-traffic
+    task: 2
+    type: problem-solution
+    level: B2
+    status: draft
+    prompt: >-
+      Traffic congestion is a growing problem in many large cities. What are the causes of this problem, and what
+      measures could be taken to solve it?
+  - id: t2-working-abroad
+    task: 2
+    type: advantages-disadvantages
+    level: B2
+    status: draft
+    prompt: >-
+      More and more young people choose to work in another country for a few years. Do the advantages of this trend
+      outweigh the disadvantages?
+  - id: t2-plastic-ban
+    task: 2
+    type: opinion
+    level: B1
+    status: draft
+    prompt: >-
+      Governments should ban single-use plastic bags and bottles. To what extent do you agree or disagree?
+  - id: t2-older-people
+    task: 2
+    type: two-part
+    level: C1
+    status: draft
+    prompt: >-
+      In many countries the proportion of older people is increasing. Why is this happening, and what effects will it
+      have on society?

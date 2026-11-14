@@ -150,8 +150,13 @@ def loop(
     pipeline_factory: Callable[[str], TopicPipeline] | None = None,
     processor: Callable[[dict[str, Any]], None] | None = None,
 ) -> None:
+    from app.services.writing import process_next_essay
+
+    writing_dir = get_settings().writing_dir
     while True:
         try:
+            if process_next_essay(database_url, writing_dir):
+                continue  # essays are short: drain them before the next topic job
             if not run_once(
                 database_url,
                 allow_fixture=allow_fixture,

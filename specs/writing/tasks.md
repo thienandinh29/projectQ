@@ -17,7 +17,8 @@
 - [ ] Write 10 Task 2 prompts of your own; later, Task 1 chart prompts
 
 **Build (agent), in order:**
-- [ ] 2.1 prompts, submission, job, results page, consent, limits and cost cap
+- [ ] 2.1 prompts, submission, job, results page, consent, limits and cost cap (API built: `specs/writing/step-2.1.md`;
+      web next)
 - [ ] 2.2 analysis, minimal correction, ERRANT, mapping, BKT evidence
 - [ ] 2.3 scorer service and the writing gate
 - [ ] 2.4 feedback with verified quotes, the correction loop, rewrites, phrases to FSRS
