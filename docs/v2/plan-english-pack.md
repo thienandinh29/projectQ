@@ -31,7 +31,7 @@ Status values: `done`, `in progress`, `next`, `planned`, `cut`.
 | 1.2 | Vocabulary: word list with CEFR levels, FSRS cards (no prerequisite edges), objective item types (meaning, gap-fill, collocation, word form) (`specs/vocabulary/`) | The gap-fill answer normaliser and its unit tests; review the 30-word seed list | built 14 Nov; owner's normaliser and review pending |
 | 1.3a | Milestone tests, quick checks, pass → assumed known, fail → open and remediate; level test over milestones plus a short vocabulary part; authored items (`specs/level-test/`) | Review the items; explain one real decision trace; the accuracy curve | built 14 Nov: engine, items, gate, level test, roadmap, milestone tests, checks, practice through the API; owner's review and analysis pending |
 | 1.3b | Items from cited sources: embeddings on a GPU notebook (export → embed → import), generation and blind verification, review queue (`specs/cited-items/`) | The embedding notebook; 50 planted-error items | spec written; needs a verified source and model keys |
-| 1.4 | Web flow on real data: level test → roadmap showing milestones → daily review and practice | Use it daily; note what feels wrong | planned |
+| 1.4 | Web flow on real data: level test → roadmap showing milestones → daily review and practice (`specs/web-english/`, in two PRs: 1.4a level test and roadmap, 1.4b practice and vocabulary) | Use it daily; note what feels wrong | spec written (14 Nov) |
 | Gate | Placement accuracy curve from the simulation; verifier catch rate on planted errors | Write the planted errors; compute both results with intervals | planned |
 
 Testers can try vocabulary and grammar from the end of phase 1: nothing there calls an LLM per user. Per-user limits
