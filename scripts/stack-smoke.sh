@@ -58,6 +58,22 @@ code=$(curl -sS -o /dev/null -w '%{http_code}' -H "x-api-key: $API_KEY" -H 'cont
 prompts=$(api "$API/writing/prompts?learner_id=$learner" | json 'len(d)')
 [ "$prompts" = 0 ]; check "draft writing prompts are not listed for a learner without permission" $?
 
+if [ -n "${LANGUAGETOOL_URL:-}" ] && [ -n "${E2E_LEARNER_ID:-}" ]; then
+  # Grammar check (specs/writing/step-2.2.md): a draft learner, since the starter prompts are drafts.
+  essay=$(api -d "{\"learner_id\":\"$E2E_LEARNER_ID\",\"prompt_id\":\"t2-plastic-ban\",\"text\":\"She go to school every day.\",\"consent\":\"writing-v1\"}" \
+    "$API/essays" | json 'd["essay_id"]')
+  status=queued
+  for _ in $(seq 1 60); do
+    status=$(api "$API/essays/$essay?learner_id=$E2E_LEARNER_ID" | json 'd["status"]')
+    [ "$status" = done ] || [ "$status" = failed ] && break
+    sleep 1
+  done
+  typed=$(api "$API/essays/$essay?learner_id=$E2E_LEARNER_ID" \
+    | json '",".join(i["errant_type"] + ">" + str(i["node"]) for i in d["result"]["grammar"]["issues"])')
+  [ "$typed" = "R:VERB:SVA>present-simple" ]; check "LanguageTool and ERRANT find, type and map an essay error ($typed)" $?
+  api -X DELETE -o /dev/null "$API/essays/$essay?learner_id=$E2E_LEARNER_ID"
+fi
+
 pages=""
 for page in / /kiem-tra /lo-trinh /tu-vung /gioi-thieu /on-tap/cot-moc/passive /viet /viet/t2-plastic-ban \
   /bai-viet/00000000-0000-4000-8000-000000000000 /kham-pha; do pages="$pages $(curl -sS -o /dev/null -w '%{http_code}' "$WEB$page")"; done

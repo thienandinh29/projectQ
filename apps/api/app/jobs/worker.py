@@ -150,12 +150,17 @@ def loop(
     pipeline_factory: Callable[[str], TopicPipeline] | None = None,
     processor: Callable[[dict[str, Any]], None] | None = None,
 ) -> None:
-    from app.services.writing import process_next_essay
+    from app.services.writing import load_grammar_step, process_next_essay
 
-    writing_dir = get_settings().writing_dir
+    settings = get_settings()
+    writing_dir = settings.writing_dir
+    # spaCy, ERRANT and the error map load once; a broken error map stops the worker loudly.
+    grammar = load_grammar_step(
+        writing_dir, settings.courses_dir, settings.languagetool_url, settings.draft_item_learners
+    )
     while True:
         try:
-            if process_next_essay(database_url, writing_dir):
+            if process_next_essay(database_url, writing_dir, grammar):
                 continue  # essays are short: drain them before the next topic job
             if not run_once(
                 database_url,

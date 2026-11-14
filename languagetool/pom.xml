@@ -1,0 +1,21 @@
+<!-- LanguageTool's HTTP server and English rules, from Maven Central, pinned (specs/writing/step-2.2.md).
+     LanguageTool is LGPL-2.1 and used unmodified as a separate service. jars.sha256 pins every resolved jar;
+     after changing the version, regenerate it (languagetool/README.md). -->
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>nodetrail</groupId>
+  <artifactId>languagetool-server</artifactId>
+  <version>1</version>
+  <dependencies>
+    <dependency>
+      <groupId>org.languagetool</groupId>
+      <artifactId>languagetool-server</artifactId>
+      <version>6.8</version>
+    </dependency>
+    <dependency>
+      <groupId>org.languagetool</groupId>
+      <artifactId>language-en</artifactId>
+      <version>6.8</version>
+    </dependency>
+  </dependencies>
+</project>

@@ -525,3 +525,30 @@
   margin: 0 0 12px;
   white-space: pre-wrap;
 }
+
+/* Grammar issues (specs/writing/step-2.2.md) */
+.en-issues {
+  display: grid;
+  gap: 14px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.en-issues li {
+  display: grid;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+.en-issues p {
+  margin: 0;
+}
+.en-issue-sentence mark {
+  background: #fff3cd;
+  color: inherit;
+  text-decoration: underline wavy #b45309;
+  text-underline-offset: 3px;
+  padding: 0 2px;
+  border-radius: 3px;
+}

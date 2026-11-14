@@ -1,0 +1,75 @@
+# ERRANT error type -> hidden node of the course (specs/writing/step-2.2.md, point 5). Hand-written; the owner reviews it.
+# draft: mapped errors move mastery only for DRAFT_ITEM_LEARNERS; reviewed: for everyone. It becomes reviewed when the
+# owner's check of 100 mapped errors reaches 90% (app/evalkit/writing_map.py).
+#
+# A row matches an ERRANT type without its operation (M:, R:, U:). Optional conditions look at the tokens of the
+# edit: `corrected_lemma` / `original_lemma` (any token has one of these lemmas), `corrected_tag` / `original_tag`
+# (any token has one of these Penn tags). The first matching row wins; a row with `node: null` explains the error but
+# maps nowhere, and a type with no row at all is shown untyped-for-the-roadmap. Unmapped errors never move mastery.
+course: english-ielts
+status: draft
+# The writing observation model: a learner who knows a structure still slips in free writing (slip); an error is
+# not practice (no transit). One error moves 0.95 to 0.90; the same error in a second essay moves it to 0.83.
+observation:
+  slip: 0.3
+  guess: 0.4
+max_evidence_per_essay: 3
+rows:
+  - type: DET
+    node: articles-basic
+    explain_vi: "Lỗi mạo từ (a, an, the): thiếu, thừa hoặc dùng sai mạo từ."
+  - type: NOUN:NUM
+    node: plural-nouns
+    explain_vi: "Lỗi số ít / số nhiều của danh từ."
+  - type: VERB:SVA
+    when: {corrected_lemma: [be]}
+    node: be-present
+    explain_vi: "Động từ to be chưa hợp với chủ ngữ (is / are / am)."
+  - type: VERB:SVA
+    node: present-simple
+    explain_vi: "Động từ chưa hợp với chủ ngữ (ví dụ: she goes, they go)."
+  - type: ADJ:FORM
+    when: {corrected_tag: [JJR, RBR]}
+    node: comparatives
+    explain_vi: "Lỗi dạng so sánh hơn (ví dụ: bigger, more important)."
+  - type: ADJ:FORM
+    when: {corrected_tag: [JJS, RBS]}
+    node: superlatives
+    explain_vi: "Lỗi dạng so sánh nhất (ví dụ: the biggest, the most important)."
+  - type: ADJ:FORM
+    node: null
+    explain_vi: "Lỗi dạng tính từ."
+  - type: ADV
+    when: {original_lemma: [more]}
+    node: comparatives
+    explain_vi: "Thừa “more” trong so sánh hơn (ví dụ: bigger, không phải more bigger)."
+  - type: ADV
+    when: {original_lemma: [most]}
+    node: superlatives
+    explain_vi: "Thừa “most” trong so sánh nhất (ví dụ: the biggest, không phải the most biggest)."
+  - type: VERB:TENSE
+    when: {corrected_lemma: [have], corrected_tag: [VBN]}
+    node: present-perfect-form
+    explain_vi: "Nên dùng thì hiện tại hoàn thành (have / has + V3)."
+  - type: VERB:TENSE
+    when: {original_lemma: [have], corrected_tag: [VBD]}
+    node: present-perfect-vs-past
+    explain_vi: "Nên dùng quá khứ đơn thay vì hiện tại hoàn thành (thời điểm đã xác định trong quá khứ)."
+  - type: VERB:TENSE
+    node: null
+    explain_vi: "Lỗi thì của động từ."
+  # No hidden node yet (the owner's roadmap work): shown, never counted.
+  - {type: PREP, node: null, explain_vi: "Lỗi giới từ (in, on, at, for, …)."}
+  - {type: VERB:FORM, node: null, explain_vi: "Lỗi dạng động từ (to V, V-ing, V3, …)."}
+  - {type: VERB, node: null, explain_vi: "Dùng sai động từ."}
+  - {type: NOUN, node: null, explain_vi: "Dùng sai danh từ."}
+  - {type: ADJ, node: null, explain_vi: "Dùng sai tính từ."}
+  - {type: ADV, node: null, explain_vi: "Dùng sai trạng từ."}
+  - {type: PRON, node: null, explain_vi: "Lỗi đại từ."}
+  - {type: CONJ, node: null, explain_vi: "Lỗi liên từ."}
+  - {type: MORPH, node: null, explain_vi: "Lỗi dạng từ (ví dụ: danh từ thay vì tính từ)."}
+  - {type: WO, node: null, explain_vi: "Lỗi trật tự từ."}
+  - {type: SPELL, node: null, explain_vi: "Lỗi chính tả."}
+  - {type: ORTH, node: null, explain_vi: "Lỗi viết hoa hoặc cách viết liền / rời."}
+  - {type: PUNCT, node: null, explain_vi: "Lỗi dấu câu."}
+  - {type: OTHER, node: null, explain_vi: "Lỗi khác."}

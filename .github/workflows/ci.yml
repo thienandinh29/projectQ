@@ -70,7 +70,9 @@ jobs:
         working-directory: runner
         run: |
           uv sync --locked
-          nohup uv run python -m nodetrail_runner.server > /tmp/runner.log 2>&1 &
+          # The venv's Python, not `uv run`: a background `uv run` holds uv's cache lock, and
+          # setup-uv's cache prune at the end of the job then times out waiting for it.
+          nohup .venv/bin/python -m nodetrail_runner.server > /tmp/runner.log 2>&1 &
           for i in $(seq 1 30); do curl -sf http://127.0.0.1:8090/health && exit 0; sleep 1; done
           cat /tmp/runner.log; exit 1
       - name: Every code exercise tells right from wrong (in the real sandbox)
@@ -88,16 +90,19 @@ jobs:
       # The browser tests' learner, allowed to see draft items (specs/web-english).
       DRAFT_ITEM_LEARNERS: 00000000-0000-4000-8000-0000000e2e01
       E2E_LEARNER_ID: 00000000-0000-4000-8000-0000000e2e01
+      # The grammar check for essays (specs/writing/step-2.2.md), with its opt-in service.
+      COMPOSE_PROFILES: writing
+      LANGUAGETOOL_URL: http://languagetool:8010
     steps:
       - uses: actions/checkout@v4
       - name: Start everything with one command
         run: docker compose up -d --build --wait --wait-timeout 300
-      - name: End-to-end checks
-        run: scripts/stack-smoke.sh
       - name: Create the browser tests' learner
         run: >-
           docker compose exec -T db psql -U postgres -d nodetrail -qc
           "insert into learners(id,display_name) values ('$E2E_LEARNER_ID','E2E') on conflict do nothing"
+      - name: End-to-end checks
+        run: scripts/stack-smoke.sh
       - uses: actions/setup-node@v4
         with:
           node-version: 22

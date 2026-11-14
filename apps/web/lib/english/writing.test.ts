@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { DataError } from "@/lib/decode";
 import { submitProblem } from "@/components/english/essay-editor";
+import { notCountedReason } from "@/components/english/essay-view";
 import { englishClient } from "./client";
 import { parseEssay, parseEssaySummaries, parseWritingPrompts } from "./decode";
 import {
@@ -169,5 +170,74 @@ describe("writing client", () => {
     await expect(
       englishClient(fetcher).submitEssay(LEARNER, prompt.id, "x"),
     ).rejects.toMatchObject({ code: "failed", status: 429 });
+  });
+});
+
+describe("grammar results (step 2.2)", () => {
+  const issue = {
+    id: 0,
+    sentence: "She go to school.",
+    sentence_start: 30,
+    start: 34,
+    end: 36,
+    text: "go",
+    suggestion: "goes",
+    category: "GRAMMAR",
+    rule_id: "HE_VERB_AGR",
+    message_en: "…",
+    errant_type: "R:VERB:SVA",
+    node: "present-simple",
+    node_vi: "Thì hiện tại đơn",
+    explain_vi: "Động từ chưa hợp với chủ ngữ.",
+    evidence: true,
+  };
+  const v2 = {
+    ...result,
+    version: 2,
+    grammar: { checker: "LanguageTool", issues: [issue], counts: {} },
+    grammar_unavailable_vi: null,
+    complexity: {
+      sentences: 3,
+      clauses_per_sentence: 1.33,
+      complex_sentence_share: 0.33,
+    },
+    evidence: [],
+  };
+  it("reads issues with their marked span and the complexity", () => {
+    const r = parseEssay({ ...essay, result: v2 }).result;
+    expect(r?.grammar?.issues[0].node_vi).toBe("Thì hiện tại đơn");
+    expect(r?.complexity?.clauses_per_sentence).toBe(1.33);
+  });
+  it("says why an error did not move the roadmap", () => {
+    const counted = { ...issue, id: 1 };
+    const extra = { ...issue, id: 2, evidence: false };
+    const unmapped = { ...issue, id: 3, node: null, evidence: false };
+    const why = notCountedReason([counted, extra, unmapped]);
+    expect(why(extra)).toContain("tối đa 3");
+    expect(why(unmapped)).toContain("chưa gắn");
+    expect(notCountedReason([extra])(extra)).toContain("bản nháp");
+  });
+  it("keeps a step 2.1 result without a grammar section", () => {
+    expect(parseEssay(essay).result?.grammar).toBeUndefined();
+  });
+  it("says why grammar was not checked", () => {
+    const r = parseEssay({
+      ...essay,
+      result: { ...v2, grammar: null, grammar_unavailable_vi: "Chưa kiểm tra" },
+    }).result;
+    expect(r?.grammar).toBeNull();
+    expect(r?.grammarUnavailableVi).toBe("Chưa kiểm tra");
+  });
+  it.each([
+    ["a span that is not in its sentence", { ...issue, text: "goes" }],
+    ["a span before its sentence", { ...issue, start: 10, end: 12 }],
+    ["evidence without a node", { ...issue, node: null }],
+  ])("rejects %s", (_, bad) => {
+    expect(() =>
+      parseEssay({
+        ...essay,
+        result: { ...v2, grammar: { issues: [bad] } },
+      }),
+    ).toThrow(DataError);
   });
 });

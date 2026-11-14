@@ -8,19 +8,30 @@ SKIP LOCKED, analyses them (`writing.analysis`) and stores the result.
 import logging
 import unicodedata
 from collections.abc import Callable
+from dataclasses import asdict, dataclass, replace
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 from uuid import UUID
 
+import httpx
 import psycopg
 from fastapi import HTTPException
 from psycopg.types.json import Jsonb
 from psycopg_pool import ConnectionPool
 
-from app.services.backend import learner_uuid
+from app.curriculum.course import CourseSpec, load_course
+from app.curriculum.store import sync_course
+from app.engine import bkt
+from app.engine.graph import UNSEEN_P_KNOWN
+from app.engine.trace import fmt_p
+from app.services.backend import learner_uuid, save_trace
+from app.services.learning import save_mastery
 from app.services.vocabulary import start_of_day
-from app.writing.analysis import analyse, load_linking_words
+from app.writing.analysis import analyse, load_linking_words, words
+from app.writing.error_map import ErrorMap, load_error_map
+from app.writing.grammar import GrammarResult, Issue, analyse_grammar, choose_evidence, complexity
+from app.writing.languagetool import LanguageToolClient
 from app.writing.prompts import Prompt, PromptBank, load_prompts
 
 logger = logging.getLogger(__name__)
@@ -28,7 +39,11 @@ CONSENT = (
     "writing-v1"  # the version of the notice the learner accepts (messages/vi.ts, writing.consent)
 )
 MAX_CHARS = 12_000
-NOTE_VI = "Lỗi ngữ pháp, điểm ước lượng và nhận xét chi tiết sẽ có ở các bước sau."
+NOTE_VI = "Điểm ước lượng và nhận xét chi tiết sẽ có ở các bước sau."
+GRAMMAR_OFF_VI = "Chưa kiểm tra ngữ pháp: máy chủ chưa bật LanguageTool (LANGUAGETOOL_URL)."
+GRAMMAR_DOWN_VI = (
+    "Chưa kiểm tra được ngữ pháp: LanguageTool không phản hồi. Bạn thử gửi lại sau nhé."
+)
 
 
 def _uuid(value: str) -> UUID:
@@ -159,32 +174,195 @@ class WritingService:
             raise HTTPException(404, "Không tìm thấy bài viết.")
 
 
-def process_next_essay(database_url: str, writing_dir: Path) -> bool:
-    """Claim and analyse one queued essay; False when there is none (the worker then sleeps)."""
+@dataclass
+class GrammarStep:
+    """What the worker needs for step 2.2, loaded once (spaCy takes about a second)."""
+
+    nlp: Any
+    annotator: Any
+    error_map: ErrorMap
+    course: CourseSpec
+    client: LanguageToolClient | None  # None: LANGUAGETOOL_URL not set, grammar is not checked
+    draft_learners: frozenset[UUID] = frozenset()
+    _ids: tuple[UUID, dict[str, UUID]] | None = None
+
+    def evidence_allowed(self, learner: UUID) -> bool:
+        return self.error_map.status == "reviewed" or learner in self.draft_learners
+
+    def ids(self, conn: psycopg.Connection[Any]) -> tuple[UUID, dict[str, UUID]]:
+        if self._ids is None:
+            concept_ids = sync_course(conn, self.course)
+            row = conn.execute(
+                "select id from subjects where slug=%s", (self.course.slug,)
+            ).fetchone()
+            assert row is not None
+            self._ids = (row[0], concept_ids)
+        return self._ids
+
+
+def load_grammar_step(
+    writing_dir: Path, courses_dir: Path, languagetool_url: str, draft_learners: str = ""
+) -> GrammarStep:
+    import errant
+    import spacy
+
+    nlp = spacy.load("en_core_web_sm")
+    error_map = load_error_map(writing_dir / "error-map.yaml")
+    course = load_course(courses_dir / f"{error_map.course}.yaml")
+    if problems := error_map.problems(course):
+        raise ValueError("; ".join(problems))
+    return GrammarStep(
+        nlp=nlp,
+        annotator=errant.load("en", nlp),
+        error_map=error_map,
+        course=course,
+        client=LanguageToolClient(languagetool_url) if languagetool_url else None,
+        draft_learners=frozenset(
+            learner_uuid(x.strip()) for x in draft_learners.split(",") if x.strip()
+        ),
+    )
+
+
+def _analyse(
+    text: str, task: int, writing_dir: Path, step: GrammarStep | None
+) -> tuple[dict[str, Any], GrammarResult | None]:
+    """The essay's result (version 2 with a grammar step) and the grammar analysis; no database."""
+    linking = load_linking_words(writing_dir / "linking-words.yaml")
+    if step is None:
+        result = analyse(text, task, linking).to_json()
+        result["note_vi"] = NOTE_VI
+        return result, None
+    grammar: GrammarResult | None = None
+    unavailable: str | None = None
+    if step.client is None:
+        unavailable = GRAMMAR_OFF_VI
+    else:
+        try:
+            grammar = analyse_grammar(
+                text, step.client.matches(text), step.nlp, step.annotator, step.error_map
+            )
+        except httpx.HTTPError:
+            logger.exception("LanguageTool did not answer")
+            unavailable = GRAMMAR_DOWN_VI
+    sents = (
+        list(grammar.sentences)
+        if grammar
+        else [s.text for s in step.nlp(text).sents if words(s.text)]
+    )
+    result = analyse(text, task, linking, sentence_texts=sents).to_json()
+    result |= {
+        "version": 2,
+        "note_vi": NOTE_VI,
+        "grammar": None
+        if grammar is None
+        else {"checker": "LanguageTool", "issues": [], "counts": grammar.counts()},
+        "grammar_unavailable_vi": unavailable,
+        "complexity": asdict(
+            grammar.complexity
+            if grammar
+            else complexity([s for s in step.nlp(text).sents if words(s.text)])
+        ),
+        "evidence": [],
+    }
+    return result, grammar
+
+
+def _apply_evidence(
+    conn: psycopg.Connection[Any],
+    learner: UUID,
+    essay_id: UUID,
+    grammar: GrammarResult,
+    step: GrammarStep,
+    now: datetime,
+) -> tuple[list[Issue], list[dict[str, Any]]]:
+    """BKT updates for the chosen errors (point 6). Returns the issues, marked, and what moved."""
+    chosen = (
+        choose_evidence(grammar.issues, step.error_map.max_evidence_per_essay)
+        if step.evidence_allowed(learner)
+        else []
+    )
+    if not chosen:
+        return list(grammar.issues), []
+    subject, ids = step.ids(conn)
+    params = step.error_map.params()
+    rows = conn.execute(
+        "select concept_id, p_known from mastery where learner_id=%s and concept_id = any(%s)",
+        (learner, [ids[i.node] for i in chosen if i.node]),
+    ).fetchall()
+    known = {r[0]: float(r[1]) for r in rows}
+    moved = []
+    for issue in chosen:
+        assert issue.node is not None
+        p = known.get(ids[issue.node], UNSEEN_P_KNOWN)
+        p_new, trace = bkt.update_traced(
+            p, False, params, concept_slug=issue.node, now=now,
+            item_id=f"essay:{essay_id}:{issue.id}", misconception=f"writing:{issue.errant_type}",
+        )  # fmt: skip
+        trace = trace.model_copy(
+            update={
+                "rule": "writing.error",
+                "rule_vi": (
+                    f"Bài viết có lỗi: {issue.explain_vi} → khả năng đã nắm vững giảm từ "
+                    f"{fmt_p(p)} xuống {fmt_p(p_new)}. Lỗi khi viết tự do được tính nhẹ hơn câu "
+                    f"trắc nghiệm (xác suất trượt {fmt_p(params.p_slip)}, "
+                    f"đoán đúng {fmt_p(params.p_guess)})."
+                ),
+            }
+        )
+        save_mastery(conn, learner, ids[issue.node], p_new)
+        save_trace(conn, learner, subject, trace)
+        moved.append({"node": issue.node, "errant_type": issue.errant_type, "issue_id": issue.id,
+                      "p_before": round(p, 4), "p_after": round(p_new, 4)})  # fmt: skip
+    used = {i.id for i in chosen}
+    return [replace(i, evidence=i.id in used) for i in grammar.issues], moved
+
+
+def process_next_essay(
+    database_url: str,
+    writing_dir: Path,
+    step: GrammarStep | None = None,
+    *,
+    now: datetime | None = None,
+) -> bool:
+    """Claim and analyse one queued essay; False when there is none (the worker then sleeps).
+
+    Without a grammar step this is step 2.1's analysis. The result and any mastery evidence are
+    written in one transaction, so a retried job never counts an essay twice.
+    """
     with psycopg.connect(database_url) as conn:
         with conn.transaction():
             row = conn.execute(
-                "select id,prompt_id,text from essays where status='queued' "
+                "select id,learner_id,prompt_id,text from essays where status='queued' "
                 "order by submitted_at,id limit 1 for update skip locked"
             ).fetchone()
             if row is None:
                 return False
             conn.execute("update essays set status='analysing' where id=%s", (row[0],))
-        essay_id, prompt_id, text = row
+        essay_id, learner, prompt_id, text = row
         try:
             prompt = load_prompts(writing_dir / "prompts.yaml").get(prompt_id)
-            linking = load_linking_words(writing_dir / "linking-words.yaml")
-            result = analyse(text, prompt.task if prompt else 2, linking).to_json()
-            result["note_vi"] = NOTE_VI
-            conn.execute(
-                "update essays set status='done', result=%s, analysed_at=now() where id=%s",
-                (Jsonb(result), essay_id),
-            )
+            result, grammar = _analyse(text, prompt.task if prompt else 2, writing_dir, step)
+            with conn.transaction():
+                if grammar is not None and step is not None:
+                    issues, moved = _apply_evidence(
+                        conn, learner, essay_id, grammar, step, now or datetime.now(UTC)
+                    )
+                    names = {c.slug: c.name_vi for c in step.course.concepts}
+                    result["grammar"]["issues"] = [
+                        i.to_json() | {"node_vi": names.get(i.node) if i.node else None}
+                        for i in issues
+                    ]
+                    result["evidence"] = moved
+                conn.execute(
+                    "update essays set status='done', result=%s, analysed_at=now() where id=%s",
+                    (Jsonb(result), essay_id),
+                )
         except Exception:
             logger.exception("essay analysis failed", extra={"essay_id": str(essay_id)})
-            conn.execute(
-                "update essays set status='failed', failure_vi=%s, analysed_at=now() where id=%s",
-                ("Không phân tích được bài viết. Bạn thử gửi lại sau nhé.", essay_id),
-            )
-        conn.commit()
+            with conn.transaction():
+                conn.execute(
+                    "update essays set status='failed', failure_vi=%s, analysed_at=now() "
+                    "where id=%s",
+                    ("Không phân tích được bài viết. Bạn thử gửi lại sau nhé.", essay_id),
+                )
         return True

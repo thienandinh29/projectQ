@@ -24,7 +24,7 @@ Planned entries are marked _(planned)_ until they exist.
 | `.claude/settings.json` | Pre-approved commands for Claude Code |
 | `.claude/skills/verify/` | `/verify` — run all lint, type checks, tests |
 | `.env.example` | Every env var the project uses (copy to `.env`) |
-| `docker-compose.yml` | The whole stack in one command: db, migrate, api, worker, sandbox, runner, web; TEI as an opt-in profile (`specs/one-command-start/`) |
+| `docker-compose.yml` | The whole stack in one command: db, migrate, api, worker, sandbox, runner, web; TEI and LanguageTool (`writing`) as opt-in profiles (`specs/one-command-start/`) |
 | `apps/api/Dockerfile`, `apps/web/Dockerfile` | Images for the API/worker/migrations and the web app |
 | `scripts/stack-smoke.sh` | End-to-end checks of a running stack (also the CI `stack` job) |
 | `.github/workflows/ci.yml` | CI: ruff, mypy, pytest against a pgvector service, evaluation gates, sandbox escape tests, grader self-test, the full stack |
@@ -72,7 +72,9 @@ Planned entries are marked _(planned)_ until they exist.
 | `apps/api/app/engine/milestones.py` | Milestones and hidden nodes: status, milestone-test outcome (pass, gap, fail), what to learn next, level test on milestones, level estimate; traced (`specs/level-test/`) |
 | `apps/api/app/services/grammar.py`, `apps/api/app/api/grammar.py` | Grammar roadmap API: `/level-tests`, `/roadmap`, `/milestones/{slug}/tests`, `/nodes/{slug}/practice`, `/grammar-runs/{id}/answers`; draft items only for `DRAFT_ITEM_LEARNERS` |
 | `apps/api/app/writing/`, `apps/api/app/services/writing.py`, `apps/api/app/api/writing.py` | Writing (`specs/writing/`): prompts, deterministic essay analysis, `/writing/prompts`, `/essays`; the worker analyses queued essays; `services/budget.py` daily model budget |
-| `data/writing/` | Writing prompts (authored, draft until reviewed) and linking words by function |
+| `data/writing/` | Writing prompts (authored, draft until reviewed), linking words by function, `error-map.yaml` (ERRANT type → hidden node, draft, with the writing observation model) |
+| `apps/api/app/writing/languagetool.py`, `grammar.py`, `error_map.py`, `export_errors.py`; `apps/api/app/evalkit/writing_map.py` | Step 2.2: LanguageTool client and filter, minimal correction, ERRANT typing, mapping, evidence choice; the owner's mapping-check sheet and its score |
+| `languagetool/` | LanguageTool 6.8 image (compose profile `writing`): Maven Central artifacts, every jar pinned by SHA-256 |
 | `apps/api/app/evalkit/english_gate.py`, `evals/baselines/english-placement.json` | Gate: simulated level-test accuracy on the English roadmap (gap and level), checked in CI |
 | `apps/web/` | Next.js web app. English pack (`specs/web-english/`): `/` today, `/kiem-tra` level test, `/lo-trinh` roadmap, `/on-tap/{cot-moc|phan}/{slug}` milestone tests and practice, `/tu-vung` vocabulary, `/viet` writing prompts and essays, `/viet/{prompt}` editor, `/bai-viet/{id}` result, `/gioi-thieu` about (`components/english/`, `lib/english/`, Playwright tests in `e2e/`); the contest's topic research at `/kham-pha` (some steps still use sample data) |
 | `apps/web/messages/` | i18n strings (`vi` default, `en`) |
