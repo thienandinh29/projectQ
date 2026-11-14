@@ -17,7 +17,7 @@ Status values: `done`, `in progress`, `next`, `planned`, `cut`.
 |---|---|---|---|---|
 | 0 | 11–14 Nov | Foundations | Code sandbox with escape tests; code practice through the API; one-command start confirmed on the owner's laptop; CI runs the whole stack | done |
 | 1 | 14 Nov–13 Dec | **MVP: roadmap, level test, vocabulary, grammar** | Placement accuracy curve by number of questions (target ≥ 90% with ≤ 20); verifier catch rate on 50 planted-error items; the owner studies with it daily for 2 weeks | in progress |
-| 2 | 14 Dec–24 Jan | **Writing** (Task 2, then Task 1) | Error → node mapping ≥ 90% on 100 hand-checked errors; QWK ≥ 0.7 against examiner bands on 50–100 private essays; same essay scored 5 times differs by ≤ 0.5 band | planned |
+| 2 | 14 Dec–24 Jan | **Writing** (Task 2, then Task 1; spec `specs/writing/`, steps 2.1–2.5) | Error → node mapping ≥ 90% on 100 hand-checked errors; QWK ≥ 0.7 against examiner bands on 50–100 private essays; same essay scored 5 times differs by ≤ 0.5 band | planned |
 | 3 | 25 Jan–14 Mar | **Pronunciation** (one week off for Tết) | False alarms ≤ 10% on 50–100 own recordings before any red highlighting; correlation (PCC) with human scores on speechocean762 recorded, then improved by fine-tuning | planned |
 | 4 | 15 Mar–11 Apr | **Listening and Reading** | Every question verified blind and reviewed before it enters the bank; owner's labels vs the verifier on 50 items (agreement, kappa) | planned |
 | 5 | 12 Apr–9 May | **Speaking Part 1–3, and opening to testers** | Per-user limits and a daily cost cap working; ≥ 5 of 10 testers still using it after 2 weeks; old errors falling in later essays over 4 weeks | planned |
@@ -104,6 +104,7 @@ learner is an estimate with a range until measured against examiners.
 ## Log
 | Date | Change |
 |---|---|
+| 2026-11-14 | Phase 2 (Writing) specified: steps 2.1–2.5, the owner's dependency decisions and hands-on work listed |
 | 2026-11-14 | 1.4b: practice and vocabulary in the browser, Vietnamese explanations for the 108 misconceptions, 3 Playwright tests (phone size) in CI. Step 1.4 done; the phase 1 gate now waits on 2 weeks of daily use |
 | 2026-11-14 | 1.4a: level test and roadmap in the web app (home page now the English pack; topic research at `/kham-pha`), driven end to end in a phone-size browser |
 | 2026-11-14 | 1.3a API: level test, roadmap, milestone tests, quick checks, practice (migration 0015). Fixed on the way: untested prerequisites were treated as weak |
