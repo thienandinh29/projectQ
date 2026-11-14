@@ -104,6 +104,7 @@ learner is an estimate with a range until measured against examiners.
 ## Log
 | Date | Change |
 |---|---|
+| 2026-11-14 | Step 2.2 specified: LanguageTool (own container), minimal correction, ERRANT types, error map (draft, few nodes map yet), gentler writing observation model; waits on the owner's dependency decisions |
 | 2026-11-14 | 2.1: write an essay in the browser (live word count, consent notice), the worker measures it (words, sentences, paragraphs, linking words), result page and deletion; a Playwright test in CI. No model call, no score yet |
 | 2026-11-14 | Phase 2 (Writing) specified: steps 2.1–2.5, the owner's dependency decisions and hands-on work listed |
 | 2026-11-14 | 1.4b: practice and vocabulary in the browser, Vietnamese explanations for the 108 misconceptions, 3 Playwright tests (phone size) in CI. Step 1.4 done; the phase 1 gate now waits on 2 weeks of daily use |
