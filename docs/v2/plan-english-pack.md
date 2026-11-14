@@ -29,7 +29,7 @@ Status values: `done`, `in progress`, `next`, `planned`, `cut`.
 |---|---|---|---|
 | 1.1 | Two-layer roadmap: milestones and hidden nodes with CEFR levels (`specs/english-course/`), starter graph, course checker; candidate sources listed | Extend the graph to the milestones A2–C1 need; read each source's licence on its own page | in progress |
 | 1.2 | Vocabulary: word list with CEFR levels, FSRS cards (no prerequisite edges), objective item types (meaning, gap-fill, collocation, word form) (`specs/vocabulary/`) | The gap-fill answer normaliser and its unit tests; review the 30-word seed list | built 14 Nov; owner's normaliser and review pending |
-| 1.3a | Milestone tests, quick checks, pass → assumed known, fail → open and remediate; level test over milestones plus a short vocabulary part; authored items (`specs/level-test/`) | Review the items; explain one real decision trace; the accuracy curve | spec written (14 Nov) |
+| 1.3a | Milestone tests, quick checks, pass → assumed known, fail → open and remediate; level test over milestones plus a short vocabulary part; authored items (`specs/level-test/`) | Review the items; explain one real decision trace; the accuracy curve | in progress: engine, 76 draft items and the gate merged; service and routes next |
 | 1.3b | Items from cited sources: embeddings on a GPU notebook (export → embed → import), generation and blind verification, review queue (`specs/cited-items/`) | The embedding notebook; 50 planted-error items | spec written; needs a verified source and model keys |
 | 1.4 | Web flow on real data: level test → roadmap showing milestones → daily review and practice | Use it daily; note what feels wrong | planned |
 | Gate | Placement accuracy curve from the simulation; verifier catch rate on planted errors | Write the planted errors; compute both results with intervals | planned |
@@ -104,6 +104,7 @@ learner is an estimate with a range until measured against examiners.
 ## Log
 | Date | Change |
 |---|---|
+| 2026-11-14 | 1.3a engine and gate: on the 10-milestone roadmap, 20 questions locate the gap exactly for 85% of single-gap learners (target 90%: not met) and 92% of learners with any state; the level shown is exact for 88% and 95%. Recorded as the baseline |
 | 2026-11-14 | Step 1.3 specified and split: 1.3a milestones and level test (no LLM), 1.3b cited and verified items |
 | 2026-11-14 | Step 1.2 built: vocabulary (word lists, items, FSRS cards, `/vocab/*` routes, migration 0014), checked in the stack smoke test. Real word lists wait for their licence checks |
 | 2026-11-14 | Plan created from the owner's proposal; replaces the plan to Tết. Phase 0 done (weeks 0–2 of the old plan). Step 1.1: milestone and hidden-node model, starter roadmap (10 milestones, 19 hidden nodes), candidate sources |

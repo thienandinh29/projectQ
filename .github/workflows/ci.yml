@@ -33,6 +33,8 @@ jobs:
       - run: uv run pytest -q
       - name: Evaluation gates (placement accuracy vs baseline)
         run: uv run python -m app.evalkit.gates check ../../evals/baselines/placement-gate.json
+      - name: Evaluation gate (level test on the English roadmap vs baseline)
+        run: uv run python -m app.evalkit.english_gate check ../../evals/baselines/english-placement.json
 
   runner:
     runs-on: ubuntu-latest

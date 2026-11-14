@@ -1,0 +1,134 @@
+{
+ "gate": {
+  "name": "english-placement",
+  "course": "english-ielts.yaml",
+  "runs": 1000,
+  "seed": 20261114,
+  "milestones": 10,
+  "states": 69,
+  "state_family": "ideals",
+  "target": "gap_exact >= 0.9 within 20 questions"
+ },
+ "cells": [
+  {
+   "learner": "single_gap",
+   "budget": 6,
+   "gap_exact": 0.512,
+   "gap_exact_ci95": [
+    0.4805,
+    0.5434
+   ],
+   "level_exact": 0.664,
+   "level_exact_ci95": [
+    0.6338,
+    0.6933
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "learner": "single_gap",
+   "budget": 10,
+   "gap_exact": 0.557,
+   "gap_exact_ci95": [
+    0.5256,
+    0.5881
+   ],
+   "level_exact": 0.671,
+   "level_exact_ci95": [
+    0.6409,
+    0.7001
+   ],
+   "mean_questions": 9.94
+  },
+  {
+   "learner": "single_gap",
+   "budget": 15,
+   "gap_exact": 0.742,
+   "gap_exact_ci95": [
+    0.7137,
+    0.7689
+   ],
+   "level_exact": 0.803,
+   "level_exact_ci95": [
+    0.777,
+    0.8272
+   ],
+   "mean_questions": 14.63
+  },
+  {
+   "learner": "single_gap",
+   "budget": 20,
+   "gap_exact": 0.846,
+   "gap_exact_ci95": [
+    0.8221,
+    0.8678
+   ],
+   "level_exact": 0.884,
+   "level_exact_ci95": [
+    0.8625,
+    0.9032
+   ],
+   "mean_questions": 18.05
+  },
+  {
+   "learner": "any_state",
+   "budget": 6,
+   "gap_exact": 0.655,
+   "gap_exact_ci95": [
+    0.6246,
+    0.6845
+   ],
+   "level_exact": 0.786,
+   "level_exact_ci95": [
+    0.7593,
+    0.811
+   ],
+   "mean_questions": 6.0
+  },
+  {
+   "learner": "any_state",
+   "budget": 10,
+   "gap_exact": 0.758,
+   "gap_exact_ci95": [
+    0.7302,
+    0.7843
+   ],
+   "level_exact": 0.86,
+   "level_exact_ci95": [
+    0.8369,
+    0.8809
+   ],
+   "mean_questions": 10.0
+  },
+  {
+   "learner": "any_state",
+   "budget": 15,
+   "gap_exact": 0.87,
+   "gap_exact_ci95": [
+    0.8476,
+    0.8902
+   ],
+   "level_exact": 0.925,
+   "level_exact_ci95": [
+    0.9069,
+    0.9406
+   ],
+   "mean_questions": 14.87
+  },
+  {
+   "learner": "any_state",
+   "budget": 20,
+   "gap_exact": 0.921,
+   "gap_exact_ci95": [
+    0.9025,
+    0.937
+   ],
+   "level_exact": 0.954,
+   "level_exact_ci95": [
+    0.9391,
+    0.9661
+   ],
+   "mean_questions": 18.8
+  }
+ ]
+}

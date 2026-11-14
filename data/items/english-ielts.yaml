@@ -1,0 +1,996 @@
+# Grammar items for the English roadmap (specs/level-test): milestone tests, quick checks, practice.
+# Written by the agent as DRAFT; the owner reviews each and changes `status` to `reviewed`. Draft items are served to
+# the owner alone, labelled "Bản nháp"; other testers only ever see reviewed items.
+# Each item practises one hidden node (`node`). Exactly one option is correct; every wrong option names the
+# misconception it reveals. Options are shuffled when served. Only options with exactly one correct answer are used
+# (for example "If I was you" is acceptable informally, so it is never offered as a wrong option).
+course: english-ielts
+items:
+- id: be-present-1
+  node: be-present
+  status: draft
+  prompt: My sister ___ a nurse.
+  options:
+  - text: is
+    correct: true
+  - text: are
+    misconception: be-plural-for-singular
+  - text: am
+    misconception: be-wrong-person
+  - text: be
+    misconception: be-base-form-as-verb
+- id: be-present-2
+  node: be-present
+  status: draft
+  prompt: We ___ ready for the test.
+  options:
+  - text: are
+    correct: true
+  - text: is
+    misconception: be-singular-for-plural
+  - text: am
+    misconception: be-wrong-person
+  - text: be
+    misconception: be-base-form-as-verb
+- id: be-present-3
+  node: be-present
+  status: draft
+  prompt: I ___ from Da Nang.
+  options:
+  - text: am
+    correct: true
+  - text: is
+    misconception: be-wrong-person
+  - text: are
+    misconception: be-wrong-person
+  - text: be
+    misconception: be-base-form-as-verb
+- id: be-present-4
+  node: be-present
+  status: draft
+  prompt: ___ your parents at home now?
+  options:
+  - text: Are
+    correct: true
+  - text: Is
+    misconception: be-singular-for-plural
+  - text: Do
+    misconception: do-instead-of-be
+  - text: Am
+    misconception: be-wrong-person
+- id: present-simple-1
+  node: present-simple
+  status: draft
+  prompt: She ___ to work by bus every day.
+  options:
+  - text: goes
+    correct: true
+  - text: go
+    misconception: third-person-s-missing
+  - text: going
+    misconception: ing-without-be
+  - text: is go
+    misconception: be-with-base-verb
+- id: present-simple-2
+  node: present-simple
+  status: draft
+  prompt: They ___ coffee every morning.
+  options:
+  - text: drink
+    correct: true
+  - text: drinks
+    misconception: third-person-s-on-plural
+  - text: drinking
+    misconception: ing-without-be
+  - text: are drink
+    misconception: be-with-base-verb
+- id: present-simple-3
+  node: present-simple
+  status: draft
+  prompt: ___ he speak French?
+  options:
+  - text: Does
+    correct: true
+  - text: Do
+    misconception: do-for-third-person
+  - text: Is
+    misconception: be-for-do-question
+  - text: Has
+    misconception: have-for-do-question
+- id: present-simple-4
+  node: present-simple
+  status: draft
+  prompt: My brother ___ like spicy food.
+  options:
+  - text: doesn't
+    correct: true
+  - text: don't
+    misconception: do-for-third-person
+  - text: isn't
+    misconception: be-for-do-negative
+  - text: not
+    misconception: missing-auxiliary
+- id: present-continuous-1
+  node: present-continuous
+  status: draft
+  prompt: Look! It ___ outside.
+  options:
+  - text: is raining
+    correct: true
+  - text: rains
+    misconception: simple-for-now
+  - text: raining
+    misconception: missing-be
+  - text: is rain
+    misconception: be-with-base-verb
+- id: present-continuous-2
+  node: present-continuous
+  status: draft
+  prompt: I can't talk now. I ___ dinner.
+  options:
+  - text: am cooking
+    correct: true
+  - text: cook
+    misconception: simple-for-now
+  - text: cooking
+    misconception: missing-be
+  - text: am cook
+    misconception: be-with-base-verb
+- id: present-continuous-3
+  node: present-continuous
+  status: draft
+  prompt: What ___ you doing at the moment?
+  options:
+  - text: are
+    correct: true
+  - text: do
+    misconception: do-for-continuous
+  - text: is
+    misconception: be-wrong-person
+  - text: does
+    misconception: do-for-continuous
+- id: present-continuous-4
+  node: present-continuous
+  status: draft
+  prompt: Water ___ at 100 degrees Celsius.
+  options:
+  - text: boils
+    correct: true
+  - text: is boiling
+    misconception: continuous-for-general-truth
+  - text: boiling
+    misconception: missing-be
+  - text: boil
+    misconception: third-person-s-missing
+- id: plural-nouns-1
+  node: plural-nouns
+  status: draft
+  prompt: There are three ___ on the table.
+  options:
+  - text: boxes
+    correct: true
+  - text: boxs
+    misconception: plural-es-rule
+  - text: box
+    misconception: plural-missing
+  - text: boxies
+    misconception: plural-y-rule-overused
+- id: plural-nouns-2
+  node: plural-nouns
+  status: draft
+  prompt: Two ___ are playing in the park.
+  options:
+  - text: children
+    correct: true
+  - text: childs
+    misconception: irregular-plural-regularised
+  - text: child
+    misconception: plural-missing
+  - text: childrens
+    misconception: double-plural
+- id: plural-nouns-3
+  node: plural-nouns
+  status: draft
+  prompt: I need some new ___ for school.
+  options:
+  - text: books
+    correct: true
+  - text: book
+    misconception: plural-missing
+  - text: bookes
+    misconception: plural-es-rule
+  - text: a books
+    misconception: article-with-plural
+- id: plural-nouns-4
+  node: plural-nouns
+  status: draft
+  prompt: The city has many ___.
+  options:
+  - text: universities
+    correct: true
+  - text: universitys
+    misconception: plural-y-rule
+  - text: university
+    misconception: plural-missing
+  - text: universityes
+    misconception: plural-y-rule
+- id: articles-basic-1
+  node: articles-basic
+  status: draft
+  prompt: She is ___ engineer.
+  options:
+  - text: an
+    correct: true
+  - text: a
+    misconception: a-before-vowel-sound
+  - text: the
+    misconception: the-for-first-mention
+  - text: (no article)
+    misconception: article-omitted-singular
+- id: articles-basic-2
+  node: articles-basic
+  status: draft
+  prompt: I saw a dog in the street. ___ dog was very big.
+  options:
+  - text: The
+    correct: true
+  - text: A
+    misconception: a-for-second-mention
+  - text: An
+    misconception: an-before-consonant-sound
+  - text: (no article)
+    misconception: article-omitted-singular
+- id: articles-basic-3
+  node: articles-basic
+  status: draft
+  prompt: He wants to be ___ doctor.
+  options:
+  - text: a
+    correct: true
+  - text: an
+    misconception: an-before-consonant-sound
+  - text: the
+    misconception: the-for-job
+  - text: (no article)
+    misconception: article-omitted-singular
+- id: articles-basic-4
+  node: articles-basic
+  status: draft
+  prompt: ___ sun rises in the east.
+  options:
+  - text: The
+    correct: true
+  - text: A
+    misconception: a-for-unique
+  - text: An
+    misconception: an-before-consonant-sound
+  - text: (no article)
+    misconception: article-omitted-unique
+- id: there-is-are-1
+  node: there-is-are
+  status: draft
+  prompt: There ___ a bank near my house.
+  options:
+  - text: is
+    correct: true
+  - text: are
+    misconception: there-are-with-singular
+  - text: have
+    misconception: have-for-there-is
+  - text: has
+    misconception: have-for-there-is
+- id: there-is-are-2
+  node: there-is-are
+  status: draft
+  prompt: There ___ many students in the library.
+  options:
+  - text: are
+    correct: true
+  - text: is
+    misconception: there-is-with-plural
+  - text: have
+    misconception: have-for-there-is
+  - text: has
+    misconception: have-for-there-is
+- id: there-is-are-3
+  node: there-is-are
+  status: draft
+  prompt: ___ there any milk in the fridge?
+  options:
+  - text: Is
+    correct: true
+  - text: Are
+    misconception: are-with-uncountable
+  - text: Has
+    misconception: have-for-there-is
+  - text: Do
+    misconception: do-for-there-is
+- id: there-is-are-4
+  node: there-is-are
+  status: draft
+  prompt: In my town, ___ a big market.
+  options:
+  - text: there is
+    correct: true
+  - text: it has
+    misconception: have-for-there-is
+  - text: there are
+    misconception: there-are-with-singular
+  - text: have
+    misconception: have-for-there-is
+- id: past-simple-1
+  node: past-simple
+  status: draft
+  prompt: We ___ a great film last night.
+  options:
+  - text: watched
+    correct: true
+  - text: watch
+    misconception: present-for-past
+  - text: have watched
+    misconception: present-perfect-with-finished-time
+  - text: watching
+    misconception: ing-without-be
+- id: past-simple-2
+  node: past-simple
+  status: draft
+  prompt: She ___ to Hanoi in 2020.
+  options:
+  - text: went
+    correct: true
+  - text: goed
+    misconception: irregular-past-regularised
+  - text: has gone
+    misconception: present-perfect-with-finished-time
+  - text: go
+    misconception: present-for-past
+- id: past-simple-3
+  node: past-simple
+  status: draft
+  prompt: ___ you finish your homework yesterday?
+  options:
+  - text: Did
+    correct: true
+  - text: Do
+    misconception: present-for-past
+  - text: Were
+    misconception: be-for-do-question
+  - text: Have
+    misconception: present-perfect-with-finished-time
+- id: past-simple-4
+  node: past-simple
+  status: draft
+  prompt: He ___ come to the party last Saturday.
+  options:
+  - text: didn't
+    correct: true
+  - text: don't
+    misconception: present-for-past
+  - text: wasn't
+    misconception: be-for-do-negative
+  - text: not
+    misconception: missing-auxiliary
+- id: future-will-going-to-1
+  node: future-will-going-to
+  status: draft
+  prompt: Tomorrow I ___ my aunt.
+  options:
+  - text: am going to visit
+    correct: true
+  - text: going to visit
+    misconception: missing-be
+  - text: am going visit
+    misconception: missing-to
+  - text: am go to visit
+    misconception: be-with-base-verb
+- id: future-will-going-to-2
+  node: future-will-going-to
+  status: draft
+  prompt: She ___ be twenty next year.
+  options:
+  - text: will
+    correct: true
+  - text: wills
+    misconception: third-person-s-on-modal
+  - text: will to
+    misconception: to-after-modal
+  - text: is will
+    misconception: be-with-modal
+- id: future-will-going-to-3
+  node: future-will-going-to
+  status: draft
+  prompt: They ___ arrive until 9 p.m.
+  options:
+  - text: won't
+    correct: true
+  - text: willn't
+    misconception: wrong-negative-form
+  - text: don't will
+    misconception: do-with-modal
+  - text: aren't will
+    misconception: be-with-modal
+- id: future-will-going-to-4
+  node: future-will-going-to
+  status: draft
+  prompt: ___ it rain tomorrow?
+  options:
+  - text: Will
+    correct: true
+  - text: Does
+    misconception: present-for-future
+  - text: Is
+    misconception: be-for-will-question
+  - text: Do
+    misconception: present-for-future
+- id: comparatives-1
+  node: comparatives
+  status: draft
+  prompt: My house is ___ than yours.
+  options:
+  - text: bigger
+    correct: true
+  - text: more big
+    misconception: more-with-short-adjective
+  - text: biger
+    misconception: double-consonant-rule
+  - text: the biggest
+    misconception: superlative-for-comparative
+- id: comparatives-2
+  node: comparatives
+  status: draft
+  prompt: This book is ___ than the last one.
+  options:
+  - text: more interesting
+    correct: true
+  - text: interestinger
+    misconception: er-with-long-adjective
+  - text: more interestinger
+    misconception: double-comparative
+  - text: most interesting
+    misconception: superlative-for-comparative
+- id: comparatives-3
+  node: comparatives
+  status: draft
+  prompt: The weather today is ___ than yesterday.
+  options:
+  - text: worse
+    correct: true
+  - text: badder
+    misconception: irregular-comparative-regularised
+  - text: more bad
+    misconception: more-with-irregular-adjective
+  - text: worst
+    misconception: superlative-for-comparative
+- id: comparatives-4
+  node: comparatives
+  status: draft
+  prompt: She is taller ___ her brother.
+  options:
+  - text: than
+    correct: true
+  - text: that
+    misconception: that-for-than
+  - text: then
+    misconception: then-for-than
+  - text: as
+    misconception: as-for-than
+- id: superlatives-1
+  node: superlatives
+  status: draft
+  prompt: It's ___ building in the city.
+  options:
+  - text: the tallest
+    correct: true
+  - text: the taller
+    misconception: comparative-for-superlative
+  - text: the most tall
+    misconception: most-with-short-adjective
+  - text: tallest
+    misconception: article-omitted-superlative
+- id: superlatives-2
+  node: superlatives
+  status: draft
+  prompt: This is the ___ day of my life.
+  options:
+  - text: best
+    correct: true
+  - text: goodest
+    misconception: irregular-superlative-regularised
+  - text: most good
+    misconception: most-with-irregular-adjective
+  - text: better
+    misconception: comparative-for-superlative
+- id: superlatives-3
+  node: superlatives
+  status: draft
+  prompt: She is ___ student in the class.
+  options:
+  - text: the most intelligent
+    correct: true
+  - text: the intelligentest
+    misconception: est-with-long-adjective
+  - text: the more intelligent
+    misconception: comparative-for-superlative
+  - text: most intelligent
+    misconception: article-omitted-superlative
+- id: superlatives-4
+  node: superlatives
+  status: draft
+  prompt: Ha Long Bay is one of the most beautiful ___ in Vietnam.
+  options:
+  - text: places
+    correct: true
+  - text: place
+    misconception: singular-after-one-of
+  - text: a place
+    misconception: singular-after-one-of
+  - text: placed
+    misconception: wrong-word-form
+- id: present-perfect-form-1
+  node: present-perfect-form
+  status: draft
+  prompt: I ___ never been to Japan.
+  options:
+  - text: have
+    correct: true
+  - text: has
+    misconception: has-with-i
+  - text: am
+    misconception: be-for-have
+  - text: did
+    misconception: past-auxiliary-for-perfect
+- id: present-perfect-form-2
+  node: present-perfect-form
+  status: draft
+  prompt: She ___ already finished her report.
+  options:
+  - text: has
+    correct: true
+  - text: have
+    misconception: have-with-third-person
+  - text: is
+    misconception: be-for-have
+  - text: did
+    misconception: past-auxiliary-for-perfect
+- id: present-perfect-form-3
+  node: present-perfect-form
+  status: draft
+  prompt: Have you ever ___ sushi?
+  options:
+  - text: eaten
+    correct: true
+  - text: ate
+    misconception: past-simple-for-participle
+  - text: eat
+    misconception: base-for-participle
+  - text: eating
+    misconception: ing-for-participle
+- id: present-perfect-form-4
+  node: present-perfect-form
+  status: draft
+  prompt: They have ___ in this city for many years.
+  options:
+  - text: lived
+    correct: true
+  - text: live
+    misconception: base-for-participle
+  - text: living
+    misconception: ing-for-participle
+  - text: lives
+    misconception: third-person-s-for-participle
+- id: present-perfect-vs-past-1
+  node: present-perfect-vs-past
+  status: draft
+  prompt: I ___ in Hanoi since 2019.
+  options:
+  - text: have lived
+    correct: true
+  - text: lived
+    misconception: past-simple-with-since
+  - text: live
+    misconception: present-simple-with-since
+  - text: am living
+    misconception: continuous-with-since
+- id: present-perfect-vs-past-2
+  node: present-perfect-vs-past
+  status: draft
+  prompt: She ___ to London three years ago.
+  options:
+  - text: went
+    correct: true
+  - text: has gone
+    misconception: present-perfect-with-ago
+  - text: has been
+    misconception: present-perfect-with-ago
+  - text: goes
+    misconception: present-for-past
+- id: present-perfect-vs-past-3
+  node: present-perfect-vs-past
+  status: draft
+  prompt: We have known each other ___ ten years.
+  options:
+  - text: for
+    correct: true
+  - text: since
+    misconception: since-with-period
+  - text: ago
+    misconception: ago-with-perfect
+  - text: during
+    misconception: during-for-for
+- id: present-perfect-vs-past-4
+  node: present-perfect-vs-past
+  status: draft
+  prompt: I haven't seen him ___ last Monday.
+  options:
+  - text: since
+    correct: true
+  - text: for
+    misconception: for-with-point-in-time
+  - text: ago
+    misconception: ago-with-perfect
+  - text: from
+    misconception: from-for-since
+- id: first-conditional-1
+  node: first-conditional
+  status: draft
+  prompt: If it ___ tomorrow, we will stay at home.
+  options:
+  - text: rains
+    correct: true
+  - text: will rain
+    misconception: will-in-if-clause
+  - text: rained
+    misconception: second-for-first
+  - text: would rain
+    misconception: would-in-if-clause
+- id: first-conditional-2
+  node: first-conditional
+  status: draft
+  prompt: If you study hard, you ___ the exam.
+  options:
+  - text: will pass
+    correct: true
+  - text: would pass
+    misconception: would-in-first-conditional
+  - text: passed
+    misconception: past-for-future-result
+  - text: would have passed
+    misconception: third-for-first
+- id: first-conditional-3
+  node: first-conditional
+  status: draft
+  prompt: I'll call you if I ___ any news.
+  options:
+  - text: get
+    correct: true
+  - text: will get
+    misconception: will-in-if-clause
+  - text: got
+    misconception: second-for-first
+  - text: would get
+    misconception: would-in-if-clause
+- id: first-conditional-4
+  node: first-conditional
+  status: draft
+  prompt: ___ you hurry, you will miss the bus.
+  options:
+  - text: Unless
+    correct: true
+  - text: If
+    misconception: if-for-unless
+  - text: When
+    misconception: when-for-unless
+  - text: Although
+    misconception: although-for-unless
+- id: second-conditional-1
+  node: second-conditional
+  status: draft
+  prompt: If I ___ rich, I would travel around the world.
+  options:
+  - text: were
+    correct: true
+  - text: am
+    misconception: present-in-second-conditional
+  - text: will be
+    misconception: will-in-if-clause
+  - text: would be
+    misconception: would-in-if-clause
+- id: second-conditional-2
+  node: second-conditional
+  status: draft
+  prompt: If she had more time, she ___ a new language.
+  options:
+  - text: would learn
+    correct: true
+  - text: will learn
+    misconception: will-in-second-conditional
+  - text: learns
+    misconception: present-in-second-conditional
+  - text: learned
+    misconception: past-for-would
+- id: second-conditional-3
+  node: second-conditional
+  status: draft
+  prompt: What would you do if you ___ the lottery?
+  options:
+  - text: won
+    correct: true
+  - text: win
+    misconception: present-in-second-conditional
+  - text: will win
+    misconception: will-in-if-clause
+  - text: would win
+    misconception: would-in-if-clause
+- id: second-conditional-4
+  node: second-conditional
+  status: draft
+  prompt: If I ___ you, I would talk to the teacher.
+  options:
+  - text: were
+    correct: true
+  - text: am
+    misconception: present-in-second-conditional
+  - text: be
+    misconception: base-form-in-if-clause
+  - text: would be
+    misconception: would-in-if-clause
+- id: passive-present-past-1
+  node: passive-present-past
+  status: draft
+  prompt: English ___ in many countries.
+  options:
+  - text: is spoken
+    correct: true
+  - text: speaks
+    misconception: active-for-passive
+  - text: is speaking
+    misconception: continuous-for-passive
+  - text: spoken
+    misconception: missing-be
+- id: passive-present-past-2
+  node: passive-present-past
+  status: draft
+  prompt: The bridge ___ in 1990.
+  options:
+  - text: was built
+    correct: true
+  - text: built
+    misconception: active-for-passive
+  - text: is built
+    misconception: present-for-past
+  - text: was build
+    misconception: base-for-participle
+- id: passive-present-past-3
+  node: passive-present-past
+  status: draft
+  prompt: These cars ___ in Japan.
+  options:
+  - text: are made
+    correct: true
+  - text: is made
+    misconception: be-singular-for-plural
+  - text: make
+    misconception: active-for-passive
+  - text: are making
+    misconception: continuous-for-passive
+- id: passive-present-past-4
+  node: passive-present-past
+  status: draft
+  prompt: The letters ___ yesterday.
+  options:
+  - text: were sent
+    correct: true
+  - text: was sent
+    misconception: be-singular-for-plural
+  - text: sent
+    misconception: active-for-passive
+  - text: are sent
+    misconception: present-for-past
+- id: past-continuous-1
+  node: past-continuous
+  status: draft
+  prompt: I ___ TV when the phone rang.
+  options:
+  - text: was watching
+    correct: true
+  - text: watched
+    misconception: simple-for-background-action
+  - text: am watching
+    misconception: present-for-past
+  - text: were watching
+    misconception: be-wrong-person
+- id: past-continuous-2
+  node: past-continuous
+  status: draft
+  prompt: What ___ you doing at 8 o'clock last night?
+  options:
+  - text: were
+    correct: true
+  - text: was
+    misconception: be-wrong-person
+  - text: did
+    misconception: do-for-continuous
+  - text: are
+    misconception: present-for-past
+- id: past-continuous-3
+  node: past-continuous
+  status: draft
+  prompt: While she ___, she cut her finger.
+  options:
+  - text: was cooking
+    correct: true
+  - text: cooked
+    misconception: simple-for-background-action
+  - text: is cooking
+    misconception: present-for-past
+  - text: cooks
+    misconception: present-for-past
+- id: past-continuous-4
+  node: past-continuous
+  status: draft
+  prompt: They ___ playing football when it started to rain.
+  options:
+  - text: were
+    correct: true
+  - text: was
+    misconception: be-wrong-person
+  - text: are
+    misconception: present-for-past
+  - text: did
+    misconception: do-for-continuous
+- id: past-perfect-1
+  node: past-perfect
+  status: draft
+  prompt: When we arrived, the film ___ already started.
+  options:
+  - text: had
+    correct: true
+  - text: has
+    misconception: present-perfect-for-past-perfect
+  - text: was
+    misconception: be-for-have
+  - text: did
+    misconception: past-auxiliary-for-perfect
+- id: past-perfect-2
+  node: past-perfect
+  status: draft
+  prompt: She was tired because she ___ all day.
+  options:
+  - text: had worked
+    correct: true
+  - text: has worked
+    misconception: present-perfect-for-past-perfect
+  - text: works
+    misconception: present-for-past
+  - text: had work
+    misconception: base-for-participle
+- id: past-perfect-3
+  node: past-perfect
+  status: draft
+  prompt: I didn't recognise him because I ___ him before.
+  options:
+  - text: had never met
+    correct: true
+  - text: have never met
+    misconception: present-perfect-for-past-perfect
+  - text: never meet
+    misconception: present-for-past
+  - text: had never meet
+    misconception: base-for-participle
+- id: past-perfect-4
+  node: past-perfect
+  status: draft
+  prompt: By the time the police came, the thief ___.
+  options:
+  - text: had escaped
+    correct: true
+  - text: has escaped
+    misconception: present-perfect-for-past-perfect
+  - text: escapes
+    misconception: present-for-past
+  - text: had escape
+    misconception: base-for-participle
+- id: third-conditional-1
+  node: third-conditional
+  status: draft
+  prompt: If I had studied harder, I ___ the exam.
+  options:
+  - text: would have passed
+    correct: true
+  - text: would pass
+    misconception: second-for-third
+  - text: will pass
+    misconception: first-for-third
+  - text: had passed
+    misconception: past-perfect-in-result
+- id: third-conditional-2
+  node: third-conditional
+  status: draft
+  prompt: If she ___ the bus, she wouldn't have been late.
+  options:
+  - text: hadn't missed
+    correct: true
+  - text: didn't miss
+    misconception: second-for-third
+  - text: wouldn't miss
+    misconception: would-in-if-clause
+  - text: hasn't missed
+    misconception: present-perfect-for-past-perfect
+- id: third-conditional-3
+  node: third-conditional
+  status: draft
+  prompt: We would have helped you if you ___ us.
+  options:
+  - text: had asked
+    correct: true
+  - text: asked
+    misconception: second-for-third
+  - text: would ask
+    misconception: would-in-if-clause
+  - text: have asked
+    misconception: present-perfect-for-past-perfect
+- id: third-conditional-4
+  node: third-conditional
+  status: draft
+  prompt: If it ___ so cold, we would have gone to the beach.
+  options:
+  - text: hadn't been
+    correct: true
+  - text: wasn't
+    misconception: second-for-third
+  - text: wouldn't be
+    misconception: would-in-if-clause
+  - text: isn't
+    misconception: present-for-past
+- id: mixed-conditionals-1
+  node: mixed-conditionals
+  status: draft
+  prompt: If I had taken that job, I ___ in London now.
+  options:
+  - text: would be living
+    correct: true
+  - text: would have lived
+    misconception: third-for-mixed
+  - text: will live
+    misconception: first-for-mixed
+  - text: lived
+    misconception: past-for-would
+- id: mixed-conditionals-2
+  node: mixed-conditionals
+  status: draft
+  prompt: If she weren't so shy, she ___ to the party last night.
+  options:
+  - text: would have gone
+    correct: true
+  - text: would go
+    misconception: second-for-mixed
+  - text: will go
+    misconception: first-for-mixed
+  - text: went
+    misconception: past-for-would
+- id: mixed-conditionals-3
+  node: mixed-conditionals
+  status: draft
+  prompt: If I ___ breakfast this morning, I wouldn't be hungry now.
+  options:
+  - text: had eaten
+    correct: true
+  - text: ate
+    misconception: past-simple-for-past-perfect
+  - text: have eaten
+    misconception: present-perfect-for-past-perfect
+  - text: would eat
+    misconception: would-in-if-clause
+- id: mixed-conditionals-4
+  node: mixed-conditionals
+  status: draft
+  prompt: If you ___ me the truth yesterday, we wouldn't be in this situation now.
+  options:
+  - text: had told
+    correct: true
+  - text: told
+    misconception: past-simple-for-past-perfect
+  - text: would tell
+    misconception: would-in-if-clause
+  - text: have told
+    misconception: present-perfect-for-past-perfect

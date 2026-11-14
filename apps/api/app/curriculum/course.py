@@ -201,6 +201,18 @@ class CourseSpec(BaseModel):
                 raise ValueError(f"objective {o.id}: figure_description needs a figure kind")
         return self
 
+    def milestone_of(self, slug: str) -> str:
+        """The milestone a concept belongs to (itself, for a milestone)."""
+        concept = next(c for c in self.concepts if c.slug == slug)
+        return concept.part_of or concept.slug
+
+    def milestone_edges(self) -> list[tuple[str, str]]:
+        """Prerequisite edges between milestones, explicit or implied by their hidden nodes."""
+        edges = {
+            (self.milestone_of(a), self.milestone_of(b)) for a, b in concept_edges(self.concepts)
+        }
+        return sorted((a, b) for a, b in edges if a != b)
+
     def milestones(self) -> tuple[Concept, ...]:
         return tuple(c for c in self.concepts if c.part_of is None)
 

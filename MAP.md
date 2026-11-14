@@ -68,7 +68,9 @@ Planned entries are marked _(planned)_ until they exist.
 | `data/sources/` | Open-education allowlist, library manifests and acquisition/index reports; `catalog.yaml` + `catalog-report.json` for v2 structured sources; `english-candidates.yaml` (English sources awaiting licence checks, rules in `app/sources/candidates.py`) |
 | `data/vocabulary/` | Word lists: `core-seed.yaml` (30 authored words A2–C1, status draft until the owner reviews it) |
 | `data/kg/` _(planned)_ | Knowledge Graph YAML fixtures |
-| `data/items/` _(planned)_ | MCQ item fixtures with misconception tags |
+| `data/items/` | Authored grammar items per course: `english-ielts.yaml` (76 draft MCQs, 4 per hidden node, a misconception on every wrong option) |
+| `apps/api/app/engine/milestones.py` | Milestones and hidden nodes: status, milestone-test outcome (pass, gap, fail), what to learn next, level test on milestones, level estimate; traced (`specs/level-test/`) |
+| `apps/api/app/evalkit/english_gate.py`, `evals/baselines/english-placement.json` | Gate: simulated level-test accuracy on the English roadmap (gap and level), checked in CI |
 | `apps/web/` | Next.js web app: topic input, research trail, map, learning, tutor (some steps still use sample data) |
 | `apps/web/messages/` | i18n strings (`vi` default, `en`) |
 | `supabase/migrations/` | Database schema (Postgres + pgvector); `0001_init.sql` = schema v1, `0002` = chunk provenance (chapter, section, kind, url), `0003` = `halfvec(1024)`, `url` → `source_uri`, HNSW dropped (rebuilt after load), `0004` = `decision_traces` (the "Vì sao?" audit trail), `0014` = `vocab_cards` + `vocab_reviews` (vocabulary state) |
