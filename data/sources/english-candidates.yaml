@@ -1,0 +1,73 @@
+# Open sources considered for the English course (specs/english-course). Candidates only: nothing here is fetched.
+# Licences below are what we BELIEVE; the owner reads each on the source's own page (this repo's agent cannot reach
+# these sites) and sets status:
+#   to_check  -> not read yet
+#   verified  -> licence read on its own page: add checked_on (YYYY-MM-DD) and licence_page (URL)
+#   rejected  -> add reason (e.g. NoDerivatives, no clear licence)
+# Rules (checked by code): NoDerivatives is never allowed; NonCommercial is allowed for study and flagged.
+candidates:
+  - slug: ngsl
+    name: New General Service List (NGSL)
+    url: https://www.newgeneralservicelist.com/
+    use: core general vocabulary (about 2,800 words), the A1-B1 word set
+    believed_licence: CC BY-SA 4.0
+    status: to_check
+  - slug: nawl
+    name: New Academic Word List (NAWL)
+    url: https://www.newgeneralservicelist.com/new-academic-word-list
+    use: academic vocabulary for IELTS (about 960 words), B2-C1
+    believed_licence: CC BY-SA 4.0
+    status: to_check
+  - slug: wiktionary
+    name: English Wiktionary
+    url: https://en.wiktionary.org/
+    use: definitions, word forms, example sentences, IPA
+    believed_licence: CC BY-SA 4.0
+    status: to_check
+  - slug: tatoeba
+    name: Tatoeba sentences
+    url: https://tatoeba.org/en/downloads
+    use: example sentences, many with Vietnamese translations, for vocabulary cards
+    believed_licence: CC BY 2.0 FR (some sentences CC0)
+    status: to_check
+  - slug: simple-wikipedia
+    name: Simple English Wikipedia
+    url: https://simple.wikipedia.org/
+    use: reading texts for lower levels
+    believed_licence: CC BY-SA 4.0
+    status: to_check
+  - slug: wikibooks-grammar
+    name: Wikibooks, English Grammar
+    url: https://en.wikibooks.org/wiki/English_Grammar
+    use: grammar explanations to cite
+    believed_licence: CC BY-SA 4.0
+    status: to_check
+  - slug: wordnet
+    name: Princeton WordNet
+    url: https://wordnet.princeton.edu/
+    use: definitions and synonyms (paraphrase practice)
+    believed_licence: WordNet licence (permissive, attribution)
+    status: to_check
+  - slug: open-esl-textbooks
+    name: Open ESL and academic-writing textbooks (Open Textbook Library, LibreTexts)
+    url: https://open.umn.edu/opentextbooks
+    use: grammar and writing explanations; pick specific books, each with its own licence
+    believed_licence: varies per book (CC BY, CC BY-NC, some ND which are refused)
+    status: to_check
+  - slug: cefr-descriptors
+    name: CEFR descriptors (Council of Europe)
+    url: https://www.coe.int/en/web/common-european-framework-reference-languages
+    use: level framework for the grammar graph (reference, not content)
+    believed_licence: reuse terms to check
+    status: to_check
+excluded:
+  - name: Cambridge IELTS books and official sample tests
+    reason: copyrighted; used only as a reference for test format and question types
+  - name: IELTS past papers
+    reason: copyrighted
+  - name: English Profile (English Vocabulary Profile, English Grammar Profile)
+    reason: restricted use
+  - name: British Council LearnEnglish and similar free sites
+    reason: free to read but all rights reserved
+  - name: Academic Word List (Coxhead)
+    reason: reuse terms unclear; NAWL covers the same need with an open licence (to confirm)

@@ -1,0 +1,162 @@
+# English for IELTS: grammar first (specs/english-course). STARTER DRAFT for the owner to extend.
+#
+# Each grammar point has a CEFR level (A1, A2, B1, B2, C1) and the points it needs first. Rules, checked by code:
+#   - every prerequisite exists and there are no cycles;
+#   - a prerequisite is never at a higher level than the point that needs it.
+# Check after every edit (from apps/api):
+#   uv run python -m app.curriculum.check ../../data/courses/english-ielts.yaml
+#
+# Authored by the project from open references and the public CEFR descriptors; not copied from any textbook.
+# The 16 points below are an example chain; their levels are approximate (common course-book practice) and
+# are for the owner to check against the CEFR descriptors. Owner's week-3 task: extend to about 30-45 points (articles, countable
+# and uncountable nouns, modals, relative clauses, reported speech, linking words, word formation, ...).
+slug: english-ielts
+title_vi: Tiếng Anh cho IELTS (ngữ pháp và từ vựng)
+title_en: English for IELTS (grammar and vocabulary)
+language: en
+source: authored
+modalities: [mcq]
+concepts:
+  - slug: be-present
+    level: A1
+    name_en: "The verb to be (am, is, are)"
+    name_vi: "Động từ to be ở hiện tại (am, is, are)"
+  - slug: plural-nouns
+    level: A1
+    name_en: "Plural nouns"
+    name_vi: "Danh từ số nhiều"
+  - slug: articles-basic
+    level: A1
+    name_en: "Articles a, an, the (basic use)"
+    name_vi: "Mạo từ a, an, the (cách dùng cơ bản)"
+    prerequisites: [plural-nouns]
+  - slug: present-simple
+    level: A1
+    name_en: "Present simple"
+    name_vi: "Thì hiện tại đơn"
+    prerequisites: [be-present]
+  - slug: there-is-are
+    level: A1
+    name_en: "There is / there are"
+    name_vi: "Cấu trúc there is / there are"
+    prerequisites: [be-present, plural-nouns]
+  - slug: present-continuous
+    level: A2
+    name_en: "Present continuous"
+    name_vi: "Thì hiện tại tiếp diễn"
+    prerequisites: [be-present, present-simple]
+  - slug: past-simple
+    level: A2
+    name_en: "Past simple"
+    name_vi: "Thì quá khứ đơn"
+    prerequisites: [present-simple]
+  - slug: future-will-going-to
+    level: A2
+    name_en: "Future with will and going to"
+    name_vi: "Tương lai với will và going to"
+    prerequisites: [be-present, present-simple]
+  - slug: comparatives
+    level: A2
+    name_en: "Comparative and superlative adjectives"
+    name_vi: "So sánh hơn và so sánh nhất"
+    prerequisites: [be-present]
+  - slug: present-perfect
+    level: B1
+    name_en: "Present perfect (for, since, ever, already)"
+    name_vi: "Thì hiện tại hoàn thành (for, since, ever, already)"
+    prerequisites: [past-simple]
+  - slug: first-conditional
+    level: B1
+    name_en: "First conditional"
+    name_vi: "Câu điều kiện loại 1"
+    prerequisites: [present-simple, future-will-going-to]
+  - slug: passive-voice
+    level: B1
+    name_en: "Passive voice (present and past)"
+    name_vi: "Câu bị động (hiện tại và quá khứ)"
+    prerequisites: [be-present, past-simple]
+  - slug: past-perfect
+    level: B2
+    name_en: "Past perfect"
+    name_vi: "Thì quá khứ hoàn thành"
+    prerequisites: [past-simple, present-perfect]
+  - slug: second-conditional
+    level: B1
+    name_en: "Second conditional"
+    name_vi: "Câu điều kiện loại 2"
+    prerequisites: [past-simple, first-conditional]
+  - slug: third-conditional
+    level: B2
+    name_en: "Third conditional"
+    name_vi: "Câu điều kiện loại 3"
+    prerequisites: [past-perfect, second-conditional]
+  - slug: mixed-conditionals
+    level: C1
+    name_en: "Mixed conditionals"
+    name_vi: "Câu điều kiện hỗn hợp"
+    prerequisites: [second-conditional, third-conditional]
+objectives:  # one multiple-choice objective per point for now; item types come in weeks 4-5
+  - id: be-present-mcq
+    concept: be-present
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: động từ to be ở hiện tại (am, is, are)."
+  - id: plural-nouns-mcq
+    concept: plural-nouns
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: danh từ số nhiều."
+  - id: articles-basic-mcq
+    concept: articles-basic
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: mạo từ a, an, the (cách dùng cơ bản)."
+  - id: present-simple-mcq
+    concept: present-simple
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: thì hiện tại đơn."
+  - id: there-is-are-mcq
+    concept: there-is-are
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: cấu trúc there is / there are."
+  - id: present-continuous-mcq
+    concept: present-continuous
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: thì hiện tại tiếp diễn."
+  - id: past-simple-mcq
+    concept: past-simple
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: thì quá khứ đơn."
+  - id: future-will-going-to-mcq
+    concept: future-will-going-to
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: tương lai với will và going to."
+  - id: comparatives-mcq
+    concept: comparatives
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: so sánh hơn và so sánh nhất."
+  - id: present-perfect-mcq
+    concept: present-perfect
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: thì hiện tại hoàn thành (for, since, ever, already)."
+  - id: first-conditional-mcq
+    concept: first-conditional
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: câu điều kiện loại 1."
+  - id: passive-voice-mcq
+    concept: passive-voice
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: câu bị động (hiện tại và quá khứ)."
+  - id: past-perfect-mcq
+    concept: past-perfect
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: thì quá khứ hoàn thành."
+  - id: second-conditional-mcq
+    concept: second-conditional
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: câu điều kiện loại 2."
+  - id: third-conditional-mcq
+    concept: third-conditional
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: câu điều kiện loại 3."
+  - id: mixed-conditionals-mcq
+    concept: mixed-conditionals
+    modality: mcq
+    text_vi: "Chọn câu hoặc dạng đúng: câu điều kiện hỗn hợp."
