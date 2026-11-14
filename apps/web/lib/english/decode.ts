@@ -4,7 +4,9 @@ import {
   LEVELS,
   LINKING_GROUPS,
   type Essay,
+  type Complexity,
   type EssayResult,
+  type GrammarIssue,
   type EssayStatus,
   type EssaySummary,
   type LinkingGroup,
@@ -331,8 +333,46 @@ function parseLinking(value: unknown): EssayResult["linking"] {
   return out;
 }
 
+function parseIssue(value: unknown): GrammarIssue {
+  const d = record(value);
+  const issue: GrammarIssue = {
+    id: int(d.id),
+    sentence: string(d.sentence),
+    sentence_start: int(d.sentence_start),
+    start: int(d.start),
+    end: int(d.end),
+    text: string(d.text),
+    suggestion: optionalString(d.suggestion),
+    category: string(d.category),
+    errant_type: optionalString(d.errant_type),
+    node: optionalString(d.node),
+    node_vi: optionalString(d.node_vi),
+    explain_vi: optionalString(d.explain_vi),
+    evidence: bool(d.evidence),
+  };
+  const from = issue.start - issue.sentence_start;
+  if (
+    from < 0 ||
+    issue.end < issue.start ||
+    issue.sentence.slice(from, from + issue.end - issue.start) !== issue.text ||
+    (issue.evidence && !issue.node)
+  )
+    throw new DataError("contract");
+  return issue;
+}
+
+function parseComplexity(value: unknown): Complexity {
+  const d = record(value);
+  return {
+    sentences: int(d.sentences),
+    clauses_per_sentence: nonNegative(d.clauses_per_sentence),
+    complex_sentence_share: probability(d.complex_sentence_share),
+  };
+}
+
 export function parseEssayResult(value: unknown): EssayResult {
   const d = record(value);
+  const v2 = d.version === 2;
   return {
     words: int(d.words),
     sentences: int(d.sentences),
@@ -343,6 +383,17 @@ export function parseEssayResult(value: unknown): EssayResult {
     longest_sentence_words: int(d.longest_sentence_words),
     linking: parseLinking(d.linking),
     linking_groups_used: int(d.linking_groups_used),
+    ...(v2 && {
+      grammar:
+        d.grammar === null
+          ? null
+          : { issues: array(record(d.grammar).issues).map(parseIssue) },
+      grammarUnavailableVi: optionalString(d.grammar_unavailable_vi),
+      complexity:
+        d.complexity === null || d.complexity === undefined
+          ? null
+          : parseComplexity(d.complexity),
+    }),
   };
 }
 

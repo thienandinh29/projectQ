@@ -8,6 +8,7 @@ import {
   LINKING_GROUPS,
   type Essay,
   type EssayResult,
+  type GrammarIssue,
 } from "@/lib/english/types";
 import { stillWorking } from "@/lib/english/writing";
 import { vi } from "@/messages/vi";
@@ -73,6 +74,86 @@ function Result({ result }: { result: EssayResult }) {
                 .map(([phrase, n]) => (n > 1 ? `${phrase} ×${n}` : phrase))
                 .join(", ")}
             </span>
+          </li>
+        ))}
+      </ul>
+      {result.complexity && (
+        <>
+          <h3>{w.complexity}</h3>
+          <p>
+            {result.complexity.clauses_per_sentence.toFixed(1)}{" "}
+            {w.clausesPerSentence} ·{" "}
+            {Math.round(result.complexity.complex_sentence_share * 100)}%{" "}
+            {w.complexShare}
+          </p>
+        </>
+      )}
+    </section>
+  );
+}
+
+/**
+ * Why an error did not move the roadmap. If the essay moved anything, the draft rule was not in
+ * effect, so a mapped error was left out by the cap (at most 3 per essay, one per part).
+ */
+export function notCountedReason(
+  issues: GrammarIssue[],
+): (issue: GrammarIssue) => string {
+  const applied = issues.some((i) => i.evidence);
+  return (issue) =>
+    !issue.node
+      ? w.notRecorded
+      : applied
+        ? w.notRecordedCap
+        : w.notRecordedDraft;
+}
+
+/** The sentence with the error's span marked. */
+function Marked({ issue }: { issue: GrammarIssue }) {
+  const from = issue.start - issue.sentence_start;
+  const to = from + issue.end - issue.start;
+  return (
+    <p lang="en" className="en-issue-sentence">
+      {issue.sentence.slice(0, from)}
+      <mark>{issue.sentence.slice(from, to)}</mark>
+      {issue.sentence.slice(to)}
+    </p>
+  );
+}
+
+export function Grammar({ result }: { result: EssayResult }) {
+  if (result.grammar === undefined) return null; // analysed before step 2.2
+  if (result.grammar === null)
+    return (
+      <section className="en-card">
+        <h2>{w.grammar}</h2>
+        <p className="en-muted">{result.grammarUnavailableVi ?? w.noGrammar}</p>
+      </section>
+    );
+  const { issues } = result.grammar;
+  const why = notCountedReason(issues);
+  return (
+    <section className="en-card" data-testid="essay-grammar">
+      <h2>{w.grammar}</h2>
+      <p className="en-muted">{w.grammarNote}</p>
+      {issues.length === 0 && <p>{w.noIssues}</p>}
+      <ul className="en-issues">
+        {issues.map((issue) => (
+          <li key={issue.id} data-errant-type={issue.errant_type ?? ""}>
+            <Marked issue={issue} />
+            {issue.suggestion !== null && (
+              <p>
+                {w.suggestion}: <strong lang="en">{issue.suggestion}</strong>
+              </p>
+            )}
+            {issue.explain_vi && <p>{issue.explain_vi}</p>}
+            {issue.evidence && issue.node ? (
+              <Link className="en-link" href={`/on-tap/phan/${issue.node}`}>
+                {w.recorded}: {issue.node_vi ?? issue.node}
+              </Link>
+            ) : (
+              <p className="en-muted">{why(issue)}</p>
+            )}
           </li>
         ))}
       </ul>
@@ -162,6 +243,7 @@ export function EssayView({ essayId }: { essayId: string }) {
         )}
       </section>
       {essay.result && <Result result={essay.result} />}
+      {essay.result && <Grammar result={essay.result} />}
       <section className="en-card">
         <h2>{w.yourText}</h2>
         <div lang="en" className="en-essay-text">

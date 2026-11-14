@@ -66,9 +66,17 @@ class Analysis:
         return asdict(self)
 
 
-def analyse(text: str, task: int, linking: Mapping[str, Sequence[str]]) -> Analysis:
+def analyse(
+    text: str,
+    task: int,
+    linking: Mapping[str, Sequence[str]],
+    *,
+    sentence_texts: Sequence[str] | None = None,
+) -> Analysis:
+    """Plain measures. `sentence_texts`: sentences from spaCy (step 2.2), else split by a regex."""
     text = unicodedata.normalize("NFC", text)
-    lengths = [len(words(s)) for s in sentences(text)]
+    split = sentences(text) if sentence_texts is None else sentence_texts
+    lengths = [len(words(s)) for s in split if words(s)]
     n_words = len(words(text))
     found = linking_found(text, linking)
     return Analysis(

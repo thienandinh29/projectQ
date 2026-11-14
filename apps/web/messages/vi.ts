@@ -590,7 +590,23 @@ export const vi = {
       slow: "Phân tích lâu hơn bình thường. Kiểm tra worker đang chạy rồi tải lại trang.",
       result: "Kết quả đo",
       measured:
-        "Đo bằng quy tắc cố định, không phải điểm IELTS. Lỗi ngữ pháp, điểm ước lượng và nhận xét chi tiết sẽ có ở các bước sau.",
+        "Đo bằng quy tắc cố định, không phải điểm IELTS. Điểm ước lượng và nhận xét chi tiết sẽ có ở các bước sau.",
+      complexity: "Độ phức tạp của câu",
+      clausesPerSentence: "mệnh đề mỗi câu",
+      complexShare: "câu có mệnh đề phụ",
+      grammar: "Lỗi ngữ pháp và chính tả",
+      grammarNote:
+        "Do LanguageTool tìm, chạy trên máy chủ của dự án (bài viết không gửi ra ngoài). Công cụ có thể bắt nhầm và bỏ sót lỗi: hãy tự đọc lại cả bài.",
+      noGrammar: "Chưa kiểm tra ngữ pháp cho bài này.",
+      noIssues: "Không thấy lỗi ngữ pháp hay chính tả nào.",
+      suggestion: "Gợi ý sửa",
+      recorded: "Đã ghi vào lộ trình",
+      notRecorded:
+        "Lỗi này chưa gắn với phần nào trong lộ trình, nên không được tính.",
+      notRecordedCap:
+        "Mỗi bài chỉ tính tối đa 3 lỗi vào lộ trình, mỗi phần một lỗi, nên lỗi này không được tính thêm.",
+      notRecordedDraft:
+        "Bảng gắn lỗi vào lộ trình còn là bản nháp, nên lỗi này chưa được tính cho bạn.",
       sentences: "Số câu",
       paragraphs: "Số đoạn",
       avgSentence: "Độ dài câu trung bình",

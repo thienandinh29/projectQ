@@ -5,6 +5,8 @@ license = "Apache-2.0"
 requires-python = ">=3.12"
 dependencies = [
     "boto3>=1.43.126",
+    "en-core-web-sm",
+    "errant>=3.0.2,<3.1",
     "fastapi>=0.156.8",
     "fsrs>=6.3.2",
     "google-auth>=2.62.1",
@@ -14,6 +16,7 @@ dependencies = [
     "pypdf>=7.0.0",
     "python-multipart>=0.0.33",
     "pyyaml>=6.0.3",
+    "spacy>=3.8,<3.9",
     "uvicorn[standard]>=0.54.0",
 ]
 
@@ -44,7 +47,15 @@ plugins = ["pydantic.mypy"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
+[tool.uv.sources]
+en-core-web-sm = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.8.0/en_core_web_sm-3.8.0-py3-none-any.whl" }
+
 [[tool.mypy.overrides]]
 # Optional `embed` extra; absent in CI, imported lazily in app/rag/embed.py.
 module = ["sentence_transformers.*", "sentence_transformers"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# ERRANT ships no type information; app/writing/grammar.py types what it uses (`Annotator`).
+module = ["errant", "errant.*"]
 ignore_missing_imports = true

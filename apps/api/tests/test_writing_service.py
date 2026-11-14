@@ -1,9 +1,14 @@
 """Essays through the API and the worker (specs/writing/step-2.1.md)."""
 
+import json
 from collections.abc import Iterator
+from dataclasses import replace
 from datetime import UTC, datetime, timedelta
+from functools import cache
 from pathlib import Path
+from typing import Any
 
+import httpx
 import psycopg
 import pytest
 from fastapi import FastAPI, HTTPException
@@ -12,7 +17,14 @@ from psycopg_pool import ConnectionPool
 
 from app.api import writing as writing_routes
 from app.services.budget import Budget, spent_today
-from app.services.writing import CONSENT, WritingService, process_next_essay
+from app.services.writing import (
+    CONSENT,
+    GrammarStep,
+    WritingService,
+    load_grammar_step,
+    process_next_essay,
+)
+from app.writing.languagetool import LanguageToolClient, Match, parse_matches
 
 WRITING = Path(__file__).resolve().parents[3] / "data" / "writing"
 NOW = datetime(2026, 11, 20, 3, 0, tzinfo=UTC)
@@ -20,10 +32,10 @@ ESSAY = "Cities are crowded. However, buses help.\n\nIn conclusion, plan better.
 Setup = tuple[WritingService, str, str]
 
 
-def drain(db: str, writing_dir: Path) -> int:
+def drain(db: str, writing_dir: Path, step: "GrammarStep | None" = None) -> int:
     """Process every queued essay: the test database is shared, so older essays may be waiting."""
     n = 0
-    while process_next_essay(db, writing_dir):
+    while process_next_essay(db, writing_dir, step):
         n += 1
     return n
 
@@ -171,3 +183,110 @@ def test_routes(setup: Setup) -> None:
         gone = client.delete(f"/essays/{essay_id}", params={"learner_id": learner})
         assert gone.status_code == 204
         assert client.get(f"/essays/{essay_id}", params={"learner_id": learner}).status_code == 404
+
+
+# --- step 2.2: grammar check and evidence (specs/writing/step-2.2.md) --------------------------
+
+FIXTURES = json.loads(
+    (Path(__file__).parent / "writing" / "fixtures" / "lt-6.8.json").read_text("utf-8")
+)
+COURSES = Path(__file__).resolve().parents[3] / "data" / "courses"
+
+
+class RecordedLanguageTool(LanguageToolClient):
+    """Answers with LanguageTool 6.8's recorded responses; `down` simulates an outage."""
+
+    def __init__(self, down: bool = False) -> None:
+        super().__init__("http://languagetool.invalid")
+        self.down = down
+
+    def check(self, text: str, language: str) -> list[Match]:
+        if self.down:
+            raise httpx.ConnectError("down")
+        recorded = next(f for f in FIXTURES.values() if f["text"] == text)
+        return parse_matches(recorded[language])
+
+
+@cache
+def grammar_step(draft_learners: str) -> GrammarStep:
+    return load_grammar_step(WRITING, COURSES, "", draft_learners)
+
+
+def step_for(learner: str, *, draft: bool = True, down: bool = False) -> GrammarStep:
+    step = replace(grammar_step(learner if draft else ""), client=RecordedLanguageTool(down))
+    return step
+
+
+def p_known(db: str, learner: str) -> dict[str, float]:
+    with psycopg.connect(db) as conn:
+        rows = conn.execute(
+            "select c.slug, m.p_known from mastery m join concepts c on c.id=m.concept_id "
+            "where m.learner_id=%s",
+            (learner,),
+        ).fetchall()
+    return {r[0]: float(r[1]) for r in rows}
+
+
+def own_essay(
+    svc: WritingService, learner: str, db: str, step: GrammarStep, text: str
+) -> dict[str, Any]:
+    essay_id = svc.submit(learner, "t2-plastic-ban", text, CONSENT, now=NOW)
+    drain(db, WRITING, step)
+    return svc.get(learner, essay_id)
+
+
+def test_mapped_errors_move_mastery_for_a_draft_learner_once(setup: Setup) -> None:
+    svc, learner, db = setup
+    step = step_for(learner)
+    essay = own_essay(svc, learner, db, step, FIXTURES["sample"]["text"])
+    r = essay["result"]
+    assert essay["status"] == "done" and r["version"] == 2 and r["grammar_unavailable_vi"] is None
+    issues = r["grammar"]["issues"]
+    assert len(issues) == 8 and r["complexity"]["sentences"] == 8
+    first = issues[0]
+    assert first["sentence"][first["start"] - first["sentence_start"] :].startswith("go")
+    assert first["node_vi"] == "Thì hiện tại đơn"
+    moved = r["evidence"]
+    # plural-nouns has two errors, so it comes first; at most 3, one per node
+    assert [e["node"] for e in moved] == ["plural-nouns", "present-simple", "be-present"]
+    assert all(e["p_before"] == 0.2 and e["p_after"] < 0.2 for e in moved)
+    assert sorted(i["id"] for i in issues if i["evidence"]) == sorted(e["issue_id"] for e in moved)
+    assert p_known(db, learner) == pytest.approx({e["node"]: e["p_after"] for e in moved}, abs=1e-4)
+    with psycopg.connect(db) as conn:
+        traces = conn.execute(
+            "select kind, evidence->>'item_id', rule_vi from decision_traces "
+            "where learner_id=%s and rule='writing.error'",
+            (learner,),
+        ).fetchall()
+    assert len(traces) == 3 and all(t[0] == "bkt_update" for t in traces)
+    assert all(t[1].startswith(f"essay:{essay['id']}:") for t in traces)
+    assert all("She go" not in t[2] for t in traces)  # traces never hold the essay's text
+    assert process_next_essay(db, WRITING, step) is False  # nothing is counted twice
+
+
+def test_errors_are_shown_but_move_nothing_while_the_map_is_draft(setup: Setup) -> None:
+    svc, learner, db = setup
+    essay = own_essay(svc, learner, db, step_for(learner, draft=False), FIXTURES["sample"]["text"])
+    assert len(essay["result"]["grammar"]["issues"]) == 8
+    assert essay["result"]["evidence"] == [] and p_known(db, learner) == {}
+    assert not any(i["evidence"] for i in essay["result"]["grammar"]["issues"])
+
+
+def test_a_reviewed_map_moves_mastery_for_everyone(setup: Setup) -> None:
+    svc, learner, db = setup
+    base = step_for(learner, draft=False)
+    reviewed = replace(base, error_map=base.error_map.model_copy(update={"status": "reviewed"}))
+    essay = own_essay(svc, learner, db, reviewed, FIXTURES["smoke"]["text"])
+    assert [e["node"] for e in essay["result"]["evidence"]] == ["present-simple"]
+
+
+def test_without_languagetool_the_page_says_grammar_was_not_checked(setup: Setup) -> None:
+    svc, learner, db = setup
+    off = replace(step_for(learner), client=None)
+    r = own_essay(svc, learner, db, off, FIXTURES["smoke"]["text"])["result"]
+    assert r["grammar"] is None and "LANGUAGETOOL_URL" in r["grammar_unavailable_vi"]
+    assert r["words"] == 6 and r["complexity"]["sentences"] == 1
+    down = own_essay(svc, learner, db, step_for(learner, down=True), FIXTURES["clean"]["text"])
+    assert down["status"] == "done" and down["result"]["grammar"] is None
+    assert "không phản hồi" in down["result"]["grammar_unavailable_vi"]
+    assert p_known(db, learner) == {}

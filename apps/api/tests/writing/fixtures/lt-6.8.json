@@ -1,0 +1,826 @@
+{
+ "sample": {
+  "text": "She go to school every day. They is very happy.\n\nI like a apples. This city is more bigger than mine. I have visit Hanoi last year. Their are many reason. The colour of the car is red. We discussed about the problem.",
+  "en-GB": {
+   "software": {
+    "version": "6.8"
+   },
+   "matches": [
+    {
+     "message": "The pronoun ‘She’ is usually used with a third-person or a past tense verb.",
+     "shortMessage": "Agreement error",
+     "replacements": [
+      {
+       "value": "goes"
+      },
+      {
+       "value": "went"
+      }
+     ],
+     "offset": 4,
+     "length": 2,
+     "context": {
+      "text": "She go to school every day. They is very happy...",
+      "offset": 4,
+      "length": 2
+     },
+     "sentence": "She go to school every day.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "HE_VERB_AGR",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "Agreement error: Non-third person/past tense verb with 'he/she/it' or a pronoun",
+      "issueType": "grammar",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/grammar-subject-verb-agreement/#1-singular-subjects-must-go-with-singular-verbs-and-plural-subjects-with-plural-verbs"
+       }
+      ],
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": -1
+    },
+    {
+     "message": "Use a third-person plural verb with ‘they’.",
+     "shortMessage": "Possible agreement error",
+     "replacements": [
+      {
+       "value": "are"
+      },
+      {
+       "value": "were",
+       "shortDescription": "second-person singular simple past of 'be', e.g. 'you were'"
+      }
+     ],
+     "offset": 33,
+     "length": 2,
+     "context": {
+      "text": "She go to school every day. They is very happy.  I like a apples. This city...",
+      "offset": 33,
+      "length": 2
+     },
+     "sentence": "They is very happy.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "PERS_PRONOUN_AGREEMENT",
+      "subId": "13",
+      "sourceFile": "grammar.xml",
+      "description": "Agreement: 'I is / you is / ... '",
+      "issueType": "grammar",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/forms-of-to-be/#forms-of-the-verb-%E2%80%9Cto-be%E2%80%9D"
+       }
+      ],
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": false,
+     "contextForSureMatch": 0
+    },
+    {
+     "message": "The plural noun “apples” cannot be used with the article “a”. Did you mean “a apple” or “apples”?",
+     "shortMessage": "",
+     "replacements": [
+      {
+       "value": "a apple"
+      },
+      {
+       "value": "apples"
+      }
+     ],
+     "offset": 56,
+     "length": 8,
+     "context": {
+      "text": "... every day. They is very happy.  I like a apples. This city is more bigger than mine. I ...",
+      "offset": 43,
+      "length": 8
+     },
+     "sentence": "I like a apples.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "A_NNS",
+      "subId": "3",
+      "sourceFile": "grammar.xml",
+      "description": "Agreement: 'a' + plural word",
+      "issueType": "grammar",
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": -1
+    },
+    {
+     "message": "Use only “bigger” (without ‘more’) when you use the comparative.",
+     "shortMessage": "Grammatical problem: unnecessary ‘more’",
+     "replacements": [
+      {
+       "value": "bigger"
+      }
+     ],
+     "offset": 79,
+     "length": 11,
+     "context": {
+      "text": "...y happy.  I like a apples. This city is more bigger than mine. I have visit Hanoi last year...",
+      "offset": 43,
+      "length": 11
+     },
+     "sentence": "This city is more bigger than mine.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "MOST_COMPARATIVE",
+      "subId": "2",
+      "sourceFile": "grammar.xml",
+      "description": "No 'more' or 'most' before comparatives",
+      "issueType": "grammar",
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": 5
+    },
+    {
+     "message": "It appears that the past participle should be used here.",
+     "shortMessage": "Possible agreement error",
+     "replacements": [
+      {
+       "value": "visited"
+      }
+     ],
+     "offset": 109,
+     "length": 5,
+     "context": {
+      "text": "...s city is more bigger than mine. I have visit Hanoi last year. Their are many reason....",
+      "offset": 43,
+      "length": 5
+     },
+     "sentence": "I have visit Hanoi last year.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "HAVE_PART_AGREEMENT",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "Agreement: 'have' + past/present tense",
+      "issueType": "grammar",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/to-have-grammar/"
+       }
+      ],
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": -1
+    },
+    {
+     "message": "‘last year’ indicates a finished event of the past. Please check the predicate’s tense.",
+     "shortMessage": "",
+     "replacements": [],
+     "offset": 121,
+     "length": 9,
+     "context": {
+      "text": "...re bigger than mine. I have visit Hanoi last year. Their are many reason. The colour of t...",
+      "offset": 43,
+      "length": 9
+     },
+     "sentence": "I have visit Hanoi last year.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "MISSING_PAST_TENSE",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "Missing past tense with '...last year/month/etc.'",
+      "issueType": "grammar",
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": -1
+    },
+    {
+     "message": "Did you mean “there”?",
+     "shortMessage": "Possible typo",
+     "replacements": [
+      {
+       "value": "There"
+      }
+     ],
+     "offset": 132,
+     "length": 5,
+     "context": {
+      "text": "...han mine. I have visit Hanoi last year. Their are many reason. The colour of the car ...",
+      "offset": 43,
+      "length": 5
+     },
+     "sentence": "Their are many reason.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "THEIR_IS",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "their/they're (there) is/are",
+      "issueType": "misspelling",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/there-their-theyre/"
+       }
+      ],
+      "category": {
+       "id": "CONFUSED_WORDS",
+       "name": "Commonly Confused Words"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": 4
+    },
+    {
+     "message": "Possible agreement error. The noun ‘reason’ seems to be countable; consider using: “many reasons”.",
+     "shortMessage": "Grammatical problem",
+     "replacements": [
+      {
+       "value": "many reasons"
+      }
+     ],
+     "offset": 142,
+     "length": 11,
+     "context": {
+      "text": "...I have visit Hanoi last year. Their are many reason. The colour of the car is red. We discu...",
+      "offset": 43,
+      "length": 11
+     },
+     "sentence": "Their are many reason.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "MANY_NN",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "Possible agreement error: 'many/several/few' + singular countable noun",
+      "issueType": "grammar",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/word-choice-many-vs-much/"
+       }
+      ],
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": 17
+    },
+    {
+     "message": "Did you mean simply “discussed the”? You do not need the word “about” here.",
+     "shortMessage": "Collocation error",
+     "replacements": [
+      {
+       "value": "discussed the"
+      }
+     ],
+     "offset": 188,
+     "length": 19,
+     "context": {
+      "text": "...eason. The colour of the car is red. We discussed about the problem.",
+      "offset": 43,
+      "length": 19
+     },
+     "sentence": "We discussed about the problem.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "MENTION_ABOUT",
+      "subId": "151",
+      "sourceFile": "grammar.xml",
+      "description": "Collocation: consider (about)",
+      "issueType": "grammar",
+      "category": {
+       "id": "COLLOCATIONS",
+       "name": "Collocations"
+      }
+     },
+     "ignoreForIncompleteSentence": false,
+     "contextForSureMatch": 0
+    }
+   ]
+  },
+  "en-US": {
+   "software": {
+    "version": "6.8"
+   },
+   "matches": [
+    {
+     "message": "The pronoun ‘She’ is usually used with a third-person or a past tense verb.",
+     "shortMessage": "Agreement error",
+     "replacements": [
+      {
+       "value": "goes"
+      },
+      {
+       "value": "went"
+      }
+     ],
+     "offset": 4,
+     "length": 2,
+     "context": {
+      "text": "She go to school every day. They is very happy...",
+      "offset": 4,
+      "length": 2
+     },
+     "sentence": "She go to school every day.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "HE_VERB_AGR",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "Agreement error: Non-third person/past tense verb with 'he/she/it' or a pronoun",
+      "issueType": "grammar",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/grammar-subject-verb-agreement/#1-singular-subjects-must-go-with-singular-verbs-and-plural-subjects-with-plural-verbs"
+       }
+      ],
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": -1
+    },
+    {
+     "message": "Use a third-person plural verb with ‘they’.",
+     "shortMessage": "Possible agreement error",
+     "replacements": [
+      {
+       "value": "are"
+      },
+      {
+       "value": "were",
+       "shortDescription": "second-person singular simple past of 'be', e.g. 'you were'"
+      }
+     ],
+     "offset": 33,
+     "length": 2,
+     "context": {
+      "text": "She go to school every day. They is very happy.  I like a apples. This city...",
+      "offset": 33,
+      "length": 2
+     },
+     "sentence": "They is very happy.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "PERS_PRONOUN_AGREEMENT",
+      "subId": "13",
+      "sourceFile": "grammar.xml",
+      "description": "Agreement: 'I is / you is / ... '",
+      "issueType": "grammar",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/forms-of-to-be/#forms-of-the-verb-%E2%80%9Cto-be%E2%80%9D"
+       }
+      ],
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": false,
+     "contextForSureMatch": 0
+    },
+    {
+     "message": "The plural noun “apples” cannot be used with the article “a”. Did you mean “a apple” or “apples”?",
+     "shortMessage": "",
+     "replacements": [
+      {
+       "value": "a apple"
+      },
+      {
+       "value": "apples"
+      }
+     ],
+     "offset": 56,
+     "length": 8,
+     "context": {
+      "text": "... every day. They is very happy.  I like a apples. This city is more bigger than mine. I ...",
+      "offset": 43,
+      "length": 8
+     },
+     "sentence": "I like a apples.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "A_NNS",
+      "subId": "3",
+      "sourceFile": "grammar.xml",
+      "description": "Agreement: 'a' + plural word",
+      "issueType": "grammar",
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": -1
+    },
+    {
+     "message": "Use only “bigger” (without ‘more’) when you use the comparative.",
+     "shortMessage": "Grammatical problem: unnecessary ‘more’",
+     "replacements": [
+      {
+       "value": "bigger"
+      }
+     ],
+     "offset": 79,
+     "length": 11,
+     "context": {
+      "text": "...y happy.  I like a apples. This city is more bigger than mine. I have visit Hanoi last year...",
+      "offset": 43,
+      "length": 11
+     },
+     "sentence": "This city is more bigger than mine.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "MOST_COMPARATIVE",
+      "subId": "2",
+      "sourceFile": "grammar.xml",
+      "description": "No 'more' or 'most' before comparatives",
+      "issueType": "grammar",
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": 5
+    },
+    {
+     "message": "It appears that the past participle should be used here.",
+     "shortMessage": "Possible agreement error",
+     "replacements": [
+      {
+       "value": "visited"
+      }
+     ],
+     "offset": 109,
+     "length": 5,
+     "context": {
+      "text": "...s city is more bigger than mine. I have visit Hanoi last year. Their are many reason....",
+      "offset": 43,
+      "length": 5
+     },
+     "sentence": "I have visit Hanoi last year.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "HAVE_PART_AGREEMENT",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "Agreement: 'have' + past/present tense",
+      "issueType": "grammar",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/to-have-grammar/"
+       }
+      ],
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": -1
+    },
+    {
+     "message": "‘last year’ indicates a finished event of the past. Please check the predicate’s tense.",
+     "shortMessage": "",
+     "replacements": [],
+     "offset": 121,
+     "length": 9,
+     "context": {
+      "text": "...re bigger than mine. I have visit Hanoi last year. Their are many reason. The colour of t...",
+      "offset": 43,
+      "length": 9
+     },
+     "sentence": "I have visit Hanoi last year.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "MISSING_PAST_TENSE",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "Missing past tense with '...last year/month/etc.'",
+      "issueType": "grammar",
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": -1
+    },
+    {
+     "message": "Did you mean “there”?",
+     "shortMessage": "Possible typo",
+     "replacements": [
+      {
+       "value": "There"
+      }
+     ],
+     "offset": 132,
+     "length": 5,
+     "context": {
+      "text": "...han mine. I have visit Hanoi last year. Their are many reason. The colour of the car ...",
+      "offset": 43,
+      "length": 5
+     },
+     "sentence": "Their are many reason.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "THEIR_IS",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "their/they're (there) is/are",
+      "issueType": "misspelling",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/there-their-theyre/"
+       }
+      ],
+      "category": {
+       "id": "CONFUSED_WORDS",
+       "name": "Commonly Confused Words"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": 4
+    },
+    {
+     "message": "Possible agreement error. The noun ‘reason’ seems to be countable; consider using: “many reasons”.",
+     "shortMessage": "Grammatical problem",
+     "replacements": [
+      {
+       "value": "many reasons"
+      }
+     ],
+     "offset": 142,
+     "length": 11,
+     "context": {
+      "text": "...I have visit Hanoi last year. Their are many reason. The colour of the car is red. We discu...",
+      "offset": 43,
+      "length": 11
+     },
+     "sentence": "Their are many reason.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "MANY_NN",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "Possible agreement error: 'many/several/few' + singular countable noun",
+      "issueType": "grammar",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/word-choice-many-vs-much/"
+       }
+      ],
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": 17
+    },
+    {
+     "message": "Possible spelling mistake. ‘colour’ is British English.",
+     "shortMessage": "",
+     "replacements": [
+      {
+       "value": "color",
+       "shortDescription": "English (US)"
+      }
+     ],
+     "offset": 159,
+     "length": 6,
+     "context": {
+      "text": "...i last year. Their are many reason. The colour of the car is red. We discussed about t...",
+      "offset": 43,
+      "length": 6
+     },
+     "sentence": "The colour of the car is red.",
+     "type": {
+      "typeName": "UnknownWord"
+     },
+     "rule": {
+      "id": "MORFOLOGIK_RULE_EN_US",
+      "description": "Possible spelling mistake",
+      "issueType": "misspelling",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/our-or/#colour-or-color%E2%80%94colourise-or-colorize"
+       }
+      ],
+      "category": {
+       "id": "TYPOS",
+       "name": "Possible Typo"
+      }
+     },
+     "ignoreForIncompleteSentence": false,
+     "contextForSureMatch": 0
+    },
+    {
+     "message": "Did you mean simply “discussed the”? You do not need the word “about” here.",
+     "shortMessage": "Collocation error",
+     "replacements": [
+      {
+       "value": "discussed the"
+      }
+     ],
+     "offset": 188,
+     "length": 19,
+     "context": {
+      "text": "...eason. The colour of the car is red. We discussed about the problem.",
+      "offset": 43,
+      "length": 19
+     },
+     "sentence": "We discussed about the problem.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "MENTION_ABOUT",
+      "subId": "151",
+      "sourceFile": "grammar.xml",
+      "description": "Collocation: consider (about)",
+      "issueType": "grammar",
+      "category": {
+       "id": "COLLOCATIONS",
+       "name": "Collocations"
+      }
+     },
+     "ignoreForIncompleteSentence": false,
+     "contextForSureMatch": 0
+    }
+   ]
+  }
+ },
+ "clean": {
+  "text": "Cities are crowded. However, buses help.\n\nIn conclusion, public transport is the answer.",
+  "en-GB": {
+   "software": {
+    "version": "6.8"
+   },
+   "matches": []
+  },
+  "en-US": {
+   "software": {
+    "version": "6.8"
+   },
+   "matches": []
+  }
+ },
+ "smoke": {
+  "text": "She go to school every day.",
+  "en-GB": {
+   "software": {
+    "version": "6.8"
+   },
+   "matches": [
+    {
+     "message": "The pronoun ‘She’ is usually used with a third-person or a past tense verb.",
+     "shortMessage": "Agreement error",
+     "replacements": [
+      {
+       "value": "goes"
+      },
+      {
+       "value": "went"
+      }
+     ],
+     "offset": 4,
+     "length": 2,
+     "context": {
+      "text": "She go to school every day.",
+      "offset": 4,
+      "length": 2
+     },
+     "sentence": "She go to school every day.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "HE_VERB_AGR",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "Agreement error: Non-third person/past tense verb with 'he/she/it' or a pronoun",
+      "issueType": "grammar",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/grammar-subject-verb-agreement/#1-singular-subjects-must-go-with-singular-verbs-and-plural-subjects-with-plural-verbs"
+       }
+      ],
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": -1
+    }
+   ]
+  },
+  "en-US": {
+   "software": {
+    "version": "6.8"
+   },
+   "matches": [
+    {
+     "message": "The pronoun ‘She’ is usually used with a third-person or a past tense verb.",
+     "shortMessage": "Agreement error",
+     "replacements": [
+      {
+       "value": "goes"
+      },
+      {
+       "value": "went"
+      }
+     ],
+     "offset": 4,
+     "length": 2,
+     "context": {
+      "text": "She go to school every day.",
+      "offset": 4,
+      "length": 2
+     },
+     "sentence": "She go to school every day.",
+     "type": {
+      "typeName": "Other"
+     },
+     "rule": {
+      "id": "HE_VERB_AGR",
+      "subId": "1",
+      "sourceFile": "grammar.xml",
+      "description": "Agreement error: Non-third person/past tense verb with 'he/she/it' or a pronoun",
+      "issueType": "grammar",
+      "urls": [
+       {
+        "value": "https://languagetool.org/insights/post/grammar-subject-verb-agreement/#1-singular-subjects-must-go-with-singular-verbs-and-plural-subjects-with-plural-verbs"
+       }
+      ],
+      "category": {
+       "id": "GRAMMAR",
+       "name": "Grammar"
+      }
+     },
+     "ignoreForIncompleteSentence": true,
+     "contextForSureMatch": -1
+    }
+   ]
+  }
+ }
+}

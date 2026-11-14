@@ -26,6 +26,8 @@ x-api-env: &api-env
     TEI_URL: http://tei:80
     CORS_ORIGINS: http://localhost:3000
     DRAFT_ITEM_LEARNERS: ${DRAFT_ITEM_LEARNERS:-}
+    # Set by --profile writing (the languagetool service below); empty: essays get no grammar check.
+    LANGUAGETOOL_URL: ${LANGUAGETOOL_URL:-}
 
 services:
   db:
@@ -121,6 +123,15 @@ services:
     depends_on:
       api:
         condition: service_healthy
+
+  # Grammar check for essays (languagetool/README.md). Opt-in: --profile writing, and set
+  # LANGUAGETOOL_URL=http://languagetool:8010 so the worker uses it.
+  languagetool:
+    image: nodetrail-languagetool:local
+    build: languagetool
+    profiles: [writing]
+    restart: unless-stopped
+    mem_limit: ${LANGUAGETOOL_MEMORY_LIMIT:-1500m}
 
   # bge-m3 embeddings for indexing and retrieval (docker/TEI.md). Opt-in: about 2.3 GB of weights.
   tei:

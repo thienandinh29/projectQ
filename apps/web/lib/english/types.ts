@@ -147,7 +147,31 @@ export interface EssaySummary {
   submitted_at: string;
 }
 
-/** What plain code measured; no score and no model output in step 2.1. */
+/** An error LanguageTool found; typed by ERRANT and mapped to a node when it can be (step 2.2). */
+export interface GrammarIssue {
+  id: number;
+  sentence: string;
+  sentence_start: number;
+  start: number;
+  end: number;
+  text: string;
+  suggestion: string | null;
+  category: string;
+  errant_type: string | null;
+  node: string | null;
+  node_vi: string | null;
+  explain_vi: string | null;
+  /** it moved the learner's mastery of `node` */
+  evidence: boolean;
+}
+
+export interface Complexity {
+  sentences: number;
+  clauses_per_sentence: number;
+  complex_sentence_share: number;
+}
+
+/** What tools measured; no score and no model output (steps 2.1 and 2.2). */
 export interface EssayResult {
   words: number;
   sentences: number;
@@ -159,6 +183,10 @@ export interface EssayResult {
   /** group → phrase → times used */
   linking: Partial<Record<LinkingGroup, Record<string, number>>>;
   linking_groups_used: number;
+  /** step 2.2 on; null when nothing was checked (then `grammarUnavailableVi` says why), absent before */
+  grammar?: { issues: GrammarIssue[] } | null;
+  grammarUnavailableVi?: string | null;
+  complexity?: Complexity | null;
 }
 
 export interface Essay {

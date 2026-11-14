@@ -88,16 +88,19 @@ jobs:
       # The browser tests' learner, allowed to see draft items (specs/web-english).
       DRAFT_ITEM_LEARNERS: 00000000-0000-4000-8000-0000000e2e01
       E2E_LEARNER_ID: 00000000-0000-4000-8000-0000000e2e01
+      # The grammar check for essays (specs/writing/step-2.2.md), with its opt-in service.
+      COMPOSE_PROFILES: writing
+      LANGUAGETOOL_URL: http://languagetool:8010
     steps:
       - uses: actions/checkout@v4
       - name: Start everything with one command
         run: docker compose up -d --build --wait --wait-timeout 300
-      - name: End-to-end checks
-        run: scripts/stack-smoke.sh
       - name: Create the browser tests' learner
         run: >-
           docker compose exec -T db psql -U postgres -d nodetrail -qc
           "insert into learners(id,display_name) values ('$E2E_LEARNER_ID','E2E') on conflict do nothing"
+      - name: End-to-end checks
+        run: scripts/stack-smoke.sh
       - uses: actions/setup-node@v4
         with:
           node-version: 22

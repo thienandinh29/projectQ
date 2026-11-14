@@ -122,7 +122,7 @@ test("an essay is written, measured by the worker, and deleted", async ({
   await expect(page.getByRole("heading", { name: "Luyện viết" })).toBeVisible();
   await page.locator('a[href="/viet/t2-plastic-ban"]').click();
   const essay =
-    "Plastic bags are cheap. However, they pollute rivers.\n\nIn conclusion, a ban is sensible.";
+    "Plastic bags is cheap. However, they pollute rivers.\n\nIn conclusion, a ban is sensible.";
   await page.getByRole("textbox").fill(essay);
   await expect(page.getByTestId("word-count")).toContainText("14 từ");
   await expect(page.getByTestId("word-count")).toContainText("cần ít nhất 250");
@@ -140,6 +140,16 @@ test("an essay is written, measured by the worker, and deleted", async ({
   await expect(result).toContainText("không phải điểm IELTS");
   await expect(result).toContainText("Đối lập");
   await expect(result).toContainText("Kết luận");
+  if (process.env.LANGUAGETOOL_URL) {
+    // the grammar check (specs/writing/step-2.2.md): this learner may see the draft error map
+    const grammar = page.getByTestId("essay-grammar");
+    await expect(
+      grammar.locator('[data-errant-type="R:VERB:SVA"]'),
+    ).toContainText("are");
+    await expect(
+      grammar.getByRole("link", { name: /Đã ghi vào lộ trình/ }),
+    ).toBeVisible();
+  }
   page.once("dialog", (dialog) => dialog.accept());
   await page.getByRole("button", { name: "Xóa bài viết" }).click();
   await expect(page.getByRole("heading", { name: "Luyện viết" })).toBeVisible();
