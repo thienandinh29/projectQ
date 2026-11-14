@@ -44,3 +44,6 @@ data/library/
 data/library-one/
 # Copyrighted evaluation data (official sample essays, recordings): never committed, only metrics are.
 data/private/
+# Playwright output
+apps/web/test-results/
+apps/web/playwright-report/

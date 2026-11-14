@@ -28,6 +28,7 @@ class StepOut(BaseModel):
     kind: str | None
     finished: dict[str, Any] | None
     traces: list[DecisionTrace]
+    feedback: dict[str, Any] | None = None  # runs only: correct, key, misconception(_vi)
 
 
 class LevelTestStart(BaseModel):
@@ -58,6 +59,7 @@ def _out(step: Step) -> StepOut:
         kind=step.kind,
         finished=step.finished,
         traces=[DecisionTrace.model_validate(t.model_dump()) for t in step.traces],
+        feedback=step.feedback,
     )
 
 

@@ -30,7 +30,9 @@ items are authored, grading is by answer key, decisions are the engine's and com
    Stops at 90% confidence in one knowledge state or after 20 questions, whichever comes first. A target (B2 or C1)
    chosen by the learner limits the roadmap to the milestones up to it.
 8. A short vocabulary part: 3 meaning questions per CEFR tier from the word list, from A2 upwards, stopping at the
-   first tier with fewer than 2 correct. It sets the vocabulary `max_level` of `specs/vocabulary/`.
+   first tier with fewer than 2 correct. New vocabulary then goes up to **one level above** it (A1 → A2, B1 → B2; C1
+   stays C1): the level is what the learner knows, so new words come from the next level (corrected 14 Nov; it was
+   used as a ceiling, which gave a beginner no words at all).
 9. Result, in Vietnamese, labelled as an estimate:
    - a grammar level: the highest CEFR tier whose milestones are all estimated as known;
    - a vocabulary level;

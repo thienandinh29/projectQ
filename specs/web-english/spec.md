@@ -16,8 +16,9 @@ step that lets the owner study with NodeTrail every day, which is part of the ph
    Colour and a text label show the status (known, mastered, cần ôn, chưa học), never colour alone. Hidden nodes
    appear under a milestone only when it is partial or the learner opens it, each with its p_known as a bar. The next
    milestone and "learn next" are highlighted; every decision opens the existing "Vì sao?" panel.
-4. **Milestone test, quick checks, practice.** The same question card. After each answer: right or wrong, and for a
-   wrong answer the misconception in plain Vietnamese when the item names one. At the end: the outcome (pass, pass
+4. **Milestone test, quick checks, practice.** The same question card. After each answer: right or wrong, the right
+   answer, and for a wrong answer the misconception in plain Vietnamese (the run answer returns `feedback`; the
+   explanations live in `data/items/misconceptions.vi.yaml`, draft, one per misconception id, checked in CI). At the end: the outcome (pass, pass
    with a gap, fail), the quick checks starting straight away when the API returns them, and what to learn next.
 5. **Vocabulary ("Từ vựng").** The daily session: a new word is shown first as a card (word, part of speech, level,
    definition, Vietnamese gloss, example), then asked. Multiple choice as buttons; typed answers in a text field with

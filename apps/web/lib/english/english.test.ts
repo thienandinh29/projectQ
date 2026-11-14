@@ -10,6 +10,7 @@ import {
 } from "./learner";
 import {
   byLevel,
+  emptyVocabReason,
   optionForKey,
   percent,
   progressText,
@@ -244,5 +245,9 @@ describe("view helpers", () => {
     expect(progressText(2, 4, "Câu")).toBe("Câu 2/4");
     expect(percent(0.904)).toBe(90);
     expect(percent(1.7)).toBe(100);
+  });
+  it("say why a vocabulary session is empty", () => {
+    expect(emptyVocabReason(0)).toBe("done");
+    expect(emptyVocabReason(4)).toBe("noMoreWords");
   });
 });

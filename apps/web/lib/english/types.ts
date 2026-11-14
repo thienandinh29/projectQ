@@ -21,12 +21,73 @@ export interface LevelResult {
   questions: number;
 }
 
+export interface Feedback {
+  correct: boolean;
+  key: string;
+  misconception: string | null;
+  misconception_vi: string | null;
+}
+
 export interface Step {
   question: Question | null;
   run_id: string | null;
   kind: string | null;
   finished: Record<string, unknown> | null;
   traces: DecisionTrace[];
+  feedback: Feedback | null; // runs only: the answer just given
+}
+
+export type RunOutcome =
+  | {
+      kind: "milestone";
+      result: "pass" | "gap" | "fail";
+      opened: string[];
+      learn_next: string | null;
+    }
+  | { kind: "checks"; learn_next: string | null }
+  | { kind: "practice"; node: string; p_known: number; mastered: boolean };
+
+export type VocabKind = "meaning" | "gapfill" | "collocation" | "wordform";
+
+export interface VocabItem {
+  id: string;
+  kind: VocabKind;
+  instruction_vi: string;
+  prompt: string;
+  options: string[] | null; // multiple choice when set, typed otherwise
+  hint: string | null; // first letter, for typed answers
+}
+
+export interface WordCard {
+  key: string;
+  lemma: string;
+  pos: string;
+  level: string;
+  definition: string;
+  vi: string | null;
+  example: string;
+}
+
+export interface VocabEntry {
+  item: VocabItem;
+  is_new: boolean;
+  card: WordCard | null;
+  due_at: string | null;
+}
+
+export interface VocabSession {
+  entries: VocabEntry[];
+  due: number;
+  new_today: number;
+  new_left_today: number;
+}
+
+export interface VocabAnswer {
+  correct: boolean;
+  accepted: string;
+  card: WordCard;
+  due_at: string;
+  trace: DecisionTrace;
 }
 
 export type MilestoneStatus = "mastered" | "known" | "partial" | "unknown";

@@ -122,7 +122,7 @@ def test_a_beginner_is_placed_below_a2_with_nothing_seeded(setup: Setup) -> None
     pool = ConnectionPool(db, open=True)
     vocab = VocabPractice(lambda: pool, ROOT / "vocabulary").session(learner, "core-seed")
     pool.close()
-    assert vocab.entries == []  # A1 vocabulary: the seed list starts at A2
+    assert {e.card.level for e in vocab.entries if e.card} == {"A2"}  # one level above A1
 
 
 def test_passing_a_milestone_test_marks_its_parts_known(setup: Setup) -> None:
@@ -274,3 +274,35 @@ def test_level_test_vocabulary_items_are_meaning_questions() -> None:
     from app.vocabulary.items import item_id
 
     assert parse_item_id(item_id("core-seed", "important:adjective", "meaning", 0))[2] == "meaning"
+
+
+def test_every_run_answer_says_right_or_wrong_and_explains_the_mistake_in_vietnamese(
+    setup: Setup,
+) -> None:
+    svc, learner, _ = setup
+    step = svc.start_run(learner, "english-ielts", "practice", "past-simple")
+    assert step.question and step.run_id
+    item_id = step.question.item_id
+    bad = svc.answer_run(learner, step.run_id, item_id, wrong(svc, step))
+    assert bad.feedback is not None and bad.feedback["correct"] is False
+    assert bad.feedback["key"] == key(svc, item_id)
+    assert bad.feedback["misconception"] and bad.feedback["misconception_vi"]
+    assert bad.question is not None and bad.run_id
+    good = svc.answer_run(learner, bad.run_id, bad.question.item_id, key(svc, bad.question.item_id))
+    assert good.feedback == {"correct": True, "key": key(svc, bad.question.item_id),
+                             "misconception": None, "misconception_vi": None}  # fmt: skip
+
+
+def test_every_misconception_an_item_names_has_a_vietnamese_explanation() -> None:
+    from app.services.grammar import load_misconceptions
+
+    glossary = load_misconceptions(ROOT / "items" / "misconceptions.vi.yaml")
+    from app.curriculum.course import load_course
+    from app.curriculum.items import load_items
+
+    items = load_items(
+        ROOT / "items" / "english-ielts.yaml", load_course(ROOT / "courses" / "english-ielts.yaml")
+    )
+    named = {o.misconception for i in items.items for o in i.options if o.misconception}
+    assert named <= set(glossary), sorted(named - set(glossary))
+    assert all(len(text) > 10 for text in glossary.values())

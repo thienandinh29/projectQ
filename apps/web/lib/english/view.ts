@@ -43,3 +43,8 @@ export function progressText(
 export function percent(p: number): number {
   return Math.round(Math.max(0, Math.min(1, p)) * 100);
 }
+
+/** Why a vocabulary session is empty: today's work is done, or the list has no new words left. */
+export function emptyVocabReason(newLeftToday: number): "done" | "noMoreWords" {
+  return newLeftToday === 0 ? "done" : "noMoreWords";
+}
