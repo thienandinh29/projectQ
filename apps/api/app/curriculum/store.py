@@ -10,7 +10,7 @@ from uuid import UUID
 import psycopg
 from psycopg.types.json import Jsonb
 
-from app.curriculum.course import CourseSpec, Objective
+from app.curriculum.course import CourseSpec, Objective, concept_edges
 
 
 def code_item_id(course: CourseSpec, objective: Objective) -> str:
@@ -53,13 +53,12 @@ def sync_course(conn: psycopg.Connection[Any], course: CourseSpec) -> dict[str, 
         ).fetchone()
         assert row is not None
         ids[c.slug] = row[0]
-    for c in course.concepts:
-        for p in c.prerequisites:
-            conn.execute(
-                "insert into concept_edges(prerequisite_id,concept_id) values (%s,%s) "
-                "on conflict do nothing",
-                (ids[p], ids[c.slug]),
-            )
+    for prerequisite, concept in concept_edges(course.concepts):  # hidden node → milestone too
+        conn.execute(
+            "insert into concept_edges(prerequisite_id,concept_id) values (%s,%s) "
+            "on conflict do nothing",
+            (ids[prerequisite], ids[concept]),
+        )
     for o in course.objectives:
         if o.code is None:
             continue

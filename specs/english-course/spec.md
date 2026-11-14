@@ -18,7 +18,14 @@ flow follow in weeks 4–6 with their own specs.
    it is believed to have and a `status`. Only a source whose licence was read on its own page (`verified`, with the
    date and the page) may be fetched later; NoDerivatives licences are refused; NonCommercial ones are flagged.
    Copyrighted material (Cambridge IELTS books, past papers, English Profile) is listed as excluded, with the reason.
-5. The existing Python course is unchanged: `level` is optional.
+5. **Two layers** (owner's proposal, 14 Nov). A concept without `part_of` is a **milestone**, shown on the learner's
+   roadmap. A concept with `part_of: <milestone>` is a **hidden node** under it. Checked: the milestone exists, a
+   hidden node is not under another hidden node, and it is not above its milestone's level. Every hidden node is a
+   prerequisite of its milestone (an implicit edge, also written to the database), so a failed milestone can be
+   traced to its hidden nodes by the existing remediation. The graph stays shallow: milestones are ordered by CEFR
+   level and explicit prerequisites are added only for obvious chains.
+6. The existing Python course is unchanged: `level` and `part_of` are optional.
 
 ## Not in scope (week 3)
-Fetching or indexing the sources, vocabulary items, grammar items, the level test, the web flow.
+Fetching or indexing the sources, vocabulary items, grammar items, milestone tests and the pass/fail behaviour
+(pass → hidden nodes count as known; fail → open them), the level test, the web flow.
