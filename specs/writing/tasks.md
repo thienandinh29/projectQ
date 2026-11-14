@@ -6,9 +6,9 @@
 - [x] spaCy and ERRANT in the worker (MIT licences; spaCy's small English model) (approved 14 Nov)
 - [x] (approved 14 Nov) The writing observation model (proposed slip 0.3, guess 0.4, no transit) and the draft rule: mapped errors move
       mastery only for `DRAFT_ITEM_LEARNERS` until the 100-error check reaches 90%
-- [ ] The scorer (`specs/writing/step-2.3.md`): PyTorch CPU + transformers as a separate service; which candidate
-      models may be tried (each model's and its training data's licence read first; this session cannot reach
-      Hugging Face); whether you see an unvalidated band before the gate (proposed: yes, labelled)
+- [x] The scorer (`specs/writing/step-2.3.md`): PyTorch CPU service; `JacobLinCool/IELTS_essay_scoring_safetensors`
+      evaluated against the baselines (`docs/v2/writing-scorer-candidates.md`); you see the unvalidated band, labelled
+      (approved 14 Nov)
 - [ ] The consent notice wording (Vietnamese) and how long essays are kept (a draft is in `apps/web/messages/vi.ts`,
       `english.writing.consent`, version `writing-v1`; changing it means a new version in the API and the web app)
 - [ ] Daily limits per learner and the daily cost cap (US$)
@@ -30,7 +30,8 @@
 **Build (agent), in order:**
 - [x] 2.1 prompts, submission, job, results page, consent, limits and cost cap (`specs/writing/step-2.1.md`)
 - [x] 2.2 analysis, minimal correction, ERRANT, mapping, BKT evidence (spec: `specs/writing/step-2.2.md`)
-- [ ] 2.3 scorer service and the writing gate (spec: `specs/writing/step-2.3.md`)
+- [x] 2.3 scorer service, calibration, band range, the owner's evaluation tool (spec: `specs/writing/step-2.3.md`);
+      the gate waits on the owner's essays
 - [ ] 2.4 feedback with verified quotes, the correction loop, rewrites, phrases to FSRS
 - [ ] 2.5 Task 1
 - [ ] Gate report

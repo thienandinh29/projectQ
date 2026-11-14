@@ -4,6 +4,7 @@ import {
   LEVELS,
   LINKING_GROUPS,
   type Essay,
+  type BandRange,
   type Complexity,
   type EssayResult,
   type GrammarIssue,
@@ -370,6 +371,32 @@ function parseComplexity(value: unknown): Complexity {
   };
 }
 
+function half(value: unknown): number {
+  if (
+    typeof value !== "number" ||
+    !(value >= 0 && value <= 9) ||
+    value * 2 !== Math.round(value * 2)
+  )
+    throw new DataError("contract");
+  return value;
+}
+
+function parseBand(value: unknown): BandRange {
+  const d = record(value);
+  const status = string(d.status);
+  if (status !== "draft" && status !== "validated")
+    throw new DataError("contract");
+  const band: BandRange = {
+    band_low: half(d.band_low),
+    band_high: half(d.band_high),
+    uncertain: bool(d.uncertain),
+    status,
+    truncated: bool(d.truncated),
+  };
+  if (band.band_low > band.band_high) throw new DataError("contract");
+  return band;
+}
+
 export function parseEssayResult(value: unknown): EssayResult {
   const d = record(value);
   const v2 = d.version === 2;
@@ -393,6 +420,10 @@ export function parseEssayResult(value: unknown): EssayResult {
         d.complexity === null || d.complexity === undefined
           ? null
           : parseComplexity(d.complexity),
+      ...(d.score !== undefined && {
+        score: d.score === null ? null : parseBand(d.score),
+        scoreUnavailableVi: optionalString(d.score_unavailable_vi),
+      }),
     }),
   };
 }

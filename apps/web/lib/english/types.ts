@@ -171,7 +171,17 @@ export interface Complexity {
   complex_sentence_share: number;
 }
 
-/** What tools measured; no score and no model output (steps 2.1 and 2.2). */
+/** The band as a range, never a point (step 2.3). */
+export interface BandRange {
+  band_low: number;
+  band_high: number;
+  /** wider than 1.5 bands: shown as "không chắc" */
+  uncertain: boolean;
+  status: "draft" | "validated";
+  truncated: boolean;
+}
+
+/** What tools measured (steps 2.1 to 2.3); the band, when present, is a calibrated range. */
 export interface EssayResult {
   words: number;
   sentences: number;
@@ -187,6 +197,9 @@ export interface EssayResult {
   grammar?: { issues: GrammarIssue[] } | null;
   grammarUnavailableVi?: string | null;
   complexity?: Complexity | null;
+  /** step 2.3 on; null when no band is shown (then `scoreUnavailableVi` says why) */
+  score?: BandRange | null;
+  scoreUnavailableVi?: string | null;
 }
 
 export interface Essay {

@@ -13,6 +13,11 @@ import math
 import random
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Literal
+
+import yaml  # type: ignore[import-untyped]
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 BAND_MIN, BAND_MAX = 0.0, 9.0
 MIN_WORDS_FOR_BAND = 150
@@ -264,3 +269,41 @@ def kfold(ids: Sequence[str], k: int = 5, seed: int = 0) -> list[tuple[list[str]
         (sorted(x for j, f in enumerate(folds) if j != i for x in f), sorted(folds[i]))
         for i in range(k)
     ]
+
+
+# --- the scorer's configuration (data/writing/scorer.yaml) ---------------------------------
+
+
+class CalibrationIn(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    xs: tuple[float, ...] = Field(min_length=2)
+    ys: tuple[float, ...] = Field(min_length=2)
+    residual_low: float = Field(le=0)
+    residual_high: float = Field(ge=0)
+    essays: int = Field(ge=10)
+    fitted_on: str  # date, and what it was fitted on
+
+    @model_validator(mode="after")
+    def _monotone(self) -> "CalibrationIn":
+        if len(self.xs) != len(self.ys) or list(self.xs) != sorted(self.xs):
+            raise ValueError("calibration points must be sorted and paired")
+        if list(self.ys) != sorted(self.ys):
+            raise ValueError("a calibration must be non-decreasing")
+        return self
+
+    def build(self) -> Calibration:
+        return Calibration(Isotonic(self.xs, self.ys), self.residual_low, self.residual_high,
+                           self.essays)  # fmt: skip
+
+
+class ScorerConfig(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    model: str = Field(pattern=r"^[\w.-]+/[\w.-]+$")
+    revision: str = Field(pattern=r"^[0-9a-f]{40}$")
+    output: int = Field(ge=0)
+    status: Literal["draft", "validated"]
+    calibration: CalibrationIn | None = None
+
+
+def load_scorer_config(path: Path) -> ScorerConfig:
+    return ScorerConfig.model_validate(yaml.safe_load(path.read_text(encoding="utf-8")))

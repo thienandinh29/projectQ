@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { DataError } from "@/lib/decode";
 import { submitProblem } from "@/components/english/essay-editor";
-import { notCountedReason } from "@/components/english/essay-view";
+import { bandText, notCountedReason } from "@/components/english/essay-view";
 import { englishClient } from "./client";
 import { parseEssay, parseEssaySummaries, parseWritingPrompts } from "./decode";
 import {
@@ -238,6 +238,61 @@ describe("grammar results (step 2.2)", () => {
         ...essay,
         result: { ...v2, grammar: { issues: [bad] } },
       }),
+    ).toThrow(DataError);
+  });
+});
+
+describe("the band (step 2.3)", () => {
+  // the worker writes a band only with the version 2 analysis
+  const v2 = {
+    ...result,
+    version: 2,
+    grammar: null,
+    grammar_unavailable_vi: "Chưa kiểm tra ngữ pháp",
+    complexity: null,
+  };
+  const band = {
+    band_low: 5.5,
+    band_high: 6.5,
+    uncertain: false,
+    model: "m",
+    revision: "r",
+    status: "draft",
+    truncated: false,
+  };
+  it("is a range, never a point, and 'không chắc' when too wide", () => {
+    const r = parseEssay({
+      ...essay,
+      result: { ...v2, score: band, score_unavailable_vi: null },
+    }).result;
+    expect(r?.score && bandText(r.score)).toBe("5.5–6.5");
+    expect(bandText({ ...band, status: "draft", uncertain: true })).toBe(
+      "không chắc",
+    );
+    expect(
+      bandText({ ...band, status: "draft", band_low: 6, band_high: 6 }),
+    ).toBe("6.0");
+  });
+  it("says why there is none, and keeps older results unchanged", () => {
+    const r = parseEssay({
+      ...essay,
+      result: {
+        ...v2,
+        score: null,
+        score_unavailable_vi: "Chưa ước lượng",
+      },
+    }).result;
+    expect(r?.score).toBeNull();
+    expect(r?.scoreUnavailableVi).toBe("Chưa ước lượng");
+    expect(parseEssay(essay).result?.score).toBeUndefined();
+  });
+  it.each([
+    ["a band off the half steps", { ...band, band_low: 5.3 }],
+    ["a reversed range", { ...band, band_low: 7, band_high: 6 }],
+    ["an unknown status", { ...band, status: "official" }],
+  ])("rejects %s", (_, bad) => {
+    expect(() =>
+      parseEssay({ ...essay, result: { ...v2, score: bad } }),
     ).toThrow(DataError);
   });
 });

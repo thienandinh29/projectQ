@@ -91,6 +91,18 @@ the range is computed in plain Vietnamese.
 - The owner's report: candidates' licences, baselines, QWK with intervals on the test set, length bias, robustness,
   memory on the laptop.
 
+## Built (14 Nov 2026) and measured in the agent's sandbox
+- The service (`scorer/`), the core (`app/writing/scoring.py`), the worker's band step, the result page, and the owner's
+  tool (`python -m app.evalkit.writing_score develop|test`). With no calibration yet, every essay says why it has no
+  band; the gate needs the owner's essays.
+- The chosen model at commit `8d8d0193`: about 780 MB resident, 0.12–0.16 s per essay, weights checked against
+  SHA-256 `3c587f43…` before loading.
+- **Its raw "Overall" output is not on the IELTS scale** (4.46 for a stronger test essay, 3.41 for a weaker one); the
+  model card's own code hides this by dividing by the largest output. Our calibration fits raw output to examiner bands.
+- **Robustness is a real risk:** two spaces after each full stop moved the stronger essay's raw output from 4.46 to
+  4.27, about a sixth of the gap between the two essays. The `test` phase measures it after calibration.
+- Not yet run: the spelling-fix perturbation (needs a chosen error per essay); the report says so.
+
 ## Not in this step
 Task 1 bands (2.5), the LLM's criterion feedback and the disagreement rule (2.4), per-criterion bands shown to learners
 (only measured here), any band for speaking.

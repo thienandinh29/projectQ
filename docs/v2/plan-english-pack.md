@@ -17,7 +17,7 @@ Status values: `done`, `in progress`, `next`, `planned`, `cut`.
 |---|---|---|---|---|
 | 0 | 11–14 Nov | Foundations | Code sandbox with escape tests; code practice through the API; one-command start confirmed on the owner's laptop; CI runs the whole stack | done |
 | 1 | 14 Nov–13 Dec | **MVP: roadmap, level test, vocabulary, grammar** | Placement accuracy curve by number of questions (target ≥ 90% with ≤ 20); verifier catch rate on 50 planted-error items; the owner studies with it daily for 2 weeks | in progress |
-| 2 | 14 Dec–24 Jan | **Writing** (Task 2, then Task 1; spec `specs/writing/`, steps 2.1–2.5) | Error → node mapping ≥ 90% on 100 hand-checked errors; QWK ≥ 0.7 against examiner bands on 50–100 private essays; same essay scored 5 times differs by ≤ 0.5 band | in progress (2.1, 2.2 built) |
+| 2 | 14 Dec–24 Jan | **Writing** (Task 2, then Task 1; spec `specs/writing/`, steps 2.1–2.5) | Error → node mapping ≥ 90% on 100 hand-checked errors; QWK ≥ 0.7 against examiner bands on 50–100 private essays; same essay scored 5 times differs by ≤ 0.5 band | in progress (2.1, 2.2, 2.3 built; gates wait on the owner's essays) |
 | 3 | 25 Jan–14 Mar | **Pronunciation** (one week off for Tết) | False alarms ≤ 10% on 50–100 own recordings before any red highlighting; correlation (PCC) with human scores on speechocean762 recorded, then improved by fine-tuning | planned |
 | 4 | 15 Mar–11 Apr | **Listening and Reading** | Every question verified blind and reviewed before it enters the bank; owner's labels vs the verifier on 50 items (agreement, kappa) | planned |
 | 5 | 12 Apr–9 May | **Speaking Part 1–3, and opening to testers** | Per-user limits and a daily cost cap working; ≥ 5 of 10 testers still using it after 2 weeks; old errors falling in later essays over 4 weeks | planned |
@@ -104,6 +104,7 @@ learner is an estimate with a range until measured against examiners.
 ## Log
 | Date | Change |
 |---|---|
+| 2026-11-14 | 2.3 built: scorer service (PyTorch CPU, `JacobLinCool/IELTS_essay_scoring_safetensors` pinned by commit and weights hash, chosen by the owner from the candidates read on Hugging Face), calibration and range, the owner's evaluation tool with baselines and a held-out split. Measured: about 780 MB, 0.15 s per essay; raw output is not on the band scale; whitespace moves it noticeably. No band is shown until the owner's essays calibrate it |
 | 2026-11-14 | Step 2.3 specified: scorer as a separate service, candidates chosen by the owner after licence checks, a 30% held-out test set, constant and feature baselines, calibrated range from cross-validated residuals, robustness instead of repeat-scoring stability; the band is never shown as a point |
 | 2026-11-14 | 2.2 built: LanguageTool 6.8 in our own container (jars pinned by SHA-256), minimal correction, ERRANT types, the draft error map, writing evidence into BKT (draft learners only until the 100-error check), grammar section on the result page. Measured: about 0.4 s per 300-word essay, LanguageTool about 670 MB; LanguageTool misses many agreement errors in mid-sentence (recall check added for the owner) |
 | 2026-11-14 | Step 2.2 specified: LanguageTool (own container), minimal correction, ERRANT types, error map (draft, few nodes map yet), gentler writing observation model; waits on the owner's dependency decisions |
