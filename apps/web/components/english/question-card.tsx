@@ -31,7 +31,11 @@ export function QuestionCard({
     return () => window.removeEventListener("keydown", onKey);
   }, [busy, chosen, onAnswer, question.options]);
   return (
-    <section className="en-card en-question" aria-busy={busy}>
+    <section
+      className="en-card en-question"
+      aria-busy={busy}
+      data-item-id={question.item_id}
+    >
       <div className="en-question-top">
         <span>{progressText(question.number, question.total, t.question)}</span>
         {question.draft && <span className="en-badge">{t.draft}</span>}

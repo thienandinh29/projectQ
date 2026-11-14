@@ -56,8 +56,8 @@ code=$(curl -sS -o /dev/null -w '%{http_code}' -H "x-api-key: $API_KEY" -H 'cont
 [ "$code" = 409 ]; check "draft items are not served to a learner without permission ($code)" $?
 
 pages=""
-for page in / /kiem-tra /lo-trinh /kham-pha; do pages="$pages $(curl -sS -o /dev/null -w '%{http_code}' "$WEB$page")"; done
-[ "$pages" = " 200 200 200 200" ]; check "English pack pages and the topic explorer load ($pages)" $?
+for page in / /kiem-tra /lo-trinh /tu-vung /gioi-thieu /on-tap/cot-moc/passive /kham-pha; do pages="$pages $(curl -sS -o /dev/null -w '%{http_code}' "$WEB$page")"; done
+[ "$pages" = " 200 200 200 200 200 200 200" ]; check "English pack pages and the topic explorer load ($pages)" $?
 proxied=$(curl -sS "$WEB/api/backend/roadmap?learner_id=$learner&course=english-ielts" | json 'len(d["milestones"])')
 [ "$proxied" = 10 ]; check "the web proxy serves the roadmap" $?
 code=$(curl -sS -o /dev/null -w '%{http_code}' -X POST -H "Origin: $WEB" -H 'content-type: application/json' \

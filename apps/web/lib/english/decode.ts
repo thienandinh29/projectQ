@@ -2,6 +2,7 @@
 import { DataError, parseTrace, record, string } from "@/lib/decode";
 import {
   LEVELS,
+  type Feedback,
   type HiddenNode,
   type Level,
   type LevelResult,
@@ -9,7 +10,14 @@ import {
   type MilestoneStatus,
   type Question,
   type Roadmap,
+  type RunOutcome,
   type Step,
+  type VocabAnswer,
+  type VocabEntry,
+  type VocabItem,
+  type VocabKind,
+  type VocabSession,
+  type WordCard,
 } from "./types";
 
 const STATUSES: readonly MilestoneStatus[] = [
@@ -62,6 +70,21 @@ export function parseQuestion(value: unknown): Question {
   };
 }
 
+function optionalString(value: unknown): string | null {
+  return value === null || value === undefined ? null : string(value);
+}
+
+function parseFeedback(value: unknown): Feedback | null {
+  if (value === null || value === undefined) return null;
+  const d = record(value);
+  return {
+    correct: bool(d.correct),
+    key: string(d.key),
+    misconception: optionalString(d.misconception),
+    misconception_vi: optionalString(d.misconception_vi),
+  };
+}
+
 export function parseStep(value: unknown): Step {
   const d = record(value);
   return {
@@ -70,6 +93,107 @@ export function parseStep(value: unknown): Step {
     kind: d.kind === null ? null : string(d.kind),
     finished: d.finished === null ? null : record(d.finished),
     traces: array(d.traces).map(parseTrace),
+    feedback: parseFeedback(d.feedback),
+  };
+}
+
+/** The outcome of a finished milestone test, quick checks or practice run. */
+export function parseOutcome(
+  kind: string,
+  value: Record<string, unknown>,
+): RunOutcome {
+  const learnNext = optionalString(value.learn_next);
+  if (kind === "milestone") {
+    const result = string(value.result);
+    if (!["pass", "gap", "fail"].includes(result))
+      throw new DataError("contract");
+    return {
+      kind,
+      result: result as "pass" | "gap" | "fail",
+      opened: strings(value.opened),
+      learn_next: learnNext,
+    };
+  }
+  if (kind === "checks") return { kind, learn_next: learnNext };
+  if (kind === "practice")
+    return {
+      kind,
+      node: string(value.node),
+      p_known: probability(value.p_known),
+      mastered: bool(value.mastered),
+    };
+  throw new DataError("contract");
+}
+
+const VOCAB_KINDS: readonly VocabKind[] = [
+  "meaning",
+  "gapfill",
+  "collocation",
+  "wordform",
+];
+
+function parseVocabItem(value: unknown): VocabItem {
+  const d = record(value);
+  const kind = string(d.kind);
+  if (!(VOCAB_KINDS as readonly string[]).includes(kind))
+    throw new DataError("contract");
+  const options = d.options === null ? null : strings(d.options);
+  if ((kind === "meaning") !== (options !== null))
+    throw new DataError("contract");
+  return {
+    id: string(d.id),
+    kind: kind as VocabKind,
+    instruction_vi: string(d.instruction_vi),
+    prompt: string(d.prompt),
+    options,
+    hint: optionalString(d.hint),
+  };
+}
+
+export function parseWordCard(value: unknown): WordCard {
+  const d = record(value);
+  return {
+    key: string(d.key),
+    lemma: string(d.lemma),
+    pos: string(d.pos),
+    level: string(d.level),
+    definition: string(d.definition),
+    vi: optionalString(d.vi),
+    example: string(d.example),
+  };
+}
+
+function parseVocabEntry(value: unknown): VocabEntry {
+  const d = record(value);
+  const isNew = bool(d.is_new);
+  const card = d.card === null ? null : parseWordCard(d.card);
+  if (isNew !== (card !== null)) throw new DataError("contract"); // reviews never show the card
+  return {
+    item: parseVocabItem(d.item),
+    is_new: isNew,
+    card,
+    due_at: optionalString(d.due_at),
+  };
+}
+
+export function parseVocabSession(value: unknown): VocabSession {
+  const d = record(value);
+  return {
+    entries: array(d.entries).map(parseVocabEntry),
+    due: int(d.due),
+    new_today: int(d.new_today),
+    new_left_today: int(d.new_left_today),
+  };
+}
+
+export function parseVocabAnswer(value: unknown): VocabAnswer {
+  const d = record(value);
+  return {
+    correct: bool(d.correct),
+    accepted: string(d.accepted),
+    card: parseWordCard(d.card),
+    due_at: string(d.due_at),
+    trace: parseTrace(d.trace),
   };
 }
 

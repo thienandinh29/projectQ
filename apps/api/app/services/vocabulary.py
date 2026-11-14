@@ -55,6 +55,21 @@ class AnswerResult:
     trace: DecisionTrace
 
 
+def next_level(known: str) -> str:
+    """New words go up to one level above what the learner already knows (A1 -> A2, C1 stays)."""
+    return LEVELS[min(LEVELS.index(known) + 1, len(LEVELS) - 1)]
+
+
+def learning_level(conn: psycopg.Connection[Any], learner: UUID) -> str:
+    """The highest level of new words: one above the last level test's vocabulary level, else C1."""
+    found = conn.execute(
+        "select result->>'vocab_level' from level_tests where learner_id=%s "
+        "and phase='done' order by finished_at desc limit 1",
+        (learner,),
+    ).fetchone()
+    return next_level(found[0]) if found and found[0] in LEVELS else "C1"
+
+
 def start_of_day(now: datetime) -> datetime:
     local = now.astimezone(VIETNAM)
     return local.replace(hour=0, minute=0, second=0, microsecond=0).astimezone(UTC)
@@ -109,13 +124,8 @@ class VocabPractice:
         now = now or datetime.now(UTC)
         with self.pool().connection() as conn:
             learner = self._learner(conn, learner_id)
-            if max_level is None:  # the level test's vocabulary level, else everything
-                found = conn.execute(
-                    "select result->>'vocab_level' from level_tests where learner_id=%s "
-                    "and phase='done' order by finished_at desc limit 1",
-                    (learner,),
-                ).fetchone()
-                max_level = found[0] if found and found[0] else "C1"
+            if max_level is None:
+                max_level = learning_level(conn, learner)
             top = LEVELS.index(max_level)  # the route or the level test gives a valid level
             cards = {
                 row[0]: (row[1], row[2])

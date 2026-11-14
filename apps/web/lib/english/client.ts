@@ -1,7 +1,22 @@
 // The English pack's calls, through the same-origin proxy (/api/backend): the API key stays on the server.
 import { DataError } from "@/lib/decode";
-import { parseLevelResult, parseRoadmap, parseStep } from "./decode";
-import type { Level, LevelResult, Roadmap, Step } from "./types";
+import {
+  parseLevelResult,
+  parseRoadmap,
+  parseStep,
+  parseVocabAnswer,
+  parseVocabSession,
+} from "./decode";
+import type {
+  Level,
+  LevelResult,
+  Roadmap,
+  Step,
+  VocabAnswer,
+  VocabSession,
+} from "./types";
+
+export const VOCAB_LIST = "core-seed";
 
 export const COURSE = "english-ielts";
 
@@ -67,6 +82,59 @@ export function englishClient(fetcher: Fetch = (...a) => fetch(...a)) {
     ): Promise<Step> {
       return parseStep(
         await post(`level-tests/${testId}/answers`, {
+          learner_id: learnerId,
+          item_id: itemId,
+          answer,
+        }),
+      );
+    },
+    async startMilestoneTest(
+      learnerId: string,
+      milestone: string,
+    ): Promise<Step> {
+      return parseStep(
+        await post(`milestones/${milestone}/tests`, {
+          learner_id: learnerId,
+          course: COURSE,
+        }),
+      );
+    },
+    async startPractice(learnerId: string, node: string): Promise<Step> {
+      return parseStep(
+        await post(`nodes/${node}/practice`, {
+          learner_id: learnerId,
+          course: COURSE,
+        }),
+      );
+    },
+    async answerRun(
+      learnerId: string,
+      runId: string,
+      itemId: string,
+      answer: string,
+    ): Promise<Step> {
+      return parseStep(
+        await post(`grammar-runs/${runId}/answers`, {
+          learner_id: learnerId,
+          item_id: itemId,
+          answer,
+        }),
+      );
+    },
+    async vocabSession(learnerId: string): Promise<VocabSession> {
+      const q = new URLSearchParams({
+        learner_id: learnerId,
+        list: VOCAB_LIST,
+      });
+      return parseVocabSession(await request(`vocab/session?${q}`));
+    },
+    async vocabAnswer(
+      learnerId: string,
+      itemId: string,
+      answer: string,
+    ): Promise<VocabAnswer> {
+      return parseVocabAnswer(
+        await post("vocab/answers", {
           learner_id: learnerId,
           item_id: itemId,
           answer,

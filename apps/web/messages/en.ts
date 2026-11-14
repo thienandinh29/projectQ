@@ -20,5 +20,7 @@ export const en = {
     },
     draft: "Draft",
     retry: "Try again",
+    about: "About",
+    vocabulary: "Vocabulary",
   },
 };

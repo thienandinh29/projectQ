@@ -202,3 +202,24 @@ def test_pick_matches_what_a_session_asks(setup: Setup) -> None:
     word = WL.words[0]
     kind, n = pick(word, 0)
     assert e.item.id == item_id("core-seed", word.key, kind, n)
+
+
+def test_new_words_go_one_level_above_the_level_test_s_vocabulary_level(setup: Setup) -> None:
+    from app.services.vocabulary import next_level
+
+    assert [next_level(lv) for lv in ("A1", "A2", "B1", "B2", "C1")] == [
+        "A2",
+        "B1",
+        "B2",
+        "C1",
+        "C1",
+    ]
+    practice, learner, db = setup
+    with psycopg.connect(db) as conn:
+        conn.execute(
+            "insert into level_tests(learner_id,course,phase,result,finished_at) "
+            "values (%s,'english-ielts','done',%s,now())",
+            (learner, '{"vocab_level": "A1"}'),
+        )
+    s = practice.session(learner, "core-seed", now=NOW)  # a beginner still gets the A2 words
+    assert s.entries and {e.card.level for e in s.entries if e.card} == {"A2"}

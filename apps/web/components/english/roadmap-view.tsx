@@ -74,6 +74,12 @@ export function RoadmapView() {
           <div className="en-learn-next">
             <span>{t.roadmap.learnNext}</span>
             <strong>{names[roadmap.learn_next] ?? roadmap.learn_next}</strong>
+            <Link
+              className="en-button small"
+              href={`/on-tap/phan/${roadmap.learn_next}`}
+            >
+              {t.run.practiseNow}
+            </Link>
             {roadmap.learn_next_trace && (
               <TraceNote trace={roadmap.learn_next_trace} names={names} />
             )}
@@ -106,13 +112,21 @@ export function RoadmapView() {
                     {m.needs.map((n) => names[n] ?? n).join(", ")}
                   </p>
                 )}
-                <button
-                  type="button"
-                  className="en-link"
-                  onClick={() => toggle(m.slug)}
-                >
-                  {open ? t.roadmap.hide : t.roadmap.show}
-                </button>
+                <div className="en-actions">
+                  <Link
+                    className="en-button small"
+                    href={`/on-tap/cot-moc/${m.slug}`}
+                  >
+                    {t.run.takeTest}
+                  </Link>
+                  <button
+                    type="button"
+                    className="en-link"
+                    onClick={() => toggle(m.slug)}
+                  >
+                    {open ? t.roadmap.hide : t.roadmap.show}
+                  </button>
+                </div>
                 {open && (
                   <ul className="en-parts" aria-label={t.roadmap.parts}>
                     {m.hidden.map((h) => (
@@ -125,6 +139,9 @@ export function RoadmapView() {
                           <span style={{ width: `${percent(h.p_known)}%` }} />
                         </span>
                         <small>{percent(h.p_known)}%</small>
+                        <Link href={`/on-tap/phan/${h.slug}`}>
+                          {t.run.practise}
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -134,7 +151,6 @@ export function RoadmapView() {
           })}
         </section>
       ))}
-      <p className="en-muted">{t.roadmap.practiceSoon}</p>
     </>
   );
 }

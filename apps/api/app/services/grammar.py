@@ -16,6 +16,7 @@ from typing import Any, Literal
 from uuid import UUID
 
 import psycopg
+import yaml  # type: ignore[import-untyped]
 from fastapi import HTTPException
 from psycopg.types.json import Jsonb
 from psycopg_pool import ConnectionPool
@@ -77,6 +78,7 @@ class Step:
     kind: str | None = None
     finished: dict[str, Any] | None = None  # outcome of a run or the level test result
     traces: list[DecisionTrace] = field(default_factory=list)
+    feedback: dict[str, Any] | None = None  # the last answer of a run: right or wrong, and why
 
 
 @dataclass(frozen=True)
@@ -84,6 +86,20 @@ class Bundle:
     course: CourseSpec
     roadmap: Roadmap
     bank: ItemBank
+    misconceptions_vi: dict[str, str] = field(default_factory=dict)
+
+
+def load_misconceptions(path: Path) -> dict[str, str]:
+    """Vietnamese explanations of misconception ids (data/items/misconceptions.vi.yaml)."""
+    if not path.is_file():
+        return {}
+    raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    found = raw.get("misconceptions", {})
+    if not isinstance(found, dict) or not all(
+        isinstance(k, str) and isinstance(v, str) for k, v in found.items()
+    ):
+        raise ValueError(f"{path}: misconceptions must map ids to text")
+    return found
 
 
 class GrammarService:
@@ -118,7 +134,12 @@ class GrammarService:
         if not items_path.is_file():
             raise HTTPException(404, "Khóa học này chưa có câu hỏi.")
         course = load_course(course_path)
-        bundle = Bundle(course, build_roadmap(course), load_items(items_path, course))
+        bundle = Bundle(
+            course,
+            build_roadmap(course),
+            load_items(items_path, course),
+            load_misconceptions(self.items_dir / "misconceptions.vi.yaml"),
+        )
         self._bundles[slug] = bundle
         return bundle
 
@@ -491,6 +512,14 @@ class GrammarService:
             answers.append({"item_id": item_id, "node": item.node, "correct": correct,
                             "misconception": misconception})  # fmt: skip
             traces = [trace]
+            feedback = {
+                "correct": correct,
+                "key": item.key,
+                "misconception": misconception,
+                "misconception_vi": b.misconceptions_vi.get(misconception)
+                if misconception
+                else None,
+            }
             if len(answers) < len(item_ids):
                 conn.execute(
                     "update grammar_runs set answers=%s where id=%s",
@@ -498,10 +527,13 @@ class GrammarService:
                 )
                 nxt = b.bank.get(item_ids[len(answers)])
                 assert nxt is not None
-                return Step(self._question(nxt, len(answers) + 1, len(item_ids)), run_id, kind,
+                step = Step(self._question(nxt, len(answers) + 1, len(item_ids)), run_id, kind,
                             traces=traces)  # fmt: skip
-            return self._finish_run(conn, b, learner, run_id, kind, target, item_ids, answers,
-                                    traces, subject, ids, now)  # fmt: skip
+            else:
+                step = self._finish_run(conn, b, learner, run_id, kind, target, item_ids,
+                                        answers, traces, subject, ids, now)  # fmt: skip
+            step.feedback = feedback
+            return step
 
     def _finish_run(
         self, conn: psycopg.Connection[Any], b: Bundle, learner: UUID, run_id: str, kind: str,

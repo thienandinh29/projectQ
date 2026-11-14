@@ -85,12 +85,28 @@ jobs:
     env:
       API_KEY: ci-only-api-key-0123456789
       RUNNER_TOKEN: ci-only-runner-token-0123456789
+      # The browser tests' learner, allowed to see draft items (specs/web-english).
+      DRAFT_ITEM_LEARNERS: 00000000-0000-4000-8000-0000000e2e01
+      E2E_LEARNER_ID: 00000000-0000-4000-8000-0000000e2e01
     steps:
       - uses: actions/checkout@v4
       - name: Start everything with one command
         run: docker compose up -d --build --wait --wait-timeout 300
       - name: End-to-end checks
         run: scripts/stack-smoke.sh
+      - name: Create the browser tests' learner
+        run: >-
+          docker compose exec -T db psql -U postgres -d nodetrail -qc
+          "insert into learners(id,display_name) values ('$E2E_LEARNER_ID','E2E') on conflict do nothing"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Browser tests (Playwright, phone size)
+        working-directory: apps/web
+        run: |
+          npx pnpm@10.20.0 install --frozen-lockfile
+          npx playwright install --with-deps chromium
+          npx playwright test
       - name: Logs on failure
         if: failure()
         run: docker compose ps -a && docker compose logs --tail 80

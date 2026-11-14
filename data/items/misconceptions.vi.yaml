@@ -1,0 +1,113 @@
+# Misconceptions named by the grammar items, explained in Vietnamese for the learner (specs/web-english, point 4).
+# Written by the agent as DRAFT, short and rule-based; the owner reviews. A CI test checks that every misconception
+# an item names has an explanation here.
+misconceptions:
+  a-before-vowel-sound: Trước từ bắt đầu bằng nguyên âm (a, e, i, o, u về âm) dùng “an”, không dùng “a”.
+  a-for-second-mention: Lần nhắc thứ hai, người nghe đã biết vật đó nên dùng “the”, không dùng “a”.
+  a-for-unique: Vật duy nhất (the sun, the moon) luôn dùng “the”.
+  active-for-passive: 'Chủ ngữ là vật chịu tác động nên cần câu bị động: be + quá khứ phân từ.'
+  ago-with-perfect: “Ago” đi với quá khứ đơn, không dùng trong câu hiện tại hoàn thành.
+  although-for-unless: “Unless” nghĩa là “nếu không”; “although” là “mặc dù”, nghĩa khác hẳn.
+  an-before-consonant-sound: Trước từ bắt đầu bằng phụ âm (về âm) dùng “a”, không dùng “an”.
+  are-with-uncountable: 'Danh từ không đếm được (milk, water) đi với động từ số ít: is.'
+  article-omitted-singular: Danh từ đếm được số ít cần mạo từ (a, an hoặc the).
+  article-omitted-superlative: 'So sánh nhất cần “the”: the tallest, the most…'
+  article-omitted-unique: 'Vật duy nhất cần “the”: the sun, the sky.'
+  article-with-plural: Không dùng “a/an” với danh từ số nhiều.
+  as-for-than: So sánh hơn dùng “than”; “as … as” dùng cho so sánh bằng.
+  base-for-participle: Sau have/has/had hoặc be (bị động) cần quá khứ phân từ (V3), không dùng động từ nguyên mẫu.
+  base-form-in-if-clause: Mệnh đề “if” loại 2 dùng quá khứ (“were” với mọi ngôi), không dùng “be”.
+  be-base-form-as-verb: '“Be” phải chia theo chủ ngữ: am, is, are.'
+  be-for-do-negative: Phủ định của động từ thường dùng don't/doesn't, không dùng isn't/aren't.
+  be-for-do-question: Câu hỏi với động từ thường dùng do/does/did, không dùng is/are.
+  be-for-have: Thì hoàn thành dùng trợ động từ have/has/had, không dùng be.
+  be-for-will-question: Câu hỏi về tương lai với “will” đặt “Will” lên đầu, không dùng “Is”.
+  be-plural-for-singular: Chủ ngữ số ít đi với “is”, không dùng “are”.
+  be-singular-for-plural: Chủ ngữ số nhiều đi với “are/were”, không dùng “is/was”.
+  be-with-base-verb: Không ghép “be” với động từ nguyên mẫu (is go); dùng is going hoặc goes.
+  be-with-modal: Động từ khuyết thiếu (will, can) không đi cùng “be” phía trước.
+  be-wrong-person: '“Be” phải hợp với chủ ngữ: I am, he/she/it is, we/you/they are (quá khứ: was/were).'
+  comparative-for-superlative: 'So sánh trong cả nhóm (nhất) dùng so sánh nhất: the -est / the most.'
+  continuous-for-general-truth: Sự thật hiển nhiên dùng hiện tại đơn, không dùng tiếp diễn.
+  continuous-for-passive: Ý bị động cần be + quá khứ phân từ, không dùng dạng -ing.
+  continuous-with-since: Với “since/for” về khoảng thời gian đến nay dùng hiện tại hoàn thành.
+  do-for-continuous: Thì tiếp diễn dùng trợ động từ “be”, không dùng “do”.
+  do-for-there-is: 'Câu hỏi với “there is” đảo “is” lên đầu: Is there…?'
+  do-for-third-person: Ngôi thứ ba số ít (he, she, it) dùng “does/doesn't”, không dùng “do/don't”.
+  do-instead-of-be: Câu có động từ “be” hỏi bằng cách đảo “be” lên đầu, không dùng “do”.
+  do-with-modal: Phủ định của “will” là “won't”, không dùng “don't will”.
+  double-comparative: Không dùng cả “more” và “-er” cùng lúc.
+  double-consonant-rule: 'Tính từ ngắn kết thúc phụ âm–nguyên âm–phụ âm thì gấp đôi phụ âm cuối: big → bigger.'
+  double-plural: “Children” đã là số nhiều, không thêm “s”.
+  during-for-for: Khoảng thời gian (ten years) đi với “for”; “during” đi với một giai đoạn (during the holiday).
+  er-with-long-adjective: Tính từ dài dùng “more …”, không thêm “-er”.
+  est-with-long-adjective: Tính từ dài dùng “the most …”, không thêm “-est”.
+  first-for-mixed: Điều kiện hỗn hợp nói về quá khứ và hiện tại không thật, không dùng will (loại 1).
+  first-for-third: Kết quả không có thật trong quá khứ dùng would have + V3, không dùng will.
+  for-with-point-in-time: Mốc thời gian (last Monday, 2019) đi với “since”; “for” đi với khoảng thời gian.
+  from-for-since: Với hiện tại hoàn thành, mốc thời gian đi với “since”, không dùng “from”.
+  has-with-i: Chủ ngữ “I” đi với “have”, không dùng “has”.
+  have-for-do-question: Câu hỏi với động từ thường dùng do/does, không dùng have/has.
+  have-for-there-is: Nói “có …” ở đâu dùng “there is/are”, không dùng “have/has” (lỗi dịch từ tiếng Việt).
+  have-with-third-person: Ngôi thứ ba số ít dùng “has”, không dùng “have”.
+  if-for-unless: Câu này cần nghĩa “nếu không” nên dùng “unless”.
+  ing-for-participle: Sau have/has cần quá khứ phân từ (eaten, lived), không dùng -ing.
+  ing-without-be: Dạng -ing làm động từ chính cần “be” phía trước (is going); thói quen thì dùng hiện tại đơn.
+  irregular-comparative-regularised: '“Bad” là bất quy tắc: bad → worse → worst.'
+  irregular-past-regularised: '“Go” là bất quy tắc: quá khứ là “went”, không phải “goed”.'
+  irregular-plural-regularised: '“Child” là bất quy tắc: số nhiều là “children”.'
+  irregular-superlative-regularised: '“Good” là bất quy tắc: good → better → best.'
+  missing-auxiliary: 'Phủ định cần trợ động từ: doesn''t/didn''t + động từ.'
+  missing-be: Thì tiếp diễn và câu bị động cần “be”.
+  missing-to: Cấu trúc đúng là “be going to + động từ”.
+  more-with-irregular-adjective: “Bad” không dùng “more bad”; so sánh hơn là “worse”.
+  more-with-short-adjective: Tính từ ngắn thêm “-er”, không dùng “more”.
+  most-with-irregular-adjective: “Good” không dùng “most good”; so sánh nhất là “best”.
+  most-with-short-adjective: Tính từ ngắn thêm “-est”, không dùng “most”.
+  past-auxiliary-for-perfect: Thì hoàn thành dùng have/has/had, không dùng “did”.
+  past-for-future-result: Kết quả ở câu điều kiện loại 1 dùng “will + động từ”.
+  past-for-would: Mệnh đề kết quả không có thật cần “would …”.
+  past-perfect-in-result: Mệnh đề kết quả loại 3 dùng “would have + V3”; quá khứ hoàn thành nằm ở mệnh đề “if”.
+  past-simple-for-participle: Sau “have” dùng quá khứ phân từ (eaten), không dùng quá khứ đơn (ate).
+  past-simple-for-past-perfect: 'Việc xảy ra trước một mốc khác trong quá khứ dùng quá khứ hoàn thành: had + V3.'
+  past-simple-with-since: Việc bắt đầu trong quá khứ và còn đến nay (since …) dùng hiện tại hoàn thành, không dùng quá khứ đơn.
+  plural-es-rule: 'Danh từ tận cùng -x, -s, -ch, -sh thêm “-es”: box → boxes.'
+  plural-missing: Sau số lượng hơn một (three, many, some) danh từ đếm được phải ở số nhiều.
+  plural-y-rule: 'Phụ âm + y thì đổi y → i rồi thêm -es: university → universities.'
+  plural-y-rule-overused: Quy tắc y → ies chỉ dùng cho từ tận cùng phụ âm + y.
+  present-for-future: Câu hỏi về tương lai dùng “will” (hoặc be going to).
+  present-for-past: Hành động đã kết thúc trong quá khứ (yesterday, last…) dùng thì quá khứ.
+  present-in-second-conditional: Điều kiện không có thật ở hiện tại dùng quá khứ trong mệnh đề “if” (loại 2).
+  present-perfect-for-past-perfect: Mốc ở quá khứ (when we arrived…) thì việc xảy ra trước nó dùng “had”, không dùng “has/have”.
+  present-perfect-with-ago: Có “ago” (thời điểm đã qua) thì dùng quá khứ đơn.
+  present-perfect-with-finished-time: Thời điểm đã kết thúc (yesterday, last night, in 2020) dùng quá khứ đơn, không dùng hiện tại hoàn thành.
+  present-simple-with-since: “Since” với việc kéo dài đến nay dùng hiện tại hoàn thành.
+  second-for-first: 'Khả năng có thật ở tương lai dùng loại 1: if + hiện tại đơn, will + động từ.'
+  second-for-mixed: Kết quả trong quá khứ của điều kiện hỗn hợp dùng “would have + V3”.
+  second-for-third: 'Điều kiện không có thật trong quá khứ dùng loại 3: if + had V3, would have V3.'
+  simple-for-background-action: 'Hành động đang diễn ra thì bị chen ngang dùng quá khứ tiếp diễn: was/were + -ing.'
+  simple-for-now: 'Việc đang xảy ra ngay lúc nói dùng hiện tại tiếp diễn: am/is/are + -ing.'
+  since-with-period: Khoảng thời gian (ten years) đi với “for”; “since” đi với mốc thời gian.
+  singular-after-one-of: Sau “one of the …” danh từ ở số nhiều.
+  superlative-for-comparative: So sánh giữa hai đối tượng (… than …) dùng so sánh hơn, không dùng so sánh nhất.
+  that-for-than: So sánh hơn dùng “than”, không dùng “that”.
+  the-for-first-mention: Nhắc lần đầu một người/vật chưa xác định dùng “a/an”.
+  the-for-job: 'Nói về nghề nghiệp dùng “a/an”: He wants to be a doctor.'
+  then-for-than: “Than” (so sánh) khác “then” (sau đó).
+  there-are-with-singular: Danh từ số ít đi với “there is”.
+  there-is-with-plural: Danh từ số nhiều đi với “there are”.
+  third-for-first: Khả năng có thật ở tương lai dùng will, không dùng would have.
+  third-for-mixed: Kết quả ở hiện tại (now) dùng “would + động từ”, không dùng “would have”.
+  third-person-s-for-participle: Sau “have” dùng quá khứ phân từ, không thêm “-s”.
+  third-person-s-missing: Ngôi thứ ba số ít (he, she, it, danh từ số ít) ở hiện tại đơn thêm “-s/-es”.
+  third-person-s-on-modal: Động từ khuyết thiếu (will, can) không thêm “-s”.
+  third-person-s-on-plural: Chủ ngữ số nhiều không thêm “-s” vào động từ.
+  to-after-modal: Sau “will” dùng động từ nguyên mẫu không “to”.
+  when-for-unless: Câu này cần nghĩa “nếu không” nên dùng “unless”, không dùng “when”.
+  will-in-if-clause: Mệnh đề “if” không dùng “will”; dùng hiện tại đơn (loại 1).
+  will-in-second-conditional: Điều kiện loại 2 dùng “would”, không dùng “will”.
+  would-in-first-conditional: Khả năng có thật ở tương lai dùng “will”, không dùng “would”.
+  would-in-if-clause: Mệnh đề “if” không dùng “would”.
+  wrong-negative-form: Phủ định của “will” là “won't” (will not).
+  wrong-word-form: Cần danh từ số nhiều “places”, không phải động từ “placed”.
+status: draft
