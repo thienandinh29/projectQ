@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { NextRequest } from "next/server";
-import { GET, POST } from "@/app/api/backend/[...path]/route";
+import { DELETE, GET, POST } from "@/app/api/backend/[...path]/route";
 
 afterEach(() => {
   vi.unstubAllEnvs();
@@ -248,5 +248,49 @@ describe("graph confirmation session proxy", () => {
       "level-tests/../learners",
     ])
       expect((await post(path)).status).toBe(404);
+  });
+  it("serves the writing routes and deletes only an essay, same-origin", async () => {
+    configure();
+    const fetchMock = vi
+      .fn()
+      .mockImplementation(async () => new Response("{}"));
+    vi.stubGlobal("fetch", fetchMock);
+    const id = "0b9d2f4e-1c2a-4d3b-8e5f-6a7b8c9d0e1f";
+    const get = (path: string) =>
+      GET(
+        new NextRequest(
+          `http://localhost:3000/api/backend/${path}?learner_id=${id}`,
+        ),
+        context(path.split("/")),
+      );
+    for (const path of ["writing/prompts", "essays", `essays/${id}`])
+      expect((await get(path)).status).toBe(200);
+    expect((await get("essays/not-an-id")).status).toBe(404);
+    const del = (path: string, origin: string) =>
+      DELETE(
+        new NextRequest(
+          `http://localhost:3000/api/backend/${path}?learner_id=${id}`,
+          { method: "DELETE", headers: { origin } },
+        ),
+        context(path.split("/")),
+      );
+    fetchMock.mockClear();
+    fetchMock.mockImplementation(
+      async () => new Response(null, { status: 204 }),
+    );
+    const gone = await del(`essays/${id}`, "http://localhost:3000");
+    expect(gone.status).toBe(204);
+    expect(fetchMock.mock.calls[0][1].method).toBe("DELETE");
+    expect(new URL(String(fetchMock.mock.calls[0][0])).pathname).toBe(
+      `/v1/essays/${id}`,
+    );
+    expect((await del(`essays/${id}`, "https://evil.example")).status).toBe(
+      403,
+    );
+    expect((await del("essays", "http://localhost:3000")).status).toBe(405);
+    expect((await del("vocab/answers", "http://localhost:3000")).status).toBe(
+      405,
+    );
+    expect(fetchMock).toHaveBeenCalledTimes(1);
   });
 });

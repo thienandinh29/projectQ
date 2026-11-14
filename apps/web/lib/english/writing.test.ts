@@ -1,0 +1,173 @@
+import { describe, expect, it, vi } from "vitest";
+import { DataError } from "@/lib/decode";
+import { submitProblem } from "@/components/english/essay-editor";
+import { englishClient } from "./client";
+import { parseEssay, parseEssaySummaries, parseWritingPrompts } from "./decode";
+import {
+  CONSENT,
+  CONSENT_KEY,
+  canSubmit,
+  consentGiven,
+  countWords,
+  rememberConsent,
+  stillWorking,
+} from "./writing";
+
+const ID = "0b9d2f4e-1c2a-4d3b-8e5f-6a7b8c9d0e1f";
+const LEARNER = "11111111-2222-4333-8444-555555555555";
+const prompt = {
+  id: "t2-plastic-ban",
+  task: 2,
+  type: "opinion",
+  level: "B2",
+  status: "draft",
+  prompt: "Some countries have banned single-use plastic bags. Do you agree?",
+};
+const result = {
+  words: 10,
+  sentences: 3,
+  paragraphs: 2,
+  min_words: 250,
+  long_enough: false,
+  avg_sentence_words: 3.33,
+  longest_sentence_words: 4,
+  linking: { contrast: { however: 1 }, conclusion: { "in conclusion": 1 } },
+  linking_groups_used: 2,
+  note_vi: "ignored by the page",
+};
+const essay = {
+  id: ID,
+  prompt,
+  text: "Cities are crowded.",
+  status: "done",
+  submitted_at: "2026-11-20T03:00:00Z",
+  result,
+  failure_vi: null,
+};
+
+function memory(): Storage {
+  const data = new Map<string, string>();
+  return {
+    getItem: (k: string) => data.get(k) ?? null,
+    setItem: (k: string, v: string) => void data.set(k, v),
+  } as Storage;
+}
+
+describe("the live word count", () => {
+  // The same cases as the API (apps/api/tests/writing/test_analysis.py): the two counts must agree.
+  it.each([
+    ["I don't think so.", 4],
+    ["I don’t think so.", 4],
+    ["A well-known fact.", 3],
+    ["In 2025, 30% rose.", 4],
+    ["— ... !", 0],
+    ["", 0],
+  ])("%j has %i words", (text, n) => {
+    expect(countWords(text)).toBe(n);
+  });
+});
+
+describe("consent and submission", () => {
+  it("asks once per browser and remembers the accepted version", () => {
+    const store = memory();
+    expect(consentGiven(store)).toBe(false);
+    rememberConsent(store);
+    expect(store.getItem(CONSENT_KEY)).toBe(CONSENT);
+    expect(consentGiven(store)).toBe(true);
+    store.setItem(CONSENT_KEY, "writing-v0"); // an older notice is asked again
+    expect(consentGiven(store)).toBe(false);
+    expect(consentGiven(null)).toBe(false);
+  });
+  it("needs consent and 1 to 12,000 characters", () => {
+    expect(canSubmit("Hello.", true)).toBe(true);
+    expect(canSubmit("Hello.", false)).toBe(false);
+    expect(canSubmit("   \n", true)).toBe(false);
+    expect(canSubmit("a".repeat(12001), true)).toBe(false);
+  });
+  it("keeps following an essay only while the worker has it", () => {
+    expect(
+      ["queued", "analysing", "done", "failed"].map((s) =>
+        stillWorking(s as "queued"),
+      ),
+    ).toEqual([true, true, false, false]);
+  });
+  it("names the daily limit and refusals in Vietnamese", () => {
+    expect(submitProblem(new DataError("failed", 429))).toContain("Hôm nay");
+    expect(submitProblem(new DataError("failed", 422))).toContain("không nhận");
+  });
+});
+
+describe("writing decoders", () => {
+  it("reads prompts, summaries and an essay", () => {
+    expect(parseWritingPrompts([prompt])[0].task).toBe(2);
+    const [s] = parseEssaySummaries([
+      {
+        id: ID,
+        prompt_id: prompt.id,
+        status: "queued",
+        words: null,
+        submitted_at: essay.submitted_at,
+      },
+    ]);
+    expect(s.words).toBeNull();
+    const e = parseEssay(essay);
+    expect(e.result?.linking.contrast).toEqual({ however: 1 });
+    expect(
+      parseEssay({ ...essay, status: "queued", result: null }).result,
+    ).toBeNull();
+  });
+  it.each([
+    ["an unknown status", { ...essay, status: "scored" }],
+    ["done without a result", { ...essay, result: null }],
+    ["a result before it is done", { ...essay, status: "analysing" }],
+    [
+      "an unknown linking group",
+      { ...essay, result: { ...result, linking: { other: {} } } },
+    ],
+    ["a negative count", { ...essay, result: { ...result, words: -1 } }],
+    ["a bad date", { ...essay, submitted_at: "yesterday" }],
+  ])("rejects %s", (_, value) => {
+    expect(() => parseEssay(value)).toThrow(DataError);
+  });
+  it("rejects a prompt for a task that does not exist", () => {
+    expect(() => parseWritingPrompts([{ ...prompt, task: 3 }])).toThrow(
+      DataError,
+    );
+  });
+});
+
+describe("writing client", () => {
+  it("submits with the notice version and deletes with a 204", async () => {
+    const fetcher = vi
+      .fn()
+      .mockResolvedValueOnce(
+        new Response(JSON.stringify({ essay_id: ID, status: "queued" }), {
+          status: 202,
+        }),
+      )
+      .mockResolvedValueOnce(new Response(null, { status: 204 }));
+    const client = englishClient(fetcher);
+    expect(await client.submitEssay(LEARNER, prompt.id, "Text.")).toBe(ID);
+    const [url, init] = fetcher.mock.calls[0];
+    expect(url).toBe("/api/backend/essays");
+    expect(JSON.parse(init.body)).toEqual({
+      learner_id: LEARNER,
+      prompt_id: prompt.id,
+      text: "Text.",
+      consent: CONSENT,
+    });
+    await client.deleteEssay(LEARNER, ID);
+    expect(fetcher.mock.calls[1][0]).toBe(
+      `/api/backend/essays/${ID}?learner_id=${LEARNER}`,
+    );
+    expect(fetcher.mock.calls[1][1].method).toBe("DELETE");
+  });
+  it("reports the daily limit as a failure with its status", async () => {
+    const fetcher = vi
+      .fn()
+      .mockResolvedValue(new Response("{}", { status: 429 }));
+    await expect(
+      englishClient(fetcher).submitEssay(LEARNER, prompt.id, "x"),
+    ).rejects.toMatchObject({ code: "failed", status: 429 });
+  });
+});

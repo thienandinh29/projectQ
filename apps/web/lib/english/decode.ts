@@ -2,6 +2,13 @@
 import { DataError, parseTrace, record, string } from "@/lib/decode";
 import {
   LEVELS,
+  LINKING_GROUPS,
+  type Essay,
+  type EssayResult,
+  type EssayStatus,
+  type EssaySummary,
+  type LinkingGroup,
+  type WritingPrompt,
   type Feedback,
   type HiddenNode,
   type Level,
@@ -247,5 +254,111 @@ export function parseRoadmap(value: unknown): Roadmap {
     learn_next: d.learn_next === null ? null : string(d.learn_next),
     learn_next_trace:
       d.learn_next_trace === null ? null : parseTrace(d.learn_next_trace),
+  };
+}
+
+// Writing (specs/writing/step-2.1.md).
+const ESSAY_STATUSES: readonly EssayStatus[] = [
+  "queued",
+  "analysing",
+  "done",
+  "failed",
+];
+
+function essayStatus(value: unknown): EssayStatus {
+  const v = string(value);
+  if (!(ESSAY_STATUSES as readonly string[]).includes(v))
+    throw new DataError("contract");
+  return v as EssayStatus;
+}
+
+function timestamp(value: unknown): string {
+  const v = string(value);
+  if (Number.isNaN(Date.parse(v))) throw new DataError("contract");
+  return v;
+}
+
+function nonNegative(value: unknown): number {
+  if (typeof value !== "number" || !(value >= 0))
+    throw new DataError("contract");
+  return value;
+}
+
+export function parseWritingPrompt(value: unknown): WritingPrompt {
+  const d = record(value);
+  const status = string(d.status);
+  if (d.task !== 1 && d.task !== 2) throw new DataError("contract");
+  if (status !== "draft" && status !== "reviewed")
+    throw new DataError("contract");
+  return {
+    id: string(d.id),
+    task: d.task,
+    type: string(d.type),
+    level: level(d.level),
+    status,
+    prompt: string(d.prompt),
+  };
+}
+
+export function parseWritingPrompts(value: unknown): WritingPrompt[] {
+  return array(value).map(parseWritingPrompt);
+}
+
+export function parseEssaySummaries(value: unknown): EssaySummary[] {
+  return array(value).map((v) => {
+    const d = record(v);
+    return {
+      id: string(d.id),
+      prompt_id: string(d.prompt_id),
+      status: essayStatus(d.status),
+      words: d.words === null ? null : int(d.words),
+      submitted_at: timestamp(d.submitted_at),
+    };
+  });
+}
+
+function parseLinking(value: unknown): EssayResult["linking"] {
+  const d = record(value);
+  const out: EssayResult["linking"] = {};
+  for (const [group, phrases] of Object.entries(d)) {
+    if (!(LINKING_GROUPS as readonly string[]).includes(group))
+      throw new DataError("contract");
+    const counts: Record<string, number> = {};
+    for (const [phrase, n] of Object.entries(record(phrases)))
+      counts[phrase] = int(n);
+    out[group as LinkingGroup] = counts;
+  }
+  return out;
+}
+
+export function parseEssayResult(value: unknown): EssayResult {
+  const d = record(value);
+  return {
+    words: int(d.words),
+    sentences: int(d.sentences),
+    paragraphs: int(d.paragraphs),
+    min_words: int(d.min_words),
+    long_enough: bool(d.long_enough),
+    avg_sentence_words: nonNegative(d.avg_sentence_words),
+    longest_sentence_words: int(d.longest_sentence_words),
+    linking: parseLinking(d.linking),
+    linking_groups_used: int(d.linking_groups_used),
+  };
+}
+
+export function parseEssay(value: unknown): Essay {
+  const d = record(value);
+  const status = essayStatus(d.status);
+  const result = d.result === null ? null : parseEssayResult(d.result);
+  if ((status === "done") !== (result !== null))
+    throw new DataError("contract");
+  return {
+    id: string(d.id),
+    prompt: d.prompt === null ? null : parseWritingPrompt(d.prompt),
+    text: string(d.text),
+    status,
+    submitted_at: timestamp(d.submitted_at),
+    result,
+    failure_vi: optionalString(d.failure_vi),
   };
 }
