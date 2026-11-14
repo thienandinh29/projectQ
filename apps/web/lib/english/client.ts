@@ -1,6 +1,7 @@
 // The English pack's calls, through the same-origin proxy (/api/backend): the API key stays on the server.
 import { DataError } from "@/lib/decode";
 import {
+  parseCorrection,
   parseEssay,
   parseEssaySummaries,
   parseLevelResult,
@@ -11,6 +12,7 @@ import {
   parseWritingPrompts,
 } from "./decode";
 import type {
+  CorrectionResult,
   Essay,
   EssaySummary,
   Level,
@@ -177,6 +179,23 @@ export function englishClient(fetcher: Fetch = (...a) => fetch(...a)) {
       })) as { essay_id?: unknown };
       if (typeof d?.essay_id !== "string") throw new DataError("contract");
       return d.essay_id;
+    },
+    /** One self-correction try, or `null` with `showAnswer` to see the correction. */
+    async correctSentence(
+      learnerId: string,
+      essayId: string,
+      issueId: number,
+      sentence: string | null,
+      showAnswer = false,
+    ): Promise<CorrectionResult> {
+      return parseCorrection(
+        await post(`essays/${encodeURIComponent(essayId)}/corrections`, {
+          learner_id: learnerId,
+          issue_id: issueId,
+          sentence,
+          show_answer: showAnswer,
+        }),
+      );
     },
     async deleteEssay(learnerId: string, essayId: string): Promise<void> {
       const q = new URLSearchParams({ learner_id: learnerId });

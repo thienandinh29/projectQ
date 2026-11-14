@@ -44,6 +44,10 @@ class Settings(BaseSettings):
     languagetool_url: str = ""
     # The band model service (specs/writing/step-2.3.md); empty: no band.
     scorer_url: str = ""
+    # Model prices for the daily cost cap (US$ per million tokens; specs/writing/step-2.4.md).
+    # Deliberately high defaults so the cap is never overshot; set the provider's real prices.
+    llm_price_input_per_mtok: float = 1.0
+    llm_price_output_per_mtok: float = 4.0
     llm_daily_cost_cap_usd: float = 1.0  # the whole service, per day (used from writing step 2.4)
     llm_daily_calls_per_learner: int = 30
     # Learners allowed to see draft (unreviewed) items, labelled "Bản nháp": comma-separated ids.

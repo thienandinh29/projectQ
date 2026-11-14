@@ -121,12 +121,17 @@ def create_app(
     app.include_router(grammar_routes.create_router(grammar))
     from app.api import writing as writing_routes
     from app.services.writing import WritingService
+    from app.writing.languagetool import LanguageToolClient
 
     writing = WritingService(
         lambda: app.state.pool,
         settings.writing_dir,
         draft_learners=settings.draft_item_learners,
         daily_essays=settings.writing_daily_essays,
+        languagetool=LanguageToolClient(settings.languagetool_url, timeout=5)
+        if settings.languagetool_url
+        else None,
+        courses_dir=settings.courses_dir,
     )
     app.include_router(writing_routes.create_router(writing))
     app.include_router(graph_confirmation.create_router())

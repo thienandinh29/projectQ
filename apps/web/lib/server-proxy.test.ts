@@ -265,6 +265,18 @@ describe("graph confirmation session proxy", () => {
       );
     for (const path of ["writing/prompts", "essays", `essays/${id}`])
       expect((await get(path)).status).toBe(200);
+    const corrections = await POST(
+      new NextRequest(
+        `http://localhost:3000/api/backend/essays/${id}/corrections`,
+        {
+          method: "POST",
+          headers: { origin: "http://localhost:3000" },
+          body: "{}",
+        },
+      ),
+      context(["essays", id, "corrections"]),
+    );
+    expect(corrections.status).toBe(200);
     expect((await get("essays/not-an-id")).status).toBe(404);
     const del = (path: string, origin: string) =>
       DELETE(

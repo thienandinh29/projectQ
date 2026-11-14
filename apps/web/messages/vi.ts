@@ -597,6 +597,32 @@ export const vi = {
         "Ước lượng từ một mô hình nhỏ, không phải điểm thi. Khoảng này rộng vì mô hình còn sai số.",
       bandDraft: "Chưa kiểm chứng với điểm giám khảo.",
       bandTruncated: "Bài dài: mô hình chỉ đọc khoảng 380 từ đầu.",
+      feedback: "Nhận xét theo 4 tiêu chí",
+      feedbackNote:
+        "Do AI viết, dựa trên các câu trích từ bài của bạn (máy đã kiểm tra mỗi câu trích có thật trong bài). Đây là gợi ý, không phải điểm.",
+      criteria: {
+        tr: "Task Response (trả lời đề bài)",
+        cc: "Coherence and Cohesion (mạch lạc, liên kết)",
+        lr: "Lexical Resource (từ vựng)",
+        gra: "Grammatical Range and Accuracy (ngữ pháp)",
+      },
+      strength: "Điểm mạnh",
+      toImprove: "Cần cải thiện",
+      droppedPoints:
+        "Đã bỏ {n} nhận xét vì câu trích không có trong bài của bạn.",
+      fromAi: "Gợi ý từ AI",
+      notRecordedAi:
+        "Lỗi do AI gợi ý: chưa tính vào lộ trình cho đến khi các gợi ý này được kiểm tra.",
+      tryYourself: "Tự sửa câu này",
+      hint: "Gợi ý: đọc lại phần được đánh dấu và lời giải thích ở trên, rồi viết lại cả câu.",
+      yourSentence: "Câu bạn sửa",
+      check: "Kiểm tra",
+      showAnswer: "Xem đáp án",
+      answer: "Cách sửa",
+      correctedEarlier: "Bạn đã tự sửa đúng lỗi này.",
+      answerSeenEarlier: "Bạn đã xem cách sửa lỗi này.",
+      checkUnavailable:
+        "Chưa kiểm tra được câu: máy chủ chưa bật LanguageTool. Bạn có thể xem đáp án.",
       complexity: "Độ phức tạp của câu",
       clausesPerSentence: "mệnh đề mỗi câu",
       complexShare: "câu có mệnh đề phụ",

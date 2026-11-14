@@ -143,6 +143,24 @@ def main() -> None:
     loop(database_url, allow_fixture=args.fixture, pipeline_factory=pipeline_factory)
 
 
+def writing_model(settings: Any) -> Any:
+    """The budgeted writing model, or None when DeepSeek is not configured (no feedback)."""
+    import os
+
+    from app.llm.providers import default_gateway
+    from app.services.budget import Budget
+    from app.writing.model_calls import Prices, WritingModel
+
+    if not (os.environ.get("DEEPSEEK_API_KEY") and os.environ.get("DEEPSEEK_FREE_MODEL")):
+        return None
+    return WritingModel(
+        default_gateway(),
+        settings.database_url,
+        Budget(settings.llm_daily_cost_cap_usd, settings.llm_daily_calls_per_learner),
+        Prices(settings.llm_price_input_per_mtok, settings.llm_price_output_per_mtok),
+    )
+
+
 def loop(
     database_url: str,
     *,
@@ -161,6 +179,7 @@ def loop(
         settings.languagetool_url,
         settings.draft_item_learners,
         settings.scorer_url,
+        writing_model(settings),
     )
     while True:
         try:

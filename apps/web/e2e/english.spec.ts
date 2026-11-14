@@ -149,6 +149,13 @@ test("an essay is written, measured by the worker, and deleted", async ({
     await expect(
       grammar.getByRole("link", { name: /Đã ghi vào lộ trình/ }),
     ).toBeVisible();
+    // hint first: the learner fixes the sentence themselves (step 2.4)
+    await grammar.getByRole("button", { name: "Tự sửa câu này" }).click();
+    await page.getByLabel("Câu bạn sửa").fill("Plastic bags are cheap.");
+    await page.getByRole("button", { name: "Kiểm tra" }).click();
+    await expect(
+      page.getByText("Đúng rồi! Bạn đã tự sửa được lỗi này."),
+    ).toBeVisible();
   }
   page.once("dialog", (dialog) => dialog.accept());
   await page.getByRole("button", { name: "Xóa bài viết" }).click();

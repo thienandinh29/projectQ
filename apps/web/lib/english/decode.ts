@@ -4,8 +4,14 @@ import {
   LEVELS,
   LINKING_GROUPS,
   type Essay,
+  CRITERIA,
   type BandRange,
   type Complexity,
+  type CorrectionResult,
+  type CorrectionState,
+  type Criterion,
+  type EssayFeedback,
+  type FeedbackPoint,
   type EssayResult,
   type GrammarIssue,
   type EssayStatus,
@@ -334,6 +340,53 @@ function parseLinking(value: unknown): EssayResult["linking"] {
   return out;
 }
 
+function source(value: unknown): GrammarIssue["source"] {
+  const v = string(value);
+  if (v !== "languagetool" && v !== "llm") throw new DataError("contract");
+  return v;
+}
+
+function parseEssayFeedback(value: unknown): EssayFeedback {
+  const d = record(value);
+  const c = record(d.criteria);
+  const criteria = {} as Record<Criterion, FeedbackPoint[]>;
+  for (const name of CRITERIA)
+    criteria[name] = array(c[name]).map((p) => {
+      const r = record(p);
+      const kind = string(r.kind);
+      if (kind !== "strength" && kind !== "issue")
+        throw new DataError("contract");
+      const quotes = strings(r.quotes);
+      if (quotes.length === 0) throw new DataError("contract");
+      return { kind, point_vi: string(r.point_vi), quotes };
+    });
+  return { criteria, dropped: int(d.dropped) };
+}
+
+function parseCorrections(value: unknown): Record<string, CorrectionState> {
+  if (value === undefined) return {};
+  const out: Record<string, CorrectionState> = {};
+  for (const [id, v] of Object.entries(record(value))) {
+    const r = record(v);
+    out[id] = {
+      tries: int(r.tries),
+      accepted: bool(r.accepted),
+      answer_shown: bool(r.answer_shown),
+    };
+  }
+  return out;
+}
+
+export function parseCorrection(value: unknown): CorrectionResult {
+  const d = record(value);
+  return {
+    accepted: bool(d.accepted),
+    tries: int(d.tries),
+    answer: optionalString(d.answer),
+    feedback_vi: string(d.feedback_vi),
+  };
+}
+
 function parseIssue(value: unknown): GrammarIssue {
   const d = record(value);
   const issue: GrammarIssue = {
@@ -350,11 +403,13 @@ function parseIssue(value: unknown): GrammarIssue {
     node_vi: optionalString(d.node_vi),
     explain_vi: optionalString(d.explain_vi),
     evidence: bool(d.evidence),
+    source: d.source === undefined ? "languagetool" : source(d.source),
   };
   const from = issue.start - issue.sentence_start;
   if (
     from < 0 ||
     issue.end < issue.start ||
+    (issue.source === "llm" && issue.evidence) ||
     issue.sentence.slice(from, from + issue.end - issue.start) !== issue.text ||
     (issue.evidence && !issue.node)
   )
@@ -392,6 +447,7 @@ function parseBand(value: unknown): BandRange {
     uncertain: bool(d.uncertain),
     status,
     truncated: bool(d.truncated),
+    uncertain_reason: optionalString(d.uncertain_reason),
   };
   if (band.band_low > band.band_high) throw new DataError("contract");
   return band;
@@ -424,6 +480,10 @@ export function parseEssayResult(value: unknown): EssayResult {
         score: d.score === null ? null : parseBand(d.score),
         scoreUnavailableVi: optionalString(d.score_unavailable_vi),
       }),
+      ...(d.feedback !== undefined && {
+        feedback: d.feedback === null ? null : parseEssayFeedback(d.feedback),
+        feedbackUnavailableVi: optionalString(d.feedback_unavailable_vi),
+      }),
     }),
   };
 }
@@ -442,5 +502,6 @@ export function parseEssay(value: unknown): Essay {
     submitted_at: timestamp(d.submitted_at),
     result,
     failure_vi: optionalString(d.failure_vi),
+    corrections: parseCorrections(d.corrections),
   };
 }

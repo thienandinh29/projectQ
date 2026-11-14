@@ -1,7 +1,7 @@
 """Essays through the API and the worker (specs/writing/step-2.1.md)."""
 
 import json
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 from dataclasses import replace
 from datetime import UTC, datetime, timedelta
 from functools import cache
@@ -228,9 +228,14 @@ def p_known(db: str, learner: str) -> dict[str, float]:
 
 
 def own_essay(
-    svc: WritingService, learner: str, db: str, step: GrammarStep, text: str
+    svc: WritingService,
+    learner: str,
+    db: str,
+    step: GrammarStep,
+    text: str,
+    now: datetime = NOW,
 ) -> dict[str, Any]:
-    essay_id = svc.submit(learner, "t2-plastic-ban", text, CONSENT, now=NOW)
+    essay_id = svc.submit(learner, "t2-plastic-ban", text, CONSENT, now=now)
     drain(db, WRITING, step)
     return svc.get(learner, essay_id)
 
@@ -290,3 +295,191 @@ def test_without_languagetool_the_page_says_grammar_was_not_checked(setup: Setup
     assert down["status"] == "done" and down["result"]["grammar"] is None
     assert "không phản hồi" in down["result"]["grammar_unavailable_vi"]
     assert p_known(db, learner) == {}
+
+
+# --- step 2.4a: model feedback, budgeted and checked (specs/writing/step-2.4.md) --------------
+
+
+class FakeDeepSeek:
+    """Scripted replies by task; counts calls. The first feedback reply is invalid JSON."""
+
+    def __init__(self, *, feedback_bands: float = 6.0, invalid_first: bool = False) -> None:
+        self.calls: list[str] = []
+        self.bands = feedback_bands
+        self.invalid_first = invalid_first
+
+    async def generate(self, route: Any, system: str, messages: Any, schema: Any) -> Any:
+        from app.llm.gateway import ProviderReply
+
+        task = "correct" if "minimal" in system or "few words" in system else "feedback"
+        self.calls.append(task)
+        body: dict[str, Any]
+        if task == "correct":
+            body = {"fixes": [{"index": 0, "corrected": None}]}
+        else:
+            if self.invalid_first and self.calls.count("feedback") == 1:
+                return ProviderReply("not json", 100, 10)
+            p = {"kind": "issue", "point_vi": "Câu này cần chia động từ theo chủ ngữ.",
+                 "quotes": ["She go to school", "words that are not there"]}  # fmt: skip
+            body = {c: {"band": self.bands, "points": [p]} for c in ("tr", "cc", "lr", "gra")}
+        return ProviderReply(json.dumps(body), 1000, 200)
+
+
+def writing_model(db: str, fake: FakeDeepSeek, cap: float = 1.0, calls: int = 30) -> Any:
+    from app.llm.gateway import Gateway, Route, Routing
+    from app.services.budget import Budget
+    from app.writing.model_calls import Prices, WritingModel
+
+    route = Route(provider="deepseek", model="deepseek-test", family="deepseek")
+    routing = Routing(tiers={"free": {"writing_feedback": [route], "writing_correct": [route]}})
+    return WritingModel(Gateway(routing, {"deepseek": fake}), db, Budget(cap, calls),
+                        Prices(1.0, 4.0), clock=lambda: NOW)  # fmt: skip
+
+
+def test_feedback_for_a_draft_learner_is_checked_recorded_and_never_shows_the_model_band(
+    setup: Setup,
+) -> None:
+    svc, learner, db = setup
+    fake = FakeDeepSeek(invalid_first=True)
+    step = replace(step_for(learner), model=writing_model(db, fake))
+    essay = own_essay(svc, learner, db, step, FIXTURES["smoke"]["text"])
+    r = essay["result"]
+    fb = r["feedback"]
+    assert r["feedback_unavailable_vi"] is None and fb["model"] == "deepseek-test"
+    assert all(p["quotes"] == ["She go to school"] for ps in fb["criteria"].values() for p in ps)
+    assert (fb["quotes_checked"], fb["quotes_kept"], fb["dropped"]) == (8, 4, 0)
+    assert "_llm_bands" not in r and "band" not in json.dumps(fb)  # stored, never sent
+    assert r.get("llm_corrections") in (None, {"kept": 0, "discarded": 0})
+    with psycopg.connect(db) as conn:
+        rows = conn.execute(
+            "select task, success, input_tokens, output_tokens, cost_usd::float from llm_calls "
+            "where learner_id=%s order by created_at, success",
+            (learner,),
+        ).fetchall()
+        stored = conn.execute("select result->'_llm_bands' from essays where id=%s",
+                              (essay["id"],)).fetchone()  # fmt: skip
+    # the invalid reply was paid for too: recorded as a failed attempt
+    assert [(t, ok) for t, ok, *_ in rows].count(("writing_feedback", False)) == 1
+    # cost = tokens x the configured prices (US$1 and US$4 per million)
+    assert all(c == pytest.approx((i * 1 + o * 4) / 1e6) for *_, i, o, c in rows)
+    assert {(i, o) for _, ok, i, o, _ in rows if ok} == {(1000, 200)}
+    assert stored and stored[0]["overall"] == 6.0
+
+
+def test_feedback_is_hidden_from_other_learners_and_stops_at_the_budget(setup: Setup) -> None:
+    svc, learner, db = setup
+    fake = FakeDeepSeek()
+    hidden = replace(step_for(learner, draft=False), model=writing_model(db, fake))
+    r = own_essay(svc, learner, db, hidden, FIXTURES["smoke"]["text"])["result"]
+    assert r["feedback"] is None and "chưa mở" in r["feedback_unavailable_vi"] and not fake.calls
+    broke = replace(step_for(learner), model=writing_model(db, fake, calls=0))
+    r = own_essay(svc, learner, db, broke, FIXTURES["smoke"]["text"])["result"]
+    assert r["feedback"] is None and "hết lượt" in r["feedback_unavailable_vi"]
+    assert not fake.calls  # the budget is checked before any call
+    off = replace(step_for(learner), model=None)
+    tomorrow = NOW + timedelta(days=1)  # the fixture allows 2 essays a day
+    r = own_essay(svc, learner, db, off, FIXTURES["smoke"]["text"], now=tomorrow)["result"]
+    assert "DEEPSEEK_API_KEY" in r["feedback_unavailable_vi"]
+
+
+def test_a_model_far_from_the_scorer_makes_the_band_uncertain(setup: Setup) -> None:
+    from tests.writing.test_band import CALIBRATED, FakeScorer
+
+    svc, learner, db = setup
+    long_text = (FIXTURES["clean"]["text"] + " ") * 12  # over 150 words, so a band is computed
+    step = replace(
+        step_for(learner),
+        model=writing_model(db, FakeDeepSeek(feedback_bands=8.5)),
+        scorer=FakeScorer(4.0),
+        scorer_config=CALIBRATED,
+        client=None,
+    )  # fmt: skip  (no LanguageTool: this text is not recorded)
+    r = own_essay(svc, learner, db, step, long_text)["result"]
+    # the scorer says 5.5-7.0 (middle 6.25); the model's overall is 8.5: more than a band apart
+    assert r["score"]["uncertain"] and "khác nhau hơn 1 band" in r["score"]["uncertain_reason"]
+
+
+# --- step 2.4a: hint first, then the answer (no model call) ---------------------------------
+
+
+class SentenceChecker(LanguageToolClient):
+    """Flags a sentence that still contains the error ("go to"); everything else is clean."""
+
+    def __init__(self) -> None:
+        super().__init__("http://languagetool.invalid")
+
+    def matches(self, text: str) -> list[Match]:
+        at = text.find(" go to ")
+        return [] if at < 0 else [Match(at + 1, 2, "HE_VERB_AGR", "GRAMMAR", "m", ("goes",))]
+
+
+def corrector(svc: WritingService, lt: LanguageToolClient | None = None) -> WritingService:
+    return WritingService(svc.pool, WRITING, draft_learners=",".join(map(str, svc.draft_learners)),
+                          daily_essays=5, languagetool=lt or SentenceChecker(),
+                          courses_dir=COURSES)  # fmt: skip
+
+
+def counted_issue(svc: WritingService, learner: str, db: str, now: datetime) -> tuple[str, int]:
+    essay = own_essay(svc, learner, db, step_for(learner), FIXTURES["smoke"]["text"], now=now)
+    issue = next(i for i in essay["result"]["grammar"]["issues"] if i["evidence"])
+    return essay["id"], issue["id"]
+
+
+def test_two_wrong_tries_show_the_answer_and_move_nothing(setup: Setup) -> None:
+    svc, learner, db = setup
+    essay_id, issue = counted_issue(svc, learner, db, NOW)
+    fixer = corrector(svc)
+    before = p_known(db, learner)
+    first = fixer.correct(learner, essay_id, issue, "She go to school every day!", now=NOW)
+    assert first["accepted"] is False and first["tries"] == 1 and first["answer"] is None
+    assert first["feedback_vi"] == "Câu vẫn còn lỗi ngữ pháp hoặc chính tả. Thử lại nhé."
+    # "went" and no "to": LanguageTool is satisfied, but it is further from the correction
+    second = fixer.correct(learner, essay_id, issue, "She went school every day.", now=NOW)
+    assert second["tries"] == 2 and second["answer"] == "She goes to school every day."
+    assert p_known(db, learner) == before
+    with pytest.raises(HTTPException) as err:
+        fixer.correct(learner, essay_id, issue, "She goes to school every day.", now=NOW)
+    assert err.value.status_code == 409
+    state = svc.get(learner, essay_id)["corrections"][str(issue)]
+    assert state == {"tries": 2, "accepted": False, "answer_shown": True}
+
+
+def test_a_correct_fix_after_the_hint_is_aided_evidence(setup: Setup) -> None:
+    from app.engine import bkt
+
+    svc, learner, db = setup
+    essay_id, issue = counted_issue(svc, learner, db, NOW)
+    p = p_known(db, learner)["present-simple"]  # after the essay's error
+    out = corrector(svc).correct(learner, essay_id, issue, "She goes to school every day.",
+                                 now=NOW)  # fmt: skip
+    assert out["accepted"] and out["tries"] == 1 and out["answer"]
+    params = bkt.params_with_help(load_grammar_step(WRITING, COURSES, "").error_map.params(), 1)
+    assert p_known(db, learner)["present-simple"] == pytest.approx(bkt.update(p, True, params))
+    with psycopg.connect(db) as conn:
+        rule = conn.execute(
+            "select rule_vi from decision_traces where learner_id=%s and "
+            "rule='writing.self_correction'", (learner,)).fetchone()  # fmt: skip
+    assert rule and "gợi ý" in rule[0]
+
+
+def test_showing_the_answer_and_what_cannot_be_corrected(setup: Setup) -> None:
+    svc, learner, db = setup
+    essay_id, issue = counted_issue(svc, learner, db, NOW)
+    fixer = corrector(svc)
+    shown = fixer.correct(learner, essay_id, issue, None, show_answer=True, now=NOW)
+    assert shown["answer"] == "She goes to school every day." and shown["tries"] == 0
+    cases: list[tuple[Callable[[], object], int]] = [
+        (lambda: fixer.correct(learner, essay_id, 99, "x", now=NOW), 404),
+        (lambda: fixer.correct(learner, essay_id, issue, "x", now=NOW), 409),
+        (lambda: fixer.correct(learner, "nope", issue, "x", now=NOW), 404),
+    ]
+    other_id, other_issue = counted_issue(svc, learner, db, NOW + timedelta(days=1))
+    no_lt = WritingService(svc.pool, WRITING, courses_dir=COURSES)
+    cases += [
+        (lambda: no_lt.correct(learner, other_id, other_issue, "She goes.", now=NOW), 503),
+        (lambda: fixer.correct(learner, other_id, other_issue, "  ", now=NOW), 422),
+    ]
+    for call, code in cases:
+        with pytest.raises(HTTPException) as err:
+            call()
+        assert err.value.status_code == code
