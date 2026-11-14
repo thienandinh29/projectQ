@@ -58,7 +58,7 @@ def create_router(practice: VocabPractice) -> APIRouter:
         ),
         limit: int = Query(default=DEFAULT_LIMIT, ge=1, le=50),
         new_limit: int = Query(default=DEFAULT_NEW_PER_DAY, ge=0, le=50),
-        max_level: Literal["A1", "A2", "B1", "B2", "C1"] = "C1",
+        max_level: Literal["A1", "A2", "B1", "B2", "C1"] | None = None,
     ) -> VocabSession:
         result = practice.session(
             learner_id, list_slug, limit=limit, new_limit=new_limit, max_level=max_level

@@ -5,7 +5,7 @@
 - [x] Item format and validation; 76 draft items (4 per hidden node) in `data/items/english-ielts.yaml`
 - [x] Engine (`engine/milestones.py`): status, outcome, next to learn, reopening; level estimate; traced
 - [x] Placement on the milestone graph: 10 milestones, 69 states, exact
-- [ ] Migration 0015, service, routes
+- [x] Migration 0015, service (`services/grammar.py`), routes (`api/grammar.py`), smoke checks
 - [x] Gate: simulated accuracy curve on the English roadmap, baseline committed, CI check
 - [ ] **Owner:** review the items (`draft` → `reviewed`); explain one real decision trace in the decision log
 - [ ] **Owner:** compute the accuracy curve with intervals and write what it shows

@@ -141,10 +141,14 @@ def next_to_learn(
     *,
     now: datetime | None = None,
 ) -> tuple[str | None, DecisionTrace | None]:
-    """The most foundational weak hidden node: the opened ones or their hidden prerequisites."""
+    """The most foundational weak hidden node: the opened ones or their hidden prerequisites.
+
+    A prerequisite counts only with evidence (a value in `p_known`): untested is not weak, and
+    the roadmap's order already asks for earlier milestones first.
+    """
     hidden = roadmap.hidden_nodes
     candidates = set(opened) | {
-        a for o in opened for a in roadmap.graph.ancestors(o) if a in hidden
+        a for o in opened for a in roadmap.graph.ancestors(o) if a in hidden and a in p_known
     }
     weak = [c for c in candidates if _p(p_known, c) < ASSUMED_KNOWN]
     if not weak:
@@ -233,3 +237,19 @@ def vocab_level(results: Mapping[str, tuple[int, int]], *, pass_mark: int = 2) -
 def seed_from_level_test(roadmap: Roadmap, known: frozenset[str] | set[str]) -> dict[str, float]:
     """Hidden nodes of known milestones start as assumed known; the rest keep the prior."""
     return {n: ASSUMED_KNOWN for m in known for n in roadmap.hidden.get(m, ())}
+
+
+def up_to(roadmap: Roadmap, level: str) -> Roadmap:
+    """The roadmap limited to milestones at or below `level` (a learner's target, e.g. B2)."""
+    cut = LEVELS.index(level)
+    keep = {m for m, lv in roadmap.level.items() if LEVELS.index(lv) <= cut}
+    if not keep:
+        raise ValueError(f"no milestones at or below {level}")
+    edges = [(p, c) for c in keep for p in roadmap.milestones.parents[c] if p in keep]
+    names = {m: roadmap.milestones.name_vi(m) for m in keep}
+    return Roadmap(
+        graph=roadmap.graph,
+        milestones=Graph.from_edges(sorted(keep), edges, names),
+        hidden={m: nodes for m, nodes in roadmap.hidden.items() if m in keep},
+        level={m: lv for m, lv in roadmap.level.items() if m in keep},
+    )

@@ -108,6 +108,17 @@ def create_app(
     app.include_router(
         vocab_routes.create_router(VocabPractice(lambda: app.state.pool, settings.vocab_dir))
     )
+    from app.api import grammar as grammar_routes
+    from app.services.grammar import GrammarService
+
+    grammar = GrammarService(
+        lambda: app.state.pool,
+        settings.courses_dir,
+        settings.items_dir,
+        settings.vocab_dir,
+        settings.draft_item_learners,
+    )
+    app.include_router(grammar_routes.create_router(grammar))
     app.include_router(graph_confirmation.create_router())
 
     @app.middleware("http")

@@ -37,6 +37,9 @@ class Settings(BaseSettings):
     runner_token: SecretStr = SecretStr("")
     courses_dir: Path = REPO_ROOT / "data" / "courses"
     vocab_dir: Path = REPO_ROOT / "data" / "vocabulary"
+    items_dir: Path = REPO_ROOT / "data" / "items"
+    # Learners allowed to see draft (unreviewed) items, labelled "Bản nháp": comma-separated ids.
+    draft_item_learners: str = ""
     tei_url: str = "http://localhost:8080"
     tei_api_key: SecretStr = SecretStr("")
     search_provider: Literal["brave", "tavily"] = "brave"
