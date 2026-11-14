@@ -49,6 +49,12 @@ answered=$(api -d "{\"learner_id\":\"$learner\",\"item_id\":\"$item\",\"answer\"
   "$API/vocab/answers" | json 'd["correct"], d["trace"]["kind"]')
 [ "$answered" = "False review" ]; check "a vocabulary answer is graded and scheduled (FSRS review trace)" $?
 
+road=$(api "$API/roadmap?learner_id=$learner" | json 'len(d["milestones"]), d["next_milestone"] is not None')
+[ "$road" = "10 True" ]; check "grammar roadmap served (10 milestones, a next one to take)" $?
+code=$(curl -sS -o /dev/null -w '%{http_code}' -H "x-api-key: $API_KEY" -H 'content-type: application/json' \
+  -d "{\"learner_id\":\"$learner\"}" "$API/level-tests")
+[ "$code" = 409 ]; check "draft items are not served to a learner without permission ($code)" $?
+
 topic=$(api -d '{"goal_vi":"Kiểm tra hệ thống","mode":"quick","tier":"free"}' "$API/topics" | json 'd["topic_id"]')
 status=queued
 for _ in $(seq 1 30); do

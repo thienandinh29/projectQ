@@ -19,6 +19,9 @@ Commands run from the repository root and work in bash and PowerShell.
 
    Or copy `.env.example` to `.env` and fill the two values by hand.
 
+   To see the draft grammar items yourself (labelled "Bản nháp"), put your learner id in
+   `DRAFT_ITEM_LEARNERS` (create a learner first, e.g. on the web app, then restart the API).
+
    Model keys are optional. Without them the app runs, but generating a new topic fails with a named
    reason. To generate content, add the DeepSeek and Gemini keys and set `WORKER_ARGS=--pipeline`.
 2. Start:

@@ -130,7 +130,7 @@ def test_status_comes_from_the_hidden_nodes_and_reopens_when_one_drops() -> None
 
 
 def test_the_most_foundational_weak_part_is_learned_first() -> None:
-    p = {"first-conditional": 0.95, "second-conditional": 0.95, "past-continuous": 0.95}
+    p = {"first-conditional": 0.95, "second-conditional": 0.95, "past-perfect": 0.3}
     node, trace = next_to_learn(RM, ["third-conditional"], p)
     assert node == "past-perfect"  # third conditional needs past perfect, which is weak
     assert trace is not None and trace.kind == "root_cause" and trace.alternatives
@@ -138,6 +138,11 @@ def test_the_most_foundational_weak_part_is_learned_first() -> None:
     assert node == "third-conditional"
     done = {**p, "past-perfect": 0.95, "third-conditional": 0.95}
     assert next_to_learn(RM, ["third-conditional"], done) == (None, None)
+
+
+def test_an_untested_prerequisite_is_not_assumed_weak() -> None:
+    node, _ = next_to_learn(RM, ["third-conditional"], {})  # nothing known about anything
+    assert node == "third-conditional"  # not sent back to the first conditional on no evidence
 
 
 # --- the level test --------------------------------------------------------------------------

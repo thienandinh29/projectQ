@@ -102,14 +102,21 @@ class VocabPractice:
         *,
         limit: int = DEFAULT_LIMIT,
         new_limit: int = DEFAULT_NEW_PER_DAY,
-        max_level: str = "C1",
+        max_level: str | None = None,
         now: datetime | None = None,
     ) -> Session:
         wl = self.wordlist(list_slug)
         now = now or datetime.now(UTC)
-        top = LEVELS.index(max_level)  # the route validates the level
         with self.pool().connection() as conn:
             learner = self._learner(conn, learner_id)
+            if max_level is None:  # the level test's vocabulary level, else everything
+                found = conn.execute(
+                    "select result->>'vocab_level' from level_tests where learner_id=%s "
+                    "and phase='done' order by finished_at desc limit 1",
+                    (learner,),
+                ).fetchone()
+                max_level = found[0] if found and found[0] else "C1"
+            top = LEVELS.index(max_level)  # the route or the level test gives a valid level
             cards = {
                 row[0]: (row[1], row[2])
                 for row in conn.execute(
