@@ -46,7 +46,8 @@ Planned entries are marked _(planned)_ until they exist.
 | `apps/api/app/engine/path.py` | The next step when nothing just went wrong (`next_step`: resume, overdue review, continue, learn, confirm, done) with a target difficulty; traced |
 | `apps/api/app/engine/remediation.py` | Remediation rules after a wrong answer (`remediate`: weakest prerequisite, repeated misconception, practise again) and `resume`; traced |
 | `apps/api/app/engine/placement.py` | Graph-walk placement: `next_question`, `gap`, `seed_mastery`; stateless, traced; `verify` re-check on by default |
-| `apps/api/app/graders/` | Deterministic grading: MCQ (`mcq.py`), code compared outside the sandbox (`code.py`), runner client, grader self-test |
+| `apps/api/app/graders/` | Deterministic grading: MCQ (`mcq.py`), typed answers exact after normalisation (`typed.py`, normaliser extended by the owner), code compared outside the sandbox (`code.py`), runner client, grader self-test |
+| `apps/api/app/vocabulary/`, `apps/api/app/services/vocabulary.py`, `apps/api/app/api/vocab.py` | Vocabulary (spec `specs/vocabulary/`): word list models and checks, items built from a word by id (meaning, gap-fill, collocation, word form), FSRS cards per learner and word, routes `/vocab/session`, `/vocab/answers` |
 | `apps/api/app/services/code_practice.py`, `apps/api/app/api/code.py` | Code practice routes `/code/exercise`, `/code/attempts` (mounted when `RUNNER_URL` is set) |
 | `apps/api/app/tutor/` | P4 three-level Socratic hints with independent verification and safe release |
 | `apps/api/app/research/` | Deep Research agent, allowlisted search/readers, library acquisition and pipeline |
@@ -65,11 +66,12 @@ Planned entries are marked _(planned)_ until they exist.
 | `apps/api/app/llm/` | LLM gateway (DeepSeek generation, Gemini verification; legacy Vertex AI, Bedrock and OpenRouter adapters), `routing.yaml`, smoke CLI and setup README |
 | `data/courses/` | Course specs: `english-ielts.yaml` (first real course: grammar roadmap of milestones with hidden nodes, A1–C1, starter draft), Python basics, IELTS Academic Writing, introductory statistics |
 | `data/sources/` | Open-education allowlist, library manifests and acquisition/index reports; `catalog.yaml` + `catalog-report.json` for v2 structured sources; `english-candidates.yaml` (English sources awaiting licence checks, rules in `app/sources/candidates.py`) |
+| `data/vocabulary/` | Word lists: `core-seed.yaml` (30 authored words A2–C1, status draft until the owner reviews it) |
 | `data/kg/` _(planned)_ | Knowledge Graph YAML fixtures |
 | `data/items/` _(planned)_ | MCQ item fixtures with misconception tags |
 | `apps/web/` | Next.js web app: topic input, research trail, map, learning, tutor (some steps still use sample data) |
 | `apps/web/messages/` | i18n strings (`vi` default, `en`) |
-| `supabase/migrations/` | Database schema (Postgres + pgvector); `0001_init.sql` = schema v1, `0002` = chunk provenance (chapter, section, kind, url), `0003` = `halfvec(1024)`, `url` → `source_uri`, HNSW dropped (rebuilt after load), `0004` = `decision_traces` (the "Vì sao?" audit trail) |
+| `supabase/migrations/` | Database schema (Postgres + pgvector); `0001_init.sql` = schema v1, `0002` = chunk provenance (chapter, section, kind, url), `0003` = `halfvec(1024)`, `url` → `source_uri`, HNSW dropped (rebuilt after load), `0004` = `decision_traces` (the "Vì sao?" audit trail), `0014` = `vocab_cards` + `vocab_reviews` (vocabulary state) |
 
 | `apps/api/app/research/pipeline.py` | P3 topic orchestration; optional async Retriever with explicit indexed subject, citation identity checks and original reading order; validates P1 KnowledgeGraph before publication |
 

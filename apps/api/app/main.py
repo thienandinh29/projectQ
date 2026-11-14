@@ -102,6 +102,12 @@ def create_app(
         runner = RunnerClient(settings.runner_url, settings.runner_token.get_secret_value())
         practice = CodePractice(lambda: app.state.pool, runner, settings.courses_dir)
         app.include_router(code_routes.create_router(practice))
+    from app.api import vocab as vocab_routes
+    from app.services.vocabulary import VocabPractice
+
+    app.include_router(
+        vocab_routes.create_router(VocabPractice(lambda: app.state.pool, settings.vocab_dir))
+    )
     app.include_router(graph_confirmation.create_router())
 
     @app.middleware("http")

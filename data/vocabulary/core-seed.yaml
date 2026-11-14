@@ -1,0 +1,327 @@
+# Core seed word list (specs/vocabulary): authored by the project, not copied from any source.
+# status: draft until the owner has reviewed every entry (definition, examples, collocations, Vietnamese gloss).
+# Levels are approximate. Practice items are built from this file; a typed answer is graded exactly, so list real
+# spelling variants (colour/color) under `accepted`.
+#
+# Per word: `examples` (a sentence; `answer` is the part the learner types), `collocations` (a phrase and the
+# `blank` word), `forms` (the learner sees `base` and types the form that fits the sentence).
+slug: core-seed
+title_vi: Từ vựng cốt lõi (bản mẫu tự soạn)
+title_en: Core vocabulary (authored seed)
+status: draft
+words:
+- lemma: important
+  pos: adjective
+  level: A2
+  definition: having great value or a strong effect on something
+  vi: quan trọng
+  examples:
+  - text: It is important to sleep well before an exam.
+    answer: important
+  forms:
+  - base: important
+    sentence: Teachers often stress the ___ of reading every day.
+    answer: importance
+- lemma: choose
+  pos: verb
+  level: A2
+  definition: to decide which one you want from a number of things
+  vi: chọn
+  examples:
+  - text: You can choose any book from this shelf.
+    answer: choose
+  forms:
+  - base: choose
+    sentence: She had no ___ but to leave early.
+    answer: choice
+- lemma: education
+  pos: noun
+  level: A2
+  definition: the process of teaching and learning, usually at school or university
+  vi: giáo dục
+  examples:
+  - text: Free education should be available to everyone.
+    answer: education
+  forms:
+  - base: educate
+    sentence: Parents want the best ___ for their children.
+    answer: education
+- lemma: advantage
+  pos: noun
+  level: B1
+  definition: something that helps you to be better or more successful than other people
+  vi: lợi thế
+  examples:
+  - text: One advantage of studying online is that you can learn at home.
+    answer: advantage
+  collocations:
+  - phrase: take advantage of
+    blank: take
+- lemma: decision
+  pos: noun
+  level: B1
+  definition: a choice that you make after thinking about the possibilities
+  vi: quyết định
+  examples:
+  - text: It was a difficult decision to move abroad.
+    answer: decision
+  collocations:
+  - phrase: make a decision
+    blank: make
+  forms:
+  - base: decide
+    sentence: The committee's final ___ surprised everyone.
+    answer: decision
+- lemma: environment
+  pos: noun
+  level: B1
+  definition: the natural world, including land, water, air, plants and animals
+  vi: môi trường
+  examples:
+  - text: Plastic bags cause serious harm to the environment.
+    answer: environment
+  collocations:
+  - phrase: protect the environment
+    blank: protect
+  forms:
+  - base: environmental
+    sentence: Pollution is a serious threat to the ___.
+    answer: environment
+- lemma: pollution
+  pos: noun
+  level: B1
+  definition: damage caused to air, water or land by harmful substances
+  vi: ô nhiễm
+  examples:
+  - text: Traffic is a major cause of air pollution in big cities.
+    answer: pollution
+  forms:
+  - base: pollute
+    sentence: Cars are a major cause of air ___.
+    answer: pollution
+- lemma: increase
+  pos: verb
+  level: B1
+  definition: to become greater in amount, number or value
+  vi: tăng
+  examples:
+  - text: The number of online shoppers continues to increase.
+    answer: increase
+- lemma: reduce
+  pos: verb
+  level: B1
+  definition: to make something smaller or less in amount, size or price
+  vi: giảm
+  examples:
+  - text: The new law aims to reduce traffic in the city centre.
+    answer: reduce
+- lemma: risk
+  pos: noun
+  level: B1
+  definition: the possibility that something bad or dangerous may happen
+  vi: rủi ro
+  examples:
+  - text: Smoking increases the risk of heart disease.
+    answer: risk
+  collocations:
+  - phrase: take a risk
+    blank: take
+- lemma: benefit
+  pos: noun
+  level: B1
+  definition: a good or helpful result that something gives you
+  vi: lợi ích
+  examples:
+  - text: Regular exercise has a number of health benefits.
+    answer: benefits
+- lemma: effect
+  pos: noun
+  level: B1
+  definition: a change that is caused by something
+  vi: tác động
+  examples:
+  - text: The new rules had little effect on prices.
+    answer: effect
+  collocations:
+  - phrase: have an effect on
+    blank: have
+- lemma: affect
+  pos: verb
+  level: B1
+  definition: to have an influence on someone or something
+  vi: ảnh hưởng
+  examples:
+  - text: Lack of sleep can seriously affect your health.
+    answer: affect
+- lemma: opportunity
+  pos: noun
+  level: B1
+  definition: a chance to do something good or useful
+  vi: cơ hội
+  examples:
+  - text: Studying abroad gives students the opportunity to meet people from other cultures.
+    answer: opportunity
+  collocations:
+  - phrase: miss an opportunity
+    blank: miss
+- lemma: compare
+  pos: verb
+  level: B1
+  definition: to look at two or more things to see how they are similar or different
+  vi: so sánh
+  examples:
+  - text: The graph compares the number of cars sold in three countries.
+    answer: compares
+- lemma: society
+  pos: noun
+  level: B1
+  definition: all the people who live in a country or area, and their way of life
+  vi: xã hội
+  examples:
+  - text: Technology has changed society in many ways.
+    answer: society
+- lemma: ability
+  pos: noun
+  level: B1
+  definition: the power or skill to do something
+  vi: khả năng
+  examples:
+  - text: Her ability to speak three languages helped her get the job.
+    answer: ability
+  forms:
+  - base: able
+    sentence: Children differ in their ___ to concentrate.
+    answer: ability
+- lemma: significant
+  pos: adjective
+  level: B2
+  definition: large or important enough to have a noticeable effect
+  vi: đáng kể
+  examples:
+  - text: There was a significant rise in unemployment last year.
+    answer: significant
+  forms:
+  - base: significant
+    sentence: Prices have risen ___ over the past decade.
+    answer: significantly
+- lemma: contribute
+  pos: verb
+  level: B2
+  definition: to give something, such as money, time or ideas, to help achieve something
+  vi: đóng góp
+  examples:
+  - text: Exercise can contribute to better mental health.
+    answer: contribute
+  forms:
+  - base: contribute
+    sentence: Her ___ to the project was essential.
+    answer: contribution
+- lemma: reliable
+  pos: adjective
+  level: B2
+  definition: that you can trust to work well or to tell the truth
+  vi: đáng tin cậy
+  examples:
+  - text: Is public transport in your city reliable?
+    answer: reliable
+- lemma: consequence
+  pos: noun
+  level: B2
+  definition: a result of something that has happened
+  vi: hậu quả
+  examples:
+  - text: Global warming has serious consequences for coastal cities.
+    answer: consequences
+  collocations:
+  - phrase: face the consequences
+    blank: face
+- lemma: challenge
+  pos: noun
+  level: B2
+  definition: something difficult that tests your ability or determination
+  vi: thách thức
+  examples:
+  - text: Learning a new language is a real challenge for most adults.
+    answer: challenge
+  collocations:
+  - phrase: face a challenge
+    blank: face
+- lemma: awareness
+  pos: noun
+  level: B2
+  definition: knowledge or understanding of a situation or subject
+  vi: nhận thức
+  examples:
+  - text: The campaign aims to raise public awareness of recycling.
+    answer: awareness
+  collocations:
+  - phrase: raise awareness
+    blank: raise
+- lemma: tackle
+  pos: verb
+  level: B2
+  definition: to try to deal with a difficult problem
+  vi: giải quyết
+  examples:
+  - text: Governments must act together to tackle climate change.
+    answer: tackle
+- lemma: inevitable
+  pos: adjective
+  level: C1
+  definition: certain to happen and impossible to avoid
+  vi: không thể tránh khỏi
+  examples:
+  - text: With so many cars on the road, traffic jams are inevitable.
+    answer: inevitable
+  forms:
+  - base: inevitable
+    sentence: Cities ___ grow as more people move there.
+    answer: inevitably
+- lemma: mitigate
+  pos: verb
+  level: C1
+  definition: to make something less harmful, serious or severe
+  vi: giảm nhẹ
+  examples:
+  - text: Planting trees can help mitigate the effects of climate change.
+    answer: mitigate
+- lemma: fluctuate
+  pos: verb
+  level: C1
+  definition: to change often, rising and falling, especially in amount or level
+  vi: dao động
+  examples:
+  - text: Fuel prices fluctuate throughout the year.
+    answer: fluctuate
+  forms:
+  - base: fluctuate
+    sentence: The chart shows a clear ___ in prices over the year.
+    answer: fluctuation
+- lemma: implication
+  pos: noun
+  level: C1
+  definition: a possible effect or result of an action or decision
+  vi: hệ quả
+  examples:
+  - text: The findings have important implications for schools.
+    answer: implications
+- lemma: advocate
+  pos: verb
+  level: C1
+  definition: to publicly support a plan or way of doing something
+  vi: ủng hộ
+  examples:
+  - text: Many experts advocate a ban on advertising to children.
+    answer: advocate
+- lemma: sustainable
+  pos: adjective
+  level: C1
+  definition: able to continue for a long time without harming the environment
+  vi: bền vững
+  examples:
+  - text: We need to find more sustainable sources of energy.
+    answer: sustainable
+  forms:
+  - base: sustainable
+    sentence: The conference focused on environmental ___.
+    answer: sustainability

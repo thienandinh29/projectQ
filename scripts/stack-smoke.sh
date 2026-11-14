@@ -41,6 +41,14 @@ check "wrong code fails in the sandbox" $?
 [ "$(attempt 'def is_even(n):\n    while True:\n        pass\n' | cut -d' ' -f1-2)" = "timeout False" ]
 check "an infinite loop is stopped" $?
 
+session=$(api "$API/vocab/session?learner_id=$learner&new_limit=2")
+item=$(echo "$session" | json 'd["entries"][0]["item"]["id"]')
+[ "$(echo "$session" | json 'len(d["entries"]), d["entries"][0]["is_new"], "accepted" in str(d)')" = "2 True False" ]
+check "vocabulary session serves new words without the answer key" $?
+answered=$(api -d "{\"learner_id\":\"$learner\",\"item_id\":\"$item\",\"answer\":\"definitely-wrong\"}" \
+  "$API/vocab/answers" | json 'd["correct"], d["trace"]["kind"]')
+[ "$answered" = "False review" ]; check "a vocabulary answer is graded and scheduled (FSRS review trace)" $?
+
 topic=$(api -d '{"goal_vi":"Kiểm tra hệ thống","mode":"quick","tier":"free"}' "$API/topics" | json 'd["topic_id"]')
 status=queued
 for _ in $(seq 1 30); do
