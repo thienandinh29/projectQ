@@ -70,7 +70,9 @@ jobs:
         working-directory: runner
         run: |
           uv sync --locked
-          nohup uv run python -m nodetrail_runner.server > /tmp/runner.log 2>&1 &
+          # The venv's Python, not `uv run`: a background `uv run` holds uv's cache lock, and
+          # setup-uv's cache prune at the end of the job then times out waiting for it.
+          nohup .venv/bin/python -m nodetrail_runner.server > /tmp/runner.log 2>&1 &
           for i in $(seq 1 30); do curl -sf http://127.0.0.1:8090/health && exit 0; sleep 1; done
           cat /tmp/runner.log; exit 1
       - name: Every code exercise tells right from wrong (in the real sandbox)
